@@ -37,12 +37,10 @@ public class RobotMap {
 	public static final int RIGHT_DRIVE_MOTOR_2 = 1;
 	public static final int LEFT_DRIVE_MOTOR_1 = 2;
 	public static final int LEFT_DRIVE_MOTOR_2 = 3;	
-//	public static final int BALL_INTAKE_MOTOR = 4;
-//	public static final int CLIMBER_MOTOR_LEFT = 5;
-//	public static final int CLIMBER_MOTOR_RIGHT = 6;
-//	public static final int SHOOTER_WHEEL_LEFT = 7;
-//	public static final int SHOOTER_WHEEL_RIGHT = 8;
-//
+	public static final int RIGHT_WING_MOTOR_1 = 4;
+	public static final int RIGHT_WING_MOTOR_2 = 5;
+	public static final int LEFT_WING_MOTOR_1 = 6;
+	public static final int LEFT_WING_MOTOR_2 = 7;
 //	public static final int SHOOTER_HOOD_SERVO = 9;
 	// More PWM channels in common PWM/DIO MXP section below.
 
@@ -89,9 +87,10 @@ public class RobotMap {
 	//Solenoid Channels////////////////////////////////////////////////////////
 	public final static int DRIVETRAIN_HIGH_GEAR = 0;
 	public final static int DRIVETRAIN_LOW_GEAR= 1;
-//	public final static int GEAR_INTAKE_PISTON_EXTEND = 2;
-//	public final static int GEAR_INTAKE_PISTON_RETRACT = 3;
-//	public final static int BALL_INTAKE_PISTON_EXTEND = 4;
+	public final static int RIGHT_WING_PISTON_EXTEND = 2;
+	public final static int RIGHT_WING_PISTON_RETRACT = 3;
+	public final static int LEFT_WING_PISTON_EXTEND = 4;
+	public final static int LEFT_WING_PISTON_RETRACT = 5;
 //	public final static int BALL_INTAKE_PISTON_RETRACT = 5;
 
 	//Analog Input Channels////////////////////////////////////////////////////
@@ -157,6 +156,17 @@ public class RobotMap {
 	public static final double MIN_DRIVE_SPEED = 0.2;
 	public static final double AUTO_NORMAL_SPEED = 0.5;
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
+	
+	/*************************************************************************
+	 *                           WING PARAMETERS
+	 *************************************************************************/
+	//TODO check if the reverse values match the physical robot
+	public static final boolean RW_REVERSE1 = true;
+	public static final boolean RW_REVERSE2 = true;
+	public static final boolean LW_REVERSE1 = false;
+	public static final boolean LW_REVERSE2 = false;
+	
+	
 	/*************************************************************************
 	 *                            PDP PARAMETERS
 	 *************************************************************************/
