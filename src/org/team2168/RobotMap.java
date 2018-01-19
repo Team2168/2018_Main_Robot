@@ -37,15 +37,9 @@ public class RobotMap {
 	public static final int RIGHT_DRIVE_MOTOR_2 = 1;
 	public static final int LEFT_DRIVE_MOTOR_1 = 2;
 	public static final int LEFT_DRIVE_MOTOR_2 = 3;	
-//	public static final int BALL_INTAKE_MOTOR = 4;
-//	public static final int CLIMBER_MOTOR_LEFT = 5;
-//	public static final int CLIMBER_MOTOR_RIGHT = 6;
-//	public static final int SHOOTER_WHEEL_LEFT = 7;
-//	public static final int SHOOTER_WHEEL_RIGHT = 8;
-//
-//	public static final int SHOOTER_HOOD_SERVO = 9;
-	// More PWM channels in common PWM/DIO MXP section below.
-
+	public static final int ELEVATOR_MOTOR_1 = 4;
+	public static final int ELEVATOR_MOTOR_2 = 5;
+	public static final int ELEVATOR_MOTOR_3 = 6;
 
 	//Digital IO Channels//////////////////////////////////////////////////////
 	//Channels 0-9 on RoboRio
@@ -89,17 +83,15 @@ public class RobotMap {
 	//Solenoid Channels////////////////////////////////////////////////////////
 	public final static int DRIVETRAIN_HIGH_GEAR = 0;
 	public final static int DRIVETRAIN_LOW_GEAR= 1;
-//	public final static int GEAR_INTAKE_PISTON_EXTEND = 2;
-//	public final static int GEAR_INTAKE_PISTON_RETRACT = 3;
-//	public final static int BALL_INTAKE_PISTON_EXTEND = 4;
-//	public final static int BALL_INTAKE_PISTON_RETRACT = 5;
-
+	public static final int ELEVATOR_BRAKE_REVERSE = 2;
+	public static final int ELEVATOR_BRAKE_FORWARD = 3;
 	//Analog Input Channels////////////////////////////////////////////////////
 	//Channels 0-3 on Roborio
 //	public static final int TURRET_POTENTIOMETER = 0;
 //	public static final int GEAR_INTAKE_ROLLER_IR = 1;
 	public static final int DRIVETRAIN_IR_SENSOR = 2;
 	public static final int PRESSURE_SENSOR = 3;
+	public static final int ELEVATOR_POSITION_POT = 0;
 
 
 	//Channels 4-7 on MXP
@@ -157,6 +149,13 @@ public class RobotMap {
 	public static final double MIN_DRIVE_SPEED = 0.2;
 	public static final double AUTO_NORMAL_SPEED = 0.5;
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
+	/*************************************************************************
+	 *                         LIFT PARAMETERS
+	 *************************************************************************/
+	public static final boolean ELEVATOR_MOTOR1_REVERSE = false;
+	public static final boolean ELEVATOR_MOTOR2_REVERSE = false;
+	public static final boolean ELEVATOR_MOTOR3_REVERSE = false;
+	public static final double ELEVATOR_MAX_SPEED = 1.0;
 	/*************************************************************************
 	 *                            PDP PARAMETERS
 	 *************************************************************************/

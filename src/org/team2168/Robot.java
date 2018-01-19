@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 	//  it's done through one of these variables.
 	public static Drivetrain drivetrain;
 	public static Pneumatics pneumatics;
-
+	public static Elevator elevator;
 	public static PowerDistribution pdp;
 	public static Compressor comp;
     public static TX1TurnON tx1;
