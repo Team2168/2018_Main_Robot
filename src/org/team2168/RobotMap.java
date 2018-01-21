@@ -83,8 +83,8 @@ public class RobotMap {
 	//Solenoid Channels////////////////////////////////////////////////////////
 	public final static int DRIVETRAIN_HIGH_GEAR = 0;
 	public final static int DRIVETRAIN_LOW_GEAR= 1;
-	public static final int ELEVATOR_BRAKE_REVERSE = 2;
-	public static final int ELEVATOR_BRAKE_FORWARD = 3;
+	public static final int ELEVATOR_BRAKE_RELEASE = 2;
+	public static final int ELEVATOR_BRAKE_APPLY = 3;
 	//Analog Input Channels////////////////////////////////////////////////////
 	//Channels 0-3 on Roborio
 //	public static final int TURRET_POTENTIOMETER = 0;
@@ -150,12 +150,12 @@ public class RobotMap {
 	public static final double AUTO_NORMAL_SPEED = 0.5;
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
 	/*************************************************************************
-	 *                         LIFT PARAMETERS
+	 *                         ELEVATOR PARAMETERS
 	 *************************************************************************/
 	public static final boolean ELEVATOR_MOTOR1_REVERSE = false;
 	public static final boolean ELEVATOR_MOTOR2_REVERSE = false;
 	public static final boolean ELEVATOR_MOTOR3_REVERSE = false;
-	public static final double ELEVATOR_MAX_SPEED = 1.0;
+	public static final double ELEVATOR_MAX_JOYSTICK_SPEED = 1.0;
 	/*************************************************************************
 	 *                            PDP PARAMETERS
 	 *************************************************************************/

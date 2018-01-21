@@ -21,7 +21,7 @@ public class DriveElevatorWithJoysticks extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	double value = joystick.getRightStickRaw_X();
-    	Robot.elevator.driveAllMotors(value * RobotMap.ELEVATOR_MAX_SPEED  );
+    	Robot.elevator.driveAllMotors(value * RobotMap.ELEVATOR_MAX_JOYSTICK_SPEED  );
     }
 
     // Called repeatedly when this Command is scheduled to run
