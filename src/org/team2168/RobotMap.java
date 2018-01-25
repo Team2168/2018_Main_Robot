@@ -37,10 +37,7 @@ public class RobotMap {
 	public static final int RIGHT_DRIVE_MOTOR_2 = 1;
 	public static final int LEFT_DRIVE_MOTOR_1 = 2;
 	public static final int LEFT_DRIVE_MOTOR_2 = 3;	
-	public static final int RIGHT_WING_MOTOR_1 = 4;
-	public static final int RIGHT_WING_MOTOR_2 = 5;
-	public static final int LEFT_WING_MOTOR_1 = 6;
-	public static final int LEFT_WING_MOTOR_2 = 7;
+	
 //	public static final int SHOOTER_HOOD_SERVO = 9;
 	// More PWM channels in common PWM/DIO MXP section below.
 
@@ -60,11 +57,12 @@ public class RobotMap {
 
 
 	//Channels 10-25 on MXP (PWM and DIO)
-//	public static final int CONVELATOR_MOTOR = 10;
-//	public static final int TURRET_MOTOR = 11;
-//	public static final int GEAR_INTAKE_MOTOR = 12;
-//	public static final int INDEXER_WHEEL = 13;
+	public static final int RIGHT_WING_MOTOR_1 = 10;
+	public static final int RIGHT_WING_MOTOR_2 = 11;
+	public static final int LEFT_WING_MOTOR_1 = 12;
+	public static final int LEFT_WING_MOTOR_2 = 13;
 //	public static final int AGITATOR_WHEEL = 14;
+	
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board

@@ -46,7 +46,7 @@ public class RightWing extends Subsystem
 	 * Takes in a double speed and sets it to Right Wing Motor 1
 	 * @param speed is a double between -1 and 1
 	 */
-	public void driveRightWingMotor1(double speed){
+	private void driveMotor1(double speed){
 		if (RobotMap.RW_REVERSE1)
 			speed = -speed;
 		rightWingMotor1.set(speed);
@@ -55,7 +55,7 @@ public class RightWing extends Subsystem
 	 * takes in a double as speed and sets it to Right wing motor 2
 	 * @param speed is a double between -1 and 1
 	 */
-	public void driveRightWingMotor2(double speed){
+	private void driveMotor2(double speed){
 		if (RobotMap.RW_REVERSE2)
 			speed = -speed;
 		rightWingMotor2.set(speed);
@@ -65,22 +65,22 @@ public class RightWing extends Subsystem
 	 *  takes in a double as speed and assigns it to both right wing motors
 	 * @param speed is a double between -1 and 1
 	 */
-	public void driveRightWing(double speed){
-		driveRightWingMotor1(speed);
-		driveRightWingMotor2(speed);
+	public void driveWing(double speed){
+		driveMotor1(speed);
+		driveMotor2(speed);
 	}
 	
 	/**
 	 * retracts right wing piston
 	 */
-	public void Retract(){
+	public void retract(){
 		rightWingPiston.set(Value.kReverse);
 	}
 	
 	/**
 	 * extends right wing piston
 	 */
-	public void Extend(){
+	public void extend(){
 		rightWingPiston.set(Value.kForward);
 	}
 	
@@ -88,7 +88,7 @@ public class RightWing extends Subsystem
 	 * reads last commanded value of right wing to determine its status
 	 * @return true if wing is raised, false if wing is extended
 	 */
-	public boolean isWingRaised(){
+	public boolean isRetracted(){
 		//if no sensor is installed use last commanded value
 		return rightWingPiston.get() == DoubleSolenoid.Value.kReverse;
 	}
@@ -97,7 +97,7 @@ public class RightWing extends Subsystem
 	 * reads last commanded value of right wing to determine its status
 	 * @return true if wing is lowered, false if wing is raised
 	 */
-	public boolean isWingLowered(){
+	public boolean isExtended(){
 		//if no sensor is installed use last commanded value
 		return rightWingPiston.get() == DoubleSolenoid.Value.kForward;
 	}
