@@ -78,4 +78,8 @@ Our repository and workflow loosely follows the gitflow workflow. This workflow 
 
 ### Fork lift
 - 1x Double Solenoid to raise/lower the arms of the lift
-..-Kforward is lift raised, Kreverse is lift lowered
+..- Kforward is lift raised, Kreverse is lift lowered
+
+### Climb Alignment Mechanism (TBD)
+- 1x Double Solenoid to extend and retract the ?
+..- Kforward is mechanism extended, Kreverse is mechanism retracted
