@@ -44,17 +44,38 @@ Our repository and workflow loosely follows the gitflow workflow. This workflow 
 - Review the changes you make before pushsing them. You should look through all the files being added/modified/removed before you commit.
 - Always verify your code compiles before pushing to the repo. There shouldn't be any red-underlined text in your commits. Use the build button (Green triangle) at the top of eclipse to verify a build completes without error.
 - Push your changes into a branch with a name that identifies what feature it is adding or problem it is addressing in the code.
-- NEver push to the master branch 
+- Never push to the master branch 
 - After pushing your changes to the repo, verify you can see your changes in GitHub from a web browser.
 
 #Robot Design
 ## Subsystems
 ### Drivetrain
-TBD
+- 4x VictorSP Motor controllers
+..- Positive values move upwards / Negative values move down
+- 2x Greyhill Encoders (1x left, 1x right)
+- 1x Gyro (ADXRS453)
 
 ### Cube Intake
+- 2x VictorSP motor controllers
+..- Positive values move cube inwards / Negative values move cube outwards
+- 1x Single Solenoid valve to open/close intake
+..- Koff is intake open / Kon is intake closed
+- 1x Double Solenoid valve to pivot/rotate the arm up/down 
+..- Kforward is rotated down, Kreverse is rotated up (starting configuration)
+- 1x SHARP IR sensor to detect the presence of a cube
 
 ### Elevator
+- 3x VictorSP motor controllers to drive lift up/down
+..- Positive values move upwards / Negative values move down
+..- On 30A fuses on the PDP
+- 2x hall effect sensors (discrete inputs) for fully raised & fully lowered position indications 
+- 1x pneumatic Double Solenoid - shifter for high/low speed (low speed for climbing)
+..- KForward is high speed / KReverse is low speed
+- 1x Encoder/10 turn potentiometer for lift position
 
-### Climber
-TBD
+### Climber (currently part of the lift assembly)
+- TBD
+
+### Fork lift
+- 1x Double Solenoid to raise/lower the arms of the lift
+..-Kforward is lift raised, Kreverse is lift lowered
