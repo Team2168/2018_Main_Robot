@@ -17,9 +17,11 @@ public class JoystickAnalogButton extends Button {
 	/**
 	 * Create a button for triggering commands off a joystick's analog axis
 	 *
-	 * @param joystick The GenericHID object that has the button (e.g. Joystick,
-	 *                 KinectStick, etc)
-	 * @param axisNumber The axis number
+	 * @param joystick
+	 *            The GenericHID object that has the button (e.g. Joystick,
+	 *            KinectStick, etc)
+	 * @param axisNumber
+	 *            The axis number
 	 */
 	public JoystickAnalogButton(GenericHID joystick, int axisNumber) {
 		m_joystick = joystick;
@@ -29,48 +31,52 @@ public class JoystickAnalogButton extends Button {
 	/**
 	 * Create a button for triggering commands off a joystick's analog axis
 	 *
-	 * @param joystick The GenericHID object that has the button (e.g. Joystick,
-	 *                 KinectStick, etc)
-	 * @param axisNumber The axis number
-	 * @param threshold The threshold to trigger above (positive)
-	 *                  or below (negative)
+	 * @param joystick
+	 *            The GenericHID object that has the button (e.g. Joystick,
+	 *            KinectStick, etc)
+	 * @param axisNumber
+	 *            The axis number
+	 * @param threshold
+	 *            The threshold to trigger above (positive) or below (negative)
 	 */
-	public JoystickAnalogButton(GenericHID joystick, int axisNumber,
-			double threshold) {
+	public JoystickAnalogButton(GenericHID joystick, int axisNumber, double threshold) {
 		m_joystick = joystick;
 		m_axisNumber = axisNumber;
 		THRESHOLD = threshold;
 	}
 
 	/**
-	 * Set the value above which triggers should occur (for positive thresholds)
-	 * or below which triggers should occur (for negative thresholds)
-	 * The default threshold value is 0.5
+	 * Set the value above which triggers should occur (for positive thresholds) or
+	 * below which triggers should occur (for negative thresholds) The default
+	 * threshold value is 0.5
 	 *
-	 * @param threshold the threshold value (1 to -1)
+	 * @param threshold
+	 *            the threshold value (1 to -1)
 	 */
-	public void setThreshold(double threshold){
+	public void setThreshold(double threshold) {
 		THRESHOLD = threshold;
 	}
 
 	/**
 	 * Get the defined threshold value.
+	 * 
 	 * @return the threshold value
 	 */
-	public double getThreshold(){
+	public double getThreshold() {
 		return THRESHOLD;
 	}
 
 	/**
 	 * Get the state of the JoystickAnalogButton.
+	 * 
 	 * @return true when the analog value exceeds the specified threshold.
 	 */
 	public boolean get() {
-		if(THRESHOLD < 0){
-			//Return true if axis value is less than negative threshold
+		if (THRESHOLD < 0) {
+			// Return true if axis value is less than negative threshold
 			return m_joystick.getRawAxis(m_axisNumber) < THRESHOLD;
 		} else {
-			//Return true if axis value is greater than positive threshold
+			// Return true if axis value is greater than positive threshold
 			return m_joystick.getRawAxis(m_axisNumber) > THRESHOLD;
 		}
 	}

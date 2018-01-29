@@ -20,6 +20,7 @@ public class Util {
 
 	/**
 	 * Find the minimum of two values.
+	 * 
 	 * @param x
 	 * @param y
 	 * @return the smaller of the two values
@@ -34,6 +35,7 @@ public class Util {
 
 	/**
 	 * Find the maximum of two values.
+	 * 
 	 * @param x
 	 * @param y
 	 * @return the larger of the two values
@@ -48,9 +50,13 @@ public class Util {
 
 	/**
 	 * Coerce a number within a defined range.
-	 * @param value the number to constrain within the defined limit
-	 * @param upperLimit number supplied value must not exceed
-	 * @param lowerLimit number supplied value must not be less than
+	 * 
+	 * @param value
+	 *            the number to constrain within the defined limit
+	 * @param upperLimit
+	 *            number supplied value must not exceed
+	 * @param lowerLimit
+	 *            number supplied value must not be less than
 	 * @return the supplied value limited to within the defined range
 	 */
 	public static double limit(double value, double lowerLimit, double upperLimit) {
@@ -59,7 +65,9 @@ public class Util {
 
 	/**
 	 * Coerce a number within a range of 1.0 to -1.0
-	 * @param value the number to constrain
+	 * 
+	 * @param value
+	 *            the number to constrain
 	 * @return the supplied value constrained from 1.0 to -1.0
 	 */
 	public static double limit(double value) {
@@ -67,8 +75,8 @@ public class Util {
 	}
 
 	/**
-	 * Returns the array of substrings obtained by dividing the given input
-	 * string at each occurrence of the given delimiter.
+	 * Returns the array of substrings obtained by dividing the given input string
+	 * at each occurrence of the given delimiter.
 	 */
 	public static String[] split(String input, String delimiter) {
 		Vector<String> node = new Vector<String>();
@@ -90,6 +98,7 @@ public class Util {
 
 	/**
 	 * Calculate the slope of a line given two points
+	 * 
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -97,12 +106,12 @@ public class Util {
 	 * @return the slope
 	 */
 	public static double slope(double x1, double y1, double x2, double y2) {
-		return (y2 - y1)/(x2 - x1);
+		return (y2 - y1) / (x2 - x1);
 	}
 
 	/**
-	 * Calculate the y intercept of the line given its slope and a point
-	 *   on the line
+	 * Calculate the y intercept of the line given its slope and a point on the line
+	 * 
 	 * @param slope
 	 * @param x
 	 * @param y
@@ -115,10 +124,12 @@ public class Util {
 	/**
 	 * Get the difference in angle between two angles.
 	 *
-	 * @param from The first angle
-	 * @param to The second angle
-	 * @return The change in angle from the first argument necessary to line up
-	 * with the second. Always between -Pi and Pi
+	 * @param from
+	 *            The first angle
+	 * @param to
+	 *            The second angle
+	 * @return The change in angle from the first argument necessary to line up with
+	 *         the second. Always between -Pi and Pi
 	 */
 	public static double getDifferenceInAngleRadians(double from, double to) {
 		return boundAngleNegPiToPiRadians(to - from);
@@ -127,10 +138,12 @@ public class Util {
 	/**
 	 * Get the difference in angle between two angles.
 	 *
-	 * @param from The first angle
-	 * @param to The second angle
-	 * @return The change in angle from the first argument necessary to line up
-	 * with the second. Always between -180 and 180
+	 * @param from
+	 *            The first angle
+	 * @param to
+	 *            The second angle
+	 * @return The change in angle from the first argument necessary to line up with
+	 *         the second. Always between -180 and 180
 	 */
 	public static double getDifferenceInAngleDegrees(double from, double to) {
 		return boundAngleNeg180to180Degrees(to - from);
@@ -182,9 +195,14 @@ public class Util {
 
 	/**
 	 * A simple low-overhead filter.
-	 * @param value new value to add to the running average
-	 * @param sum the running total for the filtered value
-	 * @param gain a between 0.0 - 1.0. The higher the gain, the slower the sum will respond to input changes.
+	 * 
+	 * @param value
+	 *            new value to add to the running average
+	 * @param sum
+	 *            the running total for the filtered value
+	 * @param gain
+	 *            a between 0.0 - 1.0. The higher the gain, the slower the sum will
+	 *            respond to input changes.
 	 * @return the filtered value
 	 */
 	public static double runningAverage(double value, double sum, double gain) {

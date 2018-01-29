@@ -16,182 +16,173 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class AverageCounter extends Counter implements PIDSensorInterface {
-    private int averagorSize;
-    private double[] averagorArray;
-    private int arrayPos = 0; // Next array position to put values to be
-    // averaged
+	private int averagorSize;
+	private double[] averagorArray;
+	private int arrayPos = 0; // Next array position to put values to be
+	// averaged
 
-    double timeNow;
-    double oldTime;
-    double countNow;
-    double countBefore;
-    double rate;
+	double timeNow;
+	double oldTime;
+	double countNow;
+	double countBefore;
+	double rate;
 
-    private SpeedReturnType speedReturnType;
-    private PositionReturnType posReturnType;
+	private SpeedReturnType speedReturnType;
+	private PositionReturnType posReturnType;
 
-    int PPR;
-    double distPerTick;
+	int PPR;
+	double distPerTick;
 
-    /**
-     * Constructor for end point average class
-     *
-     * @param n
-     *            the size of end point average
-     */
-    public AverageCounter(int channelA, int PPR,
-            double distPerTick, boolean reverseDirection, int averageN) {
-        
-    	super(channelA);
+	/**
+	 * Constructor for end point average class
+	 *
+	 * @param n
+	 *            the size of end point average
+	 */
+	public AverageCounter(int channelA, int PPR, double distPerTick, boolean reverseDirection, int averageN) {
 
-        this.averagorSize = averageN;
-        this.averagorArray = new double[averagorSize];
-        this.timeNow = 0;
-        this.oldTime = 0;
-        this.countNow = 0;
-        this.countBefore = 0;
-        this.rate = 0;
+		super(channelA);
 
-        this.PPR = PPR;
-        this.distPerTick = distPerTick;
+		this.averagorSize = averageN;
+		this.averagorArray = new double[averagorSize];
+		this.timeNow = 0;
+		this.oldTime = 0;
+		this.countNow = 0;
+		this.countBefore = 0;
+		this.rate = 0;
 
-        this.posReturnType = PositionReturnType.DEGREE;
-        this.speedReturnType = SpeedReturnType.RPM;
+		this.PPR = PPR;
+		this.distPerTick = distPerTick;
 
-        super.setSamplesToAverage(averagorSize);
-        super.setDistancePerPulse(distPerTick);
+		this.posReturnType = PositionReturnType.DEGREE;
+		this.speedReturnType = SpeedReturnType.RPM;
 
-    }
+		super.setSamplesToAverage(averagorSize);
+		super.setDistancePerPulse(distPerTick);
 
-    public AverageCounter(int channelA, int PPR,
-            double distPerTick, boolean reverseDirection,
-            SpeedReturnType speedReturnType,
-            PositionReturnType posReturnType, int averageN) {
-        this(channelA, PPR, distPerTick, reverseDirection,
-                 averageN);
-        this.speedReturnType = speedReturnType;
-        this.posReturnType = posReturnType;
+	}
 
-    }
+	public AverageCounter(int channelA, int PPR, double distPerTick, boolean reverseDirection,
+			SpeedReturnType speedReturnType, PositionReturnType posReturnType, int averageN) {
+		this(channelA, PPR, distPerTick, reverseDirection, averageN);
+		this.speedReturnType = speedReturnType;
+		this.posReturnType = posReturnType;
 
-    
+	}
 
-    public synchronized double getRawRate() {
-    	
-    	double rate = super.getRate(); //Inches per second
-    	
-    	switch (speedReturnType.value) {
-        case SpeedReturnType.IPS_val:
-        	putData (rate);
-        	break;
-        case SpeedReturnType.FPS_val:
-        	putData (rate / 12); // feet per second
-        	break;
-        case SpeedReturnType.RPM_val:
-            putData ((rate * 60) / (distPerTick*PPR)); // ticks per minute... rpm
-            break;
-           
-        case SpeedReturnType.PERIOD_val:
-        	putData(super.getPeriod()); // ticks per minute... rpm
-        	break;
-        default:
-            // should be unreachable
-            putData(0);
-            break;
+	public synchronized double getRawRate() {
 
-        }
-    	
-    	 return getAverage();
-    }
-    
-    /**
-     * returns (gets) Average of last n values sent, as name says.
-     *
-     * @return the Average
-     */
-    private synchronized double getAverage() {
-        double sum = 0;
+		double rate = super.getRate(); // Inches per second
 
-        for (int i = 0; i < averagorSize; i++)
-            sum += averagorArray[i];
+		switch (speedReturnType.value) {
+		case SpeedReturnType.IPS_val:
+			putData(rate);
+			break;
+		case SpeedReturnType.FPS_val:
+			putData(rate / 12); // feet per second
+			break;
+		case SpeedReturnType.RPM_val:
+			putData((rate * 60) / (distPerTick * PPR)); // ticks per minute... rpm
+			break;
 
-        return sum / averagorSize;
-    }
+		case SpeedReturnType.PERIOD_val:
+			putData(super.getPeriod()); // ticks per minute... rpm
+			break;
+		default:
+			// should be unreachable
+			putData(0);
+			break;
 
-    /**
-     * puts data in to array to be averaged, hence the class name and method
-     * name. Its like magic but cooler.
-     *
-     * @param value
-     *            the value being inserted into the array to be averaged.
-     */
+		}
 
-    private synchronized void putData(double value) {
+		return getAverage();
+	}
 
-        averagorArray[arrayPos] = value;
-        arrayPos++;
+	/**
+	 * returns (gets) Average of last n values sent, as name says.
+	 *
+	 * @return the Average
+	 */
+	private synchronized double getAverage() {
+		double sum = 0;
 
-        if (arrayPos >= averagorSize) // Is equal or greater to averagorSize
-            // because array is zero indexed. Rolls
-            // over index position.
-            arrayPos = 0;
-    }
+		for (int i = 0; i < averagorSize; i++)
+			sum += averagorArray[i];
 
-    //
+		return sum / averagorSize;
+	}
 
-    public synchronized double getRate() {
-        // getRate
-//        timeNow = Timer.getFPGATimestamp();
-//        countNow = super.getDistance();
-//        rate = (countNow - countBefore) / (timeNow - oldTime); // inch per seconds
-//        oldTime = timeNow;
-//        countBefore = countNow;
-//        
-//
-//        switch (speedReturnType.value) {
-//        case SpeedReturnType.IPS_val:
-//        	putData(rate);
-//            break;
-//        case SpeedReturnType.FPS_val:
-//            putData(rate / 12); // feet per second
-//            break;
-//        case SpeedReturnType.RPM_val:
-//            putData(( rate * 60 ) / (PPR * distPerTick)); // ticks per minute... rpm
-//            break;
-//        case SpeedReturnType.PERIOD_val:
-//            putData(super.getPeriod()); // ticks per minute... rpm
-//            break;
-//        default:
-//            // should be unreachable
-//            putData(0);
-//            break;
-//
-//        }
+	/**
+	 * puts data in to array to be averaged, hence the class name and method name.
+	 * Its like magic but cooler.
+	 *
+	 * @param value
+	 *            the value being inserted into the array to be averaged.
+	 */
 
-    	
-        return getRawRate();
-//       return getAverage(); // ticks per minute... rpm    	
-    }
-    
-    
-    public synchronized double getPos() {
+	private synchronized void putData(double value) {
 
-        switch (posReturnType.value) {
-        case PositionReturnType.TICKS_val:
-            return get();
-        case PositionReturnType.INCH_val:
-            return super.getDistance();
-        case PositionReturnType.DEGREE_val:
-            return (double) (super.get()) / PPR * 360;
-        case PositionReturnType.RADIANS_val:
-            return (double) (super.get()) / PPR * (2 * Math.PI);
-        case PositionReturnType.FEET_val:
-            return super.getDistance()/12.0;
-        default:
-            // should be unreachable
-            return 0;
-        }
-    }
+		averagorArray[arrayPos] = value;
+		arrayPos++;
 
+		if (arrayPos >= averagorSize) // Is equal or greater to averagorSize
+			// because array is zero indexed. Rolls
+			// over index position.
+			arrayPos = 0;
+	}
+
+	//
+
+	public synchronized double getRate() {
+		// getRate
+		// timeNow = Timer.getFPGATimestamp();
+		// countNow = super.getDistance();
+		// rate = (countNow - countBefore) / (timeNow - oldTime); // inch per seconds
+		// oldTime = timeNow;
+		// countBefore = countNow;
+		//
+		//
+		// switch (speedReturnType.value) {
+		// case SpeedReturnType.IPS_val:
+		// putData(rate);
+		// break;
+		// case SpeedReturnType.FPS_val:
+		// putData(rate / 12); // feet per second
+		// break;
+		// case SpeedReturnType.RPM_val:
+		// putData(( rate * 60 ) / (PPR * distPerTick)); // ticks per minute... rpm
+		// break;
+		// case SpeedReturnType.PERIOD_val:
+		// putData(super.getPeriod()); // ticks per minute... rpm
+		// break;
+		// default:
+		// // should be unreachable
+		// putData(0);
+		// break;
+		//
+		// }
+
+		return getRawRate();
+		// return getAverage(); // ticks per minute... rpm
+	}
+
+	public synchronized double getPos() {
+
+		switch (posReturnType.value) {
+		case PositionReturnType.TICKS_val:
+			return get();
+		case PositionReturnType.INCH_val:
+			return super.getDistance();
+		case PositionReturnType.DEGREE_val:
+			return (double) (super.get()) / PPR * 360;
+		case PositionReturnType.RADIANS_val:
+			return (double) (super.get()) / PPR * (2 * Math.PI);
+		case PositionReturnType.FEET_val:
+			return super.getDistance() / 12.0;
+		default:
+			// should be unreachable
+			return 0;
+		}
+	}
 
 }

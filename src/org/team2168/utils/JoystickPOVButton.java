@@ -17,11 +17,13 @@ public class JoystickPOVButton extends Button {
 	/**
 	 * Create a button for triggering commands off a joystick's analog axis
 	 *
-	 * @param joystick The GenericHID object that has the button (e.g. Joystick,
-	 *                 KinectStick, etc)
-	 * @param axisNumber The axis number
-	 * @param threshold The threshold to trigger above (positive)
-	 *                  or below (negative)
+	 * @param joystick
+	 *            The GenericHID object that has the button (e.g. Joystick,
+	 *            KinectStick, etc)
+	 * @param axisNumber
+	 *            The axis number
+	 * @param threshold
+	 *            The threshold to trigger above (positive) or below (negative)
 	 */
 	public JoystickPOVButton(GenericHID joystick, double threshold) {
 		m_joystick = joystick;
@@ -29,26 +31,29 @@ public class JoystickPOVButton extends Button {
 	}
 
 	/**
-	 * Set the value above which triggers should occur (for positive thresholds)
-	 * or below which triggers should occur (for negative thresholds)
-	 * The default threshold value is 0.5
+	 * Set the value above which triggers should occur (for positive thresholds) or
+	 * below which triggers should occur (for negative thresholds) The default
+	 * threshold value is 0.5
 	 *
-	 * @param threshold the threshold value (1 to -1)
+	 * @param threshold
+	 *            the threshold value (1 to -1)
 	 */
-	public void setThreshold(double threshold){
+	public void setThreshold(double threshold) {
 		THRESHOLD = threshold;
 	}
 
 	/**
 	 * Get the defined threshold value.
+	 * 
 	 * @return the threshold value
 	 */
-	public double getThreshold(){
+	public double getThreshold() {
 		return THRESHOLD;
 	}
 
 	/**
 	 * Get the state of the JoystickAnalogButton.
+	 * 
 	 * @return true when the analog value exceeds the specified threshold.
 	 */
 	public boolean get() {

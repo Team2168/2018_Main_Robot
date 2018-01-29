@@ -10,8 +10,6 @@ import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
-
-
 public class PowerDistribution {
 	private java.util.Timer executor;
 	private long period;
@@ -31,29 +29,35 @@ public class PowerDistribution {
 	private volatile double temperature;
 
 	public static final int NUM_OF_PDP_CHANNELS = 16;
-	
+
 	int currentTimeThreshold;
-	
+
 	public PowerDistribution(long period) {
 		this.period = period;
 		pdp = new PowerDistributionPanel();
 
-		//Calculate number of loops needed to meet time iteration
-		currentTimeThreshold = (int) (RobotMap.CURRENT_LIMIT_TIME_THRESHOLD_SECONDS/(period*1000));
-		
+		// Calculate number of loops needed to meet time iteration
+		currentTimeThreshold = (int) (RobotMap.CURRENT_LIMIT_TIME_THRESHOLD_SECONDS / (period * 1000));
+
 		channelCurrent = new NPointAverager[NUM_OF_PDP_CHANNELS];
-		
-		//initialize NPoint Averager for each channel
-		for(int i=0; i<NUM_OF_PDP_CHANNELS; i++)
+
+		// initialize NPoint Averager for each channel
+		for (int i = 0; i < NUM_OF_PDP_CHANNELS; i++)
 			channelCurrent[i] = new NPointAverager(currentTimeThreshold);
-		
+
 		channelPower = new double[NUM_OF_PDP_CHANNELS];
 		channelError = new int[NUM_OF_PDP_CHANNELS];
-		
-        ConsolePrinter.putNumber("Battery Voltage", () -> {return Robot.pdp.getBatteryVoltage();}, true, false);
-		ConsolePrinter.putNumber("totalCurrent", () -> {return Robot.pdp.getTotalCurrent();}, true, false);
-		ConsolePrinter.putNumber("pcmCurrent", () -> {return Robot.pdp.getChannelCurrent(RobotMap.PCM_POWER);}, true, false);
-		
+
+		ConsolePrinter.putNumber("Battery Voltage", () -> {
+			return Robot.pdp.getBatteryVoltage();
+		}, true, false);
+		ConsolePrinter.putNumber("totalCurrent", () -> {
+			return Robot.pdp.getTotalCurrent();
+		}, true, false);
+		ConsolePrinter.putNumber("pcmCurrent", () -> {
+			return Robot.pdp.getChannelCurrent(RobotMap.PCM_POWER);
+		}, true, false);
+
 	}
 
 	public void startThread() {
@@ -63,48 +67,46 @@ public class PowerDistribution {
 	}
 
 	public int getChannelError(int channel) {
-		if((channel >= channelPower.length) || (channel < 0))
+		if ((channel >= channelPower.length) || (channel < 0))
 			return 0;
-		
+
 		return channelError[channel];
 	}
 
 	public double getChannelCurrent(int channel) {
-		if((channel >= channelPower.length) || (channel < 0))
+		if ((channel >= channelPower.length) || (channel < 0))
 			return 0;
-		
+
 		return channelCurrent[channel].getLatestValue();
 	}
 
 	public double getBatteryVoltage() {
 		return batteryVoltage;
 	}
-	
+
 	public double getChannelPower(int channel) {
-		if((channel >= channelPower.length) || (channel < 0))
+		if ((channel >= channelPower.length) || (channel < 0))
 			return 0;
-		
+
 		return channelPower[channel];
 	}
 
 	private void run() {
 		batteryVoltage = pdp.getVoltage();
-		
-		for(int i=0; i<NUM_OF_PDP_CHANNELS; i++) {
-			
-			
+
+		for (int i = 0; i < NUM_OF_PDP_CHANNELS; i++) {
+
 			channelCurrent[i].putData(pdp.getCurrent(i));
 			channelPower[i] = channelCurrent[i].getLatestValue() * batteryVoltage;
-		
-			//calculate current average over last period of time and report error
+
+			// calculate current average over last period of time and report error
 			if (channelCurrent[i].getAverage() > RobotMap.STALL_CURRENT_LIMIT)
-				channelError[i] = 2; //danger
-			else if(channelCurrent[i].getAverage() > RobotMap.WARNING_CURRENT_LIMIT)
-				channelError[i] = 1; //warning
+				channelError[i] = 2; // danger
+			else if (channelCurrent[i].getAverage() > RobotMap.WARNING_CURRENT_LIMIT)
+				channelError[i] = 1; // warning
 			else
-				channelError[i] = 0; //assume no error
-			
-			
+				channelError[i] = 0; // assume no error
+
 		}
 
 		totalCurrent = pdp.getTotalCurrent();
@@ -131,17 +133,19 @@ public class PowerDistribution {
 			console.run();
 		}
 	}
-	
+
 	/**
 	 * Gets total Current
+	 * 
 	 * @return Total Current
 	 */
 	public double getTotalCurrent() {
 		return totalCurrent;
 	}
-	
+
 	/**
 	 * Gets total Energy
+	 * 
 	 * @return Total Energy
 	 */
 	public double totalEnergy() {
@@ -150,83 +154,82 @@ public class PowerDistribution {
 
 	/**
 	 * Gets total Power
+	 * 
 	 * @return Total Power
 	 */
 	public double totalPower() {
 		return totalPower;
 	}
-	
-	
+
 	public boolean isRightMotorTwoTrip() {
 		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_2_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isRightMotorOneTrip() {
-		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_1_PDP] == 2) 
+		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_1_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isBallIntakeMotorTrip() {
-		if (channelError[RobotMap.BALL_INTAKE_MOTOR_PDP] == 2) 
+		if (channelError[RobotMap.BALL_INTAKE_MOTOR_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isIndexMotorTrip() {
-		if (channelError[RobotMap.INDEXER_WHEEL_PDP] == 2) 
+		if (channelError[RobotMap.INDEXER_WHEEL_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isShooterMotorLeftTrip() {
-		
+
 		if (channelError[RobotMap.SHOOTER_MOTOR_LEFT_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isShooterMotorRightTrip() {
 		if (channelError[RobotMap.SHOOTER_MOTOR_RIGHT_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isLeftMotorOneTrip() {
-		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_1_PDP] == 2) 
+		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_1_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isLeftMotorTwoTrip() {
-		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP] == 2) 
+		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-	
-	
+
 	public boolean isLeftHangerMotorTrip() {
-		if (channelError[RobotMap.CLIMBER_MOTOR_LEFT_PDP] == 1) 
+		if (channelError[RobotMap.CLIMBER_MOTOR_LEFT_PDP] == 1)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean isRighttHangerMotorTrip() {
-		if (channelError[RobotMap.CLIMBER_MOTOR_RIGHT_PDP] == 1) 
+		if (channelError[RobotMap.CLIMBER_MOTOR_RIGHT_PDP] == 1)
 			return true;
 		else
 			return false;
 	}
-	
+
 }

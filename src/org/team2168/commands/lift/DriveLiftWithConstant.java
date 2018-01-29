@@ -1,15 +1,20 @@
-package org.team2168.commands.auto;
+package org.team2168.commands.lift;
+
+import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Does nothing, absolutely nothing
+ * Drives lift with constant
  */
-public class DoNothing extends Command {
+public class DriveLiftWithConstant extends Command {
 
-	public DoNothing() {
+	double speed;
+
+	public DriveLiftWithConstant(double liftSpeed) {
 		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+		requires(Robot.lift);
+		speed = liftSpeed;
 	}
 
 	// Called just before this Command runs the first time
@@ -18,6 +23,7 @@ public class DoNothing extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		Robot.lift.driveAllMotors(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -27,6 +33,7 @@ public class DoNothing extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.lift.driveAllMotors(0);
 	}
 
 	// Called when another command which requires one or more of the same

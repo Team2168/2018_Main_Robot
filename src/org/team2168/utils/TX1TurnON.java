@@ -14,23 +14,25 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 
-
-
 public class TX1TurnON {
 	private java.util.Timer executor;
 	private long period;
 
 	public static DigitalOutput tx1TurnOn;
 	public static DigitalInput tx1OnStatus;
-	
+
 	public TX1TurnON(long period) {
 		this.period = period;
-		
-    	tx1TurnOn = new DigitalOutput(RobotMap.TX1_TURN_ON);
-    	tx1OnStatus = new DigitalInput(RobotMap.TX1_ON_STATUS);
-		
-        ConsolePrinter.putBoolean("TX1TurnOn", () -> {return getTX1TurnOn();}, true, false);
-        ConsolePrinter.putBoolean("TX1OnStatus", () -> {return getTX1OnStatus();}, true, false);
+
+		tx1TurnOn = new DigitalOutput(RobotMap.TX1_TURN_ON);
+		tx1OnStatus = new DigitalInput(RobotMap.TX1_ON_STATUS);
+
+		ConsolePrinter.putBoolean("TX1TurnOn", () -> {
+			return getTX1TurnOn();
+		}, true, false);
+		ConsolePrinter.putBoolean("TX1OnStatus", () -> {
+			return getTX1OnStatus();
+		}, true, false);
 	}
 
 	public void startThread() {
@@ -42,30 +44,27 @@ public class TX1TurnON {
 	public boolean getTX1TurnOn() {
 		return !tx1TurnOn.get();
 	}
-	
+
 	/**
-	 * Returns status of TX1 on. This DIO input pin
-	 * should be plugged into GND on TX1 J17 header
+	 * Returns status of TX1 on. This DIO input pin should be plugged into GND on
+	 * TX1 J17 header
 	 */
 	public boolean getTX1OnStatus() {
 		return !tx1OnStatus.get();
 	}
-	
-	
+
 	/**
-	 * Try to press tegra TX1 button 1 every other second
-	 * This DIO output pin should be plugged into the PNL pin
-	 * of the J6 header on TX1
+	 * Try to press tegra TX1 button 1 every other second This DIO output pin should
+	 * be plugged into the PNL pin of the J6 header on TX1
 	 */
 	public void turnTX1On() {
-		if(Math.ceil(Timer.getFPGATimestamp()) % 2 == 0) {
+		if (Math.ceil(Timer.getFPGATimestamp()) % 2 == 0) {
 			tx1TurnOn.set(false);
-		}
-		else {
+		} else {
 			tx1TurnOn.set(true);
 		}
 	}
-	
+
 	private void run() {
 
 		turnTX1On();
@@ -89,6 +88,5 @@ public class TX1TurnON {
 			tx1.run();
 		}
 	}
-	
-	
+
 }

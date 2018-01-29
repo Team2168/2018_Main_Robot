@@ -20,14 +20,18 @@ public class LoggableBoolean implements Loggable {
 
 	/**
 	 * Send this value to the dashboard.
-	 * @param key the key associated with this value to send to the dashboard.
+	 * 
+	 * @param key
+	 *            the key associated with this value to send to the dashboard.
 	 */
 	@Override
 	public void put(String key) {
 		SmartDashboard.putBoolean(key, value.get());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.team2168.robot.utils.consoleprinter.Loggable#valueToString()
 	 */
 	@Override
