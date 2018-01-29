@@ -49,13 +49,13 @@ Our repository and workflow loosely follows the gitflow workflow. This workflow 
 
 #Robot Design
 ## Subsystems
-### Drivetrain
+### Drivetrain(Cierra)
 - 4x VictorSP Motor controllers
 ..- Positive values move upwards / Negative values move down
 - 2x Greyhill Encoders (1x left, 1x right)
 - 1x Gyro (ADXRS453)
 
-### Cube Intake
+### Cube Intake(Aidan)
 - 2x VictorSP motor controllers
 ..- Positive values move cube inwards / Negative values move cube outwards
 - 1x Single Solenoid valve to open/close intake
@@ -64,7 +64,7 @@ Our repository and workflow loosely follows the gitflow workflow. This workflow 
 ..- Kforward is rotated down, Kreverse is rotated up (starting configuration)
 - 1x SHARP IR sensor to detect the presence of a cube
 
-### Elevator
+### Lift(David)
 - 3x VictorSP motor controllers to drive lift up/down
 ..- Positive values move upwards / Negative values move down
 ..- On 30A fuses on the PDP
@@ -73,10 +73,10 @@ Our repository and workflow loosely follows the gitflow workflow. This workflow 
 ..- KForward is high speed / KReverse is low speed
 - 1x Encoder/10 turn potentiometer for lift position
 
-### Climber (currently part of the lift assembly)
+### Climber (currently part of the lift assembly)(David)
 - TBD
 
-### Fork lift
+### Fork lift(Aiden)
 - 1x Double Solenoid to raise/lower the arms of the lift
 ..- Kforward is lift raised, Kreverse is lift lowered
 
