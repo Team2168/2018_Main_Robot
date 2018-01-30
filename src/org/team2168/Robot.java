@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain;
 	public static Pneumatics pneumatics;
 	public static Lift lift;
+	public static LiftShifter liftShifter;
 	public static PowerDistribution pdp;
 	public static Compressor comp;
 	public static TX1TurnON tx1;

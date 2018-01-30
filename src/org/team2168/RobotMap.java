@@ -45,12 +45,10 @@ public class RobotMap {
 	// Channels 0-9 on RoboRio
 	public static final int RIGHT_DRIVE_ENCODER_A = 0;
 	public static final int RIGHT_DRIVE_ENCODER_B = 1;
-	// public static final int BALL_INTAKE_ARM_HALL_EFFECT = 2;
-	// public static final int GEAR_INTAKE_ARM_HALL_EFECT = 3;
 	public static final int LEFT_DRIVE_ENCODER_B = 4;
 	public static final int LEFT_DRIVE_ENCODER_A = 5;
-	// public static final int INDEXER_LOWER_BALL_PRESENT = 6;
-	// public static final int INDEXER_UPPER_BALL_PRESENT = 7;
+	public static final int LIFT_FULLY_UP = 6;
+	public static final int LIFT_FULLY_DOWN = 7;
 	public static final int TX1_TURN_ON = 8;
 	public static final int TX1_ON_STATUS = 9;
 
@@ -85,6 +83,8 @@ public class RobotMap {
 	public final static int DRIVETRAIN_LOW_GEAR = 1;
 	public static final int LIFT_BRAKE_RELEASE = 2;
 	public static final int LIFT_BRAKE_APPLY = 3;
+	public static final int LIFT_HIGH_GEAR = 4;
+	public static final int LIFT_LOW_GEAR = 5;
 	// Analog Input Channels////////////////////////////////////////////////////
 	// Channels 0-3 on Roborio
 	// public static final int TURRET_POTENTIOMETER = 0;

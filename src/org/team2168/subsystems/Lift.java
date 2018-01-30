@@ -6,6 +6,7 @@ import org.team2168.RobotMap;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Victor;
@@ -23,6 +24,9 @@ public class Lift extends Subsystem {
 	private static Victor liftMotor3;
 	private DoubleSolenoid liftBrake;
 	private static AnalogInput potentiometer;
+	private static DigitalInput liftFullyUp;
+	private static DigitalInput liftFullyDown;
+	
 
 	public volatile double liftMotor1Voltage;
 	public volatile double liftMotor2Voltage;
@@ -37,6 +41,8 @@ public class Lift extends Subsystem {
 		liftMotor3 = new Victor(RobotMap.LIFT_MOTOR_3);
 		liftBrake = new DoubleSolenoid(RobotMap.LIFT_BRAKE_APPLY, RobotMap.LIFT_BRAKE_RELEASE);
 		potentiometer = new AnalogInput(RobotMap.LIFT_POSITION_POT);
+		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP);
+		liftFullyDown = new DigitalInput(RobotMap.LIFT_FULLY_DOWN);
 	}
 
 	/**
@@ -53,6 +59,26 @@ public class Lift extends Subsystem {
 	public double getRawPot() {
 		return potentiometer.getVoltage();
 	}
+	
+	/**
+	 * Checks to see if arm is fully up
+	 * @return true if pressed, false if not
+	 */
+	public boolean isLiftFullyUp() {
+		return !liftFullyUp.get();
+	}
+	
+	/**
+	 * Checks to see if arm is fully down
+	 * @return true if pressed, false if not
+	 */
+	public boolean isLiftFullyDown() {
+		return !liftFullyDown.get();
+	}
+	
+	
+	
+	
 
 	/**
 	 * Drives the first Lift motor at a speed from -1 to 1 where 1 is forward
@@ -100,7 +126,7 @@ public class Lift extends Subsystem {
 	 * @param speed
 	 */
 	public void driveAllMotors(double speed) {
-		if (Math.abs(speed) > 0.2) {
+		if ((speed > 0.2 && isLiftFullyDown()) || ((speed < 0.2) && isLiftFullyUp())) {
 			disableBrake();
 			driveLiftMotor1(speed);
 			driveLiftMotor2(speed);
