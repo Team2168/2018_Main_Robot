@@ -46,21 +46,19 @@ public class RobotMap {
 	//Channels 0-9 on RoboRio
 	public static final int RIGHT_DRIVE_ENCODER_A = 0;
 	public static final int RIGHT_DRIVE_ENCODER_B = 1;	
-//	public static final int BALL_INTAKE_ARM_HALL_EFFECT = 2;
-//	public static final int GEAR_INTAKE_ARM_HALL_EFECT = 3;
+	public static final int FORK_LIFT_RAISED_LIMIT = 2;
+	public static final int FORK_LIFT_LOWERED_LIMIT= 3;
 	public static final int LEFT_DRIVE_ENCODER_B = 4;
 	public static final int LEFT_DRIVE_ENCODER_A = 5;
-//	public static final int INDEXER_LOWER_BALL_PRESENT = 6;
-//	public static final int INDEXER_UPPER_BALL_PRESENT = 7;
+	public static final int SCISSOR_LIFT_LOWERED_LIMIT = 6;
+	public static final int SCISSOR_LIFT_RAISED_LIMIT = 7;
 	public static final int TX1_TURN_ON = 8;
 	public static final int TX1_ON_STATUS = 9;
 
 
 	//Channels 10-25 on MXP (PWM and DIO)
-	public static final int RIGHT_WING_MOTOR_1 = 10;
-	public static final int RIGHT_WING_MOTOR_2 = 11;
-	public static final int LEFT_WING_MOTOR_1 = 12;
-	public static final int LEFT_WING_MOTOR_2 = 13;
+	public static final int FORK_LIFT_MOTOR = 10;
+	public static final int SCISSOR_LIFT_MOTOR = 11;
 //	public static final int AGITATOR_WHEEL = 14;
 	
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
@@ -85,10 +83,10 @@ public class RobotMap {
 	//Solenoid Channels////////////////////////////////////////////////////////
 	public final static int DRIVETRAIN_HIGH_GEAR = 0;
 	public final static int DRIVETRAIN_LOW_GEAR= 1;
-	public final static int RIGHT_WING_PISTON_EXTEND = 2;
-	public final static int RIGHT_WING_PISTON_RETRACT = 3;
-	public final static int LEFT_WING_PISTON_EXTEND = 4;
-	public final static int LEFT_WING_PISTON_RETRACT = 5;
+	public final static int FORK_LIFT_PISTON_EXTEND = 2;
+	public final static int FORK_LIFT_PISTON_RETRACT = 3;
+	public final static int SCISSOR_LIFT_PISTON_EXTEND = 4;
+	public final static int SCISSOR_LIFT_PISTON_RETRACT = 5;
 //	public final static int BALL_INTAKE_PISTON_RETRACT = 5;
 
 	//Analog Input Channels////////////////////////////////////////////////////
@@ -156,14 +154,17 @@ public class RobotMap {
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
 	
 	/*************************************************************************
-	 *                           WING PARAMETERS
+	 *                           FORK LIFT PARAMETERS
 	 *************************************************************************/
 	//TODO check if the reverse values match the physical robot
-	public static final boolean RW_REVERSE1 = true;
-	public static final boolean RW_REVERSE2 = true;
-	public static final boolean LW_REVERSE1 = false;
-	public static final boolean LW_REVERSE2 = false;
+	public static final boolean FORK_LIFT_REVERSE = true;
 	
+	
+	/*************************************************************************
+	 *                           SCISSOR LIFT PARAMETERS
+	 *************************************************************************/
+	//TODO check if the reverse values match the physical robot
+	public static final boolean SCISSOR_LIFT_REVERSE = true;
 	
 	/*************************************************************************
 	 *                            PDP PARAMETERS
