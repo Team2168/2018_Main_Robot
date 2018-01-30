@@ -4,10 +4,14 @@ To run the UI:
 
 Note: Even if on 64bit computer we will run 32-bit node and packages
 
-- Install Node.js version 0.8.2 (from nodejs.org previous releases section, select the MSI version from https://nodejs.org/download/release/v0.8.2/)
+- Install Node.js x86 version 0.8.2 (from nodejs.org previous releases section, select the MSI version from https://nodejs.org/download/release/v0.8.2/)
+- Install Visual Studio Express 2012 for Windows Desktop x86 version (need to create free windows developer account) https://my.visualstudio.com/Downloads?q=visual%20studio%202012&wt.mc_id=o~msft~vscom~older-downloads)
+
 - Install Visual Studio VC 2010 from Microsoft (https://www.visualstudio.com/vs/older-downloads/) Requires free MS dev account
-- In CMD type 'set VCTargetsPath=C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120'
-- Set the NPM certs with `npm config set ca=""`
+- Open File Explorer and confirm you have the following MS build path (C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120), If not you should have something simular or Visual Studio Express with C++ Did not install properly
+- In CMD type 'set VCTargetsPath=C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120' 
+- In CMD type 'set GYP_MSVS_VERSION=2012'
+- In CMD Set the NPM certs with `npm config set ca=""`
 - Install socket.io (open cmd and type `npm install socket.io@0.9.11` without quotes)
 - Install mime (open cmd and type `npm install mime@^1` without quotes
 - Install express (open cmd and type `npm install express@2.5.1` without quotes)
