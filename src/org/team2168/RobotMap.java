@@ -41,7 +41,7 @@ public class RobotMap {
 //	public static final int SHOOTER_HOOD_SERVO = 9;
 	// More PWM channels in common PWM/DIO MXP section below.
 
-
+   
 	//Digital IO Channels//////////////////////////////////////////////////////
 	//Channels 0-9 on RoboRio
 	public static final int RIGHT_DRIVE_ENCODER_A = 0;
