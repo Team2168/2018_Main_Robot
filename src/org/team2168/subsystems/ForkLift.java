@@ -47,7 +47,7 @@ public class ForkLift extends Subsystem
 	 * Takes in a double speed and sets it to fork lift motor 
 	 * @param speed is a double between -1 and 1
 	 */
-	private void driveMotor(double speed){
+	public void driveMotor(double speed){
 		if (RobotMap.FORK_LIFT_REVERSE)
 			speed = -speed;
 		forkLiftMotor.set(speed);
@@ -91,7 +91,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedExtend(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-				return forkLiftPiston.get() == DoubleSolenoid.Value.kReverse;
+				return forkLiftPiston.get() == DoubleSolenoid.Value.kForward;
 			}
 	
 	/**

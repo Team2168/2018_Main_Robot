@@ -47,11 +47,13 @@ public class ScissorLift extends Subsystem
 	 * Takes in a double speed and sets it to scissor lift motor 
 	 * @param speed is a double between -1 and 1
 	 */
-	private void driveMotor(double speed){
+	public void driveMotor(double speed){
 		if (RobotMap.SCISSOR_LIFT_REVERSE)
 			speed = -speed;
 		scissorLiftMotor.set(speed);
 	}
+	
+	
 	
 
 	/**
@@ -91,7 +93,7 @@ public class ScissorLift extends Subsystem
 	 */
 	public boolean isCommandedExtend(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-				return scissorLiftPiston.get() == DoubleSolenoid.Value.kReverse;
+				return scissorLiftPiston.get() == DoubleSolenoid.Value.kForward;
 			}
 	
 	/**
