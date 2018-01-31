@@ -24,8 +24,8 @@ public class Lift extends Subsystem {
 	private static Victor liftMotor3;
 	private DoubleSolenoid liftBrake;
 	private static AnalogInput potentiometer;
-	private static DigitalInput liftFullyUp;
-	private static DigitalInput liftFullyDown;
+	private static DigitalInput liftFullyUp; //hall effect sensors
+	private static DigitalInput liftFullyDown; // ^^^^^^^^^^^
 	
 
 	public volatile double liftMotor1Voltage;
