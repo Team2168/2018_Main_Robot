@@ -73,31 +73,31 @@ public class Drivetrain extends Subsystem {
 		rightMotor1 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_1);
 		rightMotor2 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_2);
 		
-		if(Robot.isPracticeRobot())
-		{
-			drivetrainRightEncoder = new AverageEncoder(
-					RobotMap.RIGHT_DRIVE_ENCODER_A_PBOT,
-					RobotMap.RIGHT_DRIVE_ENCODER_B_PBOT,
-					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
-					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
-					RobotMap.RIGHT_DRIVE_TRAIN_ENCODER_REVERSE_PBOT,
-					RobotMap.DRIVE_ENCODING_TYPE,
-					RobotMap.DRIVE_SPEED_RETURN_TYPE,
-					RobotMap.DRIVE_POS_RETURN_TYPE,
-					RobotMap.DRIVE_AVG_ENCODER_VAL);
-
-			drivetrainLeftEncoder = new AverageEncoder(
-					RobotMap.LEFT_DRIVE_ENCODER_A_PBOT, 
-					RobotMap.LEFT_DRIVE_ENCODER_B_PBOT,
-					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
-					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
-					RobotMap.LEFT_DRIVE_TRAIN_ENCODER_REVERSE_PBOT,
-					RobotMap.DRIVE_ENCODING_TYPE,
-					RobotMap.DRIVE_SPEED_RETURN_TYPE,
-					RobotMap.DRIVE_POS_RETURN_TYPE,
-					RobotMap.DRIVE_AVG_ENCODER_VAL);
-		}
-		else
+	//	if(Robot.isPracticeRobot())
+//		{
+//			drivetrainRightEncoder = new AverageEncoder(
+//					RobotMap.RIGHT_DRIVE_ENCODER_A_PBOT,
+//					RobotMap.RIGHT_DRIVE_ENCODER_B_PBOT,
+//					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
+//					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
+//					RobotMap.RIGHT_DRIVE_TRAIN_ENCODER_REVERSE_PBOT,
+//					RobotMap.DRIVE_ENCODING_TYPE,
+//					RobotMap.DRIVE_SPEED_RETURN_TYPE,
+//					RobotMap.DRIVE_POS_RETURN_TYPE,
+//					RobotMap.DRIVE_AVG_ENCODER_VAL);
+//
+//			drivetrainLeftEncoder = new AverageEncoder(
+//					RobotMap.LEFT_DRIVE_ENCODER_A_PBOT, 
+//					RobotMap.LEFT_DRIVE_ENCODER_B_PBOT,
+//					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
+//					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
+//					RobotMap.LEFT_DRIVE_TRAIN_ENCODER_REVERSE_PBOT,
+//					RobotMap.DRIVE_ENCODING_TYPE,
+//					RobotMap.DRIVE_SPEED_RETURN_TYPE,
+//					RobotMap.DRIVE_POS_RETURN_TYPE,
+//					RobotMap.DRIVE_AVG_ENCODER_VAL);
+//		}
+	//	else
 		{
 			drivetrainRightEncoder = new AverageEncoder(
 					RobotMap.RIGHT_DRIVE_ENCODER_A,

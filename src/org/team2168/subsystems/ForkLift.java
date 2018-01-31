@@ -5,6 +5,7 @@ import org.team2168.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,7 +18,7 @@ public class ForkLift extends Subsystem
 	private static ForkLift instance = null;
 	
 	private static VictorSP forkLiftMotor;
-	private DoubleSolenoid forkLiftPiston;
+	private Solenoid forkLiftPiston;
 	private static DigitalInput raisedLimitSwitch;
 	private static DigitalInput loweredLimitSwitch;
 	
@@ -25,9 +26,8 @@ public class ForkLift extends Subsystem
 	 * Default constructors
 	 */
 	public ForkLift(){
-		forkLiftMotor = new VictorSP(RobotMap.FORK_LIFT_MOTOR);
-		forkLiftPiston = new DoubleSolenoid(RobotMap.FORK_LIFT_PISTON_EXTEND, 
-				RobotMap.FORK_LIFT_PISTON_RETRACT);
+		forkLiftMotor = new VictorSP(RobotMap.FORKLIFT_MOTOR);
+		forkLiftPiston = new Solenoid(RobotMap.FORK_LIFT_PISTON);
 		loweredLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_LOWERED_LIMIT);
 		raisedLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_RAISED_LIMIT);
 			
@@ -58,14 +58,14 @@ public class ForkLift extends Subsystem
 	 * Retracts fork lift piston
 	 */
 	public void retract(){
-		forkLiftPiston.set(Value.kReverse);
+		forkLiftPiston.set(RobotMap.SOLENOID_OFF);
 	}
 
 	/**
 	 * Extends fork lift piston
 	 */
 	public void extend(){
-		forkLiftPiston.set(Value.kForward);
+		forkLiftPiston.set(RobotMap.SOLENOID_ON);
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedExtend(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-				return forkLiftPiston.get() == DoubleSolenoid.Value.kForward;
+				return forkLiftPiston.get() == RobotMap.SOLENOID_ON;
 			}
 	
 	/**
@@ -100,7 +100,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedRetract(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-		return forkLiftPiston.get() == DoubleSolenoid.Value.kReverse;
+		return forkLiftPiston.get() == RobotMap.SOLENOID_OFF;
 		
 	}
 	

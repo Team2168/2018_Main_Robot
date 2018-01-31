@@ -5,6 +5,7 @@ import org.team2168.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,7 +18,7 @@ public class ScissorLift extends Subsystem
 	private static ScissorLift instance = null;
 	
 	private static VictorSP scissorLiftMotor;
-	private DoubleSolenoid scissorLiftPiston;
+	private Solenoid scissorLiftPiston;
 	private static DigitalInput raisedLimitSwitch;
 	private static DigitalInput loweredLimitSwitch;
 	
@@ -25,9 +26,8 @@ public class ScissorLift extends Subsystem
 	 * Default constructors
 	 */
 	public ScissorLift(){
-		scissorLiftMotor = new VictorSP(RobotMap.SCISSOR_LIFT_MOTOR);
-		scissorLiftPiston = new DoubleSolenoid(RobotMap.SCISSOR_LIFT_PISTON_EXTEND, 
-				RobotMap.SCISSOR_LIFT_PISTON_RETRACT);
+		scissorLiftMotor = new VictorSP(RobotMap.SCISSOR_MOTOR);
+		scissorLiftPiston = new Solenoid(RobotMap.SCISSOR_LIFT_PISTON); 
 		loweredLimitSwitch = new DigitalInput(RobotMap.SCISSOR_LIFT_LOWERED_LIMIT);
 		raisedLimitSwitch = new DigitalInput(RobotMap.SCISSOR_LIFT_RAISED_LIMIT);
 			
@@ -60,14 +60,14 @@ public class ScissorLift extends Subsystem
 	 * Retracts scissor lift piston
 	 */
 	public void retract(){
-		scissorLiftPiston.set(Value.kReverse);
+		scissorLiftPiston.set(RobotMap.SOLENOID_OFF);
 	}        
 
 	/**
 	 * Extends scissor lift piston
 	 */
 	public void extend(){
-		scissorLiftPiston.set(Value.kForward);
+		scissorLiftPiston.set(RobotMap.SOLENOID_ON);
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class ScissorLift extends Subsystem
 	 */
 	public boolean isCommandedExtend(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-				return scissorLiftPiston.get() == DoubleSolenoid.Value.kForward;
+				return scissorLiftPiston.get() == RobotMap.SOLENOID_ON;
 			}
 	
 	/**
@@ -102,7 +102,7 @@ public class ScissorLift extends Subsystem
 	 */
 	public boolean isCommandedRetract(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-		return scissorLiftPiston.get() == DoubleSolenoid.Value.kReverse;
+		return scissorLiftPiston.get() == RobotMap.SOLENOID_OFF;
 		
 	}
 	
