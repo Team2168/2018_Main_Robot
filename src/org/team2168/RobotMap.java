@@ -64,9 +64,8 @@ public class RobotMap {
 	//Channels 10-25 on MXP (PWM and DIO)
 //	public static final int CONVELATOR_MOTOR = 10;
 //	public static final int TURRET_MOTOR = 11;
-//	public static final int GEAR_INTAKE_MOTOR = 12;
-//	public static final int INDEXER_WHEEL = 13;
-//	public static final int AGITATOR_WHEEL = 14;
+	public static final int INTAKE_MOTOR_LEFT = 12;
+	public static final int INTAKE_MOTOR_RIGHT = 12;
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
@@ -89,15 +88,14 @@ public class RobotMap {
 	//Solenoid Channels////////////////////////////////////////////////////////
 	public final static int DRIVETRAIN_HIGH_GEAR = 0;
 	public final static int DRIVETRAIN_LOW_GEAR= 1;
-//	public final static int GEAR_INTAKE_PISTON_EXTEND = 2;
-//	public final static int GEAR_INTAKE_PISTON_RETRACT = 3;
-//	public final static int BALL_INTAKE_PISTON_EXTEND = 4;
-//	public final static int BALL_INTAKE_PISTON_RETRACT = 5;
+	public final static int INTAKE_PIVOT_PISTON_DOWN = 2;
+	public final static int INTAKE_PIVOT_PISTON_UP = 3;
+	public final static int INTAKE_OPEN_PISTON_CLOSED = 4;
 
 	//Analog Input Channels////////////////////////////////////////////////////
 	//Channels 0-3 on Roborio
 //	public static final int TURRET_POTENTIOMETER = 0;
-//	public static final int GEAR_INTAKE_ROLLER_IR = 1;
+	public static final int CUBE_INTAKE_IR_SENSOR = 1;
 	public static final int DRIVETRAIN_IR_SENSOR = 2;
 	public static final int PRESSURE_SENSOR = 3;
 
@@ -157,6 +155,22 @@ public class RobotMap {
 	public static final double MIN_DRIVE_SPEED = 0.2;
 	public static final double AUTO_NORMAL_SPEED = 0.5;
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
+	
+	
+	/*************************************************************************
+	 *                         FORKLIFT PARAMETERS
+	 *************************************************************************/
+	public static final boolean FORKLIFT_LEFT_REVERSE = false;
+	public static final boolean FORKLIFT_RIGHT_REVERSE = false;
+	
+	
+	/*************************************************************************
+	 *                         CUBE INTAKE PARAMETERS
+	 *************************************************************************/
+	public static final boolean INTAKE_LEFT_REVERSE = false;
+	public static final boolean INTAKE_RIGHT_REVERSE = false;
+	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
+	
 	/*************************************************************************
 	 *                            PDP PARAMETERS
 	 *************************************************************************/
