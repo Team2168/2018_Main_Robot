@@ -16,6 +16,15 @@ import org.team2168.subsystems.drivetrain.Drivetrain;
  * directory.
  */
 
+<<<<<<< HEAD
+=======
+	//Subsystems instance variables
+	//  If you need to access a subsystem from anywhere in the code,
+	//  it's done through one of these variables.
+	public static Drivetrain drivetrain;
+	public static Pneumatics pneumatics;
+	public static CubeIntake cubeIntake;
+>>>>>>> refs/remotes/origin/_CubeIntake_AS
 
 public class Robot extends IterativeRobot
 {
