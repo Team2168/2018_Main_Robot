@@ -65,6 +65,7 @@ public class RobotMap {
 	public static final int PRACTICE_BOT_JUMPER = 24;
 
 	// PBOT Differences
+	
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
 	public static final int LEFT_DRIVE_ENCODER_B_PBOT = 1;
 	public static final int LEFT_DRIVE_ENCODER_A_PBOT = 2;
