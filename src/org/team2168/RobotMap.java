@@ -29,30 +29,39 @@ public class RobotMap {
 	public static final int RIGHT_DRIVE_MOTOR_1 = 0;
 	public static final int RIGHT_DRIVE_MOTOR_2 = 1;
 	public static final int LEFT_DRIVE_MOTOR_1 = 2;
-	public static final int LEFT_DRIVE_MOTOR_2 = 3;	
-//	public static final int BALL_INTAKE_MOTOR = 4;
-//	public static final int CLIMBER_MOTOR_LEFT = 5;
-//	public static final int CLIMBER_MOTOR_RIGHT = 6;
-//	public static final int SHOOTER_WHEEL_LEFT = 7;
-//	public static final int SHOOTER_WHEEL_RIGHT = 8;
-//
+	public static final int LEFT_DRIVE_MOTOR_2 = 3;
+	public static final int FORKLIFT_MOTOR = 4;
+	public static final int SCISSOR_MOTOR = 4;
+	
+	public static final int CUBE_LIFT_MOTOR1 = 9;
+
+	
 //	public static final int SHOOTER_HOOD_SERVO = 9;
 	// More PWM channels in common PWM/DIO MXP section below.
 
-
+   //SPY Channels/////////////////////////////////////////////////////////////
+	public static final int GYRO = 0;
+	
+	
+	
 	//Digital IO Channels//////////////////////////////////////////////////////
 	//Channels 0-9 on RoboRio
 	public static final int RIGHT_DRIVE_ENCODER_A = 0;
 	public static final int RIGHT_DRIVE_ENCODER_B = 1;	
-//	public static final int BALL_INTAKE_ARM_HALL_EFFECT = 2;
-//	public static final int GEAR_INTAKE_ARM_HALL_EFECT = 3;
 	public static final int LEFT_DRIVE_ENCODER_B = 4;
 	public static final int LEFT_DRIVE_ENCODER_A = 5;
-//	public static final int INDEXER_LOWER_BALL_PRESENT = 6;
-//	public static final int INDEXER_UPPER_BALL_PRESENT = 7;
 	public static final int TX1_TURN_ON = 8;
 	public static final int TX1_ON_STATUS = 9;
+	public static final int LIFT_HALL_EFFECT1 = 2;
+	public static final int LIFT_HALL_EFFECT2 = 3;
+	
+	public static final int FORK_LIFT_RAISED_LIMIT = 2;
+	public static final int FORK_LIFT_LOWERED_LIMIT= 3;
+	public static final int SCISSOR_LIFT_LOWERED_LIMIT = 2;
+	public static final int SCISSOR_LIFT_RAISED_LIMIT = 3;
+	
 
+<<<<<<< HEAD
 
 	//Channels 10-25 on MXP (PWM and DIO)
 //	public static final int CONVELATOR_MOTOR = 10;
@@ -63,8 +72,16 @@ public class RobotMap {
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
 //	public static final int SHOOTER_ENCODER_B = 22; //PWM 18 on board
+=======
+	//Channels 10-25 on MXP (PWM and  DIO)
+	public static final int CUBE_LIFT_MOTOR2 = 10;
+	public static final int CUBE_LIFT_MOTOR3 = 11;
+	public static final int CUBE_INTAKE_MOTOR1 = 12;
+	public static final int CUBE_INTAKE_MOTOR2 = 13;
+>>>>>>> refs/remotes/origin/_Lifts_AS
 	public static final int PRACTICE_BOT_JUMPER = 24;
 	
+<<<<<<< HEAD
 	//PBOT Differences
 //	public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
 	public static final int LEFT_DRIVE_ENCODER_B_PBOT = 1;
@@ -81,19 +98,48 @@ public class RobotMap {
 	
 <<<<<<< HEAD
 =======
+=======
+		
+>>>>>>> refs/remotes/origin/_Lifts_AS
 	//Solenoid Channels////////////////////////////////////////////////////////
+<<<<<<< HEAD
 	public final static int DRIVETRAIN_HIGH_GEAR = 0;
 	public final static int DRIVETRAIN_LOW_GEAR= 1;
 	public final static int INTAKE_PIVOT_PISTON_DOWN = 2;
 	public final static int INTAKE_PIVOT_PISTON_UP = 3;
 	public final static int INTAKE_OPEN_PISTON_CLOSED = 4;
 
+=======
+	public final static int DRIVETRAIN_GEAR_SHIFT = 0;
+	public final static int CUBE_INTAKE_DOWN = 1;
+	public final static int CUBE_INTAKE_UP = 2;
+	public final static int FORK_LIFT_PISTON = 3;
+	public final static int SCISSOR_LIFT_PISTON = 3;
+	public final static int LIFT_SHIFT = 4;
+	public final static int CUBE_INTAKE_OPEN = 5; //going on the relay
+	public final static int LIFT_RACHET_ENGAGE = 6;
+	public final static int LIFT_RACHET_DISENGAGE = 7;
+	public final static int LIFT_BRAKE_ENGAGE = 8;
+	public final static int LIFT_BRAKE_DISENGAGE = 9;
+	public final static int PRESSURE_SENSOR = 10; //pneumatics 
+	
+	public final static boolean SOLENOID_ON = true;
+	public final static boolean SOLENOID_OFF = false;
+	
+	
+	
+>>>>>>> refs/remotes/origin/_Lifts_AS
 	//Analog Input Channels////////////////////////////////////////////////////
 	//Channels 0-3 on Roborio
+<<<<<<< HEAD
 //	public static final int TURRET_POTENTIOMETER = 0;
 	public static final int CUBE_INTAKE_IR_SENSOR = 1;
+=======
+	public static final int LIFT_POT = 0;
+	public static final int CUBE_IR_SENSOR1 = 1;
+>>>>>>> refs/remotes/origin/_Lifts_AS
 	public static final int DRIVETRAIN_IR_SENSOR = 2;
-	public static final int PRESSURE_SENSOR = 3;
+	public static final int CUBE_IR_SENSOR2= 3;
 
 
 	//Channels 4-7 on MXP
@@ -158,6 +204,7 @@ public class RobotMap {
 	public static final double AUTO_NORMAL_SPEED = 0.5;
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
 	
+<<<<<<< HEAD
 	
 	/*************************************************************************
 	 *                         FORKLIFT PARAMETERS
@@ -172,6 +219,20 @@ public class RobotMap {
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
+=======
+	/*************************************************************************
+	 *                           FORK LIFT PARAMETERS
+	 *************************************************************************/
+	//TODO check if the reverse values match the physical robot
+	public static final boolean FORK_LIFT_REVERSE = true;
+	
+	
+	/*************************************************************************
+	 *                           SCISSOR LIFT PARAMETERS
+	 *************************************************************************/
+	//TODO check if the reverse values match the physical robot
+	public static final boolean SCISSOR_LIFT_REVERSE = true;
+>>>>>>> refs/remotes/origin/_Lifts_AS
 	
 	/*************************************************************************
 	 *                            PDP PARAMETERS

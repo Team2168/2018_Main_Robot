@@ -21,10 +21,15 @@ import org.team2168.subsystems.drivetrain.Drivetrain;
 	//Subsystems instance variables
 	//  If you need to access a subsystem from anywhere in the code,
 	//  it's done through one of these variables.
-	public static Drivetrain drivetrain;
+	public static Drivetrain drivetrain;   
 	public static Pneumatics pneumatics;
+<<<<<<< HEAD
 	public static CubeIntake cubeIntake;
 >>>>>>> refs/remotes/origin/_CubeIntake_AS
+=======
+	public static ForkLift forkLift;
+	public static ScissorLift scissorLift;
+>>>>>>> refs/remotes/origin/_Lifts_AS
 
 public class Robot extends IterativeRobot
 {
