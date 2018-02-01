@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 public class TCPSocketSender {
 	int port = 4444;
 	int portNumber = 41234;
@@ -16,7 +15,7 @@ public class TCPSocketSender {
 	StringBuffer sb = new StringBuffer();
 	boolean enable;
 	boolean init;
-	
+
 	private volatile boolean clientConnected;
 
 	// A datagram connection.
@@ -60,8 +59,8 @@ public class TCPSocketSender {
 		try {
 			listener = new ServerSocket(port);
 
-			System.out.println("Listening on: " + listener.getLocalSocketAddress()
-					+ " on port: " + listener.getLocalPort());
+			System.out.println(
+					"Listening on: " + listener.getLocalSocketAddress() + " on port: " + listener.getLocalPort());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -76,9 +75,9 @@ public class TCPSocketSender {
 
 					clientConnected = false;
 					System.out.println("Listening on port: " + listener.getLocalPort());
-					
+
 					client = listener.accept();
-					
+
 					System.out.println("Client Connected");
 					clientConnected = true;
 
@@ -182,8 +181,7 @@ public class TCPSocketSender {
 								os.write(buf);
 							} catch (IOException e) {
 								// e.printStackTrace();
-								System.out
-										.println("Appears Client Closed the Connection");
+								System.out.println("Appears Client Closed the Connection");
 								enable = false;
 
 								start();

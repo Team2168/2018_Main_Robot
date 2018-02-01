@@ -12,20 +12,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author James
  *
  */
-public class LoggableNamedSendable implements Loggable{
+public class LoggableNamedSendable implements Loggable {
 	private Supplier<NamedSendable> value;
-	
+
 	public LoggableNamedSendable(Supplier<NamedSendable> value) {
 		this.value = value;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.team2168.robot.utils.consoleprinter.Loggable#put(java.lang.String)
 	 */
 	@Override
 	public void put(String key) {
 		SmartDashboard.putData(value.get());
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.team2168.robot.utils.consoleprinter.Loggable#valueToString()
 	 */
 	@Override

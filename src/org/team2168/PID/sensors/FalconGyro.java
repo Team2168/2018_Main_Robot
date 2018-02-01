@@ -20,8 +20,7 @@ import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.util.BoundaryException;
 
 /**
- * Re-written to support RoboRio. 8/19/2014
- * Kevin Harrilal
+ * Re-written to support RoboRio. 8/19/2014 Kevin Harrilal
  * 
  * Use a rate gyro to return the robots heading relative to a starting position.
  * The Gyro class tracks the robots heading based on the starting position. As
@@ -41,8 +40,7 @@ import edu.wpi.first.wpilibj.util.BoundaryException;
  * 
  * @author James@team2168.org
  */
-public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSource,
-		LiveWindowSendable {
+public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSource, LiveWindowSendable {
 
 	static final int kOversampleBits = 10;
 	static final int kAverageBits = 0;
@@ -58,12 +56,12 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 	PIDSourceType m_pidSource;
 
 	/**
-	 * Initialize the gyro. Calibrate the gyro by running for a number of
-	 * samples and computing the center value for this part. Then use the center
-	 * value as the Accumulator center value for subsequent measurements. It's
-	 * important to make sure that the robot is not moving while the centering
-	 * calculations are in progress, this is typically done when the robot is
-	 * first turned on while it's sitting at rest before the competition starts.
+	 * Initialize the gyro. Calibrate the gyro by running for a number of samples
+	 * and computing the center value for this part. Then use the center value as
+	 * the Accumulator center value for subsequent measurements. It's important to
+	 * make sure that the robot is not moving while the centering calculations are
+	 * in progress, this is typically done when the robot is first turned on while
+	 * it's sitting at rest before the competition starts.
 	 */
 	private void initGyro() {
 		result = new AccumulatorResult();
@@ -73,60 +71,56 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 		m_voltsPerDegreePerSecond = kDefaultVoltsPerDegreePerSecond;
 		m_analog.setAverageBits(kAverageBits);
 		m_analog.setOversampleBits(kOversampleBits);
-		double sampleRate = kSamplesPerSecond
-				* (1 << (kAverageBits + kOversampleBits));
+		double sampleRate = kSamplesPerSecond * (1 << (kAverageBits + kOversampleBits));
 		AnalogInput.setGlobalSampleRate(sampleRate);
 
 		Timer.delay(1.0);
-		
+
 		reInitGyro();
-		
-//		setPIDSourceParameter(PIDSourceParameter.kAngle);
+
+		// setPIDSourceParameter(PIDSourceParameter.kAngle);
 
 		LiveWindow.addSensor("Gyro", m_analog.getChannel(), this);
 	}
 
 	/**
-	 * Initialize the gyro. This method will block for the calibration period
-	 * or until the match has started, whichever happens first. If this method
-	 * is called during a match (the robot is enabled), the previous calibration
-	 * value will be kept.
+	 * Initialize the gyro. This method will block for the calibration period or
+	 * until the match has started, whichever happens first. If this method is
+	 * called during a match (the robot is enabled), the previous calibration value
+	 * will be kept.
 	 */
 	public void reInitGyro() {
 		double startTime = Timer.getFPGATimestamp();
-		
-		//Don't bother re-initializing the gyro if the match has already started 
-		if(DriverStation.getInstance().isDisabled()) {
+
+		// Don't bother re-initializing the gyro if the match has already started
+		if (DriverStation.getInstance().isDisabled()) {
 			m_analog.initAccumulator();
-			//make sure we wait long enough to accumulate at least one sample
+			// make sure we wait long enough to accumulate at least one sample
 			Timer.delay(0.025);
-			
-			//Attempt to calibrate the gyro. Delay until we have waited for the
-			//  length of the calibration period or a match has started,
-			//  whichever happens first.
-			while((Timer.getFPGATimestamp() < startTime + kCalibrationSampleTime)
+
+			// Attempt to calibrate the gyro. Delay until we have waited for the
+			// length of the calibration period or a match has started,
+			// whichever happens first.
+			while ((Timer.getFPGATimestamp() < startTime + kCalibrationSampleTime)
 					&& DriverStation.getInstance().isDisabled()) {
 				Timer.delay(0.005);
 			}
-	
+
 			m_analog.getAccumulatorOutput(result);
-	
-			//Determine the new zero, where value is the accumulated analog data
-			//  over the time specified (count).
+
+			// Determine the new zero, where value is the accumulated analog data
+			// over the time specified (count).
 			m_center = (int) ((double) result.value / (double) result.count + .5);
-	
-			m_offset = ((double) result.value / (double) result.count)
-					- (double) m_center;
-	
+
+			m_offset = ((double) result.value / (double) result.count) - (double) m_center;
+
 			m_analog.setAccumulatorCenter(m_center);
-	
+
 			m_analog.setAccumulatorDeadband(0);
-	
+
 			m_analog.resetAccumulator();
 		}
 	}
-	
-
 
 	/**
 	 * Gyro constructor with only a channel.
@@ -144,8 +138,8 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 
 	/**
 	 * Gyro constructor with a precreated analog channel object. Use this
-	 * constructor when the analog channel needs to be shared. There is no
-	 * reference counting when an AnalogChannel is passed to the gyro.
+	 * constructor when the analog channel needs to be shared. There is no reference
+	 * counting when an AnalogChannel is passed to the gyro.
 	 * 
 	 * @param channel
 	 *            The AnalogChannel object that the gyro is connected to.
@@ -153,8 +147,7 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 	public FalconGyro(AnalogInput channel) {
 		m_analog = channel;
 		if (m_analog == null) {
-			System.err
-					.println("Analog channel supplied to Gyro constructor is null");
+			System.err.println("Analog channel supplied to Gyro constructor is null");
 		} else {
 			m_channelAllocated = false;
 			initGyro();
@@ -163,8 +156,8 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 
 	/**
 	 * Reset the gyro. Resets the gyro to a heading of zero. This can be used if
-	 * there is significant drift in the gyro and it needs to be recalibrated
-	 * after it has been running.
+	 * there is significant drift in the gyro and it needs to be recalibrated after
+	 * it has been running.
 	 */
 	@Override
 	public void reset() {
@@ -174,8 +167,7 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 	}
 
 	/**
-	 * Delete (free) the accumulator and the analog components used for the
-	 * gyro.
+	 * Delete (free) the accumulator and the analog components used for the gyro.
 	 */
 	public void free() {
 		if (m_analog != null && m_channelAllocated) {
@@ -188,13 +180,13 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 	 * Return the actual angle in degrees that the robot is currently facing.
 	 * 
 	 * The angle is based on the current accumulator value corrected by the
-	 * oversampling rate, the gyro type and the A/D calibration values. The
-	 * angle is continuous, that is can go beyond 360 degrees. This make
-	 * algorithms that wouldn't want to see a discontinuity in the gyro output
-	 * as it sweeps past 0 on the second time around.
+	 * oversampling rate, the gyro type and the A/D calibration values. The angle is
+	 * continuous, that is can go beyond 360 degrees. This make algorithms that
+	 * wouldn't want to see a discontinuity in the gyro output as it sweeps past 0
+	 * on the second time around.
 	 * 
-	 * @return the current heading of the robot in degrees. This heading is
-	 *         based on integration of the returned rate from the gyro.
+	 * @return the current heading of the robot in degrees. This heading is based on
+	 *         integration of the returned rate from the gyro.
 	 */
 	public double getAngle() {
 		if (m_analog == null) {
@@ -204,10 +196,7 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 
 			long value = result.value - (long) (result.count * m_offset);
 
-			double scaledValue = value
-					* 1e-9
-					* m_analog.getLSBWeight()
-					* (1 << m_analog.getAverageBits())
+			double scaledValue = value * 1e-9 * m_analog.getLSBWeight() * (1 << m_analog.getAverageBits())
 					/ (AnalogInput.getGlobalSampleRate() * m_voltsPerDegreePerSecond);
 
 			return scaledValue;
@@ -226,9 +215,7 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 		if (m_analog == null) {
 			return 0.0;
 		} else {
-			return (m_analog.getAverageValue() - ((double) m_center + m_offset))
-					* 1e-9
-					* m_analog.getLSBWeight()
+			return (m_analog.getAverageValue() - ((double) m_center + m_offset)) * 1e-9 * m_analog.getLSBWeight()
 					/ ((1 << m_analog.getOversampleBits()) * m_voltsPerDegreePerSecond);
 		}
 	}
@@ -250,7 +237,9 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 	 * Set which parameter of the encoder you are using as a process control
 	 * variable. The Gyro class supports the rate and angle parameters
 	 * 
-	 * @param type the type of output to provide to the PID controller (rate/displacement).
+	 * @param type
+	 *            the type of output to provide to the PID controller
+	 *            (rate/displacement).
 	 */
 	public void setPIDSourceType(PIDSourceType type) {
 		m_pidSource = type;
@@ -258,13 +247,14 @@ public class FalconGyro extends SensorBase implements PIDSensorInterface, PIDSou
 
 	/**
 	 * Get the PID source type.
+	 * 
 	 * @param test
 	 * @return the PID source type (rate/displacement)
 	 */
 	public PIDSourceType getPIDSourceType() {
 		return m_pidSource;
 	}
-	
+
 	/**
 	 * Get the angle of the gyro for use with PIDControllers
 	 * 

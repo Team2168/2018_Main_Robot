@@ -10,8 +10,8 @@ public interface TCPMessageInterface {
 	/**
 	 * 
 	 * @param message
-	 *            is a string array, where the positions of each element
-	 *            correspond to the values of the JSON key/value pair.
+	 *            is a string array, where the positions of each element correspond
+	 *            to the values of the JSON key/value pair.
 	 */
 	public void receiveJSON(String[] message);
 

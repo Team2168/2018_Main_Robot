@@ -1,23 +1,33 @@
-package org.team2168.commands.auto;
+package org.team2168.commands.lift;
+
+import org.team2168.Robot;
+import org.team2168.RobotMap;
+import org.team2168.utils.F310;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Does nothing, absolutely nothing
+ * Drives the lift with joysticks
  */
-public class DoNothing extends Command {
+public class DriveLiftWithJoysticks extends Command {
+	private F310 joystick;
+	private double speed;
 
-	public DoNothing() {
+	public DriveLiftWithJoysticks(F310 Joysticks) {
 		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+		requires(Robot.lift);
+		this.joystick = joystick;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		double value = joystick.getRightStickRaw_X();
+		Robot.lift.driveAllMotors(value * RobotMap.LIFT_MAX_JOYSTICK_SPEED);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		Robot.lift.driveAllMotors(0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

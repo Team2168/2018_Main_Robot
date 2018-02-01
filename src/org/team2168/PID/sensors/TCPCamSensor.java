@@ -23,21 +23,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author HarrilalEngineering
  */
 
-public class TCPCamSensor implements PIDSensorInterface{
-	
+public class TCPCamSensor implements PIDSensorInterface {
+
 	public boolean isCloseShot = false;
-	
+
 	private int port;
 	private String messageOut;
 	private byte[] buf;
 	private volatile String[] dataReceived;
 	private StringBuffer sb = new StringBuffer();
 	private volatile boolean sendEnable;
-	
+
 	private volatile boolean clientConnected;
 
 	private DriverStation ds;
-	
+
 	// A TCP Socket Connection
 	private ServerSocket conn = null;
 
@@ -50,24 +50,24 @@ public class TCPCamSensor implements PIDSensorInterface{
 	private Thread t3;
 
 	private long requestPeriod;
-	
+
 	private int size;
-	
+
 	private String name;
-	
-	//Default HSV for OpenCV
-	private int  hMin = 0;
-	private int  hMax = 180;
-	private int  sMin = 0;
-	private int  sMax = 255;
-	private int  vMin = 0;
-	private int  vMax = 255;
+
+	// Default HSV for OpenCV
+	private int hMin = 0;
+	private int hMax = 180;
+	private int sMin = 0;
+	private int sMax = 255;
+	private int vMin = 0;
+	private int vMax = 255;
 
 	/**
 	 * 
 	 * @param port
-	 *            which is to be used to Listen for incoming TCP connections on
-	 *            the FRC bot.
+	 *            which is to be used to Listen for incoming TCP connections on the
+	 *            FRC bot.
 	 */
 	public TCPCamSensor(String name, int port, long requestPeriod) {
 		this.requestPeriod = requestPeriod;
@@ -75,8 +75,8 @@ public class TCPCamSensor implements PIDSensorInterface{
 		this.name = name;
 
 		size = 15;
-		
-		// initialize data messageOut 
+
+		// initialize data messageOut
 		dataReceived = new String[size];
 
 		dataReceived[0] = "0";
@@ -94,21 +94,21 @@ public class TCPCamSensor implements PIDSensorInterface{
 		dataReceived[12] = "0";
 		dataReceived[13] = "0";
 		dataReceived[14] = "0";
-		
+
 		// setup socket to listen on
 		this.port = port;
 
 		ds = DriverStation.getInstance();
-		
-		SmartDashboard.putNumber(getName() +"_MinH_current", getHueMin());
-		SmartDashboard.putNumber(getName() +"_MaxH_current", getHueMax());
-		SmartDashboard.putNumber(getName() +"_MinS_current", getSaturationMin());
-		SmartDashboard.putNumber(getName() +"_MinS_current", getSaturationMax());
-		SmartDashboard.putNumber(getName() +"_MinV_current", getValueMin());
-		SmartDashboard.putNumber(getName() +"_MaxV_current", getValueMax());
+
+		SmartDashboard.putNumber(getName() + "_MinH_current", getHueMin());
+		SmartDashboard.putNumber(getName() + "_MaxH_current", getHueMax());
+		SmartDashboard.putNumber(getName() + "_MinS_current", getSaturationMin());
+		SmartDashboard.putNumber(getName() + "_MinS_current", getSaturationMax());
+		SmartDashboard.putNumber(getName() + "_MinV_current", getValueMin());
+		SmartDashboard.putNumber(getName() + "_MaxV_current", getValueMax());
 
 		start();
-		
+
 	}
 
 	public void start() {
@@ -129,13 +129,11 @@ public class TCPCamSensor implements PIDSensorInterface{
 					// wait for a client to connect, this blocks until a connect
 					// is made
 					clientConnected = false;
-					System.out.println("Listening on: "
-							+ conn.getLocalSocketAddress() + " on port: "
-							+ conn.getLocalPort());
+					System.out.println(
+							"Listening on: " + conn.getLocalSocketAddress() + " on port: " + conn.getLocalPort());
 					sc = conn.accept();
 					System.out.println("Client Connected");
 					clientConnected = true;
-					
 
 					// make this true if you want to send data to the tegra
 					// as well
@@ -175,28 +173,28 @@ public class TCPCamSensor implements PIDSensorInterface{
 							// split data into array
 							dataReceived = Util.split(sb.toString(), ","); // splits
 							System.out.println(Arrays.toString(dataReceived));
-							System.out.println("Match Start: " + isMatchStart()+", " + "Target Rotation: " + getRotationAngle() +", " + "Target Distance: " + getTargetDistance());   
+							System.out.println("Match Start: " + isMatchStart() + ", " + "Target Rotation: "
+									+ getRotationAngle() + ", " + "Target Distance: " + getTargetDistance());
 							System.out.flush();
-							
-							//set HSVs with default values
-							if (count == 0)
-							{
-								SmartDashboard.putNumber(getName() +"_MinH_set", getHueMin());
-								SmartDashboard.putNumber(getName() +"_MaxH_set", getHueMax());
-								SmartDashboard.putNumber(getName() +"_MinS_set", getSaturationMin());
-								SmartDashboard.putNumber(getName() +"_MaxS_set", getSaturationMax());
-								SmartDashboard.putNumber(getName() +"_MinV_set", getValueMin());
-								SmartDashboard.putNumber(getName() +"_MaxV_set", getValueMax());
+
+							// set HSVs with default values
+							if (count == 0) {
+								SmartDashboard.putNumber(getName() + "_MinH_set", getHueMin());
+								SmartDashboard.putNumber(getName() + "_MaxH_set", getHueMax());
+								SmartDashboard.putNumber(getName() + "_MinS_set", getSaturationMin());
+								SmartDashboard.putNumber(getName() + "_MaxS_set", getSaturationMax());
+								SmartDashboard.putNumber(getName() + "_MinV_set", getValueMin());
+								SmartDashboard.putNumber(getName() + "_MaxV_set", getValueMax());
 								count++;
 							}
-							
-							SmartDashboard.putNumber(getName() +"_MinH_current", getHueMin());
-							SmartDashboard.putNumber(getName() +"_MaxH_current", getHueMax());
-							SmartDashboard.putNumber(getName() +"_MinS_current", getSaturationMin());
-							SmartDashboard.putNumber(getName() +"_MaxS_current", getSaturationMax());
-							SmartDashboard.putNumber(getName() +"_MinV_current", getValueMin());
-							SmartDashboard.putNumber(getName() +"_MaxV_current", getValueMax());
-								// create new buffer
+
+							SmartDashboard.putNumber(getName() + "_MinH_current", getHueMin());
+							SmartDashboard.putNumber(getName() + "_MaxH_current", getHueMax());
+							SmartDashboard.putNumber(getName() + "_MinS_current", getSaturationMin());
+							SmartDashboard.putNumber(getName() + "_MaxS_current", getSaturationMax());
+							SmartDashboard.putNumber(getName() + "_MinV_current", getValueMin());
+							SmartDashboard.putNumber(getName() + "_MaxV_current", getValueMax());
+							// create new buffer
 							sb = new StringBuffer();
 						}
 					}
@@ -229,15 +227,13 @@ public class TCPCamSensor implements PIDSensorInterface{
 						if (ds.isEnabled())
 							matchStart = 1;
 
-						messageOut = String.valueOf(matchStart) + " " 
-								+ count + " " 
-								+ SmartDashboard.getNumber(getName() +"_MinH_set", getHueMin()) + " " 
-								+ SmartDashboard.getNumber(getName() +"_MaxH_set", getHueMax()) + " " 
-								+ SmartDashboard.getNumber(getName() +"_MinS_set", getSaturationMin()) + " " 
-								+ SmartDashboard.getNumber(getName() +"_MaxS_set", getSaturationMax()) + " " 
-								+ SmartDashboard.getNumber(getName() +"_MinV_set", getValueMin()) + " " 
-								+ SmartDashboard.getNumber(getName() +"_MaxV_set", getValueMax())
-								+ " \n";
+						messageOut = String.valueOf(matchStart) + " " + count + " "
+								+ SmartDashboard.getNumber(getName() + "_MinH_set", getHueMin()) + " "
+								+ SmartDashboard.getNumber(getName() + "_MaxH_set", getHueMax()) + " "
+								+ SmartDashboard.getNumber(getName() + "_MinS_set", getSaturationMin()) + " "
+								+ SmartDashboard.getNumber(getName() + "_MaxS_set", getSaturationMax()) + " "
+								+ SmartDashboard.getNumber(getName() + "_MinV_set", getValueMin()) + " "
+								+ SmartDashboard.getNumber(getName() + "_MaxV_set", getValueMax()) + " \n";
 
 						System.out.println("Sending Match Start: " + messageOut);
 						System.out.flush();
@@ -249,8 +245,7 @@ public class TCPCamSensor implements PIDSensorInterface{
 							os.write(buf);
 						} catch (IOException e) {
 							// e.printStackTrace();
-							System.out.println("Appears Client Closed "
-									+ "the Connection");
+							System.out.println("Appears Client Closed " + "the Connection");
 							System.out.flush();
 							stopThreads();
 
@@ -282,206 +277,165 @@ public class TCPCamSensor implements PIDSensorInterface{
 		t2.start();
 	}
 
+	private void stopThreads() {
+		sendEnable = false;
+	}
 
-private void stopThreads()
-{
-	sendEnable = false;
-}
+	public int getMessageLength() {
 
-public int getMessageLength()
-{
-	
-	return size;
-}
+		return size;
+	}
 
-public String[] getMessage()
-{
+	public String[] getMessage() {
 
-	return dataReceived;
-}
+		return dataReceived;
+	}
 
-//These are specific to the game, modify for each year
-public boolean isMatchStart()
-{
+	// These are specific to the game, modify for each year
+	public boolean isMatchStart() {
 
-	int message = Integer.valueOf(dataReceived[0]).intValue();
-	
-	if (message == 1)
-		return true;
-	else
-		return false;
-	
-	
-}
+		int message = Integer.valueOf(dataReceived[0]).intValue();
 
-public double getRotationAngle() {
-	
-	if (dataReceived[1].compareToIgnoreCase("inf") != 0 &&
-		dataReceived[1].compareToIgnoreCase("-inf") != 0 &&
-		dataReceived[1].compareToIgnoreCase("+inf") != 0)
-	{
-		double message = Double.valueOf(dataReceived[1]).doubleValue();
+		if (message == 1)
+			return true;
+		else
+			return false;
+
+	}
+
+	public double getRotationAngle() {
+
+		if (dataReceived[1].compareToIgnoreCase("inf") != 0 && dataReceived[1].compareToIgnoreCase("-inf") != 0
+				&& dataReceived[1].compareToIgnoreCase("+inf") != 0) {
+			double message = Double.valueOf(dataReceived[1]).doubleValue();
+			return message;
+		} else
+			return 0;
+	}
+
+	public double getTargetDistance() {
+
+		if (dataReceived[2].compareToIgnoreCase("inf") != 0 && dataReceived[2].compareToIgnoreCase("-inf") != 0
+				&& dataReceived[2].compareToIgnoreCase("+inf") != 0) {
+			double message = Double.valueOf(dataReceived[2]).doubleValue();
+			return message;
+		} else
+			return 0;
+
+	}
+
+	public boolean isClientConnected() {
+		return clientConnected;
+
+	}
+
+	public boolean isTargetScorable() {
+		int message = Integer.valueOf(dataReceived[4]).intValue();
+
+		if (message == 1)
+			return true;
+		else
+			return false;
+
+	}
+
+	public boolean isProcessingTreadRunning() {
+		int message = Integer.valueOf(dataReceived[5]).intValue();
+
+		if (message == 1)
+			return true;
+		else
+			return false;
+
+	}
+
+	public boolean isCameraConnected() {
+		int message = Integer.valueOf(dataReceived[6]).intValue();
+
+		if (message == 1)
+			return true;
+		else
+			return false;
+
+	}
+
+	public boolean isMJPEGConnected() {
+
+		int message = Integer.valueOf(dataReceived[7]).intValue();
+
+		if (message == 1)
+			return true;
+		else
+			return false;
+
+	}
+
+	public boolean isTargetDetected() {
+		int message = Integer.valueOf(dataReceived[6]).intValue();
+
+		if (message == 1)
+			return true;
+		else
+			return false;
+
+	}
+
+	public int getHueMin() {
+
+		int message = Integer.valueOf(dataReceived[9]).intValue();
 		return message;
 	}
-	else 
-		return 0;
-}
 
-public double getTargetDistance() {
-	
-	
-	
-	if (dataReceived[2].compareToIgnoreCase("inf") != 0 &&
-			dataReceived[2].compareToIgnoreCase("-inf") != 0 &&
-			dataReceived[2].compareToIgnoreCase("+inf") != 0)
-	{
-		double message = Double.valueOf(dataReceived[2]).doubleValue();
+	public int getHueMax() {
+
+		int message = Integer.valueOf(dataReceived[10]).intValue();
 		return message;
 	}
-	else
+
+	public int getSaturationMin() {
+
+		int message = Integer.valueOf(dataReceived[11]).intValue();
+		return message;
+	}
+
+	public int getSaturationMax() {
+
+		int message = Integer.valueOf(dataReceived[12]).intValue();
+		return message;
+	}
+
+	public int getValueMin() {
+
+		int message = Integer.valueOf(dataReceived[13]).intValue();
+		return message;
+	}
+
+	public int getValueMax() {
+
+		int message = Integer.valueOf(dataReceived[14]).intValue();
+		return message;
+	}
+
+	@Override
+	public double getRate() {
+		// TODO Auto-generated method stub
 		return 0;
-		
-}
+	}
 
-public boolean isClientConnected()
-{
-	return clientConnected;
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
 
-}
+	}
 
-public boolean isTargetScorable()
-{
-	int message = Integer.valueOf(dataReceived[4]).intValue();
-	
-	if (message == 1)
-		return true;
-	else
-		return false;
+	@Override
+	public double getPos() {
+		// TODO Auto-generated method stub
+		return getRotationAngle();
+	}
 
-}
-
-public boolean isProcessingTreadRunning()
-{
-	int message = Integer.valueOf(dataReceived[5]).intValue();
-	
-	if (message == 1)
-		return true;
-	else
-		return false;
-
-}
-
-
-
-public boolean isCameraConnected()
-{
-	int message = Integer.valueOf(dataReceived[6]).intValue();
-	
-	if (message == 1)
-		return true;
-	else
-		return false;
-	
-}
-
-public boolean isMJPEGConnected()
-{
-	
-	int message = Integer.valueOf(dataReceived[7]).intValue();
-	
-	if (message == 1)
-		return true;
-	else
-		return false;
-	
-}
-
-public boolean isTargetDetected()
-{
-	int message = Integer.valueOf(dataReceived[6]).intValue();
-	
-	if (message == 1)
-		return true;
-	else
-		return false;
-	
-}
-
-
-public int getHueMin()
-{
-
-	int message = Integer.valueOf(dataReceived[9]).intValue();
-	return message;
-}
-
-public int getHueMax()
-{
-
-	int message = Integer.valueOf(dataReceived[10]).intValue();
-	return message;
-}
-
-public int getSaturationMin()
-{
-
-	int message = Integer.valueOf(dataReceived[11]).intValue();
-	return message;
-}
-
-public int getSaturationMax()
-{
-
-	int message = Integer.valueOf(dataReceived[12]).intValue();
-	return message;
-}
-
-public int getValueMin()
-{
-
-	int message = Integer.valueOf(dataReceived[13]).intValue();
-	return message;
-}
-public int getValueMax()
-{
-
-	int message = Integer.valueOf(dataReceived[14]).intValue();
-	return message;
-}
-
-
-
-@Override
-public double getRate() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-
-@Override
-public void reset() {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public double getPos() {
-	// TODO Auto-generated method stub
-	return getRotationAngle();
-}
-
-
-
-
-public String getName() {
-	return this.name;
-}
-
-
-
-
-
-
-
-
+	public String getName() {
+		return this.name;
+	}
 
 }

@@ -17,14 +17,20 @@ public class LoggableString implements Loggable {
 	public LoggableString(Supplier<String> value) {
 		this.value = value;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.team2168.robot.utils.consoleprinter.Loggable#put(java.lang.String)
 	 */
 	@Override
 	public void put(String key) {
 		SmartDashboard.putString(key, value.get());
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.team2168.robot.utils.consoleprinter.Loggable#valueToString()
 	 */
 	@Override

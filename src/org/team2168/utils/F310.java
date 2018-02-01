@@ -30,18 +30,20 @@ public class F310 extends Joystick {
 	public static final int BUTTON_LEFT_STICK = 9;
 	public static final int BUTTON_RIGHT_STICK = 10;
 
-	//POV (D-Pad) buttons
+	// POV (D-Pad) buttons
 	public static final int DPAD_UP = 0;
 	public static final int DPAD_RIGHT = 90;
 	public static final int DPAD_DOWN = 180;
 	public static final int DPAD_LEFT = 270;
 
-	//private static final int BUTTON_MODE = -1;
-	//private static final int BUTTON_LOGITECH = -1;
+	// private static final int BUTTON_MODE = -1;
+	// private static final int BUTTON_LOGITECH = -1;
 
 	/**
 	 * Default constructor
-	 * @param port the port the joystick is plugged into on the DS.
+	 * 
+	 * @param port
+	 *            the port the joystick is plugged into on the DS.
 	 */
 	public F310(int port) {
 		super(port);
@@ -49,6 +51,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Returns the X position of the left stick.
+	 * 
 	 * @return Positive when pushing right on the stick (1.0 to -1.0).
 	 */
 	public double getLeftStickRaw_X() {
@@ -57,6 +60,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Returns the X position of the right stick.
+	 * 
 	 * @return Positive when pushing right on the stick (1.0 to -1.0).
 	 */
 	public double getRightStickRaw_X() {
@@ -65,6 +69,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Returns the Y position of the left stick.
+	 * 
 	 * @return Positive when pushing up on the stick (1.0 to -1.0).
 	 */
 	public double getLeftStickRaw_Y() {
@@ -73,6 +78,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Returns the Y position of the right stick.
+	 * 
 	 * @return Positive when pushing up on the stick.
 	 */
 	public double getRightStickRaw_Y() {
@@ -81,6 +87,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Returns the position of the shoulder trigger.
+	 * 
 	 * @return 1.0 to 0.0 (1.0 when depressed)
 	 */
 	public double getLeftTriggerAxisRaw() {
@@ -89,6 +96,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Returns the position of the shoulder trigger.
+	 * 
 	 * @return 1.0 to 0.0 (1.0 when depressed)
 	 */
 	public double getRightTriggerAxisRaw() {
@@ -97,6 +105,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Checks whether Button A is being pressed
+	 * 
 	 * @return true if pressed
 	 */
 	public boolean isPressedButtonA() {
@@ -105,6 +114,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Checks whether Button B is being pressed
+	 * 
 	 * @return true if pressed
 	 */
 	public boolean isPressedButtonB() {
@@ -113,6 +123,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Checks whether Button X is being pressed
+	 * 
 	 * @return true if pressed
 	 */
 	public boolean isPressedButtonX() {
@@ -121,6 +132,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Checks whether Button Y is being pressed
+	 * 
 	 * @return true if pressed
 	 */
 	public boolean isPressedButtonY() {
@@ -189,14 +201,16 @@ public class F310 extends Joystick {
 
 	/**
 	 * Gets Start button object
+	 * 
 	 * @return the Start button
 	 */
-	public JoystickButton ButtonStart(){
+	public JoystickButton ButtonStart() {
 		return new JoystickButton(this, BUTTON_START);
 	}
 
 	/**
 	 * Gets the Back button object
+	 * 
 	 * @return the Back button
 	 */
 	public JoystickButton ButtonBack() {
@@ -205,6 +219,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Gets the state of the left shoulder
+	 * 
 	 * @return the state of the left shoulder
 	 */
 	public JoystickButton ButtonLeftBumper() {
@@ -213,6 +228,7 @@ public class F310 extends Joystick {
 
 	/**
 	 * Gets the state of the right shoulder
+	 * 
 	 * @return the state of the right shoulder
 	 */
 	public JoystickButton ButtonRightBumper() {
