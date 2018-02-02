@@ -36,13 +36,13 @@ public class Drivetrain extends Subsystem {
 	private static AnalogInput DrivetrainIRSensor;
 
 	public IMU imu;
-	public TCPCamSensor tcpCamSensor;
+	
 
 	// declare position/speed controllers
 	public PIDPosition driveTrainPosController;
 	public PIDPosition rotateController;
 	public PIDPosition rotateDriveStraightController;
-	public PIDPosition rotateCameraController;
+	
 
 	// declare speed controllers
 	public PIDSpeed rightSpeedController;
@@ -139,14 +139,7 @@ public class Drivetrain extends Subsystem {
 				gyroSPI, 
 				RobotMap.DRIVE_TRAIN_PID_PERIOD);
 
-		rotateCameraController = new PIDPosition(
-				"RotationCameraController", 
-				RobotMap.ROTATE_POSITION_P,
-				RobotMap.ROTATE_POSITION_I, 
-				RobotMap.ROTATE_POSITION_D, 
-				tcpCamSensor, 
-				RobotMap.DRIVE_TRAIN_PID_PERIOD);
-
+		
 		rotateDriveStraightController = new PIDPosition(
 				"RotationStraightController",
 				RobotMap.ROTATE_POSITION_P_Drive_Straight, 
@@ -188,7 +181,7 @@ public class Drivetrain extends Subsystem {
 		driveTrainPosController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
 		rotateController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
 		rotateDriveStraightController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
-		rotateCameraController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
+
 
 		// start controller threads
 		rightSpeedController.startThread();
@@ -196,7 +189,6 @@ public class Drivetrain extends Subsystem {
 		driveTrainPosController.startThread();
 		rotateController.startThread();
 		rotateDriveStraightController.startThread();
-		rotateCameraController.startThread();
 
 		// start TCP Servers for DEBUGING ONLY
 		TCPdrivePosController = new TCPSocketSender(RobotMap.TCP_SERVER_DRIVE_TRAIN_POS, driveTrainPosController);
@@ -216,9 +208,6 @@ public class Drivetrain extends Subsystem {
 				rotateDriveStraightController);
 		TCProtateController.start();
 
-		TCProtateCameraController = new TCPSocketSender(RobotMap.TCP_SERVER_ROTATE_CAMERA_CONTROLLER,
-				rotateCameraController);
-		TCProtateCameraController.start();
 
 		leftMotor1Voltage = 0;
 		leftMotor2Voltage = 0;
@@ -273,31 +262,6 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putNumber("DTLeft2MotorCurrent", () -> {
 			return Robot.pdp.getChannelCurrent(RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP);
 		}, true, true);
-
-		ConsolePrinter.putBoolean("Camera Status", () -> {
-			return Robot.drivetrain.tcpCamSensor.isCameraConnected();
-		}, true, false);
-		ConsolePrinter.putBoolean("Bone Status", () -> {
-			return Robot.drivetrain.tcpCamSensor.isClientConnected();
-		}, true, false);
-		ConsolePrinter.putBoolean("Processing Status", () -> {
-			return Robot.drivetrain.tcpCamSensor.isProcessingTreadRunning();
-		}, true, false);
-		ConsolePrinter.putBoolean("MJPEG Status", () -> {
-			return Robot.drivetrain.tcpCamSensor.isMJPEGConnected();
-		}, true, false);
-		ConsolePrinter.putNumber("Vision Target Dist", () -> {
-			return Robot.drivetrain.tcpCamSensor.getTargetDistance();
-		}, true, false);
-		ConsolePrinter.putNumber("Vision Target Bearing", () -> {
-			return Robot.drivetrain.tcpCamSensor.getRotationAngle();
-		}, true, false);
-		ConsolePrinter.putBoolean("Is Target Detected", () -> {
-			return Robot.drivetrain.tcpCamSensor.isTargetDetected();
-		}, true, false);
-		ConsolePrinter.putBoolean("Is Target Scorable", () -> {
-			return Robot.drivetrain.tcpCamSensor.isTargetScorable();
-		}, true, false);
 
 		ConsolePrinter.putNumber("Drivetrain raw IR", () -> {
 			return Robot.drivetrain.getIRVoltage();

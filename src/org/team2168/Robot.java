@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot
 {
-	
+	//Digital Jumper to Identify if this is practice bot or comp bot
 	private static DigitalInput practiceBot;
 
 	//Operator Interface
@@ -59,6 +59,7 @@ public class Robot extends TimedRobot
 	//PDP Instance
 	public static PowerDistribution pdp;
 	
+	
 	//Autonomous Chooser
     static Command autonomousCommand;
     public static SendableChooser<Command> autoChooser;
@@ -67,10 +68,14 @@ public class Robot extends TimedRobot
     static int controlStyle;
     public static SendableChooser<Number> controlStyleChooser;
     
-    
+    //Turn on TX1
     TX1TurnON tx1;
+    
+    //Global Position Tracking Class
     public static DrivetrainIMUGlobalPosition dtIMU;
-	private static boolean blueAlliance = false;
+	
+    //Variable to track blue alliance vs red alliance
+    private static boolean blueAlliance = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -79,6 +84,8 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit() 
 	{
+		try
+		{
 		this.setPeriod(RobotMap.MAIN_PERIOD_S);
 
 		ConsolePrinter.init();
@@ -99,10 +106,13 @@ public class Robot extends TimedRobot
 		
 		oi = OI.getInstance();
 
-		// run compressor
+		// enable compressor
 		new StartCompressor();
 
+		//Initialize Autonomous Selector Choices
 		autoSelectInit();
+		
+		//Initialize Control Selector Choices
 		controlStyleSelectInit();
 
 		pdp = new PowerDistribution(RobotMap.PDPThreadPeriod);
@@ -117,8 +127,8 @@ public class Robot extends TimedRobot
 		drivetrain.calibrateGyro();
 		driverstation = DriverStation.getInstance();
 
-		SmartDashboard.putData("Autonomous Mode Chooser", Robot.autoChooser);
-		SmartDashboard.putData("Control Style Chooser", Robot.controlStyleChooser);
+		
+		ConsolePrinter.putSendable("Control Style Chooser", () -> {return Robot.controlStyleChooser;}, true, false);
 		ConsolePrinter.putSendable("Autonomous Mode Chooser", () -> {return Robot.autoChooser;}, true, false);
 		ConsolePrinter.putString("AutoName", () -> {return Robot.getAutoName();}, true, false);
 		ConsolePrinter.putString("Control Style Name", () -> {return Robot.getControlStyleName();}, true, false);
@@ -126,9 +136,28 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
 
-		//Start Thread Only After Every Class is Loaded. 
+		//Start Thread Only After Every Other Class is Loaded. 
 		ConsolePrinter.startThread();
-		System.out.println("Robot Done Loading");
+		System.out.println("************Robot Done Loading Successfully**********");
+		}
+		catch (Throwable throwable) 
+		{
+		      Throwable cause = throwable.getCause();
+		      if (cause != null) 
+		        throwable = cause;
+		      
+		      System.err.println("Bad things occured, testing using our own stach trace catch");
+		      System.err.println("Implement Logging function here");
+		      System.err.flush();
+		      
+		      //Show Stack Trace on Driverstration like before
+		      DriverStation.reportError("Unhandled exception instantiating robot" 
+		              + throwable.toString(), throwable.getStackTrace());
+		          DriverStation.reportWarning("Robots should not quit, but yours did!", false);
+		          DriverStation.reportError("Could not instantiate robot!", false);
+		          System.exit(1);
+		      return;
+		}
 	}
 	
     /************************************************************
@@ -158,12 +187,15 @@ public class Robot extends TimedRobot
 		drivetrain.calibrateGyro();
 	}
 
-	public void disabledPeriodic() {
+	public void disabledPeriodic() 
+	{
 
+		//Keep track of Gunstyle Controller Variables
 		SmartDashboard.putNumber("GunStyleYValue",Robot.oi.driverJoystick.getLeftStickRaw_Y());
 		SmartDashboard.putNumber("GunStyleX",Robot.oi.driverJoystick.getLeftStickRaw_X());
 		SmartDashboard.putNumber("GunStyleXInterpolatedValue",Robot.drivetrain.getGunStyleXValue());
 
+		
 		getControlStyleInt();
 		controlStyle = (int) controlStyleChooser.getSelected();
 		autonomousCommand = (Command) autoChooser.getSelected();
@@ -187,8 +219,9 @@ public class Robot extends TimedRobot
 			
 		autonomousCommand = (Command) autoChooser.getSelected();
     	
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        // schedule the autonomous command
+        if (autonomousCommand != null) 
+        	autonomousCommand.start();
     }
 
     /**
@@ -199,7 +232,10 @@ public class Robot extends TimedRobot
         Scheduler.getInstance().run();
         
     }	
-		
+	
+    /**
+     * This function called prior to robot entering Teleop Mode
+     */
 	public void teleopInit() 
 	{
 	    	
