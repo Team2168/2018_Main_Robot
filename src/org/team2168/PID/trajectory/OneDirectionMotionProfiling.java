@@ -1,5 +1,6 @@
 package org.team2168.PID.trajectory;
 
+import java.awt.Color;
 import java.time.zone.ZoneOffsetTransitionRule.TimeDefinition;
 
 public class OneDirectionMotionProfiling {
@@ -37,6 +38,8 @@ public class OneDirectionMotionProfiling {
 	double Ta = 0;
 	double Tj2 = 0;
 	double Td = 0;
+	private double[] rightPath;
+	private double[] leftPath;
 	 
 	
 	public void S_curves(){
@@ -65,76 +68,135 @@ public class OneDirectionMotionProfiling {
 		T = t1 + t0;
 	
 		// vector array thing
-		Linspace time = new Linspace(t0, 1/100, t1);
+		double spacing = 1/100;
+		//Linspace time = new Linspace(t0, spacing, t1);
 		
-		//Compute actual min/max a and v
+		double[] time = new double[(int)((t1-t0)/spacing)];
+		double[] pos = new double[(int)((t1-t0)/spacing)];
+		double[] vel = new double[(int)((t1-t0)/spacing)];		
+		double[] acc = new double[(int)((t1-t0)/spacing)];
+		double[] jerk = new double[(int)((t1-t0)/spacing)];
+		double[][] leftPath;
+		double[][] rightPath;
+				
+
+		//Lets create a bank image
+				FalconLinePlot fig3 = new FalconLinePlot(time, pos ,Color.black);
+				fig3.yGridOn();
+				fig3.xGridOn();
+				fig3.setYLabel("Y (feet)");
+				fig3.setXLabel("X (feet)");
+				fig3.setTitle("Top Down View of FRC Field (30ft x 27ft) \n shows global position of robot path, along with left and right wheel trajectories");
+				fig3.setSize(600,400);
+				
+		OneDirectionMotionProfiling oneDirection= new OneDirectionMotionProfiling();
+		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
+		double fieldWidth = 27.0;
+		fig3.setXTic(0, 54, 1);
+		fig3.setYTic(0, fieldWidth, 1);
+		fig3.addData(oneDirection.rightPath, Color.magenta);
+		fig3.addData(oneDirection.leftPath, Color.cyan);
+		
+		//Velocity
+				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+				fig4.yGridOn();
+				fig4.xGridOn();
+				fig4.setYLabel("Velocity (ft/sec)");
+				fig4.setXLabel("time (seconds)");
+				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+				fig4.addData(vel, Color.magenta);
+				
+
+		
+		for(int i=0; i<time.length; i++)
+		{
+			time[i]=i*1/100 + t0;
+		}
+		
+		//Compute actual min/max a and vc
 		double aLimA = jMax*Tj1;
 		double aLimD = -jMax*Tj2;
 		double vLim = v0 + (Ta-Tj1)*aLimA;
 		
 		// Calculation of trajectory for q1 > q2
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// ??
-		for(int i=1;,length(time);  ){
-			 if (time(i) <= Tj1) {
-			        pos(i) = q0 + v0*time(i) + jMax*time(i)^3/6;
-			        vel(i) = v0 + jMax*time(i)^2/2;
-			        acc(i) = jMax*time(i);
-			        jerk(i) = jMax;}
-			    else if (time(i) > Tj1 && time(i) <= Ta - Tj1) 
+		for(int i=1;i<time.length;i++)
+		{
+			 if( i <= Tj1) {
+				 pos[i]=q0 + v0*(i*1/100 + t0) + jMax*Math.pow((i*1/100 + t0),3)/6;
+			     vel[i]= v0 + jMax*Math.pow((i*1/100 + t0), 2)/2;
+			     acc[i] = jMax*(i*1/100 + t0);
+			     jerk[i] = jMax;}
+			    else if ((i*1/100 + t0) > Tj1 && (i*1/100 + t0) <= Ta - Tj1) 
 			    {
-			        pos(i) = q0 + v0*time(i) + (aLimA/6)*(3*time(i)^2 - 3*Tj1*time(i) + Tj1^2);
-			        vel(i) = v0 + a_lima*(time(i) - (Tj1/2));
-			        acc(i) = jMax*Tj1;
-			        jerk(i) = 0; }
-			    else if (time(i)>  Ta - Tj1 && time(i) <= Ta)
+			     pos[i] = q0 + v0*(i*1/100 + t0) + (aLimA/6)*3*Math.pow((i*1/100 + t0), 2) - 3*Tj1*(i*1/100 + t0) + Math.pow(Tj1, 2);
+			     vel[i] = v0 + aLimA*((i*1/100 + t0) - (Tj1/2));
+			     acc[i] = jMax*Tj1;
+			     jerk[i] = 0; }
+			    else if ((i*1/100 + t0)>  Ta - Tj1 && (i*1/100 + t0) <= Ta)
 			    {
-			    	pos(i) = q0 + (v_lim + v0)*Ta/2 - v_lim*(Ta-time(i)) - j_min*((Ta-time(i))^3/6);
-			        vel(i) = v_lim + j_min*((Ta-time(i))^2/2);
-			        acc(i) = -j_min*(Ta-time(i));
-			        jerk(i) = j_min;
+			    pos[i] = q0 + (vLim + v0)*Ta/2 - vLim*(Ta-(i*1/100 + t0)) - jMin*(Math.pow((Ta-(i*1/100 + t0)),3)/6);
+			    vel[i] = vLim + jMin*(Math.pow((Ta-(i*1/100 + t0)),2)/2);
+			    acc[i] = -jMin*(Ta-(i*1/100 + t0));
+			    jerk[i] = jMin;
 			    }
-			    else if (time(i) > Ta && time(i) <= Ta + Tv)
+			    else if ((i*1/100 + t0) > Ta && (i*1/100 + t0) <= Ta + Tv)
 			    {
-			    	pos(i) = q0 + (v_lim + v0)*(Ta/2)+v_lim*(time(i)-Ta);
-			        vel(i) = v_lim;
-			        acc(i) = 0;
-			        jerk(i) = 0;
+			    	pos[i] = q0 + (vLim + v0)*(Ta/2)+vLim*((i*1/100 + t0)-Ta);
+			        vel[i] = vLim;
+			        acc[i] = 0;
+			        jerk[i] = 0;
 			    }
-			    else if (time(i) > T-Td && time(i) <= T-Td+Tj2)     
+			    else if ((i*1/100 + t0) > T-Td && (i*1/100 + t0) <= T-Td+Tj2)     
 			    {
-			        pos(i) = q1 - (v_lim +v1)*(Td/2) + v_lim*(time(i)-T+Td)-j_max*(((time(i)-T+Td)^3)/6);
-			        vel(i) = v_lim - j_max*((((time(i)-T+Td)^2))/2);
-			        acc(i) = -j_max*(time(i)-T+Td);
-			        jerk(i) = j_min;
+			        pos[i] = q1 - (vLim +v1)*(Td/2) + vLim*((i*1/100 + t0)-T+Td)-jMax*(Math.pow(((i*1/100 + t0)-T+Td),3)/6);
+			        vel[i] = vLim - jMax*(Math.pow(((i*1/100 + t0)-T+Td),2)/2);
+			        acc[i] = -jMax*((i*1/100 + t0)-T+Td);
+			        jerk[i] = jMin;
 			    }
-			    else if (time(i) > T-Td+Tj2 && time(i) <= T-Tj2)
+			    else if ((i*1/100 + t0) > T-Td+Tj2 && (i*1/100 + t0) <= T-Tj2)
 			    {
-			        pos(i) = q1 - (v_lim+v1)*(Td/2)+v_lim*(time(i)-T+Td) + (a_limd/6)*(3*(time(i)-T+Td)^2 - 3*Tj2*(time(i)-T+Td) + Tj2^2);
-			        vel(i) = v_lim+a_limd*(time(i)-T+Td-Tj2/2);
-			        acc(i) = a_limd;
-			        jerk(i) = 0;
+			        pos[i] = q1 - (vLim+v1)*(Td/2)+vLim*((i*1/100 + t0)-T+Td) + (aLimD/6)
+			        		*(3*Math.pow(((i*1/100 + t0)-T+Td),2) - 3*Tj2*((i*1/100 + t0)-T+Td) + Math.pow(Tj2,2));
+			        vel[i] = vLim+aLimD*((i*1/100 + t0)-T+Td-Tj2/2);
+			        acc[i] = aLimD;
+			        jerk[i] = 0;
 			    }
-			    else if (time(i) > T-Tj2 && time(i) <=T)  
+			    else if ((i*1/100 + t0) > T-Tj2 && (i*1/100 + t0) <=T)  
 			    {
-			    	(i) = q1-v1*(T-time(i))-j_max*((T-time(i))^3/6);
-			        vel(i) = v1+j_max*((T-time(i))^2/2);
-			        acc(i) = -j_max*(T-time(i));
-			        jerk(i) = j_max;  
+			    	pos[i] = q1-v1*(T-(i*1/100 + t0))-jMax*(Math.pow((T-(i*1/100 + t0)),3)/6);
+			        vel[i] = v1+jMax*(Math.pow((T-(i*1/100 + t0)),2)/2);
+			        acc[i] = -jMax*(T-(i*1/100 + t0));
+			        jerk[i] = jMax;  
 			    }
 		}
 				
 	}
 	
 	
-	
-	 
+	public static void main(String[] args){
 
+
+		OneDirectionMotionProfiling oneDirection= new OneDirectionMotionProfiling();
+		oneDirection.S_curves();
 		
 	}
-	
-	
-	
+}
+
+
+
+
 //	double[] P = {A5, A4, A3, A2, A1, A0};
 	
 //	double[] Pd = new double[P.length-1];{
