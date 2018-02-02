@@ -176,6 +176,8 @@ public class PIDSpeed implements TCPMessageInterface {
 	 * @param D
 	 *            - type double which represents Derivative Gain for the Speed
 	 *            Controller
+	 * @param N
+	 *            - type double which represents Derivative Gain Filter between 0 and 1
 	 * @param currentPos
 	 *            - type SpeedSensorInterface Object which is used to reference the
 	 *            encoder object this PID loop will use as feedback

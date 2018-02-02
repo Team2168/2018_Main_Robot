@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,9 +20,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Lift extends Subsystem {
 	private static Lift instance = null;
-	private static Victor liftMotor1;
-	private static Victor liftMotor2;
-	private static Victor liftMotor3;
+	private static VictorSP liftMotor1;
+	private static VictorSP liftMotor2;
+	private static VictorSP liftMotor3;
 	private DoubleSolenoid liftBrake;
 	private static AnalogInput potentiometer;
 	private static DigitalInput liftFullyUp; //hall effect sensors
@@ -36,10 +37,10 @@ public class Lift extends Subsystem {
 	 * Default constructor for the lift
 	 */
 	private Lift() {
-		liftMotor1 = new Victor(RobotMap.LIFT_MOTOR_1);
-		liftMotor2 = new Victor(RobotMap.LIFT_MOTOR_2);
-		liftMotor3 = new Victor(RobotMap.LIFT_MOTOR_3);
-		liftBrake = new DoubleSolenoid(RobotMap.LIFT_BRAKE_APPLY, RobotMap.LIFT_BRAKE_RELEASE);
+		liftMotor1 = new VictorSP(RobotMap.LIFT_MOTOR_1);
+		liftMotor2 = new VictorSP(RobotMap.LIFT_MOTOR_2);
+		liftMotor3 = new VictorSP(RobotMap.LIFT_MOTOR_3);
+		liftBrake = new DoubleSolenoid(RobotMap.PCM_CAN_ID,RobotMap.LIFT_BRAKE_ENGAGE, RobotMap.LIFT_BRAKE_DISENGAGE);
 		potentiometer = new AnalogInput(RobotMap.LIFT_POSITION_POT);
 		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP);
 		liftFullyDown = new DigitalInput(RobotMap.LIFT_FULLY_DOWN);
