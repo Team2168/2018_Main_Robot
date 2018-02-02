@@ -22,18 +22,19 @@ public class CubeIntake extends Subsystem
 	private static VictorSP intakeMotorRight;
 	private Solenoid intakeOpenPiston;
 	private DoubleSolenoid intakePivotPiston;
-	private static AnalogInput intakeSensor;
+	private static AnalogInput intakeIRSensor;
 	
 	/**
 	 * Default constructors
 	 */
 	public CubeIntake(){
-		intakeMotorLeft = new VictorSP(RobotMap.INTAKE_MOTOR_LEFT);
-		intakeMotorRight = new VictorSP(RobotMap.INTAKE_MOTOR_RIGHT);
-		intakeOpenPiston = new Solenoid(RobotMap.INTAKE_OPEN_PISTON_CLOSED);
-		intakePivotPiston = new DoubleSolenoid(RobotMap.INTAKE_PIVOT_PISTON_DOWN, 
-				RobotMap.INTAKE_PIVOT_PISTON_UP);
-		intakeSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR);
+		intakeMotorLeft = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_LEFT);
+		intakeMotorRight = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_RIGHT);
+		//intakeOpenPiston = new Solenoid(RobotMap.CUBE_INTAKE_OPEN_PISTON_CLOSED);
+		
+		intakePivotPiston = new DoubleSolenoid(RobotMap.CUBE_INTAKE_PIVOT_EXTEND, 
+				RobotMap.CUBE_INTAKE_PIVOT_RETRACT);
+		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
 			
 	}
 	
@@ -83,16 +84,16 @@ public class CubeIntake extends Subsystem
 	 * Gets the voltage given by the Sharp IR sensor on the Lift Intake.
 	 * @return the raw voltage from the cube presence sensor
 	 */
-	public double getIRVoltage(){
-		return intakeSensor.getVoltage();
+	public double getRawIRVoltage(){
+		return intakeIRSensor.getVoltage();
 	}
 	
 	/**
 	 * Automatically determines if the cube is present by contrasting the IR Sensor voltage to a threshold set in the RobotMap.java 
 	 * @return true if a cube is present within the cube intake
 	 */
-	public boolean isGearPresent(){
-		return (getIRVoltage() >= RobotMap.CUBE_INTAKE_IR_THRESHOLD);
+	public boolean isCubePresent(){
+		return (getRawIRVoltage() >= RobotMap.CUBE_INTAKE_IR_THRESHOLD);
 	}
 	
 
@@ -134,9 +135,6 @@ public class CubeIntake extends Subsystem
 		return intakePivotPiston.get() == DoubleSolenoid.Value.kForward;
 
 	}
-	
-		
-	
 	
 	public void initDefaultCommand(){
 	}

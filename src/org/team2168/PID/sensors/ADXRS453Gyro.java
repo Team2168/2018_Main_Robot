@@ -357,4 +357,12 @@ public class ADXRS453Gyro implements PIDSensorInterface {
 		}
 	}
 
+	/**
+	 * Start the calibration sequence prematurely.
+	 * e.g. if the testing and repeatedly going into disabled
+	 */
+	public final void startCalibrating() {
+		stopCalibrating = false;
+	}
+
 }
