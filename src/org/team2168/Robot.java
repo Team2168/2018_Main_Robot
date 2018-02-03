@@ -40,12 +40,11 @@ public class Robot extends TimedRobot
 	public static CubeIntakePivot cubeIntakePivot;
 	public static Drivetrain drivetrain;
 	public static DrivetrainShifter drivetrainShifter;
-	public static ForkLift forkLift;
+	public static Platform platform;
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
-	public static ScissorLift scissorLift; //Will not have scissor and forklift together
-
+	
 	// Variables for initializing and calibrating the Gyro
 	static boolean autoMode;
 	private static boolean matchStarted = false;
@@ -104,7 +103,7 @@ public class Robot extends TimedRobot
 		cubeIntake = CubeIntake.getInstance();
 		drivetrain = Drivetrain.getInstance();
 		drivetrainShifter = DrivetrainShifter.getInstance();
-		forkLift = ForkLift.getInstance();
+		platform = Platform.getInstance();
 		lift = Lift.GetInstance();
 		liftShifter = LiftShifter.GetInstance();
 		pneumatics = Pneumatics.getInstance();

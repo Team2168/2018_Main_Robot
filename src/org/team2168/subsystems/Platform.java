@@ -13,23 +13,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem class for the fork lift
  * @author Aidan
  */
-public class ForkLift extends Subsystem 
+public class Platform extends Subsystem 
 {
-	private static ForkLift instance = null;
+	private static Platform instance = null;
 	
-	private static VictorSP forkLiftMotor;
-	private Solenoid forkLiftPiston;
+	private static VictorSP platformMotor;
+	private Solenoid platformPiston;
 	private static DigitalInput raisedLimitSwitch;
 	private static DigitalInput loweredLimitSwitch;
 	
 	/**
 	 * Default constructors
 	 */
-	public ForkLift(){
-		forkLiftMotor = new VictorSP(RobotMap.FORKLIFT_MOTOR);
-		forkLiftPiston = new Solenoid(RobotMap.FORK_LIFT_PISTON);
-		loweredLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_LOWERED_LIMIT);
-		raisedLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_RAISED_LIMIT);
+	public Platform(){
+		platformMotor = new VictorSP(RobotMap.PLATFORM_MOTOR);
+		platformPiston = new Solenoid(RobotMap.PLATFORM_PISTON);
+		loweredLimitSwitch = new DigitalInput(RobotMap.PLATFORM_LOWERED_LIMIT);
+		raisedLimitSwitch = new DigitalInput(RobotMap.PLATFORM_RAISED_LIMIT);
 			
 	}
 	
@@ -37,9 +37,9 @@ public class ForkLift extends Subsystem
 	 * Calls instance object and makes it singleton object of class fork lift
 	 * @return singleton object instance
 	 */
-	public static ForkLift getInstance(){
+	public static Platform getInstance(){
 		if (instance == null)
-			instance = new ForkLift();
+			instance = new Platform();
 		return instance;
 	}
 	
@@ -50,7 +50,7 @@ public class ForkLift extends Subsystem
 	public void driveMotor(double speed){
 		if (RobotMap.FORK_LIFT_REVERSE)
 			speed = -speed;
-		forkLiftMotor.set(speed);
+		platformMotor.set(speed);
 	}
 	
 
@@ -58,14 +58,14 @@ public class ForkLift extends Subsystem
 	 * Retracts fork lift piston
 	 */
 	public void retract(){
-		forkLiftPiston.set(RobotMap.SOLENOID_OFF);
+		platformPiston.set(RobotMap.SOLENOID_OFF);
 	}
 
 	/**
 	 * Extends fork lift piston
 	 */
 	public void extend(){
-		forkLiftPiston.set(RobotMap.SOLENOID_ON);
+		platformPiston.set(RobotMap.SOLENOID_ON);
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedExtend(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-				return forkLiftPiston.get() == RobotMap.SOLENOID_ON;
+				return platformPiston.get() == RobotMap.SOLENOID_ON;
 			}
 	
 	/**
@@ -100,7 +100,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedRetract(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-		return forkLiftPiston.get() == RobotMap.SOLENOID_OFF;
+		return platformPiston.get() == RobotMap.SOLENOID_OFF;
 		
 	}
 	

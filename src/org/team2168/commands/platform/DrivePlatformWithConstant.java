@@ -1,4 +1,4 @@
-package org.team2168.commands.scissorLift;
+package org.team2168.commands.platform;
 
 import org.team2168.Robot;
 
@@ -7,22 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveScissorLiftWithConstant extends Command {
+public class DrivePlatformWithConstant extends Command {
 	double speed;
-    public DriveScissorLiftWithConstant(double inputspeed) {
+    public DrivePlatformWithConstant(double inputspeed) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.scissorLift);
-        inputspeed =  speed;
+        requires(Robot.platform);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-   
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	 Robot.scissorLift.driveMotor(speed);
+    	Robot.platform.driveMotor(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +30,7 @@ public class DriveScissorLiftWithConstant extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.scissorLift.driveMotor(0.0);
+    	Robot.platform.driveMotor(0.0);
     }
 
     // Called when another command which requires one or more of the same

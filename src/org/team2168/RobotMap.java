@@ -42,8 +42,8 @@ public class RobotMap
 	public static final int LEFT_DRIVE_MOTOR_1 = 2; //Same as 2017
 	public static final int LEFT_DRIVE_MOTOR_2 = 3; //Same as 2017
 	
-	public static final int FORKLIFT_MOTOR = 11; //2017 turret
-	public static final int SCISSOR_MOTOR = 11; //2017 turret
+	public static final int PLATFORM_MOTOR = 11; //2017 turret
+	
 	
 	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
 	public static final int LIFT_MOTOR_2 = 10; //2017 conveyor
@@ -62,10 +62,8 @@ public class RobotMap
 	public static final int LEFT_DRIVE_ENCODER_A = 5; //same as 2017
 	
 	
-	public static final int FORK_LIFT_RAISED_LIMIT = 2;
-	public static final int FORK_LIFT_LOWERED_LIMIT= 3;
-	public static final int SCISSOR_LIFT_LOWERED_LIMIT = 2;
-	public static final int SCISSOR_LIFT_RAISED_LIMIT = 3;
+	public static final int PLATFORM_RAISED_LIMIT = 2;
+	public static final int PLATFORM_LOWERED_LIMIT= 3;
 	
 
 
@@ -100,8 +98,8 @@ public class RobotMap
 	//Single Solenoids 
 	public static final int DRIVETRAIN_GEAR_SHIFT = 0; //Single Solenoid
 	public static final int LIFT_SHIFT_HIGH_LOW = 4;
-	public static final int FORK_LIFT_PISTON = 5;
-	public static final int SCISSOR_LIFT_PISTON = 5;
+	public static final int PLATFORM_PISTON = 5;
+	
 	public static final int CUBE_INTAKE_OPEN_PISTON_CLOSED = 6;
 	
 	//Double Soldenoids PCM=0
