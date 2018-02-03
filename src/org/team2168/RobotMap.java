@@ -15,7 +15,7 @@ public class RobotMap
 {
 
 
-	public static final double MAIN_PERIOD_S = 0.005; // Main loop 200Hz
+	public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 
 	
 	/*************************************************************************
@@ -37,38 +37,40 @@ public class RobotMap
 	public static final int GTA_STYLE_ENUM = 3;
 
 	// PWM (0 to 9) on RoboRio/////////////////////////////////////////////////
-	public static final int RIGHT_DRIVE_MOTOR_1 = 0;
-	public static final int RIGHT_DRIVE_MOTOR_2 = 1;
-	public static final int LEFT_DRIVE_MOTOR_1 = 2;
-	public static final int LEFT_DRIVE_MOTOR_2 = 3;
+	public static final int RIGHT_DRIVE_MOTOR_1 = 0; //Same as 2017
+	public static final int RIGHT_DRIVE_MOTOR_2 = 1; //Same as 2017
+	public static final int LEFT_DRIVE_MOTOR_1 = 2; //Same as 2017
+	public static final int LEFT_DRIVE_MOTOR_2 = 3; //Same as 2017
 	
-	public static final int FORKLIFT_MOTOR = 4;
-	public static final int SCISSOR_MOTOR = 4;
+	public static final int FORKLIFT_MOTOR = 11; //2017 turret
+	public static final int SCISSOR_MOTOR = 11; //2017 turret
 	
-	public static final int LIFT_MOTOR_1 = 4;
-	public static final int LIFT_MOTOR_2 = 5;
-	public static final int LIFT_MOTOR_3 = 6;
+	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
+	public static final int LIFT_MOTOR_2 = 10; //2017 conveyor
+	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
 	
-	public static final int CUBE_LIFT_MOTOR1 = 9;
+
 
    //SPI Channels/////////////////////////////////////////////////////////////
 	public static final int GYRO = 0;
 	
 	// Digital IO Channels//////////////////////////////////////////////////////
 	// Channels 0-9 on RoboRio
-	public static final int RIGHT_DRIVE_ENCODER_A = 0;
-	public static final int RIGHT_DRIVE_ENCODER_B = 1;
+	public static final int RIGHT_DRIVE_ENCODER_A = 0; //same as 2017
+	public static final int RIGHT_DRIVE_ENCODER_B = 1; //same as 2017
+	public static final int LEFT_DRIVE_ENCODER_B = 4; //same as 2017
+	public static final int LEFT_DRIVE_ENCODER_A = 5; //same as 2017
+	
 	
 	public static final int FORK_LIFT_RAISED_LIMIT = 2;
 	public static final int FORK_LIFT_LOWERED_LIMIT= 3;
 	public static final int SCISSOR_LIFT_LOWERED_LIMIT = 2;
 	public static final int SCISSOR_LIFT_RAISED_LIMIT = 3;
 	
-	public static final int LEFT_DRIVE_ENCODER_B = 4;
-	public static final int LEFT_DRIVE_ENCODER_A = 5;
 
-	public static final int LIFT_FULLY_UP = 6;
-	public static final int LIFT_FULLY_DOWN = 7;
+
+	public static final int LIFT_FULLY_UP = 6; //2018 proto
+	public static final int LIFT_FULLY_DOWN = 7; //2018 proto
 	public static final int TX1_TURN_ON = 8;
 	public static final int TX1_ON_STATUS = 9;
 
@@ -76,8 +78,8 @@ public class RobotMap
 	//Channels 10-25 on MXP (PWM and DIO)
 //	public static final int CONVELATOR_MOTOR = 10;
 //	public static final int TURRET_MOTOR = 11;
-	public static final int CUBE_INTAKE_MOTOR_LEFT = 12;
-	public static final int CUBE_INTAKE_MOTOR_RIGHT = 19; //PWM 19 on board
+	public static final int CUBE_INTAKE_MOTOR_LEFT = 12; //2017 gear intake
+	public static final int CUBE_INTAKE_MOTOR_RIGHT = 19; //PWM 19 on board //2017 spare
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
@@ -92,26 +94,24 @@ public class RobotMap
 	public static final int RIGHT_DRIVE_ENCODER_B_PBOT = 4;
 
 	//SolenoidsSolenoid Channels////////////////////////////////////////////////////////
-	//Single Solenoids
+	//Single Solenoids 
 	public static final int DRIVETRAIN_GEAR_SHIFT = 0; //Single Solenoid
 	public static final int LIFT_SHIFT_HIGH_LOW = 4;
 	public static final int FORK_LIFT_PISTON = 5;
 	public static final int SCISSOR_LIFT_PISTON = 5;
 	
-	//Double Soldenoids
+	//Double Soldenoids PCM=0
 	public final static int DRIVETRAIN_HIGH_GEAR = 0; //TODO: Remove
 	public final static int DRIVETRAIN_LOW_GEAR= 1; //TODO: Remove
 	public static final int CUBE_INTAKE_PIVOT_EXTEND = 2;
 	public static final int CUBE_INTAKE_PIVOT_RETRACT = 3;
 	
-	
+	//Double Soldenoids PCM=1
 	public static final int CUBE_INTAKE_GRIPPER_EXTENED = 5; //going on the relay
 	public static final int LIFT_RACHET_ENGAGE = 6;
 	public static final int LIFT_RACHET_DISENGAGE = 7;
-	public static final int LIFT_BRAKE_ENGAGE = 8;
-	public static final int LIFT_BRAKE_DISENGAGE = 9;
-	
-	//PCM 2
+	public static final int LIFT_BRAKE_ENGAGE = 2;
+	public static final int LIFT_BRAKE_DISENGAGE = 3;
 	public static final int LIFT_HIGH_GEAR =0;
 	public static final int LIFT_LOW_GEAR = 1;
 	
@@ -228,7 +228,7 @@ public class RobotMap
 	/*************************************************************************
 	 *                               PDP PARAMETERS
 	 *************************************************************************/
-	public static final long PDPThreadPeriod = 20;
+	public static final long PDPThreadPeriod = 100;
 	public static final double WARNING_CURRENT_LIMIT = 20;
 	public static final double STALL_CURRENT_LIMIT = 35;
 	public static final double CURRENT_LIMIT_TIME_THRESHOLD_SECONDS = 1;

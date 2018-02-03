@@ -34,7 +34,7 @@ public class PowerDistribution {
 
 	public PowerDistribution(long period) {
 		this.period = period;
-		pdp = new PowerDistributionPanel();
+		pdp = new PowerDistributionPanel(RobotMap.PDP_CAN_ID);
 
 		// Calculate number of loops needed to meet time iteration
 		currentTimeThreshold = (int) (RobotMap.CURRENT_LIMIT_TIME_THRESHOLD_SECONDS / (period * 1000));

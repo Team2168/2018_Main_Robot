@@ -41,7 +41,7 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
-	public static ScissorLift scissorLift;
+	public static ScissorLift scissorLift; //Will not have scissor and forklift together
 
 	// Variables for initializing and calibrating the Gyro
 	static boolean autoMode;
@@ -88,6 +88,9 @@ public class Robot extends TimedRobot
 		{
 		this.setPeriod(RobotMap.MAIN_PERIOD_S);
 
+		//Stop all WPILib 2018 Telementry
+		//LiveWindow.disableAllTelemetry();
+		
 		ConsolePrinter.init();
 		ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
 
@@ -102,7 +105,7 @@ public class Robot extends TimedRobot
 		lift = Lift.GetInstance();
 		liftShifter = LiftShifter.GetInstance();
 		pneumatics = Pneumatics.getInstance();
-		scissorLift = ScissorLift.getInstance();
+		//scissorLift = ScissorLift.getInstance();
 		
 		oi = OI.getInstance();
 

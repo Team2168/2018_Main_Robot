@@ -1,5 +1,7 @@
 package org.team2168;
 
+import org.team2168.commands.drivetrain.ShiftHigh;
+import org.team2168.commands.drivetrain.ShiftLow;
 import org.team2168.commands.lift.LiftShiftHigh;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
@@ -54,8 +56,8 @@ public class OI {
 	private OI() {
 
 		////////////// Driver Joystick//////////////
-		//driverJoystick.ButtonStart().whenPressed(new ShiftLow());  //add drivetrainshifter
-		//driverJoystick.ButtonA().whenPressed(new ShiftHigh());
+		driverJoystick.ButtonStart().whenPressed(new ShiftLow());  //add drivetrainshifter
+		driverJoystick.ButtonA().whenPressed(new ShiftHigh());
 
 		////////////// Operator Joystick//////////////
 

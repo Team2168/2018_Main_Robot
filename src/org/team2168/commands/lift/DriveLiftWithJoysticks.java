@@ -13,7 +13,7 @@ public class DriveLiftWithJoysticks extends Command {
 	private F310 joystick;
 	private double speed;
 
-	public DriveLiftWithJoysticks(F310 Joysticks) {
+	public DriveLiftWithJoysticks(F310 joystick) {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.lift);
 		this.joystick = joystick;
