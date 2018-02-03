@@ -7,11 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveIntakeWithConstant extends Command {
+public class DriveIntakeWheelsWithConstant extends Command {
 	double speed;
-    public DriveIntakeWithConstant(double inputspeed) {
+    
+	public DriveIntakeWheelsWithConstant(double inputspeed) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.cubeIntake);
+        requires(Robot.cubeIntakeWheels);
         speed = inputspeed;
     }
 

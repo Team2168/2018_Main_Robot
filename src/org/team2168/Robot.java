@@ -35,6 +35,9 @@ public class Robot extends TimedRobot
 	
 	//Subsystems
 	public static CubeIntake cubeIntake;
+	public static CubeIntakeWheels cubeIntakeWheels;
+	public static CubeIntakeGripper cubeIntakeGripper;
+	public static CubeIntakePivot cubeIntakePivot;
 	public static Drivetrain drivetrain;
 	public static DrivetrainShifter drivetrainShifter;
 	public static ForkLift forkLift;
