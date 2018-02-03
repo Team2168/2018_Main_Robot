@@ -5,6 +5,7 @@ import org.team2168.RobotMap;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,16 +14,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LiftShifter extends Subsystem {
 	
 	private static LiftShifter instance = null;
-	private DoubleSolenoid gearShifter;
+	private Solenoid gearShifter;
 
 
 	/**
 	 * Default constructor for the lift shifter
 	 */
 	private LiftShifter() {
-	gearShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_HIGH_GEAR, RobotMap.LIFT_LOW_GEAR);
-	ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.liftShifter.isInHighGear();}, true, false);
-	ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.liftShifter.isInLowGear();}, true, false);
+	gearShifter = new Solenoid(RobotMap.LIFT_SHIFT_HIGH_LOW);
+	ConsolePrinter.putBoolean("Lift in High Gear", () -> {return Robot.liftShifter.isInHighGear();}, true, false);
+	ConsolePrinter.putBoolean("Lift in Low Gear", () -> {return Robot.liftShifter.isInLowGear();}, true, false);
 
 	}
 
@@ -41,28 +42,28 @@ public class LiftShifter extends Subsystem {
 	 * Shifts the Lift from High to Low Gear
 	 */
     public void shiftToLow() {
-    	gearShifter.set(DoubleSolenoid.Value.kForward);
+    	gearShifter.set(true);
     }
     
 	/**
 	 * Shifts the Lift from Low to High Gear
 	 */
     public void shiftToHigh() {
-    	gearShifter.set(DoubleSolenoid.Value.kReverse);
+    	gearShifter.set(false);
     }
     
 	/**
 	 * Returns true if last commanded shift was Low Gear
 	 */
     public boolean inLowGear() {
-    	return gearShifter.get() == DoubleSolenoid.Value.kForward;
+    	return gearShifter.get() == true;
     }
 
 	/**
 	 * Returns true if last commanded shift was High Gear
 	 */
     public boolean inHighGear() {
-    	return gearShifter.get() == DoubleSolenoid.Value.kReverse;
+    	return gearShifter.get() == false;
     }
     
     public boolean isInLowGear() {

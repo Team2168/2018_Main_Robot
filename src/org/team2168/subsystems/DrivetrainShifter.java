@@ -1,6 +1,7 @@
 package org.team2168.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.team2168.Robot;
@@ -15,24 +16,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Subsystem class for the Drivetrain
- * @author Aidan Sullivan
  */
 public class DrivetrainShifter extends Subsystem {
 
 	private static DrivetrainShifter instance = null;
-	private static DoubleSolenoid gearChanger;
+	private static Solenoid gearChanger;
 	
 	/**
 	 * Default constructors for Drivetrain
 	 */
 	private DrivetrainShifter() {
-		gearChanger = new DoubleSolenoid(RobotMap.PCM_CAN_ID,RobotMap.DRIVETRAIN_LOW_GEAR, RobotMap.DRIVETRAIN_HIGH_GEAR);
+		gearChanger = new Solenoid(RobotMap.DRIVETRAIN_GEAR_SHIFT);
 
 		//Log sensor data
 		//ConsolePrinter.putNumber("Drivetrain Right Encoder",
 		//		() -> {return DrivetrainShifter.getInstance().getRightPosition();}, true, false);
-		ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.drivetrainShifter.isInHighGear();}, true, false);
-		ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.drivetrainShifter.isInLowGear();}, true, false);
+		ConsolePrinter.putBoolean("Drivetrain in High Gear", () -> {return Robot.drivetrainShifter.isInHighGear();}, true, false);
+		ConsolePrinter.putBoolean("Drivetrain in Low Gear", () -> {return Robot.drivetrainShifter.isInLowGear();}, true, false);
 
 	}
 	
@@ -57,28 +57,28 @@ public class DrivetrainShifter extends Subsystem {
 	 * Shifts the Drivetrain from High to Low Gear
 	 */
     public void shiftToLow() {
-    	gearChanger.set(DoubleSolenoid.Value.kForward);
+    	gearChanger.set(true);
     }
     
 	/**
 	 * Shifts the Drivetrain from Low to High Gear
 	 */
     public void shiftToHigh() {
-    	gearChanger.set(DoubleSolenoid.Value.kReverse);
+    	gearChanger.set(false);
     }
     
 	/**
 	 * Returns true if last commanded shift was Low Gear
 	 */
     public boolean inLowGear() {
-    	return gearChanger.get() == DoubleSolenoid.Value.kForward;
+    	return gearChanger.get() == true;
     }
 
 	/**
 	 * Returns true if last commanded shift was High Gear
 	 */
     public boolean inHighGear() {
-    	return gearChanger.get() == DoubleSolenoid.Value.kReverse;
+    	return gearChanger.get() == false;
     }
     
     public boolean isInLowGear() {
