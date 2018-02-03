@@ -85,7 +85,11 @@ public class RobotMap
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
 //	public static final int SHOOTER_ENCODER_B = 22; //PWM 18 on board
 	public static final int PRACTICE_BOT_JUMPER = 24;
-
+	public static final int CUBE_INTAKE_EXTEND_LIMIT = 21;
+	public static final int CUBE_INTAKE_RETRACT_LIMIT = 22;
+	public static final int CUBE_INTAKE_PIVOT_MOTOR = 20;
+	
+	
 	// PBOT Differences
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
 	public static final int LEFT_DRIVE_ENCODER_B_PBOT = 1;
@@ -206,6 +210,7 @@ public class RobotMap
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
+	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	/*************************************************************************
 	 *                           FORK LIFT PARAMETERS
 	 *************************************************************************/
