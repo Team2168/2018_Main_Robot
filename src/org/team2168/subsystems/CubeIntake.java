@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -21,8 +22,11 @@ public class CubeIntake extends Subsystem
 	private static VictorSP intakeMotorLeft;
 	private static VictorSP intakeMotorRight;
 	private Solenoid intakeOpenPiston;
-	private DoubleSolenoid intakePivotPiston;
+	//private DoubleSolenoid intakePivotPiston;
 	private static AnalogInput intakeIRSensor;
+	private static DigitalInput fullyExtend;
+	private static DigitalInput fullyRetract;
+	private static Spark intakePivotMotor;
 	
 	/**
 	 * Default constructors
@@ -32,10 +36,12 @@ public class CubeIntake extends Subsystem
 		intakeMotorRight = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_RIGHT);
 		//intakeOpenPiston = new Solenoid(RobotMap.CUBE_INTAKE_OPEN_PISTON_CLOSED);
 		
-		intakePivotPiston = new DoubleSolenoid(RobotMap.CUBE_INTAKE_PIVOT_EXTEND, 
-				RobotMap.CUBE_INTAKE_PIVOT_RETRACT);
+		//intakePivotPiston = new DoubleSolenoid(RobotMap.CUBE_INTAKE_PIVOT_EXTEND, 
+				//RobotMap.CUBE_INTAKE_PIVOT_RETRACT);
 		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
-			
+		fullyExtend = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
+		fullyRetract = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
+		intakePivotMotor = new Spark(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
 	}
 	
 	/**
@@ -48,6 +54,42 @@ public class CubeIntake extends Subsystem
 			instance = new CubeIntake();
 		return instance;
 	}
+	/**
+	 * Takes in double speed and set it to pivot intake motor
+	 * @param speed is a double between -1 and 1
+	 */
+
+	/**
+	 * Checks to see if arm is fully up
+	 * @return true if pressed, false if not
+	 */
+	public boolean isIntakeFullyExtend() {
+		return !fullyExtend.get();
+	}
+	
+	/**
+	 * Checks to see if arm is fully down
+	 * @return true if pressed, false if not
+	 */
+	public boolean isIntakeFullyRetract() {
+		return !fullyRetract.get();
+	}
+	
+	
+	public void drivePivot(double speed)
+	{
+		if (RobotMap.INTAKE_PIVOT_REVERSE)
+			speed = -speed;
+		if ((speed > 0.2 && isIntakeFullyRetract()) || ((speed < 0.2) && isIntakeFullyExtend())) {
+			intakePivotMotor.set(speed);
+		} else {
+			intakePivotMotor.set(0);
+
+		}
+	}
+	
+	
+	
 	
 	/**
 	 * Takes in a double speed and sets it to fork lift motor 
@@ -100,16 +142,16 @@ public class CubeIntake extends Subsystem
 	/**
 	 * Retracts fork lift piston
 	 */
-	public void retractPivot(){
-		intakePivotPiston.set(Value.kReverse);
-	}
+	//public void retractPivot(){
+	//	intakePivotPiston.set(Value.kReverse);
+	//}
 
 	/**
 	 * Extends fork lift piston
 	 */
-	public void extendPivot(){
-		intakePivotPiston.set(Value.kForward);
-	}
+	//public void extendPivot(){
+	//	intakePivotPiston.set(Value.kForward);
+	//}
 	
 	public void openOpen(){
 		intakeOpenPiston.set(false);
@@ -123,18 +165,17 @@ public class CubeIntake extends Subsystem
 	 * takes in value of raised limit switch
 	 * @return true if Fork lift is retracted, false if lift is extended
 	 */
-	public boolean isRetracted(){
-		return intakePivotPiston.get() == DoubleSolenoid.Value.kReverse;
-	}
+	//public boolean isRetracted(){
+	//	return intakePivotPiston.get() == DoubleSolenoid.Value.kReverse;
+	//}
 	
 	/**
 	 * takes in value of lowered limit switch
 	 * @return true if fork lift is extended, false if lift is retracted
 	 */
-	public boolean isExtended(){
-		return intakePivotPiston.get() == DoubleSolenoid.Value.kForward;
-
-	}
+	//public boolean isExtended(){
+	//	return intakePivotPiston.get() == DoubleSolenoid.Value.kForward;
+	//}
 	
 	public void initDefaultCommand(){
 	}
