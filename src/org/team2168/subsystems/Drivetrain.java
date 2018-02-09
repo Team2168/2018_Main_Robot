@@ -296,6 +296,9 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putNumber("GunStyleXValueInterpolated", () -> {
 			return Robot.drivetrain.getGunStyleXValue();
 		}, true, false);
+		ConsolePrinter.putNumber("Drivetrain raw IR", () -> {
+			return Robot.drivetrain.getIRVoltage();
+		}, true, false);
 	}
 
 	/**
@@ -320,7 +323,7 @@ public class Drivetrain extends Subsystem {
 	 *            is stationary
 	 */
 	private void driveleftMotor1(double speed) {
-		if (!RobotMap.DT_REVERSE_LEFT)
+		if (!RobotMap.DT_REVERSE_LEFT1)
 			speed = -speed;
 
 		leftMotor1.set(speed);
@@ -338,7 +341,7 @@ public class Drivetrain extends Subsystem {
 	 *            is stationary
 	 */
 	private void driveleftMotor2(double speed) {
-		if (RobotMap.DT_REVERSE_LEFT)
+		if (RobotMap.DT_REVERSE_LEFT2)
 			speed = -speed;
 
 		leftMotor2.set(speed);
@@ -367,7 +370,7 @@ public class Drivetrain extends Subsystem {
 	 *            is stationary
 	 */
 	private void driverightMotor1(double speed) {
-		if (!RobotMap.DT_REVERSE_RIGHT)
+		if (!RobotMap.DT_REVERSE_RIGHT1)
 			speed = -speed;
 
 		rightMotor1.set(speed);
@@ -384,7 +387,7 @@ public class Drivetrain extends Subsystem {
 	 *            is stationary
 	 */
 	private void driverightMotor2(double speed) {
-		if (RobotMap.DT_REVERSE_RIGHT)
+		if (RobotMap.DT_REVERSE_RIGHT2)
 			speed = -speed;
 
 		rightMotor2.set(speed);

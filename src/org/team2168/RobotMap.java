@@ -49,6 +49,7 @@ public class RobotMap
 	public static final int LIFT_MOTOR_2 = 10; //2017 conveyor
 	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
 	
+	
 
 
    //SPI Channels/////////////////////////////////////////////////////////////
@@ -163,9 +164,11 @@ public class RobotMap
 	 * DRIVETRAIN PARAMETERS
 	 *************************************************************************/
 	// TODO check if the reverse values match the physical robot
-	public static final boolean DT_REVERSE_RIGHT = true;
-	public static final boolean DT_REVERSE_LEFT = false;
-
+	public static final boolean DT_REVERSE_LEFT1 = true;
+	public static final boolean DT_REVERSE_LEFT2 = false;
+	public static final boolean DT_REVERSE_RIGHT1 = false;
+	public static final boolean DT_REVERSE_RIGHT2 = true;
+	
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 	// TODO find ratio
 	private static final double DRIVE_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
