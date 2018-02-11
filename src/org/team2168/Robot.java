@@ -138,6 +138,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
+		ConsolePrinter.putString("Switch/Scale/Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
 
 		//Start Thread Only After Every Other Class is Loaded. 
 		ConsolePrinter.startThread();

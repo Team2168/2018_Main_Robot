@@ -1,4 +1,4 @@
-package org.team2168;
+package org.team2168;  
 
 import org.team2168.PID.sensors.AverageEncoder;
 
@@ -19,7 +19,7 @@ public class RobotMap
 
 	
 	/*************************************************************************
-	 * ROBORIO WIRING MAP
+	 *                        ROBORIO WIRING MAP                             *
 	 *************************************************************************/
 
 	// Joysticks///////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ public class RobotMap
 	
 
 
-   //SPI Channels/////////////////////////////////////////////////////////////
+    //SPI Channels/////////////////////////////////////////////////////////////
 	public static final int GYRO = 0;
 	
 	// Digital IO Channels//////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ public class RobotMap
 	public static final int RIGHT_DRIVE_ENCODER_A_PBOT = 3;
 	public static final int RIGHT_DRIVE_ENCODER_B_PBOT = 4;
 
-	//SolenoidsSolenoid Channels////////////////////////////////////////////////////////
+	//Solenoid Channels////////////////////////////////////////////////////////
 	//Single Solenoids 
 	public static final int DRIVETRAIN_GEAR_SHIFT = 0; //Single Solenoid
 	public static final int LIFT_SHIFT_HIGH_LOW = 4;
@@ -161,7 +161,7 @@ public class RobotMap
 	public static final int FLASHLIGHT_RELAY = 0;
 
 	/*************************************************************************
-	 * DRIVETRAIN PARAMETERS
+	 *                         DRIVETRAIN PARAMETERS                         *
 	 *************************************************************************/
 	// TODO check if the reverse values match the physical robot
 	public static final boolean DT_REVERSE_LEFT1 = true;
@@ -197,39 +197,39 @@ public class RobotMap
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
 	
 	/*************************************************************************
-	 *                         FORKLIFT PARAMETERS
+	 *                         FORKLIFT PARAMETERS                           *
 	 *************************************************************************/
 	public static final boolean FORKLIFT_LEFT_REVERSE = false;
 	public static final boolean FORKLIFT_RIGHT_REVERSE = false;
 	
 	
 	/*************************************************************************
-	 *                         CUBE INTAKE PARAMETERS
+	 *                         CUBE INTAKE PARAMETERS                        *
 	 *************************************************************************/
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
 	/*************************************************************************
-	 *                           FORK LIFT PARAMETERS
+	 *                         FORK LIFT PARAMETERS                          *
 	 *************************************************************************/
 	//TODO check if the reverse values match the physical robot
 	public static final boolean FORK_LIFT_REVERSE = true;
 	
 	
 	/*************************************************************************
-	 *                           SCISSOR LIFT PARAMETERS
+	 *                         SCISSOR LIFT PARAMETERS                       *
 	 *************************************************************************/
 	//TODO check if the reverse values match the physical robot
 	public static final boolean SCISSOR_LIFT_REVERSE = true;
 	/*************************************************************************
-	 *                              LIFT PARAMETERS
+	 *                         LIFT PARAMETERS                               *
 	 *************************************************************************/
 	public static final boolean LIFT_MOTOR1_REVERSE = false;
 	public static final boolean LIFT_MOTOR2_REVERSE = false;
 	public static final boolean LIFT_MOTOR3_REVERSE = false;
 	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0;
 	/*************************************************************************
-	 *                               PDP PARAMETERS
+	 *                         PDP PARAMETERS                                *
 	 *************************************************************************/
 	public static final long PDPThreadPeriod = 100;
 	public static final double WARNING_CURRENT_LIMIT = 20;
@@ -237,7 +237,7 @@ public class RobotMap
 	public static final double CURRENT_LIMIT_TIME_THRESHOLD_SECONDS = 1;
 
 	/*************************************************************************
-	 *                                 PID PARAMETERS
+	 *                         PID PARAMETERS                                *
 	 *************************************************************************/
 	// period to run PID loops on drive train
 	public static final long DRIVE_TRAIN_PID_PERIOD = 20;// 70ms loop
@@ -285,10 +285,10 @@ public class RobotMap
 
 	// Turret Period
 	public static final long TURRET_PID_PERIOD = 20;
-	public static final int TURRET_PID_ARRAY_SIZE = 30;
+	public static final int  TURRET_PID_ARRAY_SIZE = 30;
 
 	/****************************************************************
-	 * TCP Servers (ONLY FOR DEBUGGING) *
+	 *                         TCP Servers (ONLY FOR DEBUGGING)     *
 	 ****************************************************************/
 	public static final int TCP_SERVER_DRIVE_TRAIN_POS = 1180;
 	public static final int TCP_SERVER_ROTATE_CONTROLLER = 1181;
@@ -301,14 +301,14 @@ public class RobotMap
 	public static final int TCP_SERVER_ROTATE_TURRET_POT_CONTROLLER = 1188;
 
 	/******************************************************************
-	 * ConsolePrinter PARAMETERS *
+	 *                         ConsolePrinter PARAMETERS              *
 	 ******************************************************************/
 	public static final boolean PRINT_SD_DEBUG_DATA = true;
 	public static final long SmartDashThreadPeriod = 100; // ms
 	public static final long CONSOLE_PRINTER_LOG_RATE_MS = 100; // ms
 
 	/******************************************************************
-	 * Lights I2C *
+	 *                         Lights I2C                             *
 	 ******************************************************************/
 	public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
 	public static final int I2C_ADDRESS = 10;
