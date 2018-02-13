@@ -101,13 +101,13 @@ public class RobotMap
 	public static final int FORK_LIFT_PISTON = 5;
 	public static final int SCISSOR_LIFT_PISTON = 5;
 	
-	//Double Soldenoids PCM=0
+	//Double Soldenoids PCM ID =0
 	public final static int DRIVETRAIN_HIGH_GEAR = 0; //TODO: Remove
 	public final static int DRIVETRAIN_LOW_GEAR= 1; //TODO: Remove
 	public static final int CUBE_INTAKE_PIVOT_EXTEND = 2;
 	public static final int CUBE_INTAKE_PIVOT_RETRACT = 3;
 	
-	//Double Soldenoids PCM=1
+	//Double Soldenoids PCM ID =1
 	public static final int CUBE_INTAKE_GRIPPER_EXTENED = 5; //going on the relay
 	public static final int LIFT_RACHET_ENGAGE = 6;
 	public static final int LIFT_RACHET_DISENGAGE = 7;
