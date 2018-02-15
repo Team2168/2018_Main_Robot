@@ -98,23 +98,26 @@ public class RobotMap
 	//Single Solenoids 
 	public static final int DRIVETRAIN_GEAR_SHIFT = 0; //Single Solenoid
 	public static final int LIFT_SHIFT_HIGH_LOW = 4;
-	public static final int FORK_LIFT_PISTON = 5;
-	public static final int SCISSOR_LIFT_PISTON = 5;
+	public static final int FORK_LIFT_PISTON = 5; 
+	
 	
 	//Double Soldenoids PCM ID =0
-	public final static int DRIVETRAIN_HIGH_GEAR = 0; //TODO: Remove
-	public final static int DRIVETRAIN_LOW_GEAR= 1; //TODO: Remove
+	public final static int DRIVETRAIN_HIGH_GEAR = 1; //TODO: Remove
+	public final static int DRIVETRAIN_LOW_GEAR= 0; //TODO: Remove
 	public static final int CUBE_INTAKE_PIVOT_EXTEND = 2;
 	public static final int CUBE_INTAKE_PIVOT_RETRACT = 3;
+	public static final int FORK_LIFT_PISTON_EXTEND = 4;
+	public static final int FORK_LIFT_PISTON_RETRACT = 5;
+	
 	
 	//Double Soldenoids PCM ID =1
-	public static final int CUBE_INTAKE_GRIPPER_EXTENED = 5; //going on the relay
-	public static final int LIFT_RACHET_ENGAGE = 6;
-	public static final int LIFT_RACHET_DISENGAGE = 7;
+	public static final int CUBE_INTAKE_GRIPPER_EXTENED = 5; //going on the relay 
+	public static final int LIFT_RACHET_ENGAGE = 0;
+	public static final int LIFT_RACHET_DISENGAGE = 1;
 	public static final int LIFT_BRAKE_ENGAGE = 2;
 	public static final int LIFT_BRAKE_DISENGAGE = 3;
-	public static final int LIFT_HIGH_GEAR =0;
-	public static final int LIFT_LOW_GEAR = 1;
+	public static final int LIFT_HIGH_GEAR =4;
+	public static final int LIFT_LOW_GEAR = 5;
 	
 	
 	
@@ -209,6 +212,7 @@ public class RobotMap
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
+	public static final double CUBE_INTAKE_CONSTANT = 1.0;
 	/*************************************************************************
 	 *                         FORK LIFT PARAMETERS                          *
 	 *************************************************************************/

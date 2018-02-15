@@ -61,8 +61,8 @@ public class OI {
 		driverJoystick.ButtonA().whenPressed(new ShiftHigh());
 
 		////////////// Operator Joystick//////////////
-		operatorJoystick.ButtonA().whenPressed(new LiftShiftHigh()); 
-		operatorJoystick.ButtonB().whenPressed(new LiftShiftLow());
+		operatorJoystick.ButtonA().whenPressed(new LiftShiftHigh()); // for pcm testing
+		operatorJoystick.ButtonB().whenPressed(new LiftShiftLow()); // for pcm testing
 		
 		
 	}
