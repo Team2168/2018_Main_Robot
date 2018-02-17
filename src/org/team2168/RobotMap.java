@@ -1,4 +1,4 @@
-package org.team2168;
+package org.team2168;  
 
 import org.team2168.PID.sensors.AverageEncoder;
 
@@ -11,15 +11,13 @@ import edu.wpi.first.wpilibj.I2C;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap 
-{
-
+public class RobotMap {
 
 	public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 
 	
 	/*************************************************************************
-	 * ROBORIO WIRING MAP
+	 *                        ROBORIO WIRING MAP                             *
 	 *************************************************************************/
 
 	// Joysticks///////////////////////////////////////////////////////////////
@@ -46,27 +44,22 @@ public class RobotMap
 	
 	
 	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
-	public static final int LIFT_MOTOR_2 = 10; //2017 conveyor
+	public static final int LIFT_MOTOR_2 = 5; //2017 conveyor
 	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
+	
 	
 
 
-   //SPI Channels/////////////////////////////////////////////////////////////
+    //SPI Channels/////////////////////////////////////////////////////////////
 	public static final int GYRO = 0;
 	
 	// Digital IO Channels//////////////////////////////////////////////////////
 	// Channels 0-9 on RoboRio
 	public static final int RIGHT_DRIVE_ENCODER_A = 0; //same as 2017
 	public static final int RIGHT_DRIVE_ENCODER_B = 1; //same as 2017
-	public static final int LEFT_DRIVE_ENCODER_B = 4; //same as 2017
-	public static final int LEFT_DRIVE_ENCODER_A = 5; //same as 2017
+	public static final int LEFT_DRIVE_ENCODER_B = 2; //same as 2017
+	public static final int LEFT_DRIVE_ENCODER_A = 3; //same as 2017
 	
-	
-	public static final int PLATFORM_RAISED_LIMIT = 2;
-	public static final int PLATFORM_LOWERED_LIMIT= 3;
-	
-
-
 	public static final int LIFT_FULLY_UP = 6; //2018 proto
 	public static final int LIFT_FULLY_DOWN = 7; //2018 proto
 	public static final int TX1_TURN_ON = 8;
@@ -76,8 +69,8 @@ public class RobotMap
 	//Channels 10-25 on MXP (PWM and DIO)
 //	public static final int CONVELATOR_MOTOR = 10;
 //	public static final int TURRET_MOTOR = 11;
-	public static final int CUBE_INTAKE_MOTOR_LEFT = 12; //2017 gear intake
-	public static final int CUBE_INTAKE_MOTOR_RIGHT = 19; //PWM 19 on board //2017 spare
+	public static final int CUBE_INTAKE_MOTOR_LEFT = 7; //2017 gear intake
+	public static final int CUBE_INTAKE_MOTOR_RIGHT = 8; //PWM 19 on board //2017 spare
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
@@ -94,33 +87,26 @@ public class RobotMap
 	public static final int RIGHT_DRIVE_ENCODER_A_PBOT = 3;
 	public static final int RIGHT_DRIVE_ENCODER_B_PBOT = 4;
 
-	//SolenoidsSolenoid Channels////////////////////////////////////////////////////////
-	//Single Solenoids 
-	public static final int DRIVETRAIN_GEAR_SHIFT = 0; //Single Solenoid
-	public static final int LIFT_SHIFT_HIGH_LOW = 4;
-	public static final int PLATFORM_PISTON = 5;
-	
-	public static final int CUBE_INTAKE_OPEN_PISTON_CLOSED = 6;
-	
-	//Double Soldenoids PCM=0
-	public final static int DRIVETRAIN_HIGH_GEAR = 0; //TODO: Remove
-	public final static int DRIVETRAIN_LOW_GEAR= 1; //TODO: Remove
-	public static final int CUBE_INTAKE_PIVOT_EXTEND = 2;
-	public static final int CUBE_INTAKE_PIVOT_RETRACT = 3;
-	
-	//Double Soldenoids PCM=1
-	public static final int CUBE_INTAKE_GRIPPER_EXTENED = 5; //going on the relay
-	public static final int LIFT_RACHET_ENGAGE = 6;
-	public static final int LIFT_RACHET_DISENGAGE = 7;
+	//Solenoid Channels////////////////////////////////////////////////////////
+
+	//Double Soldenoids PCM ID = 0
+	public final static int DRIVETRAIN_LOW_GEAR = 0;
+	public final static int DRIVETRAIN_HIGH_GEAR = 1;
+	public static final int CUBE_INTAKE_GRIPPER_EXTEND = 2;
+	public static final int CUBE_INTAKE_GRIPPER_RETRACT = 3;
+	public static final int PLATFORM_PISTON_EXTEND = 4;     //Forklift
+	public static final int PLATFORM_PISTON_RETRACT = 5;    //Forklift
+
+	//Double Soldenoids PCM ID = 1
+	public static final int LIFT_RACHET_ENGAGE = 0;
+	public static final int LIFT_RACHET_DISENGAGE = 1;
 	public static final int LIFT_BRAKE_ENGAGE = 2;
 	public static final int LIFT_BRAKE_DISENGAGE = 3;
-	public static final int LIFT_HIGH_GEAR =0;
-	public static final int LIFT_LOW_GEAR = 1;
-	
-	
-	
-	public static final boolean SOLENOID_ON = true;
-	public static final boolean SOLENOID_OFF = false;
+	public static final int LIFT_HIGH_GEAR = 4;
+	public static final int LIFT_LOW_GEAR = 5;
+	public static final int CLIMB_GUIDE_ARM_RAISE = 6;
+	public static final int CLIMB_GUIDE_ARM_LOWER = 7;
+
 
 	//Analog Input Channels////////////////////////////////////////////////////
 	//Channels 0-3 on Roborio
@@ -162,12 +148,14 @@ public class RobotMap
 	public static final int FLASHLIGHT_RELAY = 0;
 
 	/*************************************************************************
-	 * DRIVETRAIN PARAMETERS
+	 *                         DRIVETRAIN PARAMETERS                         *
 	 *************************************************************************/
 	// TODO check if the reverse values match the physical robot
-	public static final boolean DT_REVERSE_RIGHT = true;
-	public static final boolean DT_REVERSE_LEFT = false;
-
+	public static final boolean DT_REVERSE_LEFT1 = true;
+	public static final boolean DT_REVERSE_LEFT2 = false;
+	public static final boolean DT_REVERSE_RIGHT1 = false;
+	public static final boolean DT_REVERSE_RIGHT2 = true;
+	
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 	// TODO find ratio
 	private static final double DRIVE_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
@@ -196,40 +184,42 @@ public class RobotMap
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
 	
 	/*************************************************************************
-	 *                         FORKLIFT PARAMETERS
+	 *                         FORKLIFT PARAMETERS                           *
 	 *************************************************************************/
 	public static final boolean FORKLIFT_LEFT_REVERSE = false;
 	public static final boolean FORKLIFT_RIGHT_REVERSE = false;
 	
 	
 	/*************************************************************************
-	 *                         CUBE INTAKE PARAMETERS
+	 *                         CUBE INTAKE PARAMETERS                        *
 	 *************************************************************************/
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
+	public static final double CUBE_INTAKE_CONSTANT = 1.0;
+
 	/*************************************************************************
-	 *                           FORK LIFT PARAMETERS
+	 *                         FORK LIFT PARAMETERS                          *
 	 *************************************************************************/
 	//TODO check if the reverse values match the physical robot
 	public static final boolean FORK_LIFT_REVERSE = true;
 	
 	
 	/*************************************************************************
-	 *                           SCISSOR LIFT PARAMETERS
+	 *                         SCISSOR LIFT PARAMETERS                       *
 	 *************************************************************************/
 	//TODO check if the reverse values match the physical robot
 	public static final boolean SCISSOR_LIFT_REVERSE = true;
 	/*************************************************************************
-	 *                              LIFT PARAMETERS
+	 *                         LIFT PARAMETERS                               *
 	 *************************************************************************/
 	public static final boolean LIFT_MOTOR1_REVERSE = false;
 	public static final boolean LIFT_MOTOR2_REVERSE = false;
 	public static final boolean LIFT_MOTOR3_REVERSE = false;
 	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0;
 	/*************************************************************************
-	 *                               PDP PARAMETERS
+	 *                         PDP PARAMETERS                                *
 	 *************************************************************************/
 	public static final long PDPThreadPeriod = 100;
 	public static final double WARNING_CURRENT_LIMIT = 20;
@@ -237,7 +227,7 @@ public class RobotMap
 	public static final double CURRENT_LIMIT_TIME_THRESHOLD_SECONDS = 1;
 
 	/*************************************************************************
-	 *                                 PID PARAMETERS
+	 *                         PID PARAMETERS                                *
 	 *************************************************************************/
 	// period to run PID loops on drive train
 	public static final long DRIVE_TRAIN_PID_PERIOD = 20;// 70ms loop
@@ -285,10 +275,10 @@ public class RobotMap
 
 	// Turret Period
 	public static final long TURRET_PID_PERIOD = 20;
-	public static final int TURRET_PID_ARRAY_SIZE = 30;
+	public static final int  TURRET_PID_ARRAY_SIZE = 30;
 
 	/****************************************************************
-	 * TCP Servers (ONLY FOR DEBUGGING) *
+	 *                         TCP Servers (ONLY FOR DEBUGGING)     *
 	 ****************************************************************/
 	public static final int TCP_SERVER_DRIVE_TRAIN_POS = 1180;
 	public static final int TCP_SERVER_ROTATE_CONTROLLER = 1181;
@@ -301,14 +291,14 @@ public class RobotMap
 	public static final int TCP_SERVER_ROTATE_TURRET_POT_CONTROLLER = 1188;
 
 	/******************************************************************
-	 * ConsolePrinter PARAMETERS *
+	 *                         ConsolePrinter PARAMETERS              *
 	 ******************************************************************/
 	public static final boolean PRINT_SD_DEBUG_DATA = true;
 	public static final long SmartDashThreadPeriod = 100; // ms
 	public static final long CONSOLE_PRINTER_LOG_RATE_MS = 100; // ms
 
 	/******************************************************************
-	 * Lights I2C *
+	 *                         Lights I2C                             *
 	 ******************************************************************/
 	public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
 	public static final int I2C_ADDRESS = 10;

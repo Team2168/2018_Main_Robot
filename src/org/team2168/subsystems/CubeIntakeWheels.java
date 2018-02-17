@@ -66,7 +66,21 @@ private static CubeIntakeWheels instance = null;
 		driveLeft(speed);
 	}
 
+	/**
+	 * Gets the voltage given by the Sharp IR sensor on the Lift Intake.
+	 * @return the raw voltage from the cube presence sensor
+	 */
+	public double getRawIRVoltage(){
+		return intakeIRSensor.getVoltage();
+	}
 	
+	/**
+	 * 
+	 * @return true when a cube is present
+	 */
+	public boolean isCubePresent() {
+		return (getRawIRVoltage() >= RobotMap.CUBE_INTAKE_IR_THRESHOLD);
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

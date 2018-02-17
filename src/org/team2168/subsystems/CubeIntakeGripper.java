@@ -3,7 +3,6 @@ package org.team2168.subsystems;
 import org.team2168.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,10 +12,10 @@ public class CubeIntakeGripper extends Subsystem {
 
 
 	private static CubeIntakeGripper instance = null;
-	private Solenoid intakeOpenPiston;
+	private DoubleSolenoid intakeOpenPiston;
 	
 	public CubeIntakeGripper(){
-		intakeOpenPiston = new Solenoid(RobotMap.CUBE_INTAKE_OPEN_PISTON_CLOSED);
+		intakeOpenPiston = new DoubleSolenoid(RobotMap.CUBE_INTAKE_GRIPPER_EXTEND, RobotMap.CUBE_INTAKE_GRIPPER_RETRACT);
 	}
 	
 	/**
@@ -31,14 +30,21 @@ public class CubeIntakeGripper extends Subsystem {
 	}
 	
 	
-	public void openOpen(){
-		intakeOpenPiston.set(false);
-	}
-	public void closeOpen(){
-		intakeOpenPiston.set(true);
+	public void open(){
+		intakeOpenPiston.set(DoubleSolenoid.Value.kForward);
 	}
 	
+	public void close(){
+		intakeOpenPiston.set(DoubleSolenoid.Value.kReverse);
+	}
 	
+	public boolean isOpen() {
+		return intakeOpenPiston.get() == DoubleSolenoid.Value.kForward;
+	}
+	
+	public boolean isClosed() {
+		return intakeOpenPiston.get() == DoubleSolenoid.Value.kReverse;
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

@@ -3,6 +3,7 @@ package org.team2168;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
 import org.team2168.commands.lift.LiftShiftHigh;
+import org.team2168.commands.lift.LiftShiftLow;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -60,8 +61,8 @@ public class OI {
 		driverJoystick.ButtonA().whenPressed(new ShiftHigh());
 
 		////////////// Operator Joystick//////////////
-
-		
+		operatorJoystick.ButtonA().whenPressed(new LiftShiftHigh()); // for pcm testing
+		operatorJoystick.ButtonB().whenPressed(new LiftShiftLow()); // for pcm testing
 		
 		
 	}

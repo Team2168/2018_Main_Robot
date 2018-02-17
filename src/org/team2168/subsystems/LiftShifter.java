@@ -14,17 +14,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LiftShifter extends Subsystem {
 	
 	private static LiftShifter instance = null;
-	private Solenoid gearShifter;
+	private DoubleSolenoid gearShifter;
 
 
 	/**
 	 * Default constructor for the lift shifter
 	 */
 	private LiftShifter() {
-	gearShifter = new Solenoid(RobotMap.LIFT_SHIFT_HIGH_LOW);
-	ConsolePrinter.putBoolean("Lift in High Gear", () -> {return Robot.liftShifter.isInHighGear();}, true, false);
-	ConsolePrinter.putBoolean("Lift in Low Gear", () -> {return Robot.liftShifter.isInLowGear();}, true, false);
-
+	gearShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_HIGH_GEAR, RobotMap.LIFT_LOW_GEAR);
+	//gearShifter = new DoubleSolenoid(RobotMap.LIFT_HIGH_GEAR, RobotMap.LIFT_LOW_GEAR);
+	ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.liftShifter.isInHighGear();}, true, false);
+	ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.liftShifter.isInLowGear();}, true, false);
 	}
 
 	
@@ -42,28 +42,28 @@ public class LiftShifter extends Subsystem {
 	 * Shifts the Lift from High to Low Gear
 	 */
     public void shiftToLow() {
-    	gearShifter.set(true);
+    	gearShifter.set(DoubleSolenoid.Value.kForward);
     }
     
 	/**
 	 * Shifts the Lift from Low to High Gear
 	 */
     public void shiftToHigh() {
-    	gearShifter.set(false);
+    	gearShifter.set(DoubleSolenoid.Value.kReverse);
     }
     
 	/**
 	 * Returns true if last commanded shift was Low Gear
 	 */
     public boolean inLowGear() {
-    	return gearShifter.get() == true;
+    	return gearShifter.get() == DoubleSolenoid.Value.kForward;
     }
 
 	/**
 	 * Returns true if last commanded shift was High Gear
 	 */
     public boolean inHighGear() {
-    	return gearShifter.get() == false;
+    	return gearShifter.get() == DoubleSolenoid.Value.kReverse;
     }
     
     public boolean isInLowGear() {

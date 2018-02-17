@@ -20,13 +20,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DrivetrainShifter extends Subsystem {
 
 	private static DrivetrainShifter instance = null;
-	private static Solenoid gearChanger;
+	private static DoubleSolenoid gearChanger;
 	
 	/**
 	 * Default constructors for Drivetrain
 	 */
 	private DrivetrainShifter() {
-		gearChanger = new Solenoid(RobotMap.DRIVETRAIN_GEAR_SHIFT);
+		gearChanger = new DoubleSolenoid(RobotMap.DRIVETRAIN_LOW_GEAR, RobotMap.DRIVETRAIN_HIGH_GEAR);
 
 		//Log sensor data
 		//ConsolePrinter.putNumber("Drivetrain Right Encoder",
@@ -57,28 +57,28 @@ public class DrivetrainShifter extends Subsystem {
 	 * Shifts the Drivetrain from High to Low Gear
 	 */
     public void shiftToLow() {
-    	gearChanger.set(true);
+    	gearChanger.set(DoubleSolenoid.Value.kForward);
     }
     
 	/**
 	 * Shifts the Drivetrain from Low to High Gear
 	 */
     public void shiftToHigh() {
-    	gearChanger.set(false);
+    	gearChanger.set(DoubleSolenoid.Value.kReverse);
     }
     
 	/**
 	 * Returns true if last commanded shift was Low Gear
 	 */
     public boolean inLowGear() {
-    	return gearChanger.get() == true;
+    	return gearChanger.get() == DoubleSolenoid.Value.kForward;
     }
 
 	/**
 	 * Returns true if last commanded shift was High Gear
 	 */
     public boolean inHighGear() {
-    	return gearChanger.get() == false;
+    	return gearChanger.get() == DoubleSolenoid.Value.kReverse;
     }
     
     public boolean isInLowGear() {
