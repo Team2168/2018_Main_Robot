@@ -28,8 +28,8 @@ public class ForkLift extends Subsystem
 	public ForkLift(){
 		forkLiftMotor = new VictorSP(RobotMap.FORKLIFT_MOTOR);
 		forkLiftPiston = new DoubleSolenoid(RobotMap.PCM_CAN_ID, RobotMap.FORK_LIFT_PISTON_EXTEND, RobotMap.FORK_LIFT_PISTON_RETRACT);
-		loweredLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_LOWERED_LIMIT);
-		raisedLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_RAISED_LIMIT);
+		//loweredLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_LOWERED_LIMIT);
+		//raisedLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_RAISED_LIMIT);
 			
 	}
 	

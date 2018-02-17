@@ -59,14 +59,14 @@ public class RobotMap
 	// Channels 0-9 on RoboRio
 	public static final int RIGHT_DRIVE_ENCODER_A = 0; //same as 2017
 	public static final int RIGHT_DRIVE_ENCODER_B = 1; //same as 2017
-	public static final int LEFT_DRIVE_ENCODER_B = 4; //same as 2017
-	public static final int LEFT_DRIVE_ENCODER_A = 5; //same as 2017
+	public static final int LEFT_DRIVE_ENCODER_B = 2; //same as 2017
+	public static final int LEFT_DRIVE_ENCODER_A = 3; //same as 2017
 	
 	
-	public static final int FORK_LIFT_RAISED_LIMIT = 2;
-	public static final int FORK_LIFT_LOWERED_LIMIT= 3;
-	public static final int SCISSOR_LIFT_LOWERED_LIMIT = 2;
-	public static final int SCISSOR_LIFT_RAISED_LIMIT = 3;
+//	public static final int FORK_LIFT_RAISED_LIMIT = 2;
+//	public static final int FORK_LIFT_LOWERED_LIMIT= 3;
+//	public static final int SCISSOR_LIFT_LOWERED_LIMIT = 2;
+//	public static final int SCISSOR_LIFT_RAISED_LIMIT = 3;
 	
 
 
