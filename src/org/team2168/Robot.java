@@ -41,7 +41,8 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
-	public static ScissorLift scissorLift; //Will not have scissor and forklift together
+	public static ClimbGuideArm climbGuideArm;
+	
 
 	// Variables for initializing and calibrating the Gyro
 	static boolean autoMode;
@@ -138,6 +139,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
+		ConsolePrinter.putString("Switch/Scale/Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
 
 		//Start Thread Only After Every Other Class is Loaded. 
 		ConsolePrinter.startThread();
@@ -161,6 +163,10 @@ public class Robot extends TimedRobot
 		          System.exit(1);
 		      return;
 		}
+		
+		
+		LiveWindow.disableAllTelemetry();
+		
 	}
 	
     /************************************************************

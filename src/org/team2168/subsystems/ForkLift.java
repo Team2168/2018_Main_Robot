@@ -18,7 +18,7 @@ public class ForkLift extends Subsystem
 	private static ForkLift instance = null;
 	
 	private static VictorSP forkLiftMotor;
-	private Solenoid forkLiftPiston;
+	private DoubleSolenoid forkLiftPiston;
 	private static DigitalInput raisedLimitSwitch;
 	private static DigitalInput loweredLimitSwitch;
 	
@@ -27,9 +27,9 @@ public class ForkLift extends Subsystem
 	 */
 	public ForkLift(){
 		forkLiftMotor = new VictorSP(RobotMap.FORKLIFT_MOTOR);
-		forkLiftPiston = new Solenoid(RobotMap.FORK_LIFT_PISTON);
-		loweredLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_LOWERED_LIMIT);
-		raisedLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_RAISED_LIMIT);
+		forkLiftPiston = new DoubleSolenoid(RobotMap.PCM_CAN_ID, RobotMap.FORK_LIFT_PISTON_EXTEND, RobotMap.FORK_LIFT_PISTON_RETRACT);
+		//loweredLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_LOWERED_LIMIT);
+		//raisedLimitSwitch = new DigitalInput(RobotMap.FORK_LIFT_RAISED_LIMIT);
 			
 	}
 	
@@ -57,15 +57,15 @@ public class ForkLift extends Subsystem
 	/**
 	 * Retracts fork lift piston
 	 */
-	public void retract(){
-		forkLiftPiston.set(RobotMap.SOLENOID_OFF);
+	public void retractPivot(){
+		forkLiftPiston.set(Value.kReverse);
 	}
 
 	/**
 	 * Extends fork lift piston
 	 */
-	public void extend(){
-		forkLiftPiston.set(RobotMap.SOLENOID_ON);
+	public void extendPivot(){
+		forkLiftPiston.set(Value.kForward);
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedExtend(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-				return forkLiftPiston.get() == RobotMap.SOLENOID_ON;
+				return forkLiftPiston.get() == DoubleSolenoid.Value.kForward;
 			}
 	
 	/**
@@ -100,7 +100,7 @@ public class ForkLift extends Subsystem
 	 */
 	public boolean isCommandedRetract(){
 		//if no sensor is installed or sensor is malfunctioning use last commanded value
-		return forkLiftPiston.get() == RobotMap.SOLENOID_OFF;
+		return forkLiftPiston.get() == DoubleSolenoid.Value.kReverse;
 		
 	}
 	
