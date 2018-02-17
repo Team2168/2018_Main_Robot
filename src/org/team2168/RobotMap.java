@@ -46,7 +46,7 @@ public class RobotMap
 	public static final int SCISSOR_MOTOR = 11; //2017 turret
 	
 	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
-	public static final int LIFT_MOTOR_2 = 10; //2017 conveyor
+	public static final int LIFT_MOTOR_2 = 5; //2017 conveyor
 	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
 	
 	
@@ -79,8 +79,8 @@ public class RobotMap
 	//Channels 10-25 on MXP (PWM and DIO)
 //	public static final int CONVELATOR_MOTOR = 10;
 //	public static final int TURRET_MOTOR = 11;
-	public static final int CUBE_INTAKE_MOTOR_LEFT = 12; //2017 gear intake
-	public static final int CUBE_INTAKE_MOTOR_RIGHT = 19; //PWM 19 on board //2017 spare
+	public static final int CUBE_INTAKE_MOTOR_LEFT = 7; //2017 gear intake
+	public static final int CUBE_INTAKE_MOTOR_RIGHT = 8; //PWM 19 on board //2017 spare
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
