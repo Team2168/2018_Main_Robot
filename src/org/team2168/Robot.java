@@ -162,6 +162,10 @@ public class Robot extends TimedRobot
 		          System.exit(1);
 		      return;
 		}
+		
+		
+		LiveWindow.disableAllTelemetry();
+		
 	}
 	
     /************************************************************
