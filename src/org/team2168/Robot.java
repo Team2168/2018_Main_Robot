@@ -34,17 +34,17 @@ public class Robot extends TimedRobot
 	public static OI oi;
 	
 	//Subsystems
-	public static CubeIntake cubeIntake;
 	public static CubeIntakeWheels cubeIntakeWheels;
 	public static CubeIntakeGripper cubeIntakeGripper;
 	public static CubeIntakePivot cubeIntakePivot;
 	public static Drivetrain drivetrain;
 	public static DrivetrainShifter drivetrainShifter;
-	public static Platform platform;
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
+	public static Platform platform;
 	
+
 	// Variables for initializing and calibrating the Gyro
 	static boolean autoMode;
 	private static boolean matchStarted = false;
@@ -100,13 +100,13 @@ public class Robot extends TimedRobot
 
 				
 		// Instantiate the subsystems
-		cubeIntake = CubeIntake.getInstance();
+
 		drivetrain = Drivetrain.getInstance();
 		drivetrainShifter = DrivetrainShifter.getInstance();
-		platform = Platform.getInstance();
 		lift = Lift.GetInstance();
 		liftShifter = LiftShifter.GetInstance();
 		pneumatics = Pneumatics.getInstance();
+		platform = platform.getInstance();
 		//scissorLift = ScissorLift.getInstance();
 		
 		oi = OI.getInstance();

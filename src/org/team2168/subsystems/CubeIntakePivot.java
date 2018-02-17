@@ -16,18 +16,18 @@ public class CubeIntakePivot extends Subsystem {
 
 	private static CubeIntakePivot instance = null;
 	private static Spark intakePivotMotor;
-	private static AnalogInput intakeIRSensor;
-	private static DigitalInput fullyExtend;
-	private static DigitalInput fullyRetract;
+	
+	private static DigitalInput fullyLowered;
+	private static DigitalInput fullyRaised;
 	
 	/**
 	 * Default constructors
 	 */
 	public CubeIntakePivot(){
 		
-		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
-		fullyExtend = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
-		fullyRetract = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
+		
+		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
+		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
 		intakePivotMotor = new Spark(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
 			
 	}
@@ -42,16 +42,16 @@ public class CubeIntakePivot extends Subsystem {
 	 * Checks to see if arm is fully up
 	 * @return true if pressed, false if not
 	 */
-	public boolean isIntakeFullyExtend() {
-		return !fullyExtend.get();
+	public boolean isLowered() {
+		return !fullyLowered.get();
 	}
 	
 	/**
 	 * Checks to see if arm is fully down
 	 * @return true if pressed, false if not
 	 */
-	public boolean isIntakeFullyRetract() {
-		return !fullyRetract.get();
+	public boolean isRaised() {
+		return !fullyRaised.get();
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class CubeIntakePivot extends Subsystem {
 	{
 		if (RobotMap.INTAKE_PIVOT_REVERSE)
 			speed = -speed;
-		if ((speed > 0.2 && isIntakeFullyRetract()) || ((speed < 0.2) && isIntakeFullyExtend())) {
+		if ((speed > 0.2 && isRaised()) || ((speed < 0.2) && isLowered())) {
 			intakePivotMotor.set(speed);
 		} else {
 			intakePivotMotor.set(0);

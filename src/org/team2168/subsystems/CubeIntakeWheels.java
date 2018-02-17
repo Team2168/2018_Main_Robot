@@ -3,6 +3,8 @@ package org.team2168.subsystems;
 import org.team2168.RobotMap;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,10 +17,12 @@ private static CubeIntakeWheels instance = null;
 	
 	private static VictorSP intakeMotorLeft;
 	private static VictorSP intakeMotorRight;
+	private static AnalogInput intakeIRSensor;
 	
 	public CubeIntakeWheels(){
 		intakeMotorLeft = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_LEFT);
 		intakeMotorRight = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_RIGHT);
+		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
 	}
 	
 	/**

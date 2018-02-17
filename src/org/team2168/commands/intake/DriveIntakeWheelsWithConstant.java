@@ -18,7 +18,7 @@ public class DriveIntakeWheelsWithConstant extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    Robot.cubeIntake.driveAllMotors(speed);
+    Robot.cubeIntakeWheels.driveAllMotors(speed);
     
     }
 
@@ -33,7 +33,7 @@ public class DriveIntakeWheelsWithConstant extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntake.driveAllMotors(0.0);
+    	Robot.cubeIntakeWheels.driveAllMotors(0.0);
     }
 
     // Called when another command which requires one or more of the same
