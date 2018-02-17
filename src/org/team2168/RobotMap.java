@@ -81,6 +81,7 @@ public class RobotMap {
 	public static final int CUBE_INTAKE_PIVOT_MOTOR = 20;
 
 	// PBOT Differences
+	
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
 	public static final int LEFT_DRIVE_ENCODER_B_PBOT = 1;
 	public static final int LEFT_DRIVE_ENCODER_A_PBOT = 2;
