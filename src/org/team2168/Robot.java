@@ -41,6 +41,7 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
+	public static ClimbGuideArm climbGuideArm;
 	
 
 	// Variables for initializing and calibrating the Gyro

@@ -118,7 +118,8 @@ public class RobotMap
 	public static final int LIFT_BRAKE_DISENGAGE = 3;
 	public static final int LIFT_HIGH_GEAR =4;
 	public static final int LIFT_LOW_GEAR = 5;
-	
+	public static final int CLIMB_GUIDE_ARM_RAISE = 6;
+	public static final int CLIMB_GUIDE_ARM_LOWER = 7;
 	
 	
 	public static final boolean SOLENOID_ON = true;
