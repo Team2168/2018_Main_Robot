@@ -1,6 +1,7 @@
 package org.team2168.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.team2168.Robot;
@@ -15,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Subsystem class for the Drivetrain
- * @author Aidan Sullivan
  */
 public class DrivetrainShifter extends Subsystem {
 
@@ -26,13 +26,13 @@ public class DrivetrainShifter extends Subsystem {
 	 * Default constructors for Drivetrain
 	 */
 	private DrivetrainShifter() {
-		gearChanger = new DoubleSolenoid(RobotMap.PCM_CAN_ID,RobotMap.DRIVETRAIN_LOW_GEAR, RobotMap.DRIVETRAIN_HIGH_GEAR);
+		gearChanger = new DoubleSolenoid(RobotMap.DRIVETRAIN_LOW_GEAR, RobotMap.DRIVETRAIN_HIGH_GEAR);
 
 		//Log sensor data
 		//ConsolePrinter.putNumber("Drivetrain Right Encoder",
 		//		() -> {return DrivetrainShifter.getInstance().getRightPosition();}, true, false);
-		ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.drivetrainShifter.isInHighGear();}, true, false);
-		ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.drivetrainShifter.isInLowGear();}, true, false);
+		ConsolePrinter.putBoolean("Drivetrain in High Gear", () -> {return Robot.drivetrainShifter.isInHighGear();}, true, false);
+		ConsolePrinter.putBoolean("Drivetrain in Low Gear", () -> {return Robot.drivetrainShifter.isInLowGear();}, true, false);
 
 	}
 	

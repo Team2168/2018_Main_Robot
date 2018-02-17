@@ -12,7 +12,7 @@ public class IntakeUntilCube extends Command {
 
     public IntakeUntilCube() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.cubeIntake);
+        requires(Robot.cubeIntakeWheels);
     }
 
     // Called just before this Command runs the first time
@@ -21,18 +21,18 @@ public class IntakeUntilCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntake.driveAllMotors(RobotMap.CUBE_INTAKE_CONSTANT);
+    	Robot.cubeIntakeWheels.driveAllMotors(RobotMap.CUBE_INTAKE_CONSTANT);
     }
     
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.cubeIntake.isCubePresent();
+        return Robot.cubeIntakeWheels.isCubePresent();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntake.driveAllMotors(0);
+    	Robot.cubeIntakeWheels.driveAllMotors(0);
     }
 
     // Called when another command which requires one or more of the same

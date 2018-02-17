@@ -1,28 +1,25 @@
-package org.team2168.commands.forkLift;
+package org.team2168.commands.intake;
 
-import org.team2168.OI;
 import org.team2168.Robot;
-import org.team2168.utils.F310;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveForkliftWithJoysticks extends Command {
-
-	private F310 joystick;
-	private double speed;
-	
-    public DriveForkliftWithJoysticks(F310 joystick) {
+public class DriveIntakeWheelsWithConstant extends Command {
+	double speed;
+    
+	public DriveIntakeWheelsWithConstant(double inputspeed) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.forkLift);
-        this.joystick = joystick;
+        requires(Robot.cubeIntakeWheels);
+        speed = inputspeed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.forkLift.driveMotor(OI.operatorJoystick.getLeftStickRaw_X());
+    Robot.cubeIntakeWheels.driveAllMotors(speed);
+    
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,6 +33,7 @@ public class DriveForkliftWithJoysticks extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.cubeIntakeWheels.driveAllMotors(0.0);
     }
 
     // Called when another command which requires one or more of the same
