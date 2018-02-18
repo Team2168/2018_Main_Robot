@@ -111,7 +111,7 @@ public class Robot extends TimedRobot
 		climbGuideArm = climbGuideArm.getInstance();
 		cubeIntakeGripper = cubeIntakeGripper.getInstance();
 		cubeIntakePivot = cubeIntakePivot.getInstance();
-		cubeIntakeWheels =CubeIntakeWheels.getInstance();
+		cubeIntakeWheels =  CubeIntakeWheels.getInstance();
 		//scissorLift = ScissorLift.getInstance();
 		
 		oi = OI.getInstance();
