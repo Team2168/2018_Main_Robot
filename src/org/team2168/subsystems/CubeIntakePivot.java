@@ -39,7 +39,7 @@ public class CubeIntakePivot extends Subsystem {
 	}
 
 	/**
-	 * Checks to see if arm is fully up
+	 * Checks to see if arm down
 	 * @return true if pressed, false if not
 	 */
 	public boolean isLowered() {
@@ -47,7 +47,7 @@ public class CubeIntakePivot extends Subsystem {
 	}
 	
 	/**
-	 * Checks to see if arm is fully down
+	 * Checks to see if arm is up
 	 * @return true if pressed, false if not
 	 */
 	public boolean isRaised() {
