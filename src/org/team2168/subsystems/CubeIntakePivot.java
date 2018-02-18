@@ -60,17 +60,22 @@ public class CubeIntakePivot extends Subsystem {
 	}
 	
 	/**
-	 * Calls instance object and makes it singleton object of class fork lift
-	 * @return 
-	 * @return singleton object instance
+	 * Rotates the pivot motor
+	 * 1 is forward and -1 is backwards
 	 */
 	public void drivePivot(double speed)
 	{
 		if (RobotMap.INTAKE_PIVOT_REVERSE)
 			speed = -speed;
-		if ((speed > 0.2 && isRaised()) || ((speed < 0.2) && isLowered())) {
+		if ((speed > 0.2 && isRaised()))  {
 			intakePivotMotor.set(speed);
-		} else {
+			
+		if ((speed < 0.2) && isLowered())
+			{
+				intakePivotMotor.set(-speed);
+			}
+		}
+		else {
 			intakePivotMotor.set(0);
 
 		}

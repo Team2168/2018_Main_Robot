@@ -43,7 +43,6 @@ public class Lift extends Subsystem {
 		liftMotor2 = new VictorSP(RobotMap.LIFT_MOTOR_2);
 		liftMotor3 = new VictorSP(RobotMap.LIFT_MOTOR_3);
 		liftBrake = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2,RobotMap.LIFT_BRAKE_ENGAGE, RobotMap.LIFT_BRAKE_DISENGAGE);
-		//liftBrake = new DoubleSolenoid(RobotMap.LIFT_BRAKE_ENGAGE, RobotMap.LIFT_BRAKE_DISENGAGE);
 		liftRachet = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_RACHET_ENGAGE, RobotMap.LIFT_RACHET_DISENGAGE);
 		potentiometer = new AnalogInput(RobotMap.LIFT_POSITION_POT);
 		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP);

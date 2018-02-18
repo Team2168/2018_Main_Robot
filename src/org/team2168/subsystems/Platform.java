@@ -20,7 +20,7 @@
 //	 * Default constructors
 //	 */
 //	public Platform() {
-//		platformPiston = new DoubleSolenoid(RobotMap.PLATFORM_PISTON_EXTEND, RobotMap.PLATFORM_PISTON_RETRACT);
+//		platformPiston = new DoubleSolenoid(RobotMap.PCM_CAN_ID, RobotMap.PLATFORM_PISTON_EXTEND, RobotMap.PLATFORM_PISTON_RETRACT);
 //	}
 //	
 //	/**

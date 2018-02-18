@@ -5,7 +5,7 @@ import org.team2168.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Extends the 
  */
 public class CloseDownGuidingArm extends Command {
 
@@ -25,7 +25,7 @@ public class CloseDownGuidingArm extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.climbGuideArm.isArmClosed();
     }
 
     // Called once after isFinished returns true

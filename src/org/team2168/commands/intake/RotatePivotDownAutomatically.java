@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DrivePivotWithConstant extends Command {
+public class RotatePivotDownAutomatically extends Command {
 	double speed;
 	
 	
-    public DrivePivotWithConstant(double speed) {
+    public RotatePivotDownAutomatically(double speed) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.cubeIntakePivot);
         this.speed = speed;
@@ -40,5 +40,6 @@ public class DrivePivotWithConstant extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.cubeIntakePivot.drivePivot(0);
     }
 }
