@@ -10,11 +10,13 @@ import org.team2168.commands.intake.DrivePivotBackWithConstant;
 import org.team2168.commands.intake.DrivePivotWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OpenIntake;
+import org.team2168.commands.lift.DisableBrake;
+import org.team2168.commands.lift.DisableRachet;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
+import org.team2168.commands.lift.EnableBrake;
+import org.team2168.commands.lift.EnableRachet;
 import org.team2168.commands.lift.LiftShiftHigh;
 import org.team2168.commands.lift.LiftShiftLow;
-import org.team2168.commands.platform.LowerPlatform;
-import org.team2168.commands.platform.RaisePlatform;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -79,12 +81,12 @@ public class OI {
 		operatorJoystick.ButtonStart().whenPressed(new LiftShiftLow());
 		
 		////////////////Lower Platform///////////////////////////////////////
-		operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
+		//operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
 		
 		////////////////Cube Intake assembly/////////////////////////////////////////////
 		operatorJoystick.ButtonRightTrigger().whileHeld(new DrivePivotWithConstant(0.1));
 		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(0.1));
+		//operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(0.1));
 		
 		////////////////Spit Cube With wheels////////////////////////////////////////////////////
 		operatorJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1.0));
@@ -103,11 +105,15 @@ public class OI {
 		operatorJoystick.ButtonLeftStick().whenPressed(new DriveLiftWithJoysticks(OI.operatorJoystick));
 		
 		////////////////Raise platform/////////////////////////////
-		operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
+		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
 		
 		//////////////// Open arm and shift high///////////////////// 
 		operatorJoystick.ButtonB().whenPressed(new OpenGuidingArm());
 		operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());
+		
+		////////////////For testing purposes//////////////////////
+		operatorJoystick.ButtonY().whenPressed(new ShiftHigh());
+		operatorJoystick.ButtonX().whenPressed(new ShiftLow());
 		
 	}
 

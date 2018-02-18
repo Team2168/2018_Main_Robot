@@ -28,6 +28,7 @@ public class Lift extends Subsystem {
 	private static AnalogInput potentiometer;
 	private static DigitalInput liftFullyUp; //hall effect sensors
 	private static DigitalInput liftFullyDown; // ^^^^^^^^^^^
+	private static DoubleSolenoid liftRachet;
 	
 
 	public volatile double liftMotor1Voltage;
@@ -43,9 +44,11 @@ public class Lift extends Subsystem {
 		liftMotor3 = new VictorSP(RobotMap.LIFT_MOTOR_3);
 		liftBrake = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2,RobotMap.LIFT_BRAKE_ENGAGE, RobotMap.LIFT_BRAKE_DISENGAGE);
 		//liftBrake = new DoubleSolenoid(RobotMap.LIFT_BRAKE_ENGAGE, RobotMap.LIFT_BRAKE_DISENGAGE);
+		liftRachet = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_RACHET_ENGAGE, RobotMap.LIFT_RACHET_DISENGAGE);
 		potentiometer = new AnalogInput(RobotMap.LIFT_POSITION_POT);
 		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP);
 		liftFullyDown = new DigitalInput(RobotMap.LIFT_FULLY_DOWN);
+		
 		
 		
 		ConsolePrinter.putBoolean("Is Lift Fully Up", () -> {return Robot.lift.isLiftFullyUp();}, true, false);
@@ -173,6 +176,39 @@ public class Lift extends Subsystem {
 	 *
 	 * @return True when brake is enabled
 	 */
+	public boolean isRachetEnabled() {
+		return liftRachet.get() == Value.kForward;
+	}
+
+	/**
+	 * Disables the pneumatic brake
+	 */
+	public void disableRachet() {
+		liftRachet.set(Value.kReverse);
+	}
+
+	/**
+	 * Gets the current state of the pneumatic brake
+	 *
+	 * @return True when brake is disabled
+	 */
+	public boolean isRachetDisabled() {
+		return liftRachet.get() == Value.kReverse;
+	}
+
+	
+	/**
+	 * Enables the pneumatic brake
+	 */
+	public void enableRachet() {
+		liftRachet.set(Value.kForward);
+	}
+
+	/**
+	 * Gets the current state of the pneumatic brake
+	 *
+	 * @return True when brake is enabled
+	 */
 	public boolean isBrakeEnabled() {
 		return liftBrake.get() == Value.kForward;
 	}
@@ -193,6 +229,13 @@ public class Lift extends Subsystem {
 		return liftBrake.get() == Value.kReverse;
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveLiftWithJoysticks(OI.getInstance().operatorJoystick));

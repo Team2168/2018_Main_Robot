@@ -42,7 +42,7 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
-	public static Platform platform;
+	//public static Platform platform;
 	public static ClimbGuideArm climbGuideArm;
 	
 
@@ -107,7 +107,7 @@ public class Robot extends TimedRobot
 		lift = Lift.GetInstance();
 		liftShifter = LiftShifter.GetInstance();
 		pneumatics = Pneumatics.getInstance();
-		platform = platform.getInstance();
+		//platform = platform.getInstance();
 		climbGuideArm = climbGuideArm.getInstance();
 		cubeIntakeGripper = cubeIntakeGripper.getInstance();
 		cubeIntakePivot = cubeIntakePivot.getInstance();

@@ -93,9 +93,11 @@ public class RobotMap {
 	public final static int DRIVETRAIN_HIGH_GEAR = 1;
 	public static final int CUBE_INTAKE_GRIPPER_LOWERED = 2;
 	public static final int CUBE_INTAKE_GRIPPER_RAISED = 3;
-	public static final int PLATFORM_PISTON_EXTEND = 4;     //Forklift
-	public static final int PLATFORM_PISTON_RETRACT = 5;    //Forklift
-
+	//public static final int PLATFORM_PISTON_EXTEND = 4;     //Forklift
+	//public static final int PLATFORM_PISTON_RETRACT = 5;    //Forklift
+	public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
+	public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
+	
 	//Double Soldenoids PCM ID = 1
 	public static final int LIFT_RACHET_ENGAGE = 0;
 	public static final int LIFT_RACHET_DISENGAGE = 1;
@@ -103,8 +105,8 @@ public class RobotMap {
 	public static final int LIFT_BRAKE_DISENGAGE = 3;
 	public static final int LIFT_HIGH_GEAR = 4;
 	public static final int LIFT_LOW_GEAR = 5;
-	public static final int CLIMB_GUIDE_ARM_RAISE = 6;
-	public static final int CLIMB_GUIDE_ARM_LOWER = 7;
+	//public static final int CLIMB_GUIDE_ARM_RAISE = 6;
+	//public static final int CLIMB_GUIDE_ARM_LOWER = 7;
 
 
 	//Analog Input Channels////////////////////////////////////////////////////
