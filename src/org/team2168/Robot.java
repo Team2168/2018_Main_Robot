@@ -42,7 +42,7 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftShifter liftShifter;
 	public static Pneumatics pneumatics;
-	public static Platform platform;
+	//public static Platform platform;
 	public static ClimbGuideArm climbGuideArm;
 	
 
@@ -92,7 +92,7 @@ public class Robot extends TimedRobot
 		this.setPeriod(RobotMap.MAIN_PERIOD_S);
 
 		//Stop all WPILib 2018 Telementry
-		//LiveWindow.disableAllTelemetry();
+		LiveWindow.disableAllTelemetry();
 		
 		ConsolePrinter.init();
 		ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
@@ -107,7 +107,11 @@ public class Robot extends TimedRobot
 		lift = Lift.GetInstance();
 		liftShifter = LiftShifter.GetInstance();
 		pneumatics = Pneumatics.getInstance();
-		platform = platform.getInstance();
+		//platform = platform.getInstance();
+		climbGuideArm = climbGuideArm.getInstance();
+		cubeIntakeGripper = cubeIntakeGripper.getInstance();
+		cubeIntakePivot = cubeIntakePivot.getInstance();
+		cubeIntakeWheels =  CubeIntakeWheels.getInstance();
 		//scissorLift = ScissorLift.getInstance();
 		
 		oi = OI.getInstance();

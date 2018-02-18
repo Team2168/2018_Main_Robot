@@ -15,7 +15,7 @@ public class CubeIntakeGripper extends Subsystem {
 	private DoubleSolenoid intakeOpenPiston;
 	
 	public CubeIntakeGripper(){
-		intakeOpenPiston = new DoubleSolenoid(RobotMap.CUBE_INTAKE_GRIPPER_EXTEND, RobotMap.CUBE_INTAKE_GRIPPER_RETRACT);
+		intakeOpenPiston = new DoubleSolenoid(RobotMap.PCM_CAN_ID, RobotMap.CUBE_INTAKE_GRIPPER_LOWERED, RobotMap.CUBE_INTAKE_GRIPPER_RAISED);
 	}
 	
 	/**

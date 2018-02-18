@@ -40,12 +40,11 @@ public class RobotMap {
 	public static final int LEFT_DRIVE_MOTOR_1 = 2; //Same as 2017
 	public static final int LEFT_DRIVE_MOTOR_2 = 3; //Same as 2017
 	
-	public static final int PLATFORM_MOTOR = 11; //2017 turret
-	
-	
 	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
 	public static final int LIFT_MOTOR_2 = 5; //2017 conveyor
 	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
+	
+	public static final int PLATFORM_MOTOR = 11; //2017 turret
 	
 	
 
@@ -78,7 +77,7 @@ public class RobotMap {
 	public static final int PRACTICE_BOT_JUMPER = 24;
 	public static final int CUBE_INTAKE_EXTEND_LIMIT = 23;
 	public static final int CUBE_INTAKE_RETRACT_LIMIT = 22;
-	public static final int CUBE_INTAKE_PIVOT_MOTOR = 20;
+	public static final int CUBE_INTAKE_PIVOT_MOTOR = 9;
 
 	// PBOT Differences
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
@@ -92,11 +91,13 @@ public class RobotMap {
 	//Double Soldenoids PCM ID = 0
 	public final static int DRIVETRAIN_LOW_GEAR = 0;
 	public final static int DRIVETRAIN_HIGH_GEAR = 1;
-	public static final int CUBE_INTAKE_GRIPPER_EXTEND = 2;
-	public static final int CUBE_INTAKE_GRIPPER_RETRACT = 3;
-	public static final int PLATFORM_PISTON_EXTEND = 4;     //Forklift
-	public static final int PLATFORM_PISTON_RETRACT = 5;    //Forklift
-
+	public static final int CUBE_INTAKE_GRIPPER_LOWERED = 2;
+	public static final int CUBE_INTAKE_GRIPPER_RAISED = 3;
+	//public static final int PLATFORM_PISTON_EXTEND = 4;     //Forklift
+	//public static final int PLATFORM_PISTON_RETRACT = 5;    //Forklift
+	public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
+	public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
+	
 	//Double Soldenoids PCM ID = 1
 	public static final int LIFT_RACHET_ENGAGE = 0;
 	public static final int LIFT_RACHET_DISENGAGE = 1;
@@ -104,8 +105,8 @@ public class RobotMap {
 	public static final int LIFT_BRAKE_DISENGAGE = 3;
 	public static final int LIFT_HIGH_GEAR = 4;
 	public static final int LIFT_LOW_GEAR = 5;
-	public static final int CLIMB_GUIDE_ARM_RAISE = 6;
-	public static final int CLIMB_GUIDE_ARM_LOWER = 7;
+	//public static final int CLIMB_GUIDE_ARM_RAISE = 6;
+	//public static final int CLIMB_GUIDE_ARM_LOWER = 7;
 
 
 	//Analog Input Channels////////////////////////////////////////////////////

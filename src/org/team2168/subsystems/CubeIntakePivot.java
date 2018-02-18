@@ -1,6 +1,8 @@
 package org.team2168.subsystems;
 
+import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -29,6 +31,9 @@ public class CubeIntakePivot extends Subsystem {
 		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
 		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
 		intakePivotMotor = new Spark(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
+		
+		ConsolePrinter.putBoolean("Is Intake Fully Up", () -> {return isRaised();}, true, false);
+		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return isLowered();}, true, false);
 			
 	}
 	
@@ -39,7 +44,7 @@ public class CubeIntakePivot extends Subsystem {
 	}
 
 	/**
-	 * Checks to see if arm is fully up
+	 * Checks to see if arm down
 	 * @return true if pressed, false if not
 	 */
 	public boolean isLowered() {
@@ -47,7 +52,7 @@ public class CubeIntakePivot extends Subsystem {
 	}
 	
 	/**
-	 * Checks to see if arm is fully down
+	 * Checks to see if arm is up
 	 * @return true if pressed, false if not
 	 */
 	public boolean isRaised() {
@@ -55,17 +60,22 @@ public class CubeIntakePivot extends Subsystem {
 	}
 	
 	/**
-	 * Calls instance object and makes it singleton object of class fork lift
-	 * @return 
-	 * @return singleton object instance
+	 * Rotates the pivot motor
+	 * 1 is forward and -1 is backwards
 	 */
 	public void drivePivot(double speed)
 	{
 		if (RobotMap.INTAKE_PIVOT_REVERSE)
 			speed = -speed;
-		if ((speed > 0.2 && isRaised()) || ((speed < 0.2) && isLowered())) {
+		if ((speed > 0.2 && isRaised()))  {
 			intakePivotMotor.set(speed);
-		} else {
+			
+		if ((speed < 0.2) && isLowered())
+			{
+				intakePivotMotor.set(-speed);
+			}
+		}
+		else {
 			intakePivotMotor.set(0);
 
 		}
