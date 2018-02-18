@@ -79,6 +79,7 @@ public class OI {
 		////////////////Get Ready to climb///////////////////////////////////
 		operatorJoystick.ButtonStart().whenPressed(new CloseDownGuidingArm());
 		operatorJoystick.ButtonStart().whenPressed(new LiftShiftLow());
+		operatorJoystick.ButtonStart().whenPressed(new EnableRachet());
 		
 		////////////////Lower Platform///////////////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
@@ -107,9 +108,10 @@ public class OI {
 		////////////////Raise platform/////////////////////////////
 		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
 		
-		//////////////// Open arm and shift high///////////////////// 
+		//////////////// Open arm and shift high and disengage rachet ///
 		operatorJoystick.ButtonB().whenPressed(new OpenGuidingArm());
 		operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());
+		operatorJoystick.ButtonB().whenPressed(new DisableRachet());
 		
 		////////////////For testing purposes//////////////////////
 		operatorJoystick.ButtonY().whenPressed(new ShiftHigh());
