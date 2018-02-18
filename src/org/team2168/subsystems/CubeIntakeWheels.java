@@ -1,7 +1,9 @@
 package org.team2168.subsystems;
 
+import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -23,6 +25,8 @@ private static CubeIntakeWheels instance = null;
 		intakeMotorLeft = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_LEFT);
 		intakeMotorRight = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_RIGHT);
 		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
+		
+		ConsolePrinter.putNumber("Gripper IR", () -> {return getRawIRVoltage();}, true, false);
 	}
 	
 	/**

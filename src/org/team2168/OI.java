@@ -82,9 +82,9 @@ public class OI {
 		operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
 		
 		////////////////Cube Intake assembly/////////////////////////////////////////////
-		operatorJoystick.ButtonRightTrigger().whileHeld(new DrivePivotWithConstant(1.0));
+		operatorJoystick.ButtonRightTrigger().whileHeld(new DrivePivotWithConstant(0.1));
 		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(1.0));
+		operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(0.1));
 		
 		////////////////Spit Cube With wheels////////////////////////////////////////////////////
 		operatorJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1.0));
@@ -94,10 +94,10 @@ public class OI {
 		operatorJoystick.ButtonLeftBumper().whenReleased(new CloseIntake());
 		
 		/////////////////Emergency Raise Intake////////////////////////////////////////
-		operatorJoystick.ButtonDownDPad().whenPressed(new DrivePivotWithConstant(1.0));
+		operatorJoystick.ButtonDownDPad().whenPressed(new DrivePivotWithConstant(0.1));
 		
 		/////////////////Emergency Lower Intake/////////////////////////////////////////
-		operatorJoystick.ButtonUpDPad().whenPressed(new DrivePivotBackWithConstant(1.0));
+		operatorJoystick.ButtonUpDPad().whenPressed(new DrivePivotBackWithConstant(0.1));
 		
 		/////////////////Raise and lower the lift//////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftStick().whenPressed(new DriveLiftWithJoysticks(OI.operatorJoystick));

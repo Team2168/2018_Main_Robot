@@ -1,6 +1,8 @@
 package org.team2168.subsystems;
 
+import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -29,6 +31,9 @@ public class CubeIntakePivot extends Subsystem {
 		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
 		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
 		intakePivotMotor = new Spark(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
+		
+		ConsolePrinter.putBoolean("Is Intake Fully Up", () -> {return isRaised();}, true, false);
+		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return isLowered();}, true, false);
 			
 	}
 	

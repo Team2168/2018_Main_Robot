@@ -4,6 +4,7 @@ import org.team2168.OI;
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -45,8 +46,25 @@ public class Lift extends Subsystem {
 		potentiometer = new AnalogInput(RobotMap.LIFT_POSITION_POT);
 		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP);
 		liftFullyDown = new DigitalInput(RobotMap.LIFT_FULLY_DOWN);
+		
+		
+		ConsolePrinter.putBoolean("Is Lift Fully Up", () -> {return Robot.lift.isLiftFullyUp();}, true, false);
+		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
+		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
+	
+	
+	
+	
+	
+	
 	}
 
+	
+	
+	
+	
+	
+	
 	/**
 	 * Singleton constructor of the lift
 	 * 
@@ -69,6 +87,8 @@ public class Lift extends Subsystem {
 	public boolean isLiftFullyUp() {
 		return !liftFullyUp.get();
 	}
+	
+	
 	
 	/**
 	 * Checks to see if arm is fully down
