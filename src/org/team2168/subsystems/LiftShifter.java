@@ -21,10 +21,10 @@ public class LiftShifter extends Subsystem {
 	 * Default constructor for the lift shifter
 	 */
 	private LiftShifter() {
-	gearShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_LOW_GEAR, RobotMap.LIFT_HIGH_GEAR);
+	gearShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_LOW_GEAR_PCM, RobotMap.LIFT_HIGH_GEAR_PCM);
 	//gearShifter = new DoubleSolenoid(RobotMap.LIFT_HIGH_GEAR, RobotMap.LIFT_LOW_GEAR);
-	ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.liftShifter.isInHighGear();}, true, false);
-	ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.liftShifter.isInLowGear();}, true, false);
+	ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.liftShifter.isHighGear();}, true, false);
+	ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.liftShifter.isLowGear();}, true, false);
 	}
 
 	
@@ -55,28 +55,17 @@ public class LiftShifter extends Subsystem {
 	/**
 	 * Returns true if last commanded shift was Low Gear
 	 */
-    public boolean inLowGear() {
+    public boolean isLowGear() {
     	return gearShifter.get() == DoubleSolenoid.Value.kForward;
     }
 
 	/**
 	 * Returns true if last commanded shift was High Gear
 	 */
-    public boolean inHighGear() {
+    public boolean isHighGear() {
     	return gearShifter.get() == DoubleSolenoid.Value.kReverse;
     }
     
-    public boolean isInLowGear() {
-    	return inLowGear();
-    }
-    
-    public boolean isInHighGear() {
-    	return inHighGear();
-    }
-
-	
-	
-	
 	
 	
 	public void initDefaultCommand() {

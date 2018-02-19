@@ -5,7 +5,7 @@ import org.team2168.commands.auto.*;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
-import org.team2168.utils.TX1TurnON;
+
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -34,16 +34,17 @@ public class Robot extends TimedRobot
 	public static OI oi;
 	
 	//Subsystems
+	public static ClimbGuideArm climbGuideArm;
 	public static CubeIntakeWheels cubeIntakeWheels;
 	public static CubeIntakeGripper cubeIntakeGripper;
 	public static CubeIntakePivot cubeIntakePivot;
 	public static Drivetrain drivetrain;
 	public static DrivetrainShifter drivetrainShifter;
 	public static Lift lift;
+	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
-	public static Pneumatics pneumatics;
 	//public static Platform platform;
-	public static ClimbGuideArm climbGuideArm;
+	public static Pneumatics pneumatics;
 	
 
 	// Variables for initializing and calibrating the Gyro
@@ -62,7 +63,6 @@ public class Robot extends TimedRobot
 	//PDP Instance
 	public static PowerDistribution pdp;
 	
-	
 	//Autonomous Chooser
     static Command autonomousCommand;
     public static SendableChooser<Command> autoChooser;
@@ -72,7 +72,7 @@ public class Robot extends TimedRobot
     public static SendableChooser<Number> controlStyleChooser;
     
     //Turn on TX1
-    TX1TurnON tx1;
+    //TX1TurnON tx1;
     
     //Global Position Tracking Class
     public static DrivetrainIMUGlobalPosition dtIMU;
@@ -101,19 +101,20 @@ public class Robot extends TimedRobot
 
 				
 		// Instantiate the subsystems
-
+		climbGuideArm = ClimbGuideArm.getInstance();
+		cubeIntakeGripper = CubeIntakeGripper.getInstance();
+		cubeIntakePivot = CubeIntakePivot.getInstance();
+		cubeIntakeWheels =  CubeIntakeWheels.getInstance();
 		drivetrain = Drivetrain.getInstance();
 		drivetrainShifter = DrivetrainShifter.getInstance();
 		lift = Lift.GetInstance();
 		liftShifter = LiftShifter.GetInstance();
-		pneumatics = Pneumatics.getInstance();
+		liftRatchetShifter = LiftRatchetShifter.GetInstance();
 		//platform = platform.getInstance();
-		climbGuideArm = climbGuideArm.getInstance();
-		cubeIntakeGripper = cubeIntakeGripper.getInstance();
-		cubeIntakePivot = cubeIntakePivot.getInstance();
-		cubeIntakeWheels =  CubeIntakeWheels.getInstance();
+		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
 		
+		//Start Operator Interface
 		oi = OI.getInstance();
 
 		// enable compressor
@@ -128,8 +129,8 @@ public class Robot extends TimedRobot
 		pdp = new PowerDistribution(RobotMap.PDPThreadPeriod);
 		pdp.startThread();
 
-		tx1 = new TX1TurnON(RobotMap.PDPThreadPeriod);
-		tx1.startThread();
+		//tx1 = new TX1TurnON(RobotMap.PDPThreadPeriod);
+		//tx1.startThread();
 
 		dtIMU = new DrivetrainIMUGlobalPosition(RobotMap.PDPThreadPeriod);
 		dtIMU.startThread();

@@ -55,7 +55,7 @@ public class PowerDistribution {
 			return Robot.pdp.getTotalCurrent();
 		}, true, false);
 		ConsolePrinter.putNumber("pcmCurrent", () -> {
-			return Robot.pdp.getChannelCurrent(RobotMap.PCM_POWER);
+			return Robot.pdp.getChannelCurrent(RobotMap.PCM_POWER_PCM);
 		}, true, false);
 
 	}

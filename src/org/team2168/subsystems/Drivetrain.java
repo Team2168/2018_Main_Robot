@@ -33,7 +33,7 @@ public class Drivetrain extends Subsystem {
 	private AverageEncoder drivetrainLeftEncoder;
 	private AverageEncoder drivetrainRightEncoder;
 
-	private static AnalogInput DrivetrainIRSensor;
+	private static AnalogInput DrivetrainSonarSensor;
 
 	public IMU imu;
 	
@@ -128,7 +128,7 @@ public class Drivetrain extends Subsystem {
 
 		imu = new IMU(drivetrainLeftEncoder, drivetrainRightEncoder, RobotMap.WHEEL_BASE);
 
-		DrivetrainIRSensor = new AnalogInput(RobotMap.DRIVETRAIN_IR_SENSOR);
+		DrivetrainSonarSensor = new AnalogInput(RobotMap.DRIVETRAIN_SONAR_SENSOR);
 
 		// DriveStraight Controller
 		rotateController = new PIDPosition(
@@ -483,7 +483,7 @@ public class Drivetrain extends Subsystem {
 	 * @return the raw voltage from the gear presence sensor
 	 */
 	public double getIRVoltage() {
-		return DrivetrainIRSensor.getVoltage();
+		return DrivetrainSonarSensor.getVoltage();
 	}
 
 	/**

@@ -28,8 +28,8 @@ public class CubeIntakePivot extends Subsystem {
 	public CubeIntakePivot(){
 		
 		
-		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
-		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
+		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_ROTATE_UP_LIMIT);
+		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_ROTATE_DOWN_LIMIT);
 		intakePivotMotor = new Spark(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
 		
 		ConsolePrinter.putBoolean("Is Intake Fully Up", () -> {return isRaised();}, true, false);

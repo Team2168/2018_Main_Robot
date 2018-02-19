@@ -44,6 +44,12 @@ public class RobotMap {
 	public static final int LIFT_MOTOR_2 = 5; //2017 conveyor
 	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
 	
+	public static final int CUBE_INTAKE_MOTOR_LEFT = 7; //2017 gear intake
+	public static final int CUBE_INTAKE_MOTOR_RIGHT = 8; //PWM 19 on board //2017 spare
+	
+	public static final int CUBE_INTAKE_PIVOT_MOTOR = 9;
+	
+	
 	public static final int PLATFORM_MOTOR = 11; //2017 turret
 	
 	
@@ -58,26 +64,23 @@ public class RobotMap {
 	public static final int RIGHT_DRIVE_ENCODER_B = 1; //same as 2017
 	public static final int LEFT_DRIVE_ENCODER_B = 2; //same as 2017
 	public static final int LEFT_DRIVE_ENCODER_A = 3; //same as 2017
-	
-	public static final int LIFT_FULLY_UP = 6; //2018 proto
-	public static final int LIFT_FULLY_DOWN = 7; //2018 proto
-	public static final int TX1_TURN_ON = 8;
-	public static final int TX1_ON_STATUS = 9;
+	public static final int CUBE_INTAKE_ROTATE_UP_LIMIT = 4;
+	public static final int CUBE_INTAKE_ROTATE_DOWN_LIMIT = 5;
+	public static final int LIFT_FULLY_UP_LIMIT = 6; //2018 proto
+	public static final int LIFT_FULLY_DOWN_LIMIT = 7; //2018 proto
+	public static final int LIFT_RATCHET_ENGAGE_LIMIT = 8;
+	//public static final int TX1_ON_STATUS = 9;
 
 
 	//Channels 10-25 on MXP (PWM and DIO)
 //	public static final int CONVELATOR_MOTOR = 10;
 //	public static final int TURRET_MOTOR = 11;
-	public static final int CUBE_INTAKE_MOTOR_LEFT = 7; //2017 gear intake
-	public static final int CUBE_INTAKE_MOTOR_RIGHT = 8; //PWM 19 on board //2017 spare
 //	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
 //	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
 //	public static final int SHOOTER_ENCODER_B = 22; //PWM 18 on board
 	public static final int PRACTICE_BOT_JUMPER = 24;
-	public static final int CUBE_INTAKE_EXTEND_LIMIT = 23;
-	public static final int CUBE_INTAKE_RETRACT_LIMIT = 22;
-	public static final int CUBE_INTAKE_PIVOT_MOTOR = 9;
+	
 
 	// PBOT Differences
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
@@ -89,31 +92,31 @@ public class RobotMap {
 	//Solenoid Channels////////////////////////////////////////////////////////
 
 	//Double Soldenoids PCM ID = 0
-	public final static int DRIVETRAIN_LOW_GEAR = 0;
-	public final static int DRIVETRAIN_HIGH_GEAR = 1;
-	public static final int CUBE_INTAKE_GRIPPER_LOWERED = 2;
-	public static final int CUBE_INTAKE_GRIPPER_RAISED = 3;
-	//public static final int PLATFORM_PISTON_EXTEND = 4;     //Forklift
-	//public static final int PLATFORM_PISTON_RETRACT = 5;    //Forklift
-	public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
-	public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
+	public final static int DRIVETRAIN_LOW_GEAR_PCM = 0;
+	public final static int DRIVETRAIN_HIGH_GEAR_PCM = 1;
+	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 2;
+	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 3;
+	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
+	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;    //Forklift
+	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
+	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	
 	//Double Soldenoids PCM ID = 1
-	public static final int LIFT_RACHET_ENGAGE = 0;
-	public static final int LIFT_RACHET_DISENGAGE = 1;
-	public static final int LIFT_BRAKE_ENGAGE = 2;
-	public static final int LIFT_BRAKE_DISENGAGE = 3;
-	public static final int LIFT_HIGH_GEAR = 4;
-	public static final int LIFT_LOW_GEAR = 5;
-	//public static final int CLIMB_GUIDE_ARM_RAISE = 6;
-	//public static final int CLIMB_GUIDE_ARM_LOWER = 7;
+	public static final int LIFT_RACHET_ENGAGE_PCM = 0;
+	public static final int LIFT_RACHET_DISENGAGE_PCM = 1;
+	public static final int LIFT_BRAKE_ENGAGE_PCM = 2;
+	public static final int LIFT_BRAKE_DISENGAGE_PCM = 3;
+	public static final int LIFT_HIGH_GEAR_PCM = 4;
+	public static final int LIFT_LOW_GEAR_PCM = 5;
+	public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
+	public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
 
 
 	//Analog Input Channels////////////////////////////////////////////////////
 	//Channels 0-3 on Roborio
 	public static final int LIFT_POSITION_POT = 0;
 	public static final int CUBE_INTAKE_IR_SENSOR1 = 1;
-	public static final int DRIVETRAIN_IR_SENSOR = 2;
+	public static final int DRIVETRAIN_SONAR_SENSOR = 2;
 	public static final int CUBE_INTAKE_IR_SENSOR2 = 3;
 	public static final int PRESSURE_SENSOR = 4;
 	
@@ -136,7 +139,7 @@ public class RobotMap {
 	public static final int INDEXER_WHEEL_PDP = 10;
 	public static final int SHOOTER_MOTOR_LEFT_PDP = 0;
 	public static final int SHOOTER_MOTOR_RIGHT_PDP = 15;
-	public static final int PCM_POWER = 7;;
+	public static final int PCM_POWER_PCM = 7;;
 	
 	
 	//CAN Device IDs///////////////////////////////////////////////////////////
