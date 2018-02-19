@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class CubeIntakePivot extends Subsystem {
 
 	private static CubeIntakePivot instance = null;
-	private static Spark intakePivotMotor;
+	private static VictorSP intakePivotMotor;
 	
 	private static DigitalInput fullyLowered;
 	private static DigitalInput fullyRaised;
@@ -30,7 +30,7 @@ public class CubeIntakePivot extends Subsystem {
 		
 		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_EXTEND_LIMIT);
 		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_RETRACT_LIMIT);
-		intakePivotMotor = new Spark(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
+		intakePivotMotor = new VictorSP(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
 		
 		ConsolePrinter.putBoolean("Is Intake Fully Up", () -> {return isRaised();}, true, false);
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return isLowered();}, true, false);
@@ -61,25 +61,21 @@ public class CubeIntakePivot extends Subsystem {
 	
 	/**
 	 * Rotates the pivot motor
-	 * 1 is forward and -1 is backwards
+	 * 1 is rotate 1 and -1 is rotate down
 	 */
 	public void drivePivot(double speed)
 	{
 		if (RobotMap.INTAKE_PIVOT_REVERSE)
 			speed = -speed;
-		if ((speed > 0.2 && isRaised()))  {
+		if ((speed > RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED && !isRaised()))  {
 			intakePivotMotor.set(speed);
-			
-		if ((speed < 0.2) && isLowered())
-			{
-				intakePivotMotor.set(-speed);
-			}
 		}
+			else if ((speed < RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED) && isLowered())
+			intakePivotMotor.set(speed);
 		else {
 			intakePivotMotor.set(0);
-
 		}
-}
+	}
 
 	
 	

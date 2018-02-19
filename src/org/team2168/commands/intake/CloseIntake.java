@@ -20,12 +20,12 @@ public class CloseIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakeGripper.close();
+    	Robot.cubeIntakeGripper.retractIntake();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.cubeIntakeGripper.isClosed();
+        return Robot.cubeIntakeGripper.isIntakeRetracted();
     }
 
     // Called once after isFinished returns true

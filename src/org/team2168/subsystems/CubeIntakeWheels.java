@@ -30,7 +30,7 @@ private static CubeIntakeWheels instance = null;
 	}
 	
 	/**
-	 * Calls instance object and makes it singleton object of class fork lift
+	 * Calls instance object and makes it singleton object of class intake wheels
 	 * @return 
 	 * @return singleton object instance
 	 */
@@ -40,7 +40,7 @@ private static CubeIntakeWheels instance = null;
 		return instance;
 	}
 	/**
-	 * Takes in a double speed and sets it to fork lift motor 
+	 * Takes in a double speed and sets it to intake lift motor 
 	 * @param speed is a double between -1 and 1
 	 */
 	private void driveLeft(double speed){
@@ -50,8 +50,8 @@ private static CubeIntakeWheels instance = null;
 	}
 	
 	/**
-	 * Takes in a double speed and sets it to fork lift motor 
-	 * @param speed is a double between -1 and 1
+	 * Takes in a double speed and sets it to intake lift motor 
+	 * @param speed is a double between -1 and 1 where -1 is in and 1 is out
 	 */
 	private void driveRight(double speed){
 		if (RobotMap.INTAKE_RIGHT_REVERSE)
@@ -61,7 +61,7 @@ private static CubeIntakeWheels instance = null;
 	
 
 	/**
-	 * drives all cube intake motors
+	 * drives all cube intake motors where 1 is out and -1 is in
 	 * @param speed
 	 */
 	

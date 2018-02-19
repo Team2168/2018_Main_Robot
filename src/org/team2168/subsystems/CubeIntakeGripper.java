@@ -30,19 +30,19 @@ public class CubeIntakeGripper extends Subsystem {
 	}
 	
 	
-	public void open(){
+	public void extendIntake(){
 		intakeOpenPiston.set(DoubleSolenoid.Value.kForward);
 	}
 	
-	public void close(){
+	public void retractIntake(){
 		intakeOpenPiston.set(DoubleSolenoid.Value.kReverse);
 	}
 	
-	public boolean isOpen() {
+	public boolean isIntakeExtended() {
 		return intakeOpenPiston.get() == DoubleSolenoid.Value.kForward;
 	}
 	
-	public boolean isClosed() {
+	public boolean isIntakeRetracted() {
 		return intakeOpenPiston.get() == DoubleSolenoid.Value.kReverse;
 	}
 	
