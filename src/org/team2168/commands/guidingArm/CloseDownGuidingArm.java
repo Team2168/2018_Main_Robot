@@ -20,12 +20,12 @@ public class CloseDownGuidingArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climbGuideArm.CloseArm();
+    	Robot.climbGuideArm.retractArm();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.climbGuideArm.isArmClosed();
+        return Robot.climbGuideArm.isArmRetracted();
     }
 
     // Called once after isFinished returns true

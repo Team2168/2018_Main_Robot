@@ -1,17 +1,15 @@
 package org.team2168.commands.intake;
 
-import org.team2168.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class OpenIntake extends Command {
+public class DriveIntakeWithJoystick extends Command {
 
-    public OpenIntake() {
+    public DriveIntakeWithJoystick() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.cubeIntakeGripper);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +18,11 @@ public class OpenIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakeGripper.extendIntake();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.cubeIntakeGripper.isIntakeExtended();
+        return false;
     }
 
     // Called once after isFinished returns true
