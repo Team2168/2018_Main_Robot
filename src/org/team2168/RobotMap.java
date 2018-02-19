@@ -198,7 +198,10 @@ public class RobotMap {
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
-	public static final double CUBE_INTAKE_CONSTANT = 1.0;
+	public static final double CUBE_INTAKE_MAX_OUTAKE = -1.0;
+	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
+	public static final double CUBE_PIVOT_CONSTANT = 0.3;
+	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
 
 	/*************************************************************************
 	 *                         FORK LIFT PARAMETERS                          *

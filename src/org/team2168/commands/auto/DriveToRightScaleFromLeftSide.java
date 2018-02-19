@@ -1,15 +1,17 @@
 package org.team2168.commands.auto;
 
+import org.team2168.RobotMap;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
-import org.team2168.commands.gearintake.DriveGearIntakeRollerWithConstant;
-import org.team2168.commands.gearintake.LowerGearArmDANGEROUS;
-import org.team2168.commands.gearintake.RaiseGearArm;
+import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
+import org.team2168.commands.intake.RotatePivotDownAutomatically;
+import org.team2168.commands.intake.RotatePivotUpAutomatically;
+import org.team2168.commands.intake.StopWheels;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Drive to right scale from left side
  */
 public class DriveToRightScaleFromLeftSide extends CommandGroup {
 
@@ -24,9 +26,9 @@ public class DriveToRightScaleFromLeftSide extends CommandGroup {
     	
     	
     	//score on switch (Spit Intake)
-   	 	addSequential(new LowerGearArmDANGEROUS(),0.3); 
-   	 	addSequential(new DriveGearIntakeRollerWithConstant(-1.0),0.4);
-   	 	addSequential(new DriveGearIntakeRollerWithConstant(0.0),0.4);
-   	    addSequential(new RaiseGearArm(),0.2);
+   	 	addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
+   	 	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
+   	 	addParallel(new StopWheels());
+   	    addParallel(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
     }
 }
