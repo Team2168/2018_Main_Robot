@@ -2,15 +2,16 @@ package org.team2168.commands.intake;
 
 import org.team2168.OI;
 import org.team2168.Robot;
+import org.team2168.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Drive intake wheels with joystick
  */
-public class DriveIntakeWithJoystick extends Command {
+public class DriveIntakeWheelsWithJoystick extends Command {
 
-    public DriveIntakeWithJoystick() {
+    public DriveIntakeWheelsWithJoystick() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.cubeIntakeWheels);
     }
@@ -21,7 +22,7 @@ public class DriveIntakeWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakeWheels.driveAllMotors(OI.getDriveIntakeWheelsJoystickValue());
+    	Robot.cubeIntakeWheels.driveAllMotors(OI.getDriveIntakeWheelsJoystickValue() * RobotMap.CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED );
     }
 
     // Make this return true when this Command no longer needs to run execute()

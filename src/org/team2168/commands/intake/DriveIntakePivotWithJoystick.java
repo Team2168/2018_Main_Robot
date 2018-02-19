@@ -22,7 +22,7 @@ public class DriveIntakePivotWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakePivot.drivePivot(OI.getDriveIntakePivotJoystickValue() * RobotMap.CUBE_INTAKE_PIVOT_MAX_SPEED);
+    	Robot.cubeIntakePivot.drivePivot(OI.getDriveIntakePivotJoystickValue() * RobotMap.CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()

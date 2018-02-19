@@ -3,7 +3,7 @@ package org.team2168.subsystems;
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
-import org.team2168.commands.intake.DriveIntakeWithJoystick;
+import org.team2168.commands.intake.DriveIntakeWheelsWithJoystick;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -90,7 +90,7 @@ private static CubeIntakeWheels instance = null;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new DriveIntakeWithJoystick());
+        setDefaultCommand(new DriveIntakeWheelsWithJoystick());
     }
 }
 
