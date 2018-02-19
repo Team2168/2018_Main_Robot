@@ -28,9 +28,6 @@ public class DrivetrainShifter extends Subsystem {
 	private DrivetrainShifter() {
 		gearChanger = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.DRIVETRAIN_LOW_GEAR, RobotMap.DRIVETRAIN_HIGH_GEAR);
 
-		//Log sensor data
-		//ConsolePrinter.putNumber("Drivetrain Right Encoder",
-		//		() -> {return DrivetrainShifter.getInstance().getRightPosition();}, true, false);
 		ConsolePrinter.putBoolean("Drivetrain in High Gear", () -> {return Robot.drivetrainShifter.isInHighGear();}, true, false);
 		ConsolePrinter.putBoolean("Drivetrain in Low Gear", () -> {return Robot.drivetrainShifter.isInLowGear();}, true, false);
 
