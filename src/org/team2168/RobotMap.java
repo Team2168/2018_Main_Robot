@@ -198,7 +198,10 @@ public class RobotMap {
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
-	public static final double CUBE_INTAKE_CONSTANT = 1.0;
+	public static final double CUBE_INTAKE_MAX_OUTAKE = -1.0;
+	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
+	public static final double CUBE_PIVOT_CONSTANT = 0.3;
+	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
 
 	/*************************************************************************
 	 *                         FORK LIFT PARAMETERS                          *
@@ -233,6 +236,12 @@ public class RobotMap {
 	// period to run PID loops on drive train
 	public static final long DRIVE_TRAIN_PID_PERIOD = 20;// 70ms loop
 	public static final int DRIVE_TRAIN_PID_ARRAY_SIZE = 30;
+	
+	public static final double DRIVE_TRAIN_MIN_FWD_VOLTAGE = 1.8;//volts
+	public static final double DRIVE_TRAIN_MIN_RVD_VOLTAGE = 1.2;//volts
+	
+	public static final double DRIVE_TRAIN_MIN_ROT_CLOCKWISE_VOLTAGE = 3.5;//volts
+	public static final double DRIVE_TRAIN_MIN_ROT_COUNTCLOCKWISE_VOLTAGE = 3.5;//volts
 
 	// PID Gains for Left & Right Speed and Position
 	// Bandwidth =
