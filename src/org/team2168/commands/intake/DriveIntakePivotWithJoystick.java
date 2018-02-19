@@ -6,13 +6,13 @@ import org.team2168.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Drive intake wheels with joystick
+ *
  */
-public class DriveIntakeWithJoystick extends Command {
+public class DriveIntakePivotWithJoystick extends Command {
 
-    public DriveIntakeWithJoystick() {
+    public DriveIntakePivotWithJoystick() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.cubeIntakeWheels);
+        requires(Robot.cubeIntakePivot);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class DriveIntakeWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakeWheels.driveAllMotors(OI.getDriveIntakeWheelsJoystickValue());
+    	Robot.cubeIntakePivot.drivePivot(OI.getDriveIntakePivotJoystickValue());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,12 +31,12 @@ public class DriveIntakeWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntakeWheels.driveAllMotors(0.0);
+    	Robot.cubeIntakePivot.drivePivot(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.cubeIntakeWheels.driveAllMotors(0.0);
+    	Robot.cubeIntakePivot.drivePivot(0.0);
     }
 }
