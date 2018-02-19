@@ -26,7 +26,7 @@ public class DrivetrainShifter extends Subsystem {
 	 * Default constructors for Drivetrain
 	 */
 	private DrivetrainShifter() {
-		gearChanger = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.DRIVETRAIN_LOW_GEAR_PCM, RobotMap.DRIVETRAIN_HIGH_GEAR_PCM);
+		gearChanger = new DoubleSolenoid(RobotMap.PCM_CAN_ID, RobotMap.DRIVETRAIN_LOW_GEAR_PCM, RobotMap.DRIVETRAIN_HIGH_GEAR_PCM);
 
 		//Log sensor data
 		//ConsolePrinter.putNumber("Drivetrain Right Encoder",

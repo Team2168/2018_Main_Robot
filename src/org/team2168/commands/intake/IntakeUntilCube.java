@@ -21,7 +21,8 @@ public class IntakeUntilCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakeWheels.driveAllMotors(RobotMap.CUBE_INTAKE_MAX_INTAKE);
+    	if(!Robot.cubeIntakeWheels.isCubePresent())
+    		Robot.cubeIntakeWheels.driveAllMotors(RobotMap.CUBE_INTAKE_MAX_INTAKE);
     }
     
 
@@ -32,11 +33,12 @@ public class IntakeUntilCube extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntakeWheels.driveAllMotors(0);
+    	Robot.cubeIntakeWheels.driveAllMotors(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.cubeIntakeWheels.driveAllMotors(0.0);
     }
 }

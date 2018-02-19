@@ -11,12 +11,12 @@ import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.lift.DisableBrake;
-import org.team2168.commands.lift.DisableRachet;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
 import org.team2168.commands.lift.EnableBrake;
-import org.team2168.commands.lift.EnableRachet;
 import org.team2168.commands.lift.LiftShiftHigh;
 import org.team2168.commands.lift.LiftShiftLow;
+import org.team2168.commands.liftRatchetShifter.DisableRachet;
+import org.team2168.commands.liftRatchetShifter.EnableRachet;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -85,22 +85,29 @@ public class OI {
 		//operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
 		
 		////////////////Cube Intake assembly/////////////////////////////////////////////
-		operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(0.1));
-		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
+		//operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(0.1));
+		operatorJoystick.ButtonLeftTrigger().whenPressed(new DriveIntakeWheelsWithConstant(1.0));
+		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+		
+		operatorJoystick.ButtonRightTrigger().whenPressed(new DriveIntakeWheelsWithConstant(-1.0));
+		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		//operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(0.1));
 		
 		////////////////Spit Cube With wheels////////////////////////////////////////////////////
-		operatorJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1.0));
+		operatorJoystick.ButtonRightBumper().whileHeld(new IntakeUntilCube());
+		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
 		////////////////Emergency Open/Close Intake///////////////////////
-		operatorJoystick.ButtonLeftBumper().whenPressed(new OpenIntake());
-		operatorJoystick.ButtonLeftBumper().whenReleased(new CloseIntake());
+		//operatorJoystick.ButtonLeftBumper().whenPressed(new OpenIntake());
+		//operatorJoystick.ButtonLeftBumper().whenReleased(new CloseIntake());
 		
 		/////////////////Emergency Raise Intake////////////////////////////////////////
-		operatorJoystick.ButtonDownDPad().whenPressed(new RotatePivotDownAutomatically(0.1));
+		operatorJoystick.ButtonDownDPad().whenPressed(new RotatePivotDownAutomatically(-0.6));
+		operatorJoystick.ButtonDownDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
 		/////////////////Emergency Lower Intake/////////////////////////////////////////
-		operatorJoystick.ButtonUpDPad().whenPressed(new RotatePivotUpAutomatically(0.1));
+		operatorJoystick.ButtonUpDPad().whenPressed(new RotatePivotUpAutomatically(0.6));
+		operatorJoystick.ButtonUpDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
 		/////////////////Raise and lower the lift//////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftStick().whenPressed(new DriveLiftWithJoysticks(OI.operatorJoystick));

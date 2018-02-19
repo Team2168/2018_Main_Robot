@@ -23,7 +23,7 @@ public class LiftRatchetShifter extends Subsystem {
 	 * Default constructor for the lift shifter
 	 */
 	private LiftRatchetShifter() {
-	ratchetShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_RACHET_DISENGAGE_PCM, RobotMap.LIFT_RACHET_ENGAGE_PCM);
+	ratchetShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_RACHET_ENGAGE_PCM, RobotMap.LIFT_RACHET_DISENGAGE_PCM);
 	ratchetPosition = new DigitalInput(RobotMap.LIFT_RATCHET_ENGAGE_LIMIT);
 
 	ConsolePrinter.putBoolean("Is Lift Ratchet Engaged", () -> {return Robot.liftRatchetShifter.isRatchetEngaged();}, true, false);
@@ -87,7 +87,7 @@ public class LiftRatchetShifter extends Subsystem {
 	 * Hall Effect Status of Ratchet Position, true if ratchet is disengaged
 	 */
 	public boolean isRatchetDisEngaged() {
-		return !ratchetPosition.get();
+		return ratchetPosition.get();
 	}
 }
 

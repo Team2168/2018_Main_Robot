@@ -12,7 +12,7 @@ public class RotatePivotUpAutomatically extends Command {
     public RotatePivotUpAutomatically(double speed) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.cubeIntakePivot);
-        this.speed = -speed;
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time

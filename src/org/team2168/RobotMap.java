@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.I2C;
  */
 public class RobotMap {
 
-	public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
+	public static final double MAIN_PERIOD_S = 1.0/200.0; // Main loop 200Hz
 
 	
 	/*************************************************************************
@@ -208,7 +208,7 @@ public class RobotMap {
 	 *************************************************************************/
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
-	public static final double CUBE_INTAKE_IR_THRESHOLD = 1.4;
+	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.3;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	public static final double CUBE_INTAKE_MAX_OUTAKE = -1.0;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
@@ -229,6 +229,11 @@ public class RobotMap {
 	public static final boolean LIFT_MOTOR2_REVERSE = false;
 	public static final boolean LIFT_MOTOR3_REVERSE = false;
 	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0;
+	public static final double LIFT_UP_MIN_VOLTAGE = 1.2;
+	public static final double LIFT_DOWN_MIN_VOLTAGE = 1.2;
+	
+	public static final double LIFT_MIN_SPEED = 0.15;
+	
 	
 	public static final double LIFT_POT_VOLTAGE_MAX = 2.67; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 85.0;

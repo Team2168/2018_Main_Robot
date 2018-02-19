@@ -32,7 +32,6 @@ public class Lift extends Subsystem {
 	private static AveragePotentiometer liftPot;
 	private static DigitalInput liftFullyUp; //hall effect sensors
 	private static DigitalInput liftFullyDown; // ^^^^^^^^^^^
-	private static DoubleSolenoid liftRachet;
 	
 
     double liftPotMax;
@@ -58,12 +57,8 @@ public class Lift extends Subsystem {
 		liftMotor2 = new VictorSP(RobotMap.LIFT_MOTOR_2);
 		liftMotor3 = new VictorSP(RobotMap.LIFT_MOTOR_3);
 		liftBrake = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2,RobotMap.LIFT_BRAKE_ENGAGE_PCM, RobotMap.LIFT_BRAKE_DISENGAGE_PCM);
-		liftRachet = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_RACHET_ENGAGE_PCM, RobotMap.LIFT_RACHET_DISENGAGE_PCM);
 		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP_LIMIT);
 		liftFullyDown = new DigitalInput(RobotMap.LIFT_FULLY_DOWN_LIMIT);
-		
-		
-
 		
 		if(Robot.isPracticeRobot()){
 			liftPot = new AveragePotentiometer(RobotMap.LIFT_POSITION_POT_PBOT,
@@ -195,22 +190,26 @@ public class Lift extends Subsystem {
 	}
 
 	/**
-	 * Drives all lift Motors at a speed from -1 to 1 where 1 is forward and
-	 * negative 1 is backwards
+	 * Drives all lift Motors at a speed from -1 to 1 where 1 is up and
+	 * negative 1 is down, and ratchet is not engaged
 	 * 
-	 * @param speed
+	 * @param speed is +1 up and -1 down
 	 */
 	public void driveAllMotors(double speed) {
-		if ((speed > 0.2 && isLiftFullyDown()) || ((speed < 0.2) && isLiftFullyUp())) {
+		if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged()) ||
+				((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() && Robot.liftRatchetShifter.isRatchetDisEngaged()))
+		{
 			disableBrake();
 			driveLiftMotor1(speed);
 			driveLiftMotor2(speed);
 			driveLiftMotor3(speed);
-		} else {
+		}
+		else 
+		{
 			enableBrake();
-			driveLiftMotor1(0);
-			driveLiftMotor2(0);
-			driveLiftMotor3(0);
+			driveLiftMotor1(0.0);
+			driveLiftMotor2(0.0);
+			driveLiftMotor3(0.0);
 		}
 	}
 
@@ -221,39 +220,7 @@ public class Lift extends Subsystem {
 		liftBrake.set(Value.kForward);
 	}
 
-	/**
-	 * Gets the current state of the pneumatic brake
-	 *
-	 * @return True when brake is enabled
-	 */
-	public boolean isRachetEnabled() {
-		return liftRachet.get() == Value.kForward;
-	}
-
-	/**
-	 * Disables the pneumatic brake
-	 */
-	public void disableRachet() {
-		liftRachet.set(Value.kReverse);
-	}
-
-	/**
-	 * Gets the current state of the pneumatic brake
-	 *
-	 * @return True when brake is disabled
-	 */
-	public boolean isRachetDisabled() {
-		return liftRachet.get() == Value.kReverse;
-	}
-
 	
-	/**
-	 * Enables the pneumatic brake
-	 */
-	public void enableRachet() {
-		liftRachet.set(Value.kForward);
-	}
-
 	/**
 	 * Gets the current state of the pneumatic brake
 	 *
@@ -279,13 +246,6 @@ public class Lift extends Subsystem {
 		return liftBrake.get() == Value.kReverse;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveLiftWithJoysticks(OI.getInstance().operatorJoystick));

@@ -23,8 +23,8 @@ public class LiftShifter extends Subsystem {
 	private LiftShifter() {
 	gearShifter = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_LOW_GEAR_PCM, RobotMap.LIFT_HIGH_GEAR_PCM);
 	//gearShifter = new DoubleSolenoid(RobotMap.LIFT_HIGH_GEAR, RobotMap.LIFT_LOW_GEAR);
-	ConsolePrinter.putBoolean("In High Gear", () -> {return Robot.liftShifter.isHighGear();}, true, false);
-	ConsolePrinter.putBoolean("In Low Gear", () -> {return Robot.liftShifter.isLowGear();}, true, false);
+	ConsolePrinter.putBoolean("Lift High Gear", () -> {return Robot.liftShifter.isHighGear();}, true, false);
+	ConsolePrinter.putBoolean("Lift Low Gear", () -> {return Robot.liftShifter.isLowGear();}, true, false);
 	}
 
 	

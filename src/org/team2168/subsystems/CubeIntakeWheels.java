@@ -3,6 +3,7 @@ package org.team2168.subsystems;
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
+import org.team2168.commands.intake.DriveIntakeWithJoystick;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -26,7 +27,8 @@ private static CubeIntakeWheels instance = null;
 		intakeMotorRight = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_RIGHT);
 		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
 		
-		ConsolePrinter.putNumber("Gripper IR", () -> {return getRawIRVoltage();}, true, false);
+		ConsolePrinter.putNumber("Cube Raw IR", () -> {return getRawIRVoltage();}, true, false);
+		ConsolePrinter.putBoolean("isCubePresent", () -> {return isCubePresent();}, true, false);
 	}
 	
 	/**
@@ -88,7 +90,7 @@ private static CubeIntakeWheels instance = null;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new ());
+        //setDefaultCommand(new DriveIntakeWithJoystick());
     }
 }
 

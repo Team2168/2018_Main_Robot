@@ -67,13 +67,16 @@ public class CubeIntakePivot extends Subsystem {
 	{
 		if (RobotMap.INTAKE_PIVOT_REVERSE)
 			speed = -speed;
-		if ((speed > RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED && !isRaised()))  {
+		
+		
+		if ((speed > RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED && !isRaised()) ||
+			((speed < -RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED) && !isLowered()))
+		{
 			intakePivotMotor.set(speed);
 		}
-			else if ((speed < RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED) && isLowered())
-			intakePivotMotor.set(speed);
-		else {
-			intakePivotMotor.set(0);
+		else 
+		{
+			intakePivotMotor.set(0.0);
 		}
 	}
 

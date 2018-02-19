@@ -71,6 +71,9 @@ public class Robot extends TimedRobot
     static int controlStyle;
     public static SendableChooser<Number> controlStyleChooser;
     
+
+	double runTime = Timer.getFPGATimestamp();
+    
     //Turn on TX1
     //TX1TurnON tx1;
     
@@ -268,6 +271,8 @@ public class Robot extends TimedRobot
 	
 	    	// Select the control style
 	        controlStyle = (int) controlStyleChooser.getSelected();
+	        
+	        runTime = Timer.getFPGATimestamp();
 	  }
 	    
 
@@ -276,7 +281,9 @@ public class Robot extends TimedRobot
 	     */
 	    public void teleopPeriodic() {
 	    	
-	    	double runTime = Timer.getFPGATimestamp();
+	        SmartDashboard.putNumber("TeleopLoopTime", Timer.getFPGATimestamp()-runTime);
+	        runTime = Timer.getFPGATimestamp();
+	    
 	    	autoMode = false;
 	        Scheduler.getInstance().run();
 	        
@@ -285,9 +292,7 @@ public class Robot extends TimedRobot
 	        SmartDashboard.putNumber("GunStyleXValueMakingThisLongSoWeCanFindIt", Robot.oi.driverJoystick.getLeftStickRaw_X());
 	        SmartDashboard.putNumber("GunStyleXInterpolatedValueMakingThisLongSoWeCanFindIt", Robot.drivetrain.getGunStyleXValue());
 	        
-	        SmartDashboard.putNumber("TeleopLoopTime", Timer.getFPGATimestamp()-runTime);
-	        
-	    
+
 	    }
 
 	    
