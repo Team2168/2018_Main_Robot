@@ -212,15 +212,5 @@ public double[] getJerkArray()
 }
 
 
-}
-//	double[] P = {A5, A4, A3, A2, A1, A0};
-	
-//	double[] Pd = new double[P.length-1];{
-//	for(int i = 0; i < P.length-1; i++)
-//		Pd[i] = P[i]*(P.length-i-1);
-//	}
 
-//	double[] Pdd = new double [Pd.length-1]; {
-//	for(int i = 0; i < Pd.length-1; i++)
-//		Pdd[i] = Pd[i]*(Pd.length-i-1);
-//	}
+}
