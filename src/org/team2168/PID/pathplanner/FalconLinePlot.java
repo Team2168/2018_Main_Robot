@@ -45,7 +45,7 @@ import javax.swing.*;
  *
  */
 
-class FalconLinePlot extends JPanel implements ClipboardOwner {
+public class FalconLinePlot extends JPanel implements ClipboardOwner {
 
 	private static final long serialVersionUID = 3205256608145459434L;
 	private final int yPAD = 60; // controls how far the X- and Y- axis lines are away from the window edge
@@ -314,7 +314,7 @@ class FalconLinePlot extends JPanel implements ClipboardOwner {
 
 	}
 
-	void setXTic(double lowerBound, double upperBound, double stepSize) {
+	public void setXTic(double lowerBound, double upperBound, double stepSize) {
 		this.userSetXTic = true;
 
 		this.upperXtic = upperBound;

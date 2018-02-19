@@ -2,6 +2,7 @@ package org.team2168.PID.trajectory;
 
 import java.awt.Color;
 import java.time.zone.ZoneOffsetTransitionRule.TimeDefinition;
+import org.team2168.PID.pathplanner.*;
 
 public class OneDirectionMotionProfiling {
 
@@ -38,11 +39,19 @@ public class OneDirectionMotionProfiling {
 	double Ta = 0;
 	double Tj2 = 0;
 	double Td = 0;
-	private double[] rightPath;
-	private double[] leftPath;
+	
+	// vector array thing
+	double spacing = 100;
+	
+	double[] time = new double[(int)((t1-t0)/spacing)];
+	double[] pos = new double[(int)((t1-t0)/spacing)];
+	double[] vel = new double[(int)((t1-t0)/spacing)];		
+	double[] acc = new double[(int)((t1-t0)/spacing)];
+	double[] jerk = new double[(int)((t1-t0)/spacing)];
 	 
 	
-	public void S_curves(){
+	public void S_curves()
+	{
 		if (((vMax- v0) * jMax ) < Math.pow(aMax, 2)){
 			Tj1 = Math.sqrt((vMax - v0)/jMax);
 			Ta = 2*Tj1;
@@ -67,47 +76,12 @@ public class OneDirectionMotionProfiling {
 		t1 = Ta + Tv + Td;
 		T = t1 + t0;
 	
-		// vector array thing
-		double spacing = 1/100;
+
 		//Linspace time = new Linspace(t0, spacing, t1);
 		
-		double[] time = new double[(int)((t1-t0)/spacing)];
-		double[] pos = new double[(int)((t1-t0)/spacing)];
-		double[] vel = new double[(int)((t1-t0)/spacing)];		
-		double[] acc = new double[(int)((t1-t0)/spacing)];
-		double[] jerk = new double[(int)((t1-t0)/spacing)];
-		double[][] leftPath;
-		double[][] rightPath;
-				
 
-		//Lets create a bank image
-				FalconLinePlot fig3 = new FalconLinePlot(time, pos ,Color.black);
-				fig3.yGridOn();
-				fig3.xGridOn();
-				fig3.setYLabel("Y (feet)");
-				fig3.setXLabel("X (feet)");
-				fig3.setTitle("Top Down View of FRC Field (30ft x 27ft) \n shows global position of robot path, along with left and right wheel trajectories");
-				fig3.setSize(600,400);
-				
-		OneDirectionMotionProfiling oneDirection= new OneDirectionMotionProfiling();
-		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
-		double fieldWidth = 27.0;
-		fig3.setXTic(0, 54, 1);
-		fig3.setYTic(0, fieldWidth, 1);
-		fig3.addData(oneDirection.rightPath, Color.magenta);
-		fig3.addData(oneDirection.leftPath, Color.cyan);
-		
-		//Velocity
-				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-				fig4.yGridOn();
-				fig4.xGridOn();
-				fig4.setYLabel("Velocity (ft/sec)");
-				fig4.setXLabel("time (seconds)");
-				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-				fig4.addData(vel, Color.magenta);
-				
 
-		
+								
 		for(int i=0; i<time.length; i++)
 		{
 			time[i]=i*1/100 + t0;
@@ -119,17 +93,6 @@ public class OneDirectionMotionProfiling {
 		double vLim = v0 + (Ta-Tj1)*aLimA;
 		
 		// Calculation of trajectory for q1 > q2
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		// ??
 		for(int i=1;i<time.length;i++)
 		{
@@ -182,6 +145,11 @@ public class OneDirectionMotionProfiling {
 			    }
 		}
 				
+	
+		//Lets create a bank image
+		
+	
+	
 	}
 	
 	
@@ -191,12 +159,60 @@ public class OneDirectionMotionProfiling {
 		OneDirectionMotionProfiling oneDirection= new OneDirectionMotionProfiling();
 		oneDirection.S_curves();
 		
+		FalconLinePlot fig3 = new FalconLinePlot(oneDirection.time, oneDirection.pos ,Color.black);
+		fig3.yGridOn();
+		fig3.xGridOn();
+		fig3.setYLabel("Y (feet)");
+		fig3.setXLabel("X (feet)");
+		fig3.setTitle("Top Down View of FRC Field (30ft x 27ft) \n shows global position of robot path, along with left and right wheel trajectories");
+		fig3.setSize(600,400);
+		
+//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
+double fieldWidth = 27.0;
+fig3.setXTic(0, 54, 1);
+fig3.setYTic(0, fieldWidth, 1);
+
+
+//Velocity
+		FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		fig4.yGridOn();
+		fig4.xGridOn();
+		fig4.setYLabel("Velocity (ft/sec)");
+		fig4.setXLabel("time (seconds)");
+		fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+		fig4.addData(oneDirection.time,oneDirection.vel, Color.magenta);
+	
+		
 	}
+
+
+public double[] getTimeArray()
+{
+	return time;
+}
+
+public double[] getPosArray()
+{
+	return pos;
+}
+
+public double[] getVelArray()
+{
+	return vel;
+}
+
+public double[] getAccelArray()
+{
+	return acc;
+}
+
+public double[] getJerkArray()
+{
+	return jerk;
 }
 
 
-
-
+}
 //	double[] P = {A5, A4, A3, A2, A1, A0};
 	
 //	double[] Pd = new double[P.length-1];{
