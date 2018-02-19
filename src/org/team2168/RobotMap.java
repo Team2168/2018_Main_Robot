@@ -215,6 +215,7 @@ public class RobotMap {
 	public static final double CUBE_PIVOT_CONSTANT = 0.3;
 	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
 	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
+	public static final double CUBE_INTAKE_PIVOT_MAX_SPEED = 0.6;
 
 	
 	/*************************************************************************

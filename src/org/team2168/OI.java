@@ -109,9 +109,6 @@ public class OI {
 		operatorJoystick.ButtonUpDPad().whenPressed(new RotatePivotUpAutomatically(0.6));
 		operatorJoystick.ButtonUpDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
-		/////////////////Raise and lower the lift//////////////////////////////////////////////////////
-		operatorJoystick.ButtonLeftStick().whenPressed(new DriveLiftWithJoysticks());
-		
 		////////////////Raise platform/////////////////////////////
 		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
 		
@@ -173,7 +170,7 @@ public class OI {
 	}
 
 	public static double getDriveIntakePivotJoystickValue() {
-		return testJoystick.getRightStickRaw_X();
+		return testJoystick.getRightStickRaw_Y();
 	}
 
 }

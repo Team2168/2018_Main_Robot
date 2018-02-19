@@ -2,6 +2,7 @@ package org.team2168.commands.intake;
 
 import org.team2168.OI;
 import org.team2168.Robot;
+import org.team2168.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,7 +22,7 @@ public class DriveIntakePivotWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakePivot.drivePivot(OI.getDriveIntakePivotJoystickValue());
+    	Robot.cubeIntakePivot.drivePivot(OI.getDriveIntakePivotJoystickValue() * RobotMap.CUBE_INTAKE_PIVOT_MAX_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
