@@ -109,9 +109,6 @@ public class OI {
 		operatorJoystick.ButtonUpDPad().whenPressed(new RotatePivotUpAutomatically(0.6));
 		operatorJoystick.ButtonUpDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
-		/////////////////Raise and lower the lift//////////////////////////////////////////////////////
-		operatorJoystick.ButtonLeftStick().whenPressed(new DriveLiftWithJoysticks(OI.operatorJoystick));
-		
 		////////////////Raise platform/////////////////////////////
 		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
 		
@@ -164,47 +161,16 @@ public class OI {
 	 * 
 	 * @author Krystina
 	 */
-	public static double getDriveShooterJoystick() {
+	public static double getDriveLiftJoystickValue() {
+		return operatorJoystick.getLeftStickRaw_Y();
+	}
+
+	public static double getDriveIntakeWheelsJoystickValue() {
 		return operatorJoystick.getRightStickRaw_Y();
 	}
 
-	public static double getDriveElevatorJoystick() {
-		return operatorJoystick.getLeftStickRaw_Y();
+	public static double getDriveIntakePivotJoystickValue() {
+		return testJoystick.getRightStickRaw_Y();
 	}
 
-	public static double getDriveGearIntakeRollerJoystick() {
-		return operatorJoystick.getLeftStickRaw_Y();
-	}
-
-	public static double getDriveConveryorJoystick() {
-		return operatorJoystick.getLeftStickRaw_Y();
-	}
-
-	public static double getDriveBallIntakeJoystick() {
-		return operatorJoystick.getLeftStickRaw_Y();
-	}
-
-	public static double getDriveShooterIndexerJoystick() {
-		return operatorJoystick.getLeftStickRaw_Y();
-	}
-
-	public static double getDriveShooterPIDTestJoystick() {
-		return pidTestJoystick.getRightStickRaw_Y();
-	}
-
-	public static double getDriveElevatorPIDTestJoystick() {
-		return pidTestJoystick.getLeftStickRaw_Y();
-	}
-
-	public static double getDriveIndexerPIDTestJoystick() {
-		return (pidTestJoystick.getRightTriggerAxisRaw() + pidTestJoystick.getLeftTriggerAxisRaw());
-	}
-
-	public static double getDriveTurretJoystick() {
-		return pidTestJoystick.getLeftStickRaw_Y();
-	}
-
-	public static double getDriveAgitatorJoystick() {
-		return 0;
-	}
 }
