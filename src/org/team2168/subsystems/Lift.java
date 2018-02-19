@@ -3,7 +3,11 @@ package org.team2168.subsystems;
 import org.team2168.OI;
 import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.PID.controllers.PIDPosition;
+import org.team2168.PID.sensors.AveragePotentiometer;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
+import org.team2168.utils.LinearInterpolator;
+import org.team2168.utils.TCPSocketSender;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -25,15 +29,26 @@ public class Lift extends Subsystem {
 	private static VictorSP liftMotor2;
 	private static VictorSP liftMotor3;
 	private DoubleSolenoid liftBrake;
-	private static AnalogInput potentiometer;
+	private static AveragePotentiometer liftPot;
 	private static DigitalInput liftFullyUp; //hall effect sensors
 	private static DigitalInput liftFullyDown; // ^^^^^^^^^^^
 	private static DoubleSolenoid liftRachet;
 	
 
+    double liftPotMax;
+    double liftPotMin;
+    
+	public PIDPosition liftPOTController;	
+	TCPSocketSender TCPLiftPOTController;
+	
 	public volatile double liftMotor1Voltage;
 	public volatile double liftMotor2Voltage;
 	public volatile double liftMotor3Voltage;
+	
+    private static LinearInterpolator liftPotInterpolator;
+    //TODO get these values plez format for points: (volts, inches)
+    private double[][] liftRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
+    		                          {RobotMap.LIFT_POT_VOLTAGE_MAX,RobotMap.LIFT_POT_MAX_HEIGHT_INCHES}};
 
 	/**
 	 * Default constructor for the lift
@@ -44,28 +59,52 @@ public class Lift extends Subsystem {
 		liftMotor3 = new VictorSP(RobotMap.LIFT_MOTOR_3);
 		liftBrake = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2,RobotMap.LIFT_BRAKE_ENGAGE_PCM, RobotMap.LIFT_BRAKE_DISENGAGE_PCM);
 		liftRachet = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2, RobotMap.LIFT_RACHET_ENGAGE_PCM, RobotMap.LIFT_RACHET_DISENGAGE_PCM);
-		potentiometer = new AnalogInput(RobotMap.LIFT_POSITION_POT);
 		liftFullyUp = new DigitalInput(RobotMap.LIFT_FULLY_UP_LIMIT);
 		liftFullyDown = new DigitalInput(RobotMap.LIFT_FULLY_DOWN_LIMIT);
 		
 		
+
+		
+		if(Robot.isPracticeRobot()){
+			liftPot = new AveragePotentiometer(RobotMap.LIFT_POSITION_POT_PBOT,
+					 RobotMap.LIFT_POT_VOLTAGE_0_PBOT, RobotMap.LIFT_POT_0_HEIGHT_INCHES_PBOT,
+					 RobotMap.LIFT_POT_VOLTAGE_MAX_PBOT, RobotMap.LIFT_POT_MAX_HEIGHT_INCHES_PBOT,
+					 RobotMap.LIFT_AVG_ENCODER_VAL);
+			liftPotMax = RobotMap.LIFT_POT_VOLTAGE_MAX_PBOT;
+			liftPotMin = RobotMap.LIFT_POT_VOLTAGE_0_PBOT;
+		}
+		else {
+			liftPot = new AveragePotentiometer(RobotMap.LIFT_POSITION_POT,
+					 RobotMap.LIFT_POT_VOLTAGE_0, RobotMap.LIFT_POT_0_HEIGHT_INCHES,
+					 RobotMap.LIFT_POT_VOLTAGE_MAX, RobotMap.LIFT_POT_MAX_HEIGHT_INCHES,
+					 RobotMap.LIFT_AVG_ENCODER_VAL);
+			liftPotMax = RobotMap.LIFT_POT_VOLTAGE_MAX;
+			liftPotMin = RobotMap.LIFT_POT_VOLTAGE_0;
+
+		}
+    		
+		liftPOTController = new PIDPosition(
+				"LiftPosController",
+				RobotMap.LIFT_P,
+				RobotMap.LIFT_I,
+				RobotMap.LIFT_D,
+				RobotMap.LIFT_N,
+				liftPot,
+				RobotMap.LIFT_PID_PERIOD);
+    	
+		liftPOTController.setSIZE(RobotMap.LIFT_PID_ARRAY_SIZE);
+
+		liftPOTController.startThread();
+		
+		TCPLiftPOTController = new TCPSocketSender(RobotMap.TCP_SERVER_LIFT_POT_CONTROLLER, liftPOTController);
+		TCPLiftPOTController.start();
 		
 		ConsolePrinter.putBoolean("Is Lift Fully Up", () -> {return Robot.lift.isLiftFullyUp();}, true, false);
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
 		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
-	
-	
-	
-	
-	
-	
-	}
+		ConsolePrinter.putNumber("Lift Pot Inches", () -> {return getPotPos();}, true, false);
 
-	
-	
-	
-	
-	
+	}
 	
 	/**
 	 * Singleton constructor of the lift
@@ -78,8 +117,20 @@ public class Lift extends Subsystem {
 		return instance;
 	}
 
+	/**
+	 * 
+	 * @return pot position in volts
+	 */
 	public double getRawPot() {
-		return potentiometer.getVoltage();
+		return liftPot.getRawPos();
+	}
+	
+	/**
+	 * 
+	 * @return pot position in inches
+	 */
+	public double getPotPos() {
+		return liftPot.getPos();
 	}
 	
 	/**

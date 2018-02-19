@@ -22,19 +22,36 @@ public class AveragePotentiometer implements PIDSensorInterface {
 	// averaged
 
 	AnalogInput potentiometer;
-	LinearInterpolator turretInterpolator;
-	double[][] turretRange;
+	LinearInterpolator interpolator;
+	double[][] range;
 
+	public AveragePotentiometer(int channel, double zeroVoltage, double zeroAngle,
+			double maxVoltage, double maxAngle, int averageN) {
+
+		potentiometer = new AnalogInput(channel);
+
+		double[][] tempRange = {{ zeroVoltage, zeroAngle }, { maxVoltage, maxAngle } };
+
+		this.range = tempRange;
+
+		interpolator = new LinearInterpolator(this.range);
+
+		this.averagorSize = averageN;
+		this.averagorArray = new double[averagorSize];
+
+	}
+	
+	
 	public AveragePotentiometer(int channel, double minVoltage, double minAngle, double zeroVoltage, double zeroAngle,
 			double maxVoltage, double maxAngle, int averageN) {
 
 		potentiometer = new AnalogInput(channel);
 
-		double[][] turretRange = { { minVoltage, minAngle }, { zeroVoltage, zeroAngle }, { maxVoltage, maxAngle } };
+		double[][] tempRange = { { minVoltage, minAngle }, { zeroVoltage, zeroAngle }, { maxVoltage, maxAngle } };
 
-		this.turretRange = turretRange;
+		this.range = tempRange;
 
-		turretInterpolator = new LinearInterpolator(this.turretRange);
+		interpolator = new LinearInterpolator(this.range);
 
 		this.averagorSize = averageN;
 		this.averagorArray = new double[averagorSize];
@@ -55,7 +72,7 @@ public class AveragePotentiometer implements PIDSensorInterface {
 
 	@Override
 	public double getPos() {
-		return turretInterpolator.interpolate(potentiometer.getVoltage());
+		return interpolator.interpolate(potentiometer.getVoltage());
 	}
 
 	public double getRawPos() {

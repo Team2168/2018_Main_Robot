@@ -151,6 +151,15 @@ public class RobotMap {
 	// Relay Channels///////////////////////////////////////////////////////////
 	public static final int FLASHLIGHT_RELAY = 0;
 
+	
+	/*************************************************************************
+	 *                         PBOT DIFFERENCES  PARAMETERS                         *
+	 *************************************************************************/
+	
+	
+	public static final int LIFT_POSITION_POT_PBOT = 0;
+	
+	
 	/*************************************************************************
 	 *                         DRIVETRAIN PARAMETERS                         *
 	 *************************************************************************/
@@ -205,13 +214,8 @@ public class RobotMap {
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
 	public static final double CUBE_PIVOT_CONSTANT = 0.3;
 	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
+	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
 
-	/*************************************************************************
-	 *                         FORK LIFT PARAMETERS                          *
-	 *************************************************************************/
-	//TODO check if the reverse values match the physical robot
-	public static final boolean FORK_LIFT_REVERSE = true;
-	
 	
 	/*************************************************************************
 	 *                         SCISSOR LIFT PARAMETERS                       *
@@ -225,6 +229,21 @@ public class RobotMap {
 	public static final boolean LIFT_MOTOR2_REVERSE = false;
 	public static final boolean LIFT_MOTOR3_REVERSE = false;
 	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0;
+	
+	public static final double LIFT_POT_VOLTAGE_MAX = 2.67; //85 degrees
+	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 85.0;
+	public static final double LIFT_POT_VOLTAGE_0 = 1.599; //0 degrees
+	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
+	
+	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 3.06; //90 degrees
+	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 90.0;
+	public static final double LIFT_POT_VOLTAGE_0_PBOT = 1.840; //0 degrees
+	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
+
+	
+	public static final int LIFT_AVG_ENCODER_VAL = 5;
+	
+	
 	/*************************************************************************
 	 *                         PDP PARAMETERS                                *
 	 *************************************************************************/
@@ -281,14 +300,14 @@ public class RobotMap {
 	// public static final double SHOOTER_SPEED_D = 0.0000011838;
 	// public static final double SHOOTER_SPEED_N = 6.8807;
 
-	public static final double SHOOTER_SPEED_P = 0.0000727;
-	public static final double SHOOTER_SPEED_I = 0.000093;
-	public static final double SHOOTER_SPEED_D = 0.0000015838;
-	public static final double SHOOTER_SPEED_N = 100;
+	public static final double LIFT_P = 0.024;
+	public static final double LIFT_I = 0.027;
+	public static final double LIFT_D = 0.000000067;
+	public static final double LIFT_N = 100;
 
 	// Turret Period
-	public static final long TURRET_PID_PERIOD = 20;
-	public static final int  TURRET_PID_ARRAY_SIZE = 30;
+	public static final long LIFT_PID_PERIOD = 20;
+	public static final int  LIFT_PID_ARRAY_SIZE = 30;
 
 	/****************************************************************
 	 *                         TCP Servers (ONLY FOR DEBUGGING)     *
@@ -297,11 +316,9 @@ public class RobotMap {
 	public static final int TCP_SERVER_ROTATE_CONTROLLER = 1181;
 	public static final int TCO_SERVER_RIGHT_DRIVE_TRAIN_SPEED = 1182;
 	public static final int TCP_SERVER_LEFT_DRIVE_TRAIN_SPEED = 1183;
-	public static final int TCP_SERVER_SHOOTER_SPEED = 1184;
+	public static final int TCP_SERVER_LIFT_POT_CONTROLLER = 1184;
 	public static final int TCP_SERVER_ROTATE_CONTROLLER_STRAIGHT = 1185;
-	public static final int TCP_SERVER_ROTATE_CAMERA_CONTROLLER = 1186;
-	public static final int TCP_SERVER_ROTATE_TURRET_CAMERA_CONTROLLER = 1187;
-	public static final int TCP_SERVER_ROTATE_TURRET_POT_CONTROLLER = 1188;
+	
 
 	/******************************************************************
 	 *                         ConsolePrinter PARAMETERS              *

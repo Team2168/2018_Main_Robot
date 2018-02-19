@@ -18,15 +18,15 @@ public class ClimbGuideArm extends Subsystem {
 	
 	
 	/**
-	 * Default constructors for Drivetrain
+	 * Default constructors for Climb guide arm
 	 */
 	private ClimbGuideArm() {
 		guidingArm = new DoubleSolenoid(RobotMap.PCM_CAN_ID,RobotMap.CLIMB_GUIDE_ARM_RAISE_PCM, RobotMap.CLIMB_GUIDE_ARM_LOWER_PCM);
 			}
 	
 	/**
-	 * Calls instance object and makes it a singleton object of type Drivetrain
-	 * @returns Drivetrain object "instance"
+	 * Calls instance object and makes it a singleton object of type Climb guide arm
+	 * @returns Climb guide arm object "instance"
 	 */
 	public static ClimbGuideArm getInstance() {
 		if(instance == null)
@@ -38,28 +38,28 @@ public class ClimbGuideArm extends Subsystem {
 	/**
 	 * Close down guide arm
 	 */
-    public void CloseArm() {
+    public void retractArm() {
     	guidingArm.set(DoubleSolenoid.Value.kForward);
     }
     
 	/**
 	 * Open guide arm
 	 */
-    public void OpenArm() {
+    public void extendArm() {
     	guidingArm.set(DoubleSolenoid.Value.kReverse);
     }
 	
     /**
 	 * Returns true if arm is closed
 	 */
-    public boolean isArmClosed() {
+    public boolean isArmRetracted() {
     	return guidingArm.get() == DoubleSolenoid.Value.kForward;
     }
 
 	/**
 	 * Returns true if arm is open
 	 */
-    public boolean isArmOpen() {
+    public boolean isArmExtended() {
     	return guidingArm.get() == DoubleSolenoid.Value.kReverse;
     }
 

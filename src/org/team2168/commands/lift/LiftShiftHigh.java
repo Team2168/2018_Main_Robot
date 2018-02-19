@@ -16,16 +16,17 @@ public class LiftShiftHigh extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.liftShifter.shiftToHigh();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.liftShifter.shiftToHigh();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.liftShifter.isInHighGear();
+        return Robot.liftShifter.isHighGear();
     }
 
     // Called once after isFinished returns true

@@ -1,17 +1,15 @@
-package org.team2168.commands.lift;
-
-import org.team2168.Robot;
+package org.team2168.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *shifts the lift into low
+ *
  */
-public class LiftShiftLow extends Command {
+public class DriveIntakeWithJoystick extends Command {
 
-    public LiftShiftLow() {
+    public DriveIntakeWithJoystick() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.liftShifter);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +18,11 @@ public class LiftShiftLow extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.liftShifter.shiftToLow();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.liftShifter.isLowGear();
+        return false;
     }
 
     // Called once after isFinished returns true
