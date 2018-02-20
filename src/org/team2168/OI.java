@@ -2,6 +2,7 @@ package org.team2168;
 
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
+import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.guidingArm.CloseDownGuidingArm;
 import org.team2168.commands.guidingArm.OpenGuidingArm;
 import org.team2168.commands.intake.CloseIntake;
@@ -120,6 +121,17 @@ public class OI {
 		////////////////For testing purposes//////////////////////
 		operatorJoystick.ButtonY().whenPressed(new ShiftHigh());
 		operatorJoystick.ButtonX().whenPressed(new ShiftLow());
+		
+		
+		
+		//////////////PID Testing///////////////////////////////////////////////
+		testJoystick.ButtonA().whenPressed(new RotateXDistancePIDZZZ(45,0.5,0.2));
+		testJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
+		testJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.5,0.2));
+		testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(-90,0.5,0.2));
+		
+		
+		
 		
 	}
 
