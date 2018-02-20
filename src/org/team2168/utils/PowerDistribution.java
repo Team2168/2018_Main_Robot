@@ -197,8 +197,67 @@ public class PowerDistribution {
 			return false;
 	}
 
-	
+	public boolean isLeftMotorThreeTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_3_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
 
-	
+	public boolean isPlatformMotorOneTrip() {
+		if (channelError[RobotMap.PLATFORM_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
 
+	public boolean isPlatformMotorTwoTrip() {
+		if (channelError[RobotMap.PLATFORM_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorOneTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorTwoTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorThreeTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_3_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isIntakeMotorOneTrip() {
+		if (channelError[RobotMap.INTAKE_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isIntakeMotorTwoTrip() {
+		if (channelError[RobotMap.INTAKE_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isIntakePivotMotorTrip() {
+		if (channelError[RobotMap.INTAKE_PIVOT_MOTOR_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
 }
