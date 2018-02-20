@@ -86,40 +86,58 @@ public class OI {
 		
 		////////////////Cube Intake assembly/////////////////////////////////////////////
 		//operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(0.1));
-		operatorJoystick.ButtonLeftTrigger().whenPressed(new DriveIntakeWheelsWithConstant(1.0));
+		////////////////Spit Cube With wheels////////////////////////////////////////////////////
+		operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCube());
 		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+		operatorJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
+		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
+
+		operatorJoystick.ButtonLeftTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 		
-		operatorJoystick.ButtonRightTrigger().whenPressed(new DriveIntakeWheelsWithConstant(-1.0));
-		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+		
+		operatorJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
+		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		//operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(0.1));
 		
 		////////////////Spit Cube With wheels////////////////////////////////////////////////////
-		operatorJoystick.ButtonRightBumper().whileHeld(new IntakeUntilCube());
-		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
+		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+		operatorJoystick.ButtonRightTrigger().whenPressed(new OpenIntake());
+		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
+		
+		operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
+		operatorJoystick.ButtonRightTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
+		
+		
 		
 		////////////////Emergency Open/Close Intake///////////////////////
-		//operatorJoystick.ButtonLeftBumper().whenPressed(new OpenIntake());
-		//operatorJoystick.ButtonLeftBumper().whenReleased(new CloseIntake());
+		operatorJoystick.ButtonLeftBumper().whenPressed(new OpenIntake());
+		operatorJoystick.ButtonLeftBumper().whenReleased(new CloseIntake());
 		
 		/////////////////Emergency Raise Intake////////////////////////////////////////
-		operatorJoystick.ButtonDownDPad().whenPressed(new RotatePivotDownAutomatically(-0.6));
+		operatorJoystick.ButtonDownDPad().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 		operatorJoystick.ButtonDownDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
 		/////////////////Emergency Lower Intake/////////////////////////////////////////
-		operatorJoystick.ButtonUpDPad().whenPressed(new RotatePivotUpAutomatically(0.6));
+		operatorJoystick.ButtonUpDPad().whileHeld(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
 		operatorJoystick.ButtonUpDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
 		////////////////Raise platform/////////////////////////////
 		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
 		
 		//////////////// Open arm and shift high and disengage rachet ///
-		operatorJoystick.ButtonB().whenPressed(new OpenGuidingArm());
-		operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());
-		operatorJoystick.ButtonB().whenPressed(new DisableRachet());
+		//operatorJoystick.ButtonB().whenPressed(new OpenGuidingArm());
+		//operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());
+		//operatorJoystick.ButtonB().whenPressed(new DisableRachet());
 		
 		////////////////For testing purposes//////////////////////
-		operatorJoystick.ButtonY().whenPressed(new ShiftHigh());
-		operatorJoystick.ButtonX().whenPressed(new ShiftLow());
+		operatorJoystick.ButtonY().whenPressed(new LiftShiftHigh());
+		operatorJoystick.ButtonX().whenPressed(new LiftShiftLow());
+		operatorJoystick.ButtonA().whenPressed(new EnableRachet());
+		operatorJoystick.ButtonB().whenPressed(new DisableRachet());
+		operatorJoystick.ButtonLeftDPad().whenPressed(new EnableBrake());
+		operatorJoystick.ButtonRightDPad().whenPressed(new DisableBrake());
+		//ConsolePrinter.putNumber("Lift speed value", () -> {return ();}, true, false);
 		
 	}
 

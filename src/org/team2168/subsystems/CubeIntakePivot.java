@@ -22,7 +22,9 @@ public class CubeIntakePivot extends Subsystem {
 	
 	private static DigitalInput fullyLowered;
 	private static DigitalInput fullyRaised;
-	
+	public static volatile double pivotMotorVoltage;
+	private int isPivotFullyUpInt;
+	private int isPivotFullyDownInt;
 	/**
 	 * Default constructors
 	 */
@@ -31,11 +33,14 @@ public class CubeIntakePivot extends Subsystem {
 		fullyLowered = new DigitalInput(RobotMap.CUBE_INTAKE_ROTATE_UP_LIMIT);
 		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_ROTATE_DOWN_LIMIT);
 		intakePivotMotor = new VictorSP(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
-
+		isPivotFullyUpInt = 0;
+		isPivotFullyDownInt = 0;
 		
 		ConsolePrinter.putBoolean("Is Intake Pivot Fully Up", () -> {return isRaised();}, true, false);
 		ConsolePrinter.putBoolean("Is Intake Pivot Fully Down", () -> {return isLowered();}, true, false);
-			
+		ConsolePrinter.putNumber("Pivot motor voltage", () -> {return getMotorVoltage();}, true, false);
+		ConsolePrinter.putNumber("Is fully up int", () -> {return (double)getIsFullyRaisedInt();}, true, false);
+		ConsolePrinter.putNumber("Is fully down int", () -> {return (double)getIsFullyLoweredInt();}, true, false);
 	}
 	
 		public static CubeIntakePivot getInstance(){
@@ -49,7 +54,12 @@ public class CubeIntakePivot extends Subsystem {
 	 * @return true if pressed, false if not
 	 */
 	public boolean isLowered() {
+		if(!fullyLowered.get())
+			this.isPivotFullyDownInt = 1;
+		else 
+			this.isPivotFullyDownInt = 0;
 		return !fullyLowered.get();
+		
 	}
 	
 	/**
@@ -57,6 +67,10 @@ public class CubeIntakePivot extends Subsystem {
 	 * @return true if pressed, false if not
 	 */
 	public boolean isRaised() {
+		if(!fullyRaised.get())
+			this.isPivotFullyUpInt = 1;
+		else
+			this.isPivotFullyUpInt = 0;
 		return !fullyRaised.get();
 	}
 	
@@ -73,17 +87,25 @@ public class CubeIntakePivot extends Subsystem {
 		if ((speed > RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED && !isRaised()) ||
 			((speed < -RobotMap.CUBE_INTAKE_PIVOT_MIN_SPEED) && !isLowered()))
 		{
+			System.out.println(speed);
 			intakePivotMotor.set(speed);
 		}
 		else 
 		{
 			intakePivotMotor.set(0.0);
 		}
+		pivotMotorVoltage = Robot.pdp.getBatteryVoltage() * speed;
 	}
 
+	public int getIsFullyLoweredInt() {
+		return this.isPivotFullyDownInt;
+	}
+	public int getIsFullyRaisedInt() {
+		return this.isPivotFullyUpInt;
+	}
 	
-	
-
+	public double getMotorVoltage() {
+		return  pivotMotorVoltage;      }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new DriveIntakePivotWithJoystick());

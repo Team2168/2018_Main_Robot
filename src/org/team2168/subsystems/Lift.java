@@ -33,7 +33,6 @@ public class Lift extends Subsystem {
 	private static DigitalInput liftFullyUp; //hall effect sensors
 	private static DigitalInput liftFullyDown; // ^^^^^^^^^^^
 	
-
     double liftPotMax;
     double liftPotMin;
     
@@ -98,7 +97,9 @@ public class Lift extends Subsystem {
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
 		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
 		ConsolePrinter.putNumber("Lift Pot Inches", () -> {return getPotPos();}, true, false);
-
+		ConsolePrinter.putNumber("Lift motor 1 voltage", () -> {return liftMotor1Voltage;}, true, false);
+		ConsolePrinter.putNumber("Lift motor 2 voltage", () -> {return liftMotor2Voltage;}, true, false);
+		ConsolePrinter.putNumber("Lift motor 3 voltage", () -> {return liftMotor3Voltage;}, true, false);
 	}
 	
 	/**
@@ -199,14 +200,14 @@ public class Lift extends Subsystem {
 		if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged()) ||
 				((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() && Robot.liftRatchetShifter.isRatchetDisEngaged()))
 		{
-			disableBrake();
+			//disableBrake();
 			driveLiftMotor1(speed);
 			driveLiftMotor2(speed);
 			driveLiftMotor3(speed);
 		}
 		else 
 		{
-			enableBrake();
+			//enableBrake();
 			driveLiftMotor1(0.0);
 			driveLiftMotor2(0.0);
 			driveLiftMotor3(0.0);

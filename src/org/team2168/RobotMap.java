@@ -208,14 +208,16 @@ public class RobotMap {
 	 *************************************************************************/
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
-	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.3;
+	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.7;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
-	public static final double CUBE_INTAKE_MAX_OUTAKE = -1.0;
+	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.5;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
-	public static final double CUBE_PIVOT_CONSTANT = 0.3;
+	public static final double CUBE_PIVOT_CONSTANT_NO_CUBE = 0.4;
+	public static final double CUBE_PIVOT_CONSTANT = 0.6;
+	public static final double CUBE_PIVOT_DOWN_CONSTANT = 0.25;
 	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
 	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
-	public static final double CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED = 0.6;
+	public static final double CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED = 0.2;
 	public static final double CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED = 1.0; 
 	
 	/*************************************************************************
@@ -228,8 +230,9 @@ public class RobotMap {
 	 *************************************************************************/
 	public static final boolean LIFT_MOTOR1_REVERSE = true;
 	public static final boolean LIFT_MOTOR2_REVERSE = true;
+	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
-	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.5;
+	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0;
 	public static final double LIFT_UP_MIN_VOLTAGE = 1.2;
 	public static final double LIFT_DOWN_MIN_VOLTAGE = 1.2;
 	
