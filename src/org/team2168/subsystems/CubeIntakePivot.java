@@ -19,6 +19,7 @@ public class CubeIntakePivot extends Subsystem {
 
 	private static CubeIntakePivot instance = null;
 	private static VictorSP intakePivotMotor;
+	public static volatile double intakeVoltage;
 	
 	private static DigitalInput fullyLowered;
 	private static DigitalInput fullyRaised;
@@ -32,10 +33,10 @@ public class CubeIntakePivot extends Subsystem {
 		fullyRaised = new DigitalInput(RobotMap.CUBE_INTAKE_ROTATE_DOWN_LIMIT);
 		intakePivotMotor = new VictorSP(RobotMap.CUBE_INTAKE_PIVOT_MOTOR);
 
-		
+		ConsolePrinter.putNumber("Pivot Motor Current ", () -> {return getPivotVoltage();}, true, true);
 		ConsolePrinter.putBoolean("Is Intake Pivot Fully Up", () -> {return isRaised();}, true, false);
 		ConsolePrinter.putBoolean("Is Intake Pivot Fully Down", () -> {return isLowered();}, true, false);
-			
+		ConsolePrinter.putNumber("Pivot Motor Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.INTAKE_PIVOT_MOTOR_PDP);}, true, true);	
 	}
 	
 		public static CubeIntakePivot getInstance(){
@@ -79,9 +80,12 @@ public class CubeIntakePivot extends Subsystem {
 		{
 			intakePivotMotor.set(0.0);
 		}
+	intakeVoltage = Robot.pdp.getBatteryVoltage() * speed;
 	}
 
-	
+	public double getPivotVoltage() {
+		return intakeVoltage;
+	}
 	
 
     public void initDefaultCommand() {

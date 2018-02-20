@@ -89,7 +89,7 @@ public class RobotMap {
 	public static final int RIGHT_DRIVE_ENCODER_A_PBOT = 3;
 	public static final int RIGHT_DRIVE_ENCODER_B_PBOT = 4;
 
-	//Solenoid Channels////////////////////////////////////////////////////////
+	//Solenoid Channels//////////////////////////////////////////
 
 	//Double Soldenoids PCM ID = 0
 	public final static int DRIVETRAIN_LOW_GEAR_PCM = 0;
@@ -126,19 +126,30 @@ public class RobotMap {
 	// TODO: Confirm PDP Ports
 	// TODO: Should be changed to match the new configuration
 	// PDP Channels/////////////////////////////////////////////////////////////
-	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 12;
-	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 3;
-	public static final int BALL_INTAKE_MOTOR_PDP = 11;
-	public static final int TURRET_MOTOR_PDP = 5;
-	public static final int CLIMBER_MOTOR_LEFT_PDP = 13;
-	public static final int CLIMBER_MOTOR_RIGHT_PDP = 14;
-	public static final int LIFT_MOTOR_PDP = 4;
-	public static final int GEAR_INTAKE_MOTOR_PDP = 6;
-	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 1;
-	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 2;	
-	public static final int INDEXER_WHEEL_PDP = 10;
-	public static final int SHOOTER_MOTOR_LEFT_PDP = 0;
-	public static final int SHOOTER_MOTOR_RIGHT_PDP = 15;
+	
+	///////////////////40 Amp////////////////////////////////
+	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 0;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 1;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 3;
+	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 15;
+	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
+	public static final int DRIVETRAIN_LEFT_MOTOR_3_PDP = 13;
+	public static final int PLATFORM_1_PDP = 3;
+	public static final int PLATFORM_2_PDP = 12;
+	
+	///////////20-30 Amp/////////////////////////////////////
+	public static final int LIFT_MOTOR_1_PDP = 9;
+	public static final int LIFT_MOTOR_2_PDP = 10;
+	public static final int LIFT_MOTOR_3_PDP = 11;
+	public static final int INTAKE_MOTOR_1_PDP = 4;
+	public static final int INTAKE_MOTOR_2_PDP = 5;
+	public static final int INTAKE_PIVOT_MOTOR_PDP = 6;
+	public static final int COMPRESSOR_PDP = 7;
+	public static final int AUX_POWER = 8;
+	
+	
+	
+	
 	public static final int PCM_POWER_PCM = 7;;
 	
 	
