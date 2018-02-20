@@ -21,6 +21,8 @@ private static CubeIntakeWheels instance = null;
 	private static VictorSP intakeMotorLeft;
 	private static VictorSP intakeMotorRight;
 	private static AnalogInput intakeIRSensor;
+	public static volatile double intakeMotorLeftVoltage;
+	public static volatile double intakeMotorRightVoltage;
 	
 	public CubeIntakeWheels(){
 		intakeMotorLeft = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_LEFT);
@@ -29,6 +31,8 @@ private static CubeIntakeWheels instance = null;
 		
 		ConsolePrinter.putNumber("Cube Raw IR", () -> {return getRawIRVoltage();}, true, false);
 		ConsolePrinter.putBoolean("isCubePresent", () -> {return isCubePresent();}, true, false);
+		ConsolePrinter.putNumber("Intake right motor voltage", () -> {return intakeMotorRightVoltage;}, true, false);
+		ConsolePrinter.putNumber("Intake left motor voltage", () -> {return intakeMotorLeftVoltage;}, true, false);
 	}
 	
 	/**
@@ -49,6 +53,7 @@ private static CubeIntakeWheels instance = null;
 		if (RobotMap.INTAKE_LEFT_REVERSE)
 			speed = -speed;
 		intakeMotorLeft.set(speed);
+		intakeMotorLeftVoltage = Robot.pdp.getBatteryVoltage() * speed;
 	}
 	
 	/**
@@ -59,6 +64,7 @@ private static CubeIntakeWheels instance = null;
 		if (RobotMap.INTAKE_RIGHT_REVERSE)
 			speed = -speed;
 		intakeMotorRight.set(speed);
+		intakeMotorRightVoltage = Robot.pdp.getBatteryVoltage() * speed;
 	}
 	
 
