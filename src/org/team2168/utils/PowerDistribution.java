@@ -175,34 +175,13 @@ public class PowerDistribution {
 			return false;
 	}
 
-	public boolean isBallIntakeMotorTrip() {
-		if (channelError[RobotMap.BALL_INTAKE_MOTOR_PDP] == 2)
+	public boolean isRightMotorThreeTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_3_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
-
-	public boolean isIndexMotorTrip() {
-		if (channelError[RobotMap.INDEXER_WHEEL_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isShooterMotorLeftTrip() {
-
-		if (channelError[RobotMap.SHOOTER_MOTOR_LEFT_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isShooterMotorRightTrip() {
-		if (channelError[RobotMap.SHOOTER_MOTOR_RIGHT_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
+	
 
 	public boolean isLeftMotorOneTrip() {
 		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_1_PDP] == 2)
@@ -218,18 +197,67 @@ public class PowerDistribution {
 			return false;
 	}
 
-	public boolean isLeftHangerMotorTrip() {
-		if (channelError[RobotMap.CLIMBER_MOTOR_LEFT_PDP] == 1)
+	public boolean isLeftMotorThreeTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_3_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
 
-	public boolean isRighttHangerMotorTrip() {
-		if (channelError[RobotMap.CLIMBER_MOTOR_RIGHT_PDP] == 1)
+	public boolean isPlatformMotorOneTrip() {
+		if (channelError[RobotMap.PLATFORM_1_PDP] == 2)
 			return true;
 		else
 			return false;
 	}
 
+	public boolean isPlatformMotorTwoTrip() {
+		if (channelError[RobotMap.PLATFORM_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorOneTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorTwoTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorThreeTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_3_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isIntakeMotorOneTrip() {
+		if (channelError[RobotMap.INTAKE_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isIntakeMotorTwoTrip() {
+		if (channelError[RobotMap.INTAKE_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isIntakePivotMotorTrip() {
+		if (channelError[RobotMap.INTAKE_PIVOT_MOTOR_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
 }
