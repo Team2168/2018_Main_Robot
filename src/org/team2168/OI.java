@@ -69,29 +69,33 @@ public class OI {
 	 */
 	private OI() {
 
-		////////////// Driver Joystick//////////////
+		/*************************************************************************
+		 *                         Driver Joystick			                       *
+		 *************************************************************************/
 		driverJoystick.ButtonStart().whenPressed(new ShiftLow());  //add drivetrainshifter
 		driverJoystick.ButtonA().whenPressed(new ShiftHigh());
 
 		////////////// Operator Joystick//////////////
 		
 		
-		////////////////Get Ready to climb///////////////////////////////////
-		operatorJoystick.ButtonStart().whenPressed(new CloseDownGuidingArm());
-		operatorJoystick.ButtonStart().whenPressed(new LiftShiftLow());
-		operatorJoystick.ButtonStart().whenPressed(new EnableRachet());
+		/*************************************************************************
+		 *                         Operator Joystick         		              *
+		 *************************************************************************/
+		
+		//Start will be climb
+		//operatorJoystick.ButtonStart().whenPressed(new CloseDownGuidingArm());
+		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftLow());
+		//operatorJoystick.ButtonStart().whenPressed(new EnableRachet());
 		
 		////////////////Lower Platform///////////////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
 		
-		////////////////Cube Intake assembly/////////////////////////////////////////////
-		//operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(0.1));
-		////////////////Spit Cube With wheels////////////////////////////////////////////////////
+		
+		////////////////Intake Cube and Rotate up when done////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCube());
 		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		operatorJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
 		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
-
 		operatorJoystick.ButtonLeftTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 		
 		
@@ -101,13 +105,12 @@ public class OI {
 		
 		////////////////Spit Cube With wheels////////////////////////////////////////////////////
 		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
-		operatorJoystick.ButtonRightTrigger().whenPressed(new OpenIntake());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
-		
 		operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
-		operatorJoystick.ButtonRightTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
+		//operatorJoystick.ButtonRightTrigger().whenPressed(new OpenIntake());
 		
+		//operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
+		operatorJoystick.ButtonRightTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
+		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
 		
 		////////////////Emergency Open/Close Intake///////////////////////
