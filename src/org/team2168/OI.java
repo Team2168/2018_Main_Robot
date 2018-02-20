@@ -103,20 +103,24 @@ public class OI {
 		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		//operatorJoystick.ButtonRightTrigger().whenReleased(new DrivePivotBackWithConstant(0.1));
 		
-		////////////////Spit Cube With wheels////////////////////////////////////////////////////
+
 		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
 		operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
-		//operatorJoystick.ButtonRightTrigger().whenPressed(new OpenIntake());
+		operatorJoystick.ButtonRightTrigger().whenPressed(new OpenIntake());
 		
-		//operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
+		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
 		operatorJoystick.ButtonRightTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
 		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
 		
 		////////////////Emergency Open/Close Intake///////////////////////
-		operatorJoystick.ButtonLeftBumper().whenPressed(new OpenIntake());
-		operatorJoystick.ButtonLeftBumper().whenReleased(new CloseIntake());
+		operatorJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
+		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+		operatorJoystick.ButtonRightBumper().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
+		operatorJoystick.ButtonRightBumper().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
 		
+		operatorJoystick.ButtonLeftBumper().whenPressed(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
+		operatorJoystick.ButtonLeftBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		/////////////////Emergency Raise Intake////////////////////////////////////////
 		operatorJoystick.ButtonDownDPad().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 		operatorJoystick.ButtonDownDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
