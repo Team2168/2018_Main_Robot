@@ -33,6 +33,8 @@ private static CubeIntakeWheels instance = null;
 		ConsolePrinter.putBoolean("isCubePresent", () -> {return isCubePresent();}, true, false);
 		ConsolePrinter.putNumber("Intake right motor voltage", () -> {return intakeMotorRightVoltage;}, true, false);
 		ConsolePrinter.putNumber("Intake left motor voltage", () -> {return intakeMotorLeftVoltage;}, true, false);
+		ConsolePrinter.putNumber("Intake right motor current", () -> {return Robot.pdp.getChannelCurrent(RobotMap.INTAKE_MOTOR_2_PDP);}, true, false);
+		ConsolePrinter.putNumber("Intake left motor current", () -> {return Robot.pdp.getChannelCurrent(RobotMap.INTAKE_MOTOR_1_PDP);}, true, false);
 	}
 	
 	/**

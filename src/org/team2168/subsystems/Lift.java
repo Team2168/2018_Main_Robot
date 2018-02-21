@@ -105,7 +105,7 @@ public class Lift extends Subsystem {
 		ConsolePrinter.putNumber("Lift Motor 1 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP);}, true, true);
 		ConsolePrinter.putNumber("Lift Motor 2 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP);}, true, true);
 		ConsolePrinter.putNumber("Lift Motor 3 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP);}, true, true);
-		
+		ConsolePrinter.putNumber("Lift Joystick value ", () -> {return OI.getDriveLiftJoystickValue();}, true, true);
 	}
 	
 	/**
