@@ -214,6 +214,7 @@ public class RobotMap {
 	public static final boolean FORKLIFT_RIGHT_REVERSE = false;
 	
 	
+	
 	/*************************************************************************
 	 *                         CUBE INTAKE PARAMETERS                        *
 	 *************************************************************************/
@@ -221,9 +222,9 @@ public class RobotMap {
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.2;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
-	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.5;
+	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.8;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
-	public static final double CUBE_PIVOT_CONSTANT_NO_CUBE = 0.4;
+	public static final double CUBE_PIVOT_CONSTANT_NO_CUBE = 1.0;
 	public static final double CUBE_PIVOT_CONSTANT = 1.0;
 	public static final double CUBE_PIVOT_DOWN_CONSTANT = 0.4;
 	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
@@ -243,7 +244,7 @@ public class RobotMap {
 	public static final boolean LIFT_MOTOR2_REVERSE = true;
 	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
-	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0; 
+	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.7; 
 	public static final double LIFT_UP_MIN_VOLTAGE = 1.2;
 	public static final double LIFT_DOWN_MIN_VOLTAGE = 1.2;
 	
