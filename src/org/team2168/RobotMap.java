@@ -250,14 +250,14 @@ public class RobotMap {
 	public static final double LIFT_MIN_SPEED = 0.15;
 	
 	
-	public static final double LIFT_POT_VOLTAGE_MAX = 2.67; //85 degrees
-	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 85.0;
-	public static final double LIFT_POT_VOLTAGE_0 = 1.599; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX = 3.6; //85 degrees
+	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
+	public static final double LIFT_POT_VOLTAGE_0 = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
-	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 3.06; //90 degrees
-	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 90.0;
-	public static final double LIFT_POT_VOLTAGE_0_PBOT = 1.840; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 3.6; //90 degrees
+	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
+	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
 	

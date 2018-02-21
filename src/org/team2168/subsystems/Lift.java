@@ -45,7 +45,7 @@ public class Lift extends Subsystem {
 	
     private static LinearInterpolator liftPotInterpolator;
     //TODO get these values plez format for points: (volts, inches)
-    private double[][] liftRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
+    private double[][] liftPotRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
     		                          {RobotMap.LIFT_POT_VOLTAGE_MAX,RobotMap.LIFT_POT_MAX_HEIGHT_INCHES}};
 
 	/**
@@ -209,7 +209,7 @@ public class Lift extends Subsystem {
 			disableBrake();
 			driveLiftMotor1(speed);
 			driveLiftMotor2(speed);
-			driveLiftMotor3(speed);
+			driveLiftMotor3(speed); 
 		}
 		else 
 		{
