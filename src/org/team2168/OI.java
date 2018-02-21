@@ -2,6 +2,7 @@ package org.team2168;
 
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
+import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.guidingArm.CloseDownGuidingArm;
 import org.team2168.commands.guidingArm.OpenGuidingArm;
@@ -149,7 +150,13 @@ public class OI {
 		operatorJoystick.ButtonRightDPad().whenPressed(new DisableBrake());
 		//ConsolePrinter.putNumber("Lift speed value", () -> {return ();}, true, false);
 		
+		//////////////PID Testing///////////////////////////////////////////////
+		testJoystick.ButtonA().whenPressed(new RotateXDistancePIDZZZ(45,0.5,0.2));
+		testJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
+		testJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.5,0.2));
+		testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(-90,0.5,0.2));
 		
+
 		////PID testing///////////////////////////////////////////////////////////
 		pidTestJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(20.0, 0.5, 0.1,  1.0));
 		pidTestJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(-20.0, 0.5, 0.1, 1.0));
@@ -157,6 +164,7 @@ public class OI {
 		pidTestJoystick.ButtonUpDPad().whenPressed(new DriveXDistance(2.41,0.7,0.05));
 		pidTestJoystick.ButtonDownDPad().whenPressed(new DriveXDistance(-2.41,0.7,0.05));
 		pidTestJoystick.ButtonDownDPad().whenPressed(new DriveXDistance(0.0,0.7,0.05));
+
 	}
 
 	/**
