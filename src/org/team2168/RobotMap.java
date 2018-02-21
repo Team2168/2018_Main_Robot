@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.I2C;
  */
 public class RobotMap {
 
-	public static final double MAIN_PERIOD_S = 1.0/200.0; // Main loop 200Hz
+	public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 
 	
 	/*************************************************************************
