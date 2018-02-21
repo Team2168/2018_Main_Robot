@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Vittorio
  */
-public class RotateLiftPIDZZZ extends Command {
+public class DriveLiftPIDZZZ extends Command {
 
 	private double setPoint;
 	private double maxSpeed;
@@ -20,7 +20,7 @@ public class RotateLiftPIDZZZ extends Command {
 	private double error = 0.5;  // Rotational degree error, default 0 never ends.
 	private boolean absolute = false;
 	
-    public RotateLiftPIDZZZ() {
+    public DriveLiftPIDZZZ() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.lift);
     	this.setPoint = Robot.lift.liftPOTController.getSetPoint();
@@ -28,28 +28,28 @@ public class RotateLiftPIDZZZ extends Command {
     	this.minSpeed = 0;
     }
 
-    public RotateLiftPIDZZZ(double setPoint){
+    public DriveLiftPIDZZZ(double setPoint){
  	   this();
  	   this.setPoint = setPoint;
     }
 
-    public RotateLiftPIDZZZ(double setPoint, double maxSpeed){
+    public DriveLiftPIDZZZ(double setPoint, double maxSpeed){
   	   this(setPoint);
   	   this.maxSpeed = maxSpeed;
      }
     
-    public RotateLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed){
+    public DriveLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed){
    	   this(setPoint, maxSpeed);
    	   this.minSpeed = minSpeed;
       }    
 
-    public RotateLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error) {
+    public DriveLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error) {
     	this(setPoint, maxSpeed, minSpeed);
     	this.error = error;
     	this.absolute = false;
     }
     
-    public RotateLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
+    public DriveLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
     	this(setPoint, maxSpeed, minSpeed, error);
     	this.absolute = absolute;
     }
@@ -63,9 +63,9 @@ public class RotateLiftPIDZZZ extends Command {
 			sp = this.setPoint;
 		Robot.lift.liftPOTController.reset();
 
-//		Robot.turret.rotateTurretPOTController.setpGain(RobotMap.ROTATE_POSITION_P);
-//		Robot.turret.rotateTurretPOTController.setiGain(RobotMap.ROTATE_POSITION_I);
-//		Robot.turret.rotateTurretPOTController.setdGain(RobotMap.ROTATE_POSITION_D);
+		Robot.lift.liftPOTController.setpGain(RobotMap.LIFT_P);
+		Robot.lift.liftPOTController.setiGain(RobotMap.LIFT_I);
+		Robot.lift.liftPOTController.setdGain(RobotMap.LIFT_D);
 		Robot.lift.liftPOTController.setSetPoint(sp);
 		Robot.lift.liftPOTController.setMaxPosOutput(maxSpeed);
 		Robot.lift.liftPOTController.setMaxNegOutput(-maxSpeed);
