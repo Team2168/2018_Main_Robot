@@ -423,7 +423,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * Gets the voltage given by the Sharp IR sensor on the Gear Intake.
+	 * Gets the voltage given by the sonar sensor on the Gear Intake.
 	 * 
 	 * @return the raw voltage from the gear presence sensor
 	 */

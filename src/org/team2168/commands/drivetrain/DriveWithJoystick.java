@@ -103,7 +103,7 @@ public class DriveWithJoystick extends Command {
 			// Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.gyroSPI.getAngleDeg());
 
 			Robot.drivetrain.driveTrainPosController.Enable();
-			Robot.drivetrain.rotateDriveStraightController.Enable();
+			//Robot.drivetrain.rotateDriveStraightController.Enable();
 
 			System.out.println("Initialize case ran");
 		default:
@@ -155,16 +155,22 @@ public class DriveWithJoystick extends Command {
 			// Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
 			// }
 			//
-			Robot.drivetrain.tankDrive(Robot.drivetrain.getGunStyleXValue(), Robot.drivetrain.getGunStyleXValue());
-			if ((Robot.drivetrain.getGunStyleXValue() > 0.25 || Robot.drivetrain.getGunStyleXValue() < -0.25)
-					&& !(Robot.oi.driverJoystick.getLeftStickRaw_Y() > 0.1
-							|| Robot.oi.driverJoystick.getLeftStickRaw_Y() < -0.1)) {
+			
+			//((Robot.drivetrain.getGunStyleXValue() > 0.25 || Robot.drivetrain.getGunStyleXValue() < -0.25)&&
+			//Robot.drivetrain.tankDrive(Robot.drivetrain.getGunStyleXValue(), Robot.drivetrain.getGunStyleXValue());
+			
+			if ((Robot.oi.driverJoystick.getLeftStickRaw_Y() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
+			{
 				Robot.drivetrain.tankDrive(Robot.drivetrain.getGunStyleXValue(), Robot.drivetrain.getGunStyleXValue());
-			} else {
+				System.out.println("Straight: Left: "+ Robot.drivetrain.getGunStyleXValue() + ", Right: "+ Robot.drivetrain.getGunStyleXValue());
+			} 
+			else {
 				Robot.drivetrain.tankDrive(
 						(Robot.drivetrain.getGunStyleXValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
 						(Robot.drivetrain.getGunStyleXValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
 				Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
+				System.out.println("Turn: Left: "+ (Robot.drivetrain.getGunStyleXValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.drivetrain.getGunStyleXValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
+				
 			}
 
 			break;

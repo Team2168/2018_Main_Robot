@@ -33,7 +33,6 @@ public class Lift extends Subsystem {
 	private static DigitalInput liftFullyUp; //hall effect sensors
 	private static DigitalInput liftFullyDown; // ^^^^^^^^^^^
 	
-
     double liftPotMax;
     double liftPotMin;
     
@@ -98,6 +97,11 @@ public class Lift extends Subsystem {
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
 		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
 		ConsolePrinter.putNumber("Lift Pot Inches", () -> {return getPotPos();}, true, false);
+
+		ConsolePrinter.putNumber("Lift motor 1 voltage", () -> {return liftMotor1Voltage;}, true, false);
+		ConsolePrinter.putNumber("Lift motor 2 voltage", () -> {return liftMotor2Voltage;}, true, false);
+		ConsolePrinter.putNumber("Lift motor 3 voltage", () -> {return liftMotor3Voltage;}, true, false);
+
 		ConsolePrinter.putNumber("Lift Motor 1 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP);}, true, true);
 		ConsolePrinter.putNumber("Lift Motor 2 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP);}, true, true);
 		ConsolePrinter.putNumber("Lift Motor 3 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP);}, true, true);
