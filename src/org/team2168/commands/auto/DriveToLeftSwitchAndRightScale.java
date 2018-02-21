@@ -26,7 +26,7 @@ public class DriveToLeftSwitchAndRightScale extends CommandGroup {
    	 
    	 
    	//score on switch (Spit Intake)
-   	 	addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
+   	    addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
    	 	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
    	 	addParallel(new StopWheels());
    	    addParallel(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
