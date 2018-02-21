@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author shriji
  */
-public class DrivePIDPause extends Command {
+public class EnableRotatePID extends Command {
 
-    public DrivePIDPause() {
+    public EnableRotatePID() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
@@ -22,15 +22,15 @@ public class DrivePIDPause extends Command {
     // Called just before this Command runs the first time
     
 	protected void initialize() {
-		Robot.drivetrain.rightSpeedController.Pause();
-		Robot.drivetrain.leftSpeedController.Pause();
-		Robot.drivetrain.rotateController.Pause();
-		Robot.drivetrain.driveTrainPosController.Pause();
+		
+		Robot.drivetrain.rotateController.Enable();
+		
     }
 
     // Called repeatedly when this Command is scheduled to run
     
 	protected void execute() {
+		
     	
     }
 
@@ -38,10 +38,7 @@ public class DrivePIDPause extends Command {
     // Make this return true when this Command no longer needs to run execute()
     
 	protected boolean isFinished() {
-        return (Robot.drivetrain.rightSpeedController.isEnabled() == false) 
-        		&& (Robot.drivetrain.driveTrainPosController.isEnabled() == false)
-        		&& (Robot.drivetrain.leftSpeedController.isEnabled() == false)
-        		&& (Robot.drivetrain.rotateController.isEnabled() == false);
+        return false;
     }
 
     // Called once after isFinished returns true

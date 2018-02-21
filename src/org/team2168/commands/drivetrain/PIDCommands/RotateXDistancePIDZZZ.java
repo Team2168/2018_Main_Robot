@@ -93,8 +93,8 @@ public class RotateXDistancePIDZZZ extends Command {
     
 	protected boolean isFinished() {
 		//TODO Should the command be stopped????????!?!?!?!?!? after PID is tuned
-    	return Robot.drivetrain.rotateController.isFinished();
-		//return false;
+    	//return Robot.drivetrain.rotateController.isFinished();
+		return false;
     }
 
     // Called once after isFinished returns true
