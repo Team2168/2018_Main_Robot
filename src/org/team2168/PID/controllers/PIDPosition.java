@@ -1146,7 +1146,7 @@ public class PIDPosition implements TCPMessageInterface {
 			log.flush();
 		} else {
 			cp = encoder.getPos();
-			// sp = encoder.getPos();
+			sp = encoder.getPos();
 			clock = Timer.getFPGATimestamp();
 			// isFinished = true;
 		}

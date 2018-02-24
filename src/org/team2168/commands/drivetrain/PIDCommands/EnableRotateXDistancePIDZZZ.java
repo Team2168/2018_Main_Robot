@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Vittorio
  */
-public class RotateXDistancePIDZZZ extends Command {
+public class EnableRotateXDistancePIDZZZ extends Command {
 
 	private double setPoint;
 	private double maxSpeed;
@@ -20,7 +20,7 @@ public class RotateXDistancePIDZZZ extends Command {
 	private double error = 0.5;  // Rotational degree error, default 0 never ends.
 	private boolean absolute = false;
 	
-    public RotateXDistancePIDZZZ() {
+    public EnableRotateXDistancePIDZZZ() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.drivetrain);
     	this.setPoint = Robot.drivetrain.rotateController.getSetPoint();
@@ -28,28 +28,28 @@ public class RotateXDistancePIDZZZ extends Command {
     	this.minSpeed = 0;
     }
 
-    public RotateXDistancePIDZZZ(double setPoint){
+    public EnableRotateXDistancePIDZZZ(double setPoint){
  	   this();
  	   this.setPoint = setPoint;
     }
 
-    public RotateXDistancePIDZZZ(double setPoint, double maxSpeed){
+    public EnableRotateXDistancePIDZZZ(double setPoint, double maxSpeed){
   	   this(setPoint);
   	   this.maxSpeed = maxSpeed;
      }
     
-    public RotateXDistancePIDZZZ(double setPoint, double maxSpeed, double minSpeed){
+    public EnableRotateXDistancePIDZZZ(double setPoint, double maxSpeed, double minSpeed){
    	   this(setPoint, maxSpeed);
    	   this.minSpeed = minSpeed;
       }    
 
-    public RotateXDistancePIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error) {
+    public EnableRotateXDistancePIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error) {
     	this(setPoint, maxSpeed, minSpeed);
     	this.error = error;
     	this.absolute = false;
     }
     
-    public RotateXDistancePIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
+    public EnableRotateXDistancePIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
     	this(setPoint, maxSpeed, minSpeed, error);
     	this.absolute = absolute;
     }
@@ -66,12 +66,12 @@ public class RotateXDistancePIDZZZ extends Command {
 //		Robot.drivetrain.rotateController.setpGain(RobotMap.ROTATE_POSITION_P);
 //		Robot.drivetrain.rotateController.setiGain(RobotMap.ROTATE_POSITION_I);
 //		Robot.drivetrain.rotateController.setdGain(RobotMap.ROTATE_POSITION_D);
-		Robot.drivetrain.rotateController.setSetPoint(sp);
-		Robot.drivetrain.rotateController.setMaxPosOutput(maxSpeed);
-		Robot.drivetrain.rotateController.setMaxNegOutput(-maxSpeed);
-		Robot.drivetrain.rotateController.setMinPosOutput(minSpeed);
-		Robot.drivetrain.rotateController.setMinNegOutput(-minSpeed);
-		Robot.drivetrain.rotateController.setAcceptErrorDiff(error);
+//		Robot.drivetrain.rotateController.setSetPoint(sp);
+//		Robot.drivetrain.rotateController.setMaxPosOutput(maxSpeed);
+//		Robot.drivetrain.rotateController.setMaxNegOutput(-maxSpeed);
+//		Robot.drivetrain.rotateController.setMinPosOutput(minSpeed);
+//		Robot.drivetrain.rotateController.setMinNegOutput(-minSpeed);
+//		Robot.drivetrain.rotateController.setAcceptErrorDiff(error);
 		//Robot.drivetrain.gyroSPI.reset();
 		Robot.drivetrain.rotateController.Enable();
 		
@@ -82,19 +82,17 @@ public class RotateXDistancePIDZZZ extends Command {
 	protected void execute() {
 
 		//Set Min as minimum voltage to drive mechanims based on emperical measurements. Should account for battery dipping. Calculate Motor controller %
-		Robot.drivetrain.rotateController.setMinPosOutput(RobotMap.DRIVE_TRAIN_MIN_ROT_CLOCKWISE_VOLTAGE/Robot.pdp.getBatteryVoltage());
-		Robot.drivetrain.rotateController.setMinNegOutput(-RobotMap.DRIVE_TRAIN_MIN_ROT_COUNTCLOCKWISE_VOLTAGE/Robot.pdp.getBatteryVoltage());
+//		Robot.drivetrain.rotateController.setMinPosOutput(RobotMap.DRIVE_TRAIN_MIN_ROT_CLOCKWISE_VOLTAGE/Robot.pdp.getBatteryVoltage());
+//		Robot.drivetrain.rotateController.setMinNegOutput(-RobotMap.DRIVE_TRAIN_MIN_ROT_COUNTCLOCKWISE_VOLTAGE/Robot.pdp.getBatteryVoltage());
 		
     	if (setPoint != 0)
-    	{
     		Robot.drivetrain.rotateController.setSetPoint(setPoint);
-			Robot.drivetrain.tankDrive(Robot.drivetrain.rotateController.getControlOutput(),-Robot.drivetrain.rotateController.getControlOutput());
-    	}
-		
-    }
+    	
+    	Robot.drivetrain.tankDrive(Robot.drivetrain.rotateController.getControlOutput(),-Robot.drivetrain.rotateController.getControlOutput());
+
 
     // Make this return true when this Command no longer needs to run execute()
-    
+	} 
 	protected boolean isFinished() {
 		//TODO Should the command be stopped????????!?!?!?!?!? after PID is tuned
     	//return Robot.drivetrain.rotateController.isFinished();
