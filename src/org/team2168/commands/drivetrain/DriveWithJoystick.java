@@ -156,20 +156,20 @@ public class DriveWithJoystick extends Command {
 			// }
 			//
 			
-			//((Robot.drivetrain.getGunStyleXValue() > 0.25 || Robot.drivetrain.getGunStyleXValue() < -0.25)&&
-			//Robot.drivetrain.tankDrive(Robot.drivetrain.getGunStyleXValue(), Robot.drivetrain.getGunStyleXValue());
+			//((Robot.oi.getGunStyleYValue() > 0.25 || Robot.oi.getGunStyleYValue() < -0.25)&&
+			//Robot.drivetrain.tankDrive(Robot.oi.getGunStyleYValue(), Robot.oi.getGunStyleYValue());
 			
-			if ((Robot.oi.driverJoystick.getLeftStickRaw_Y() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
+			if ((Robot.oi.getGunStyleYValue() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
 			{
-				Robot.drivetrain.tankDrive(Robot.drivetrain.getGunStyleXValue(), Robot.drivetrain.getGunStyleXValue());
-				System.out.println("Straight: Left: "+ Robot.drivetrain.getGunStyleXValue() + ", Right: "+ Robot.drivetrain.getGunStyleXValue());
+				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleYValue(), Robot.oi.getGunStyleYValue());
+				System.out.println("Straight: Left: "+ Robot.oi.getGunStyleYValue() + ", Right: "+ Robot.oi.getGunStyleYValue());
 			} 
 			else {
 				Robot.drivetrain.tankDrive(
-						(Robot.drivetrain.getGunStyleXValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
-						(Robot.drivetrain.getGunStyleXValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
+						(Robot.oi.getGunStyleYValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
+						(Robot.oi.getGunStyleYValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
 				Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
-				System.out.println("Turn: Left: "+ (Robot.drivetrain.getGunStyleXValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.drivetrain.getGunStyleXValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
+				System.out.println("Turn: Left: "+ (Robot.oi.getGunStyleYValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.oi.getGunStyleYValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
 				
 			}
 

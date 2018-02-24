@@ -92,6 +92,7 @@ private static CubeIntakeWheels instance = null;
 	 * 
 	 * @return true when a cube is present
 	 */
+	
 	public boolean isCubePresent() {
 		return (getRawIRVoltage() >= RobotMap.CUBE_INTAKE_IR_THRESHOLD);
 	}

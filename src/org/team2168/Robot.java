@@ -149,7 +149,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
-		ConsolePrinter.putString("Switch/Scale/Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
+		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
 
 		//Start Thread Only After Every Other Class is Loaded. 
 		ConsolePrinter.startThread();
@@ -210,10 +210,7 @@ public class Robot extends TimedRobot
 	{
 
 		//Keep track of Gunstyle Controller Variables
-		SmartDashboard.putNumber("GunStyleYValue",Robot.oi.driverJoystick.getLeftStickRaw_Y());
-		SmartDashboard.putNumber("GunStyleX",Robot.oi.driverJoystick.getLeftStickRaw_X());
-		SmartDashboard.putNumber("GunStyleXInterpolatedValue",Robot.drivetrain.getGunStyleXValue());
-
+		
 		
 		getControlStyleInt();
 		controlStyle = (int) controlStyleChooser.getSelected();
@@ -289,8 +286,6 @@ public class Robot extends TimedRobot
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        
-	        SmartDashboard.putNumber("GunStyleXValueMakingThisLongSoWeCanFindIt", Robot.oi.driverJoystick.getLeftStickRaw_X());
-	        SmartDashboard.putNumber("GunStyleXInterpolatedValueMakingThisLongSoWeCanFindIt", Robot.drivetrain.getGunStyleXValue());
 	        
 
 	    }
@@ -365,7 +360,21 @@ public class Robot extends TimedRobot
 		 */
 		public void autoSelectInit() {
 			autoChooser = new SendableChooser<Command>();
-			autoChooser.addObject("Do Nothing", new DoNothing());
+			autoChooser.addDefault("Do Nothing", new DoNothing());
+			autoChooser.addObject("2018 Right Switch From Center", new DriveToRightSwitch());
+	        autoChooser.addObject("2018 Left Switch From Center", new DriveToLeftSwitch());
+	        autoChooser.addObject("2018 Left Switch From Center and left scale", new DriveToLeftSwitchAndLeftScale());
+	        autoChooser.addObject("2018 Right Switch From Center and right scale", new DriveToRightSwitchAndRightScale());
+	        autoChooser.addObject("2018 Left Switch From Center and right scale ", new DriveToLeftSwitchAndRightScale());
+	        autoChooser.addObject("2018 Right Switch From Center and left scale", new DriveToRightSwitchAndLeftScale());
+	        autoChooser.addObject("2018 Left Scale From Left Side", new DriveToLeftScaleFromLeftSide());
+	        autoChooser.addObject("2018 Right Scale From Right Side", new DriveToRightScaleFromRightSide());
+	        autoChooser.addObject("2018 Right Scale from Left side", new DriveToRightScaleFromLeftSide());
+	        autoChooser.addObject("2018 Left Scale from Right side", new DriveToLeftScaleFromRightSide());
+	        autoChooser.addObject("2018 Left Switch from Left side", new DriveToLeftSwitchFromLeftSide());
+	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
+	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
+	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
 			// autoChooser.addObject("Do Something", new DoSomething());
 		}
 

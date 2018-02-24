@@ -45,7 +45,7 @@ public class Lift extends Subsystem {
 	
     private static LinearInterpolator liftPotInterpolator;
     //TODO get these values plez format for points: (volts, inches)
-    private double[][] liftRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
+    private double[][] liftPotRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
     		                          {RobotMap.LIFT_POT_VOLTAGE_MAX,RobotMap.LIFT_POT_MAX_HEIGHT_INCHES}};
 
 	/**
@@ -93,19 +93,22 @@ public class Lift extends Subsystem {
 		TCPLiftPOTController = new TCPSocketSender(RobotMap.TCP_SERVER_LIFT_POT_CONTROLLER, liftPOTController);
 		TCPLiftPOTController.start();
 		
+		
+		
+		ConsolePrinter.putNumber("Lift Joystick value", () -> {return Robot.oi.getDriveLiftJoystickValue();}, true, true);
+		ConsolePrinter.putNumber("Lift motor 1 voltage", () -> {return liftMotor1Voltage;}, true, true);
+		ConsolePrinter.putNumber("Lift motor 2 voltage", () -> {return liftMotor2Voltage;}, true, true);
+		ConsolePrinter.putNumber("Lift motor 3 voltage", () -> {return liftMotor3Voltage;}, true, true);
+		ConsolePrinter.putNumber("Lift Motor 1 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP);}, true, true);
+		ConsolePrinter.putNumber("Lift Motor 2 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP);}, true, true);
+		ConsolePrinter.putNumber("Lift Motor 3 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP);}, true, true);
+		
+		
 		ConsolePrinter.putBoolean("Is Lift Fully Up", () -> {return Robot.lift.isLiftFullyUp();}, true, false);
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
 		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
 		ConsolePrinter.putNumber("Lift Pot Inches", () -> {return getPotPos();}, true, false);
-
-		ConsolePrinter.putNumber("Lift motor 1 voltage", () -> {return liftMotor1Voltage;}, true, false);
-		ConsolePrinter.putNumber("Lift motor 2 voltage", () -> {return liftMotor2Voltage;}, true, false);
-		ConsolePrinter.putNumber("Lift motor 3 voltage", () -> {return liftMotor3Voltage;}, true, false);
-
-		ConsolePrinter.putNumber("Lift Motor 1 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP);}, true, true);
-		ConsolePrinter.putNumber("Lift Motor 2 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP);}, true, true);
-		ConsolePrinter.putNumber("Lift Motor 3 Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP);}, true, true);
-		ConsolePrinter.putNumber("Lift Joystick value ", () -> {return OI.getDriveLiftJoystickValue();}, true, true);
+    
 	}
 	
 	/**
@@ -209,7 +212,7 @@ public class Lift extends Subsystem {
 			disableBrake();
 			driveLiftMotor1(speed);
 			driveLiftMotor2(speed);
-			driveLiftMotor3(speed);
+			driveLiftMotor3(speed); 
 		}
 		else 
 		{
@@ -253,6 +256,9 @@ public class Lift extends Subsystem {
 		return liftBrake.get() == Value.kReverse;
 	}
 
+	
+	
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveLiftWithJoysticks());
