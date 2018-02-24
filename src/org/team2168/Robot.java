@@ -286,8 +286,6 @@ public class Robot extends TimedRobot
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        
-	        SmartDashboard.putNumber("GunStyleXValueMakingThisLongSoWeCanFindIt", Robot.oi.driverJoystick.getLeftStickRaw_X());
-	        SmartDashboard.putNumber("GunStyleXInterpolatedValueMakingThisLongSoWeCanFindIt", Robot.drivetrain.getGunStyleXValue());
 	        
 
 	    }
