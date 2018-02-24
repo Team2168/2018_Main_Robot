@@ -218,6 +218,8 @@ public class Drivetrain extends Subsystem {
 		// Log sensor data
 		
 		//PID Testing order
+		
+		
 		ConsolePrinter.putNumber("Left Encoder Distance", () -> {return Robot.drivetrain.getLeftPosition();}, true, true);
 		ConsolePrinter.putNumber("Right Encoder Distance:", () -> {return Robot.drivetrain.getRightPosition();}, true, true);
 		ConsolePrinter.putNumber("Average Drive Encoder Distance", () -> {return Robot.drivetrain.getAverageDistance();}, true, true);
@@ -226,6 +228,7 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putNumber("Average Drive Encoder Rate", () -> {return Robot.drivetrain.getAverageEncoderRate();}, true, true);
 		ConsolePrinter.putNumber("Gyro Angle:", () -> {return Robot.drivetrain.getHeading();}, true, true);	
 		ConsolePrinter.putNumber("Gunstyle X Value", () -> {return Robot.drivetrain.getGunStyleXValue();}, true, true);
+		ConsolePrinter.putNumber("Gunstyle Y Value", () -> {return Robot.drivetrain.getGunStyleYValue();}, true, true);
 		ConsolePrinter.putNumber("DTLeft1MotorVoltage", () -> {return Robot.drivetrain.getleftMotor1Voltage();}, true, true);
 		ConsolePrinter.putNumber("DTLeft2MotorVoltage", () -> {return Robot.drivetrain.getleftMotor2Voltage();}, true, true);
 		ConsolePrinter.putNumber("DTRight1MotorVoltage", () -> {return Robot.drivetrain.getrightMotor1Voltage();}, true, true);
@@ -550,6 +553,13 @@ public class Drivetrain extends Subsystem {
 		return -Robot.oi.driverJoystick.getLeftStickRaw_X();
 	}
 
+	public double getGunStyleYValue() {
+		// return
+		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
+		return Robot.oi.driverJoystick.getLeftStickRaw_Y();
+	}
+	
+	
 	/**
 	 * Call to start an active gyro calibration sequence.
 	 */
