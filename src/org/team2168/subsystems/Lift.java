@@ -95,7 +95,7 @@ public class Lift extends Subsystem {
 		
 		
 		
-		ConsolePrinter.putNumber("Lift Joystick value", () -> {return Robot.lift.getLiftJoystickValue();}, true, true);
+		ConsolePrinter.putNumber("Lift Joystick value", () -> {return OI.getDriveLiftJoystickValue();}, true, true);
 		ConsolePrinter.putNumber("Lift motor 1 voltage", () -> {return liftMotor1Voltage;}, true, true);
 		ConsolePrinter.putNumber("Lift motor 2 voltage", () -> {return liftMotor2Voltage;}, true, true);
 		ConsolePrinter.putNumber("Lift motor 3 voltage", () -> {return liftMotor3Voltage;}, true, true);
@@ -259,9 +259,6 @@ public class Lift extends Subsystem {
 	}
 
 	
-	public double getLiftJoystickValue() {	
-		return Robot.oi.driverJoystick.getLeftStickRaw_Y();
-	}
 	
 	
 	public void initDefaultCommand() {
