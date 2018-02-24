@@ -222,4 +222,16 @@ public class OI {
 		return testJoystick.getRightStickRaw_Y();
 	}
 
+	public static double getGunStyleXValue() {
+		// return
+		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
+		return -Robot.oi.driverJoystick.getLeftStickRaw_X();
+	}
+
+	public static double getGunStyleYValue() {
+		// return
+		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
+		return Robot.oi.driverJoystick.getLeftStickRaw_Y();
+	}
+	
 }

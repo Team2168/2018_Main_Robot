@@ -210,10 +210,7 @@ public class Robot extends TimedRobot
 	{
 
 		//Keep track of Gunstyle Controller Variables
-		SmartDashboard.putNumber("GunStyleYValue",Robot.oi.driverJoystick.getLeftStickRaw_Y());
-		SmartDashboard.putNumber("GunStyleX",Robot.oi.driverJoystick.getLeftStickRaw_X());
-		SmartDashboard.putNumber("GunStyleXInterpolatedValue",Robot.drivetrain.getGunStyleXValue());
-
+		
 		
 		getControlStyleInt();
 		controlStyle = (int) controlStyleChooser.getSelected();
@@ -289,8 +286,6 @@ public class Robot extends TimedRobot
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        
-	        SmartDashboard.putNumber("GunStyleXValueMakingThisLongSoWeCanFindIt", Robot.oi.driverJoystick.getLeftStickRaw_X());
-	        SmartDashboard.putNumber("GunStyleXInterpolatedValueMakingThisLongSoWeCanFindIt", Robot.drivetrain.getGunStyleXValue());
 	        
 
 	    }
