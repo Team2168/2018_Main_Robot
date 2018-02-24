@@ -6,6 +6,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPause;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.EnableRotatePID;
+import org.team2168.commands.drivetrain.PIDCommands.EnableRotateXDistancePIDZZZ;
 import org.team2168.commands.guidingArm.CloseDownGuidingArm;
 import org.team2168.commands.guidingArm.OpenGuidingArm;
 import org.team2168.commands.intake.CloseIntake;
@@ -158,7 +159,7 @@ public class OI {
 		testJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.5,0.2));
 		//testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(-90,0.5,0.2));
 		testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(0,0.5,0.2));
-		testJoystick.ButtonUpDPad().whenPressed(new EnableRotatePID());
+		testJoystick.ButtonUpDPad().whenPressed(new EnableRotateXDistancePIDZZZ(0));
 		testJoystick.ButtonDownDPad().whenPressed(new DrivePIDPause());
 		
 
