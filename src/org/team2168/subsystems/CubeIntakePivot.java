@@ -40,10 +40,10 @@ public class CubeIntakePivot extends Subsystem {
 		
 		ConsolePrinter.putBoolean("Is Intake Pivot Fully Up", () -> {return isRaised();}, true, false);
 		ConsolePrinter.putBoolean("Is Intake Pivot Fully Down", () -> {return isLowered();}, true, false);
-		ConsolePrinter.putNumber("Pivot motor voltage", () -> {return getMotorVoltage();}, true, false);
+		ConsolePrinter.putNumber("Pivot motor voltage", () -> {return getMotorVoltage();}, true, true);
 		ConsolePrinter.putNumber("Is fully up int", () -> {return (double)getIsFullyRaisedInt();}, true, false);
 		ConsolePrinter.putNumber("Is fully down int", () -> {return (double)getIsFullyLoweredInt();}, true, false);
-		ConsolePrinter.putNumber("Pivot Motor Current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.INTAKE_PIVOT_MOTOR_PDP);}, true, true);	
+		ConsolePrinter.putNumber("Pivot Motor current ", () -> {return Robot.pdp.getChannelCurrent(RobotMap.INTAKE_PIVOT_MOTOR_PDP);}, true, false);	
 
 	}
 	
