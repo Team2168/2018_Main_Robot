@@ -122,7 +122,7 @@ public class Robot extends TimedRobot
 
 		
 		
-		motion = new OneDimensionalMotionProfiling(10);
+		motion = new OneDimensionalMotionProfiling(15);
 		for(int i=0; i<motion.getVelArray().length; i++)
 			System.out.println(motion.getVelArray()[i]);
 		//Start Thread Only After Every Other Class is Loaded. 

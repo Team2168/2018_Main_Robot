@@ -10,15 +10,15 @@ public class OneDimensionalMotionProfiling {
 	
 
 	double q0 = 0.0;
-	double q1 = 40.0;
-	double v0 = 0.0;
-	double v1 =  0.0;
+	double q1 = 15.0;
+	double v0 = 0.9;
+	double v1 =  0.9;
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
 	double t1= 10.0;
 	double vMax = 4.0;
-	double aMax = 5.0;
+	double aMax = 10.0;
 	double jMax = 30.0;
 	
 	double vMin = -vMax;
