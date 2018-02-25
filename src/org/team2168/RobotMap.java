@@ -83,11 +83,7 @@ public class RobotMap {
 
 	// PBOT Differences
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
-	public static final int LEFT_DRIVE_ENCODER_B_PBOT = 1;
-	public static final int LEFT_DRIVE_ENCODER_A_PBOT = 2;
-	public static final int RIGHT_DRIVE_ENCODER_A_PBOT = 3;
-	public static final int RIGHT_DRIVE_ENCODER_B_PBOT = 4;
-
+	
 	//Solenoid Channels//////////////////////////////////////////
 
 	//Double Soldenoids PCM ID = 0
@@ -174,15 +170,15 @@ public class RobotMap {
 	 *                         DRIVETRAIN PARAMETERS                         *
 	 *************************************************************************/
 	// TODO check if the reverse values match the physical robot
-	public static final boolean DT_REVERSE_LEFT1 = true;
+	public static final boolean DT_REVERSE_LEFT1 = false;
 	public static final boolean DT_REVERSE_LEFT2 = false;
-	public static final boolean DT_REVERSE_RIGHT1 = false;
+	public static final boolean DT_REVERSE_RIGHT1 = true;
 	public static final boolean DT_REVERSE_RIGHT2 = true;
 	
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 	// TODO find ratio
 	private static final double DRIVE_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
-	private static final double DRIVE_WHEEL_DIAMETER = 6;
+	private static final double DRIVE_WHEEL_DIAMETER = 6.0;
 	public static final int DRIVE_ENCODER_PULSE_PER_ROT = (int) (DRIVE_PULSE_PER_ROTATION * DRIVE_GEAR_RATIO); // pulse
 																												// per
 																												// rotation
