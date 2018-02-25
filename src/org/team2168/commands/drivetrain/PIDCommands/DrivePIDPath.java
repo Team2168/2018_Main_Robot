@@ -3,6 +3,7 @@ package org.team2168.commands.drivetrain.PIDCommands;
 
 import org.team2168.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,6 +15,7 @@ public class DrivePIDPath extends Command {
 	
     int counter;
     double ff_term;
+    double oldClock;
    public DrivePIDPath(double[] setPointLeft, double[] setPointRight){
 	   requires(Robot.drivetrain);
 	   this.setPointLeft = setPointLeft;
@@ -33,15 +35,21 @@ public class DrivePIDPath extends Command {
 		Robot.drivetrain.rightSpeedController.setSetPoint(setPointRight);
     
 		counter = 0;
-		ff_term = 0.08;
+		ff_term = 0.05;
+		oldClock = Timer.getFPGATimestamp();
     }
 
     // Called repeatedly when this Command is scheduled to run
     
-	protected void execute() {
+	protected void execute() 
+	{
     	//Robot.drivetrain.tankDrive(Robot.drivetrain.leftSpeedController.getControlOutput(),
     	//Robot.drivetrain.rightSpeedController.getControlOutput());
         
+		double currTime = Timer.getFPGATimestamp(); 
+		SmartDashboard.putNumber("Command Execution Time", (currTime - oldClock));
+		oldClock = currTime;
+		
 		if(counter<setPointLeft.length)
 		{
 			double speed = ff_term*setPointLeft[counter];
@@ -52,8 +60,7 @@ public class DrivePIDPath extends Command {
 			
 			SmartDashboard.putNumber("DriveArraySpeed", speed);
 		}
-		
-		
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
