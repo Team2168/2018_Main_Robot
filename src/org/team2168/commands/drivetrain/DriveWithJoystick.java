@@ -26,7 +26,7 @@ public class DriveWithJoystick extends Command {
 	private double endDistance;
 	private boolean finished;
 	private double angle;
-	private double error = 0.3;
+	private double error = 0.1;
 
 	private double powerShift;
 
@@ -62,12 +62,13 @@ public class DriveWithJoystick extends Command {
 		case 1:
 			finished = false;
 			Robot.drivetrain.getInstance();
-			Robot.drivetrain.resetPosition();
+		
 
 			// reset controller
-		//	Robot.drivetrain.imu.reset();
-			Robot.drivetrain.driveTrainPosController.reset();
-			Robot.drivetrain.rotateDriveStraightController.reset();
+			//	Robot.drivetrain.resetPosition();	
+			//	Robot.drivetrain.imu.reset();
+			//	Robot.drivetrain.driveTrainPosController.reset();
+			//	Robot.drivetrain.rotateDriveStraightController.reset();
 
 			// drivetrain.resetGyro();
 			endDistance = Robot.drivetrain.getAverageDistance() + distanceGoal;
