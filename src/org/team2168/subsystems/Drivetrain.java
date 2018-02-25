@@ -561,19 +561,31 @@ public class Drivetrain extends Subsystem {
 	}		
 		
 	public double PIDVoltagefeedRightMotor1 () {
-		return this.getrightMotor1Voltage() / this.getRightEncoderRate();
+		if(getRightEncoderRate() != 0)
+			return this.getrightMotor1Voltage() / this.getRightEncoderRate();
+		else 
+			return 0.0;
 	}
 	
 	public double PIDVoltagefeedRightMotor2 () {
-		return this.getrightMotor2Voltage() / this.getRightEncoderRate();
+		if(getRightEncoderRate() != 0)
+			return this.getrightMotor2Voltage() / this.getRightEncoderRate();
+		else 
+			return 0.0;
 	}
 	
 	public double PIDVoltagefeedLeftMotor1 () {
-		return this.getleftMotor1Voltage() / this.getLeftEncoderRate();
+		if(getLeftEncoderRate() != 0)
+			return this.getleftMotor1Voltage() / this.getLeftEncoderRate();
+		else 
+			return 0.0;
 	}
 	
 	public double PIDVoltagefeedLeftMotor2 () {
-		return this.getleftMotor2Voltage() / this.getLeftEncoderRate();
+		if(getLeftEncoderRate() != 0)
+			return this.getleftMotor2Voltage() / this.getLeftEncoderRate();
+		else 
+			return 0.0;
 	}
 }
 
