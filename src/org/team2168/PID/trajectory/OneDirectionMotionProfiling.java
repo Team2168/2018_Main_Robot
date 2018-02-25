@@ -9,9 +9,10 @@ public class OneDirectionMotionProfiling {
 	
 	
 
-	double q0 = 0.0;
-	double q1 = 5.0;
-	double v0 = 0.0;
+	double q0 = 5.0;
+	double q1 = 25;
+	double v0 = 0.0
+			;
 	double v1 =  0.0;
 	double a0 = 0.0;
 	double a1 = 0.0;
@@ -42,7 +43,7 @@ public class OneDirectionMotionProfiling {
 	double Tv = 0;
 	
 	// vector array thing
-	double spacing = 100;
+	double spacing = 1000.0;
 	
 	double[] time;
 	double[] pos;
@@ -77,17 +78,25 @@ public class OneDirectionMotionProfiling {
 		//Tj2 = 1/6 
 		// Td =	4/5 + 1/6 = 29/30	
 		// Tv = 5/4 - (29/60)*(1/4) - 29/60 = 155/240 = 31/48
-		// t1 = 681/240 = 2.84
+		// t1 = 681/240 = 1.22
 		
 		//duration of constant velocity
 		Tv = (q1-q0)/vMax - (Ta/2)*(1+v0/vMax) - (Td/2)*(1+(v1/vMax));
-	
 		t1 = Ta + Tv + Td;
 		T = t1 - t0;
+		if (Tv < 0){
+			double ratio = Ta/(T/2);
+			Tj1 = Tj1/ratio;
+			Tj2 = Tj2/ratio;
+			Ta = T/2;
+			Td = T/2;
+			Tv = 0.0;
+		}
 		
+		System.out.println(Ta);
 		System.out.println(T);
-		
-		 time = new double[(int)((T)*spacing)];
+		System.out.println(Tv);
+		 time = new double[(int)((T)*spacing)]; 
 		 pos = new double[(int)((T)*spacing)];
 		 vel = new double[(int)((T)*spacing)];		
 		 acc = new double[(int)((T)*spacing)];
@@ -101,12 +110,13 @@ public class OneDirectionMotionProfiling {
 		double aLimD = -jMax*Tj2;
 		double vLim = v0 + (Ta-Tj1)*aLimA;
 		System.out.println(vLim+ " hi");
+		System.out.println(Tj1 + " " + Ta);
 		//alima = 5
 		//vlim = 4
 								
 		for(int i=0; i<time.length; i++)
 		{
-			time[i]=i*1.0/100.0 + t0;
+			time[i]=i*1.0/spacing + t0;
 		}
 		
 
@@ -166,7 +176,11 @@ public class OneDirectionMotionProfiling {
 			    }
 		}
 				
-	
+		System.out.println(pos[85]);
+		System.out.println(pos[95]);
+		System.out.println(vel[85]);
+		System.out.println(vel[95]);
+		System.out.println("abc");
 		//Lets create a bank image
 	
 	}
