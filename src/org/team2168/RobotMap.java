@@ -279,8 +279,8 @@ public class RobotMap {
 	public static final double DRIVE_TRAIN_MIN_FWD_VOLTAGE = 1.8;//volts
 	public static final double DRIVE_TRAIN_MIN_RVD_VOLTAGE = 1.2;//volts
 	
-	public static final double DRIVE_TRAIN_MIN_ROT_CLOCKWISE_VOLTAGE = 3.5;//volts
-	public static final double DRIVE_TRAIN_MIN_ROT_COUNTCLOCKWISE_VOLTAGE = 3.5;//volts
+	public static final double DRIVE_TRAIN_MIN_ROT_CLOCKWISE_VOLTAGE = 1.45;//volts
+	public static final double DRIVE_TRAIN_MIN_ROT_COUNTCLOCKWISE_VOLTAGE = 1.45;//volts
 
 	// PID Gains for Left & Right Speed and Position
 	// Bandwidth =

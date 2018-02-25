@@ -65,7 +65,7 @@ public class DriveWithJoystick extends Command {
 			Robot.drivetrain.resetPosition();
 
 			// reset controller
-			Robot.drivetrain.imu.reset();
+		//	Robot.drivetrain.imu.reset();
 			Robot.drivetrain.driveTrainPosController.reset();
 			Robot.drivetrain.rotateDriveStraightController.reset();
 
