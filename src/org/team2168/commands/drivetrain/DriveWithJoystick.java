@@ -65,7 +65,7 @@ public class DriveWithJoystick extends Command {
 			Robot.drivetrain.resetPosition();
 
 			// reset controller
-			Robot.drivetrain.imu.reset();
+		//	Robot.drivetrain.imu.reset();
 			Robot.drivetrain.driveTrainPosController.reset();
 			Robot.drivetrain.rotateDriveStraightController.reset();
 
@@ -159,15 +159,15 @@ public class DriveWithJoystick extends Command {
 			//((Robot.oi.getGunStyleYValue() > 0.25 || Robot.oi.getGunStyleYValue() < -0.25)&&
 			//Robot.drivetrain.tankDrive(Robot.oi.getGunStyleYValue(), Robot.oi.getGunStyleYValue());
 			
-			if ((Robot.oi.getGunStyleYValue() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
+			if ((Robot.oi.driverJoystick.getLeftStickRaw_Y() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
 			{
-				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleYValue(), Robot.oi.getGunStyleYValue());
-				System.out.println("Straight: Left: "+ Robot.oi.getGunStyleYValue() + ", Right: "+ Robot.oi.getGunStyleYValue());
+				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleXValue(), Robot.oi.getGunStyleXValue());
+				System.out.println("Straight: Left: "+ Robot.oi.getGunStyleXValue() + ", Right: "+ Robot.oi.getGunStyleXValue());
 			} 
 			else {
 				Robot.drivetrain.tankDrive(
-						(Robot.oi.getGunStyleYValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
-						(Robot.oi.getGunStyleYValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
+						(Robot.oi.getGunStyleXValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
+						(Robot.oi.getGunStyleXValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
 				Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
 				System.out.println("Turn: Left: "+ (Robot.oi.getGunStyleYValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.oi.getGunStyleYValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
 				

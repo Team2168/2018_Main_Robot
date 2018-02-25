@@ -75,53 +75,35 @@ public class Drivetrain extends Subsystem {
 		
 		if(Robot.isPracticeRobot())
 		{
-			drivetrainRightEncoder = new AverageEncoder(
-					RobotMap.RIGHT_DRIVE_ENCODER_A_PBOT,
-					RobotMap.RIGHT_DRIVE_ENCODER_B_PBOT,
-					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
-					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
-					RobotMap.RIGHT_DRIVE_TRAIN_ENCODER_REVERSE_PBOT,
-					RobotMap.DRIVE_ENCODING_TYPE,
-					RobotMap.DRIVE_SPEED_RETURN_TYPE,
-					RobotMap.DRIVE_POS_RETURN_TYPE,
-					RobotMap.DRIVE_AVG_ENCODER_VAL);
-
-			drivetrainLeftEncoder = new AverageEncoder(
-					RobotMap.LEFT_DRIVE_ENCODER_A_PBOT, 
-					RobotMap.LEFT_DRIVE_ENCODER_B_PBOT,
-					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
-					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
-					RobotMap.LEFT_DRIVE_TRAIN_ENCODER_REVERSE_PBOT,
-					RobotMap.DRIVE_ENCODING_TYPE,
-					RobotMap.DRIVE_SPEED_RETURN_TYPE,
-					RobotMap.DRIVE_POS_RETURN_TYPE,
-					RobotMap.DRIVE_AVG_ENCODER_VAL);
+						
 		}
 		else
 		{
-			drivetrainRightEncoder = new AverageEncoder(
-					RobotMap.RIGHT_DRIVE_ENCODER_A,
-					RobotMap.RIGHT_DRIVE_ENCODER_B,
-					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
-					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
-					RobotMap.RIGHT_DRIVE_TRAIN_ENCODER_REVERSE,
-					RobotMap.DRIVE_ENCODING_TYPE,
-					RobotMap.DRIVE_SPEED_RETURN_TYPE,
-					RobotMap.DRIVE_POS_RETURN_TYPE,
-					RobotMap.DRIVE_AVG_ENCODER_VAL);
-
-
-			drivetrainLeftEncoder = new AverageEncoder(
-					RobotMap.LEFT_DRIVE_ENCODER_A, 
-					RobotMap.LEFT_DRIVE_ENCODER_B,
-					RobotMap.DRIVE_ENCODER_PULSE_PER_ROT, 
-					RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
-					RobotMap.LEFT_DRIVE_TRAIN_ENCODER_REVERSE, 
-					RobotMap.DRIVE_ENCODING_TYPE,
-					RobotMap.DRIVE_SPEED_RETURN_TYPE, 
-					RobotMap.DRIVE_POS_RETURN_TYPE, 
-					RobotMap.DRIVE_AVG_ENCODER_VAL);
+			
 		}
+		
+		drivetrainRightEncoder = new AverageEncoder(
+				RobotMap.RIGHT_DRIVE_ENCODER_A,
+				RobotMap.RIGHT_DRIVE_ENCODER_B,
+				RobotMap.DRIVE_ENCODER_PULSE_PER_ROT,
+				RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
+				RobotMap.RIGHT_DRIVE_TRAIN_ENCODER_REVERSE,
+				RobotMap.DRIVE_ENCODING_TYPE,
+				RobotMap.DRIVE_SPEED_RETURN_TYPE,
+				RobotMap.DRIVE_POS_RETURN_TYPE,
+				RobotMap.DRIVE_AVG_ENCODER_VAL);
+
+
+		drivetrainLeftEncoder = new AverageEncoder(
+				RobotMap.LEFT_DRIVE_ENCODER_A, 
+				RobotMap.LEFT_DRIVE_ENCODER_B,
+				RobotMap.DRIVE_ENCODER_PULSE_PER_ROT, 
+				RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
+				RobotMap.LEFT_DRIVE_TRAIN_ENCODER_REVERSE, 
+				RobotMap.DRIVE_ENCODING_TYPE,
+				RobotMap.DRIVE_SPEED_RETURN_TYPE, 
+				RobotMap.DRIVE_POS_RETURN_TYPE, 
+				RobotMap.DRIVE_AVG_ENCODER_VAL);
 
 		gyroSPI = new ADXRS453Gyro();
 		gyroSPI.startThread();
@@ -284,7 +266,7 @@ public class Drivetrain extends Subsystem {
 	 *            is stationary
 	 */
 	private void driveleftMotor1(double speed) {
-		if (!RobotMap.DT_REVERSE_LEFT1)
+		if (RobotMap.DT_REVERSE_LEFT1)
 			speed = -speed;
 
 		leftMotor1.set(speed);
@@ -331,7 +313,7 @@ public class Drivetrain extends Subsystem {
 	 *            is stationary
 	 */
 	private void driverightMotor1(double speed) {
-		if (!RobotMap.DT_REVERSE_RIGHT1)
+		if (RobotMap.DT_REVERSE_RIGHT1)
 			speed = -speed;
 
 		rightMotor1.set(speed);
