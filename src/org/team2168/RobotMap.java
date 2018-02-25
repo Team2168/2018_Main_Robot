@@ -202,7 +202,6 @@ public class RobotMap {
 	public static final double AUTO_NORMAL_SPEED = 0.5;
 	public static final double WHEEL_BASE = 2; //units must match PositionReturnType (feet)
 	
-	
 	/*************************************************************************
 	 *                         FORKLIFT PARAMETERS                           *
 	 *************************************************************************/

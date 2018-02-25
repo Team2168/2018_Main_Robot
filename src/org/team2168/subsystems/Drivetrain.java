@@ -36,6 +36,11 @@ public class Drivetrain extends Subsystem {
 
 	private static AnalogInput DrivetrainSonarSensor;
 
+	
+	private double RightMotor1FPS;
+	private double RightMotor2FPS;
+	private double leftMotor1FPS;
+	private double lefttMotor1FPS;
 	public IMU imu;
 	
 
@@ -197,6 +202,8 @@ public class Drivetrain extends Subsystem {
 
 		rightMotor1Voltage = 0;
 		rightMotor2Voltage = 0;
+		
+	
 
 		// Log sensor data
 		
@@ -220,13 +227,12 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putNumber("DTRight2MotorCurrent", () -> {return Robot.pdp.getChannelCurrent(RobotMap.DRIVETRAIN_RIGHT_MOTOR_2_PDP);}, true, true);
 		ConsolePrinter.putNumber("DTLeft1MotorCurrent", () -> {return Robot.pdp.getChannelCurrent(RobotMap.DRIVETRAIN_LEFT_MOTOR_1_PDP);}, true, true);
 		ConsolePrinter.putNumber("DTLeft2MotorCurrent", () -> {return Robot.pdp.getChannelCurrent(RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP);}, true, true);
+		ConsolePrinter.putNumber("PID right motor 1 voltage", () -> {return this.PIDVoltagefeedRightMotor1();}, true, true);
+		ConsolePrinter.putNumber("PID right motor 2 voltage", () -> {return this.PIDVoltagefeedRightMotor2();}, true, true);
+		ConsolePrinter.putNumber("PID left motor 1 voltage", () -> {return this.PIDVoltagefeedLeftMotor1();}, true, true);
+		ConsolePrinter.putNumber("PID left motor 2 voltage", () -> {return this.PIDVoltagefeedLeftMotor2();}, true, true);
 		
-		
-		
-		
-		
-		
-		
+		ConsolePrinter.putNumber("DTLeft2MotorCurrent", () -> {return Robot.pdp.getChannelCurrent(RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP);}, true, true);
 		ConsolePrinter.putNumber("GYRO Driftrate:", () -> {return Robot.drivetrain.gyroSPI.driftRate;}, true, false);
 		ConsolePrinter.putNumber("GYRO Rate:", () -> {return Robot.drivetrain.gyroSPI.getRate();}, true, false);
 		ConsolePrinter.putNumber("GYRO Angle SPI:", () -> {return Robot.drivetrain.gyroSPI.getAngle();}, true, false);
@@ -256,6 +262,11 @@ public class Drivetrain extends Subsystem {
 		return instance;
 	}
 
+	
+	
+	
+	
+	
 	/**
 	 * Calls left motor 1 and creates a local variable "speed" Refers to boolean in
 	 * Robot map and if true, speed = - speed Uses set() command to assign the new
@@ -538,7 +549,34 @@ public class Drivetrain extends Subsystem {
 	public void startGyroCalibrating() {
 		gyroSPI.startCalibrating();
 	}
-
-
+	
+	
+	public double returnRightEncoderRate()
+	{
+		return getRightEncoderRate();
+	}
+	
+	public double returnLeftEncoderRate() {
+	return getLeftEncoderRate();	
+	}		
+		
+	public double PIDVoltagefeedRightMotor1 () {
+		return this.getrightMotor1Voltage() / this.getRightEncoderRate();
+	}
+	
+	public double PIDVoltagefeedRightMotor2 () {
+		return this.getrightMotor2Voltage() / this.getRightEncoderRate();
+	}
+	
+	public double PIDVoltagefeedLeftMotor1 () {
+		return this.getleftMotor1Voltage() / this.getLeftEncoderRate();
+	}
+	
+	public double PIDVoltagefeedLeftMotor2 () {
+		return this.getleftMotor2Voltage() / this.getLeftEncoderRate();
+	}
 }
+
+
+
 
