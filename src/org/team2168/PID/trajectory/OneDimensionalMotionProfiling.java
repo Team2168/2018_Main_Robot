@@ -4,15 +4,14 @@ import java.awt.Color;
 import java.time.zone.ZoneOffsetTransitionRule.TimeDefinition;
 import org.team2168.PID.pathplanner.*;
 
-public class OneDirectionMotionProfiling {
+public class OneDimensionalMotionProfiling {
 
 	
 	
 
-	double q0 = 5.0;
-	double q1 = 25;
-	double v0 = 0.0
-			;
+	double q0 = 0.0;
+	double q1 = 40.0;
+	double v0 = 0.0;
 	double v1 =  0.0;
 	double a0 = 0.0;
 	double a1 = 0.0;
@@ -43,13 +42,29 @@ public class OneDirectionMotionProfiling {
 	double Tv = 0;
 	
 	// vector array thing
-	double spacing = 1000.0;
+	double spacing = 50.0;
 	
 	double[] time;
 	double[] pos;
 	double[] vel;		
 	double[] acc;
-	double[] jerk; 
+	double[] jerk;
+	
+	
+	public OneDimensionalMotionProfiling(double distance)
+	{
+		this.q1 = distance;
+		
+		S_curves();
+	}
+	
+	public OneDimensionalMotionProfiling(double distance, double v_max, double accel_max)
+	{
+		this.q1 = distance;
+		this.vMax = v_max;
+		S_curves();
+		this.aMax = accel_max;
+	}
 	 
 	
 	public void S_curves()
@@ -189,12 +204,12 @@ public class OneDirectionMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDirectionMotionProfiling oneDirection= new OneDirectionMotionProfiling();
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(10);
 		System.out.println("Hello");
-		oneDirection.S_curves();
 		
-		for(int i=0; i<oneDirection.getPosArray().length; i++)
-			System.out.println(oneDirection.getPosArray()[i]);
+		
+		for(int i=0; i<oneDirection.getVelArray().length; i++)
+			System.out.println(oneDirection.getVelArray()[i]);
 		
 		FalconLinePlot fig3 = new FalconLinePlot(oneDirection.time, oneDirection.pos ,Color.black);
 		fig3.yGridOn();
