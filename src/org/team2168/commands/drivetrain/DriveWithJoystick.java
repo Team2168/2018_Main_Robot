@@ -29,8 +29,8 @@ public class DriveWithJoystick extends Command {
 	private double angle;
 	private double error = 0.1;
 
-	private double[] leftDrive;
-	private double[] rightDrive;
+	private static volatile double[] leftDrive = new double[500];
+	private static volatile double[] rightDrive = new double[500];
 	private int intCounter = 0;
 	private double powerShift;
 
@@ -53,15 +53,15 @@ public class DriveWithJoystick extends Command {
 		this.speed = RobotMap.AUTO_NORMAL_SPEED;
 		this.powerShift = 1;
 		this.lastRotateOutput = 0;
-		rightDrive = new double[500]; 
-		leftDrive = new double[500];
+		
+		SmartDashboard.putNumber("Recordnumber", 0);
 	}
 
 	// Called just before this Command runs the first time
 	
 	
 	protected void initialize() {
-		SmartDashboard.putNumber("Recordnumber", 0);
+		
 		
 		intCounter = 0;
 		ctrlStyle = Robot.getControlStyleInt();
@@ -184,11 +184,14 @@ public class DriveWithJoystick extends Command {
 				
 			}
 			
-			if(intCounter < leftDrive.length)
+			if (SmartDashboard.getNumber("Recordnumber", 1) > 0.5 )
 			{
-			leftDrive[intCounter] = Robot.drivetrain.getleftMotor1Voltage();
-			rightDrive[intCounter] = Robot.drivetrain.getrightMotor1Voltage();
-			intCounter ++;
+				if(intCounter < leftDrive.length)
+				{
+				leftDrive[intCounter] = Robot.drivetrain.getleftMotor1Voltage();
+				rightDrive[intCounter] = Robot.drivetrain.getrightMotor1Voltage();
+				intCounter ++;
+				}
 			}
 			
 			break;
@@ -245,13 +248,10 @@ public class DriveWithJoystick extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.drivetrain.tankDrive(0.0, 0.0);
-		if (SmartDashboard.getNumber("Recordnumber", 1) == 1 )
-		{
+	
 		
 		for(int i=0; i < leftDrive.length; i++) {
-			System.out.println(Timer.getFPGATimestamp() +", " + leftDrive + ", " + rightDrive );
-			
-		}	
+			System.out.println(Timer.getFPGATimestamp() +", " + leftDrive[i] + ", " + rightDrive[i] );
 		}
 	}
 
@@ -260,5 +260,17 @@ public class DriveWithJoystick extends Command {
 	protected void interrupted() {
 		
 		end();
+	}
+	
+	public static double[] getLeftRecordVoltage()
+	{
+		
+		return leftDrive;
+	}
+	
+	public static double[] getRightRecordVoltage()
+	{
+		
+		return rightDrive;
 	}
 }
