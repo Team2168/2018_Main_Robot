@@ -5,6 +5,7 @@ import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -28,6 +29,9 @@ public class DriveWithJoystick extends Command {
 	private double angle;
 	private double error = 0.1;
 
+	private double[] leftDrive;
+	private double[] rightDrive;
+	private int intCounter = 0;
 	private double powerShift;
 
 	double rightSpeed = 0;
@@ -49,11 +53,17 @@ public class DriveWithJoystick extends Command {
 		this.speed = RobotMap.AUTO_NORMAL_SPEED;
 		this.powerShift = 1;
 		this.lastRotateOutput = 0;
-
+		rightDrive = new double[500]; 
+		leftDrive = new double[500];
 	}
 
 	// Called just before this Command runs the first time
+	
+	
 	protected void initialize() {
+		SmartDashboard.putNumber("Recordnumber", 0);
+		
+		intCounter = 0;
 		ctrlStyle = Robot.getControlStyleInt();
 		switch (ctrlStyle) {
 		/**
@@ -162,7 +172,7 @@ public class DriveWithJoystick extends Command {
 			
 			if ((Robot.oi.driverJoystick.getLeftStickRaw_Y() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
 			{
-				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleXValue(), Robot.oi.getGunStyleXValue());
+				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleXValue(), Robot.oi.getGunStyleXValue());	
 				System.out.println("Straight: Left: "+ Robot.oi.getGunStyleXValue() + ", Right: "+ Robot.oi.getGunStyleXValue());
 			} 
 			else {
@@ -173,7 +183,14 @@ public class DriveWithJoystick extends Command {
 				System.out.println("Turn: Left: "+ (Robot.oi.getGunStyleYValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.oi.getGunStyleYValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
 				
 			}
-
+			
+			if(intCounter < leftDrive.length)
+			{
+			leftDrive[intCounter] = Robot.drivetrain.getleftMotor1Voltage();
+			rightDrive[intCounter] = Robot.drivetrain.getrightMotor1Voltage();
+			intCounter ++;
+			}
+			
 			break;
 
 		/**
@@ -228,11 +245,20 @@ public class DriveWithJoystick extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.drivetrain.tankDrive(0.0, 0.0);
+		if (SmartDashboard.getNumber("Recordnumber", 1) == 1 )
+		{
+		
+		for(int i=0; i < leftDrive.length; i++) {
+			System.out.println(Timer.getFPGATimestamp() +", " + leftDrive + ", " + rightDrive );
+			
+		}	
+		}
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		
 		end();
 	}
 }

@@ -7,17 +7,16 @@ import org.team2168.PID.pathplanner.*;
 public class OneDimensionalMotionProfiling {
 
 	
-	
 
 	double q0 = 0.0;
-	double q1 = 15.0;
+	double q1 = 20;
 	double v0 = 0.9;
 	double v1 =  0.9;
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
 	double t1= 10.0;
-	double vMax = 4.0;
+	double vMax = 12.0;
 	double aMax = 10.0;
 	double jMax = 30.0;
 	
@@ -190,12 +189,6 @@ public class OneDimensionalMotionProfiling {
 			        jerk[i] = jMax;  
 			    }
 		}
-				
-		System.out.println(pos[85]);
-		System.out.println(pos[95]);
-		System.out.println(vel[85]);
-		System.out.println(vel[95]);
-		System.out.println("abc");
 		//Lets create a bank image
 	
 	}

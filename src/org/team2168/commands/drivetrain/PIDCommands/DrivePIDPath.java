@@ -2,6 +2,7 @@
 package org.team2168.commands.drivetrain.PIDCommands;
 
 import org.team2168.Robot;
+import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,6 +13,8 @@ public class DrivePIDPath extends Command {
 	
 	private double[] setPointLeft;
     private double[] setPointRight;
+    
+    OneDimensionalMotionProfiling motion;
 	
     int counter;
     double ff_term;
@@ -20,6 +23,20 @@ public class DrivePIDPath extends Command {
     double lastRotateOutput;
     boolean direction = false;
     int directionValue = 1;
+    
+    public DrivePIDPath(double distance )
+    {
+    	this(distance,false);
+    }
+    
+    public DrivePIDPath(double distance, boolean reverseDirection )
+    {
+    	requires(Robot.drivetrain);
+    	motion = new OneDimensionalMotionProfiling(distance);
+  	   this.setPointLeft =  motion.getVelArray();
+  	   this.setPointRight = motion.getVelArray();
+  	   this.direction = reverseDirection;
+    }
    
     public DrivePIDPath(double[] setPointLeft, double[] setPointRight){
  	   requires(Robot.drivetrain);
@@ -65,7 +82,7 @@ public class DrivePIDPath extends Command {
 		//reset controller
 		Robot.drivetrain.imu.reset();
 		Robot.drivetrain.driveTrainPosController.reset();
-		//Robot.drivetrain.rotateDriveStraightController.reset();
+		Robot.drivetrain.rotateDriveStraightController.reset();
 
 		angle = Robot.drivetrain.getHeading();
 		this.lastRotateOutput = 0;

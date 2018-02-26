@@ -168,6 +168,7 @@ public class OI {
 		pidTestJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(10.0, 0.5, 0.1,  1.0));
 		pidTestJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(-10.0, 0.5, 0.1, 1.0));
 		pidTestJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(0.0, 0.5, 0.1, 1.0));
+		pidTestJoystick.ButtonY().whenPressed(new DrivePIDPath(20.0));
 		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveXDistance(2.0,0.7,0.05));
 		pidTestJoystick.ButtonUpDPad().whenPressed(new DrivePIDPath(Robot.motion.getVelArray(), Robot.motion.getVelArray()));
 		pidTestJoystick.ButtonDownDPad().whenPressed(new DrivePIDPath(Robot.motion.getVelArray(), Robot.motion.getVelArray(),true));
