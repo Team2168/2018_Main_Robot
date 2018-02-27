@@ -162,7 +162,6 @@ public class OneDimensionalMotionProfiling {
 			 
 			    else if ((time[i] > Tj1) && (time[i] <= Ta - Tj1)) //1/6<t<4/5
 			    {
-			    // pos[i] = q0 + v0*(time[i]) + (aLimA/6.0)*(3.0*Math.pow((time[i]), 2) - 3.0*Tj1*(time[i]) + Math.pow(Tj1, 2);
 			     pos[i] = q0 + v0*(time[i]) + (aLimA/6.0)*(3.0*Math.pow((time[i]), 2) - 3.0*Tj1*(time[i]) + Math.pow(Tj1,2)   );
 			     System.out.println("time[i] " +  time[i] + " pos[i] " +  pos[i]);
 			     //pos =1.228
