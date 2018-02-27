@@ -7,16 +7,15 @@ import org.team2168.PID.pathplanner.*;
 public class OneDimensionalMotionProfiling {
 
 	
-
+	double delta = 0.0;
 	double q0 = 0.0;
-	double q1 = 20;
-	double v0 = 0.9;
-	double v1 =  0.9;
+	double q1 = 100;
+	double v0 = 0.5;
+	double v1 =  0.5;
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
-	double t1= 10.0;
-	double vMax = 12.0;
+	double vMax = 100.0;
 	double aMax = 10.0;
 	double jMax = 30.0;
 	
@@ -24,15 +23,8 @@ public class OneDimensionalMotionProfiling {
 	double aMin = -aMax;
 	double jMin = -jMax;
 	
-    double	T = t1 - t0;
-	double  h = q1 - q0;
-	
-	double A0 = q0;
-	double A1 = v0;
-	double A2 = 1/2 * a0;
-	double A3 = 1/(2* Math.pow(T, 3)) * (20*h - (8*v1 + 12*v0)*T - (3*a0 - a1)*Math.pow(T, 2));
-	double A4 = 1/(2* Math.pow(T, 4)) * (-30*h +(14*v1 + 16*v0)*T + (3*a0 - 2*a1)* Math.pow(T, 2));
-	double A5 = 1/(2* Math.pow(T, 5)) * (12*h - 6*(v1+v0)*T + (a1-a0)* Math.pow(T, 2));
+   
+
 	
 	double Tj1 = 0;
 	double Ta = 0;
@@ -74,16 +66,16 @@ public class OneDimensionalMotionProfiling {
 		}
 		else {
 			Tj1 = aMax/jMax;
-			Ta = Tj1 + ((vMax-v0)/aMax);
+			Ta = Tj1 + ((vMax - v0)/aMax);
 		}	
 		
 		if (((vMax- v1) * jMax ) < Math.pow(aMax, 2)){
 			Tj2 = Math.sqrt((vMax - v1)/jMax);
-			Td = Tj2 + ((vMax-v1)/aMax);
+			Td = 2 * Tj2;
 		}
 		else {
 			Tj2 = aMax/jMax;
-			Td = Tj2 + ((vMax-v1)/aMax);
+			Td = Tj2 + ((vMax - v1) / aMax);
 		}	
 		
 		
@@ -95,21 +87,40 @@ public class OneDimensionalMotionProfiling {
 		// t1 = 681/240 = 1.22
 		
 		//duration of constant velocity
-		Tv = (q1-q0)/vMax - (Ta/2)*(1+v0/vMax) - (Td/2)*(1+(v1/vMax));
-		t1 = Ta + Tv + Td;
-		T = t1 - t0;
-		if (Tv < 0){
-			double ratio = Ta/(T/2);
-			Tj1 = Tj1/ratio;
-			Tj2 = Tj2/ratio;
-			Ta = T/2;
-			Td = T/2;
-			Tv = 0.0;
+		System.out.println("ta: "  + Ta);
+		System.out.println("td: " + Td);
+		System.out.println(" ");
+		System.out.println("v0: " + v0);
+		System.out.println("vMax: " + vMax);
+		
+		System.out.println("q1: " + q1);
+		System.out.println("q0: " + q0);
+		Tv = (q1-q0)/vMax - (Ta/2) * (1+v0/vMax) - (Td/2)*(1+(v1/vMax));
+		System.out.println("Ta: " +Ta);
+		System.out.println("Tv: " + Tv);
+		System.out.println("Td: " + Td);
+		System.out.println(" ");
+		if (Tv <= 0) 
+		{
+			Tj1 = aMax / jMax;
+			Tj2 = aMax/ jMax;
+			Tv = 0;
+			
+			delta = Math.pow(aMax, 4) / Math.pow(jMax, 2) + 2 * (Math.pow(v0, 2) + Math.pow(v1, 2)) + aMax * (4 * (q1 - q0)-2*(aMax/jMax) * (v0+v1));
+		
+			Ta = (Math.pow(aMax, 2) / jMax - 2 * v0 + Math.sqrt(delta)) / (2 * aMax);
+			Td = (Math.pow(aMax, 2) / jMax - 2 * v1 + Math.sqrt(delta)) / (2 * aMax);
 		}
 		
-		System.out.println(Ta);
-		System.out.println(T);
-		System.out.println(Tv);
+		double t1 = Ta + Tv + Td;
+		double	T = t1 - t0;
+
+		System.out.println("Ta: " + Ta);
+		System.out.println("Tv: " + Tv);
+		System.out.println("Td: " + Td);
+		System.out.println((int)((T)*spacing));
+		System.out.println("T: " + T);
+		System.out.println("Tv: " + Tv);
 		 time = new double[(int)((T)*spacing)]; 
 		 pos = new double[(int)((T)*spacing)];
 		 vel = new double[(int)((T)*spacing)];		
@@ -117,36 +128,43 @@ public class OneDimensionalMotionProfiling {
 		 jerk = new double[(int)((T)*spacing)];
 		
 		//Linspace time = new Linspace(t0, spacing, t1);
-		
+		 for(int i=0; i<time.length; i++)
+			{
+				time[i]=i*1.0/spacing + t0;
+			}
+			
 
 		//Compute actual min/max a and vc
 		double aLimA = jMax*Tj1;
 		double aLimD = -jMax*Tj2;
 		double vLim = v0 + (Ta-Tj1)*aLimA;
-		System.out.println(vLim+ " hi");
-		System.out.println(Tj1 + " " + Ta);
-		//alima = 5
-		//vlim = 4
-								
-		for(int i=0; i<time.length; i++)
-		{
-			time[i]=i*1.0/spacing + t0;
-		}
 		
-
+								
+		
 		// Calculation of trajectory for q1 > q2
 		// ??
+		System.out.println("Tj1: " + Tj1);
+		System.out.println("Ta - Tj1: " + (Ta - Tj1));
+		System.out.println("Ta: " +  Ta);
+		System.out.println("aLimA: " +  aLimA);
+		System.out.println("q0: " +  q0);
+		System.out.println("v0: " +  v0);
 		for(int i=0;i<time.length;i++)
 		{
 			//System.out.println(time[i]);
 			 if( time[i] <= Tj1) {//t<1/6
-				 pos[i]=q0 + v0*(time[i] + t0) + jMax*Math.pow((time[i] + t0),3)/6;
+				 pos[i]=q0 + v0*(time[i]) + jMax*Math.pow((time[i]),3)/6;
+				 //System.out.println("time[i] " +  time[i] + " pos[i] " +  pos[i]);
+				 
 			     vel[i]= v0 + jMax*Math.pow((time[i] + t0), 2)/2;
 			     acc[i] = jMax*(time[i] + t0);
 			     jerk[i] = jMax;}
-			    else if ((time[i] + t0) > Tj1 && (time[i] + t0) <= Ta - Tj1) //1/6<t<4/5
+			 
+			    else if ((time[i] > Tj1) && (time[i] <= Ta - Tj1)) //1/6<t<4/5
 			    {
-			     pos[i] = q0 + v0*(time[i] + t0) + (aLimA/6)*3*Math.pow((time[i] + t0), 2) - 3*Tj1*(time[i] + t0) + Math.pow(Tj1, 2);
+			    // pos[i] = q0 + v0*(time[i]) + (aLimA/6.0)*(3.0*Math.pow((time[i]), 2) - 3.0*Tj1*(time[i]) + Math.pow(Tj1, 2);
+			     pos[i] = q0 + v0*(time[i]) + (aLimA/6.0)*(3.0*Math.pow((time[i]), 2) - 3.0*Tj1*(time[i]) + Math.pow(Tj1,2)   );
+			     System.out.println("time[i] " +  time[i] + " pos[i] " +  pos[i]);
 			     //pos =1.228
 			     vel[i] = v0 + aLimA*((time[i] + t0) - (Tj1/2));
 			     acc[i] = jMax*Tj1;
@@ -197,12 +215,12 @@ public class OneDimensionalMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(10);
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(100);
 		System.out.println("Hello");
 		
 		
-		for(int i=0; i<oneDirection.getVelArray().length; i++)
-			System.out.println(oneDirection.getVelArray()[i]);
+//		for(int i=0; i<oneDirection.getVelArray().length; i++)
+//			System.out.println(oneDirection.getPosArray()[i]);
 		
 		FalconLinePlot fig3 = new FalconLinePlot(oneDirection.time, oneDirection.pos ,Color.black);
 		fig3.yGridOn();
@@ -226,6 +244,15 @@ double fieldWidth = 27.0;
 		fig4.setXLabel("time (seconds)");
 		fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig4.addData(oneDirection.time,oneDirection.vel, Color.magenta);
+		
+		
+		FalconLinePlot fig5 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		fig5.yGridOn();
+		fig5.xGridOn();
+		fig5.setYLabel("Accel (ft/sec/sec)");
+		fig5.setXLabel("time (seconds)");
+		fig5.setTitle("Accel Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+		fig5.addData(oneDirection.time,oneDirection.acc, Color.black);
 	
 		
 	}
