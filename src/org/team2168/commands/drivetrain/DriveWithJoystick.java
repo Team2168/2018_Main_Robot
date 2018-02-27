@@ -29,8 +29,6 @@ public class DriveWithJoystick extends Command {
 	private double angle;
 	private double error = 0.1;
 
-	private static volatile double[] leftDrive = new double[500];
-	private static volatile double[] rightDrive = new double[500];
 	private int intCounter = 0;
 	private double powerShift;
 
@@ -173,26 +171,18 @@ public class DriveWithJoystick extends Command {
 			if ((Robot.oi.driverJoystick.getLeftStickRaw_Y() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
 			{
 				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleXValue(), Robot.oi.getGunStyleXValue());	
-				System.out.println("Straight: Left: "+ Robot.oi.getGunStyleXValue() + ", Right: "+ Robot.oi.getGunStyleXValue());
+				
 			} 
 			else {
 				Robot.drivetrain.tankDrive(
 						(Robot.oi.getGunStyleXValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
 						(Robot.oi.getGunStyleXValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
 				Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
-				System.out.println("Turn: Left: "+ (Robot.oi.getGunStyleYValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.oi.getGunStyleYValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
-				
+						
 			}
+			System.out.println("Counter: " + intCounter + ", " + (SmartDashboard.getNumber("Recordnumber", 1) > 0.5));
 			
-			if (SmartDashboard.getNumber("Recordnumber", 1) > 0.5 )
-			{
-				if(intCounter < leftDrive.length)
-				{
-				leftDrive[intCounter] = Robot.drivetrain.getleftMotor1Voltage();
-				rightDrive[intCounter] = Robot.drivetrain.getrightMotor1Voltage();
-				intCounter ++;
-				}
-			}
+			
 			
 			break;
 
@@ -248,12 +238,8 @@ public class DriveWithJoystick extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.drivetrain.tankDrive(0.0, 0.0);
-	
-		
-		for(int i=0; i < leftDrive.length; i++) {
-			System.out.println(Timer.getFPGATimestamp() +", " + leftDrive[i] + ", " + rightDrive[i] );
-		}
 	}
+	
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
@@ -262,15 +248,4 @@ public class DriveWithJoystick extends Command {
 		end();
 	}
 	
-	public static double[] getLeftRecordVoltage()
-	{
-		
-		return leftDrive;
-	}
-	
-	public static double[] getRightRecordVoltage()
-	{
-		
-		return rightDrive;
-	}
 }

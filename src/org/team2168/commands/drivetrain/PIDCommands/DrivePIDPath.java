@@ -42,6 +42,9 @@ public class DrivePIDPath extends Command {
  	   requires(Robot.drivetrain);
  	   this.setPointLeft = setPointLeft;
  	   this.setPointRight = setPointRight;
+ 	   SmartDashboard.putNumber("FF_term", 0);
+ 	   ff_term = SmartDashboard.getNumber("FF_term", 0);
+ 	   
  	   direction = false;
  	   
  	   
@@ -62,6 +65,8 @@ public class DrivePIDPath extends Command {
 	   requires(Robot.drivetrain);
 	   this.setPointLeft = setPointLeft;
 	   this.setPointRight = setPointRight;
+	   SmartDashboard.putNumber("FF_term", 0);
+	   ff_term = SmartDashboard.getNumber("FF_term", 0);
 	   
 	   direction = reverseDirection;
 	   
@@ -99,10 +104,6 @@ public class DrivePIDPath extends Command {
 			directionValue = -1;
 		else
 			directionValue = 1;
-		
-		for(int i=0; i < setPointLeft.length; i++) {
-			System.out.println(Timer.getFPGATimestamp() +", " + setPointLeft[i] + ", " + setPointRight[i] );
-		}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -125,7 +126,11 @@ public class DrivePIDPath extends Command {
 		{
 			double speedLeft = (ff_term*directionValue*setPointLeft[counter])/(Robot.pdp.getBatteryVoltage());
 			double speedRight = (ff_term*directionValue*setPointRight[counter])/(Robot.pdp.getBatteryVoltage());
-
+			if (Math.abs(speedLeft)<0.12 && counter!=0)
+				speedLeft = directionValue*0.12;
+			
+			if (Math.abs(speedRight)<0.12 && counter!=0)
+				speedRight = directionValue*0.12;
 			
 			Robot.drivetrain.tankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
 			counter++;

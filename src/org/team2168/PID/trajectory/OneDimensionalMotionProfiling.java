@@ -15,8 +15,8 @@ public class OneDimensionalMotionProfiling {
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
-	double vMax = 100.0;
-	double aMax = 10.0;
+	double vMax = 12.0;
+	double aMax = 8.0;
 	double jMax = 30.0;
 	
 	double vMin = -vMax;
@@ -215,7 +215,7 @@ public class OneDimensionalMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(100);
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(2);
 		System.out.println("Hello");
 		
 		

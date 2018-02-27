@@ -1,5 +1,6 @@
 package org.team2168;
 
+import org.team2168.commands.auto.DriveToLeftScaleFromLeftSide;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
@@ -169,9 +170,8 @@ public class OI {
 		pidTestJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(10.0, 0.5, 0.1,  1.0));
 		pidTestJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(-10.0, 0.5, 0.1, 1.0));
 		pidTestJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(0.0, 0.5, 0.1, 1.0));
-		pidTestJoystick.ButtonY().whenPressed(new DrivePIDPath(20.0));
-		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveXDistance(2.0,0.7,0.05));
-		pidTestJoystick.ButtonUpDPad().whenPressed(new DrivePIDPath(DriveWithJoystick.getLeftRecordVoltage(), DriveWithJoystick.getRightRecordVoltage(),1));
+		pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
+		pidTestJoystick.ButtonUpDPad().whenPressed(new DriveXDistance(2.0,0.7,0.05));
 		pidTestJoystick.ButtonDownDPad().whenPressed(new DrivePIDPath(Robot.motion.getVelArray(), Robot.motion.getVelArray(),true));
 		//pidTestJoystick.ButtonDownDPad().whenPressed(new DriveXDistance(-2.0,0.7,0.1));
 		pidTestJoystick.ButtonLeftDPad().whenPressed(new DriveXDistance(-10.0,0.7,0.1));

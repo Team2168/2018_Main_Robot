@@ -18,8 +18,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveToLeftScaleFromLeftSide extends CommandGroup {
 
     public DriveToLeftScaleFromLeftSide() {
-    	addSequential(new DrivePIDPath(20.0));
-    	//addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2));
+    	addSequential(new DrivePIDPath(18.0));
+    	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));
+    	addSequential(new DrivePIDPath(2.0));
 
     	
     	
