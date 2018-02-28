@@ -1,6 +1,7 @@
 package org.team2168;
 
 import org.team2168.commands.auto.DriveToLeftScaleFromLeftSide;
+import org.team2168.commands.auto.DriveToRightScaleFromLeftSide;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
@@ -168,13 +169,13 @@ public class OI {
 
 		////PID testing///////////////////////////////////////////////////////////
 		pidTestJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(10.0, 0.5, 0.1,  1.0));
-		pidTestJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(-10.0, 0.5, 0.1, 1.0));
-		pidTestJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(0.0, 0.5, 0.1, 1.0));
+		pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
+		pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
 		pidTestJoystick.ButtonUpDPad().whenPressed(new DriveXDistance(2.0,0.7,0.05));
 		pidTestJoystick.ButtonDownDPad().whenPressed(new DrivePIDPath(Robot.motion.getVelArray(), Robot.motion.getVelArray(),true));
 		//pidTestJoystick.ButtonDownDPad().whenPressed(new DriveXDistance(-2.0,0.7,0.1));
-		pidTestJoystick.ButtonLeftDPad().whenPressed(new DriveXDistance(-10.0,0.7,0.1));
+		pidTestJoystick.ButtonLeftDPad().whenPressed(new DrivePIDPath(2.0));
 		pidTestJoystick.ButtonRightDPad().whenPressed(new DriveXDistance(10.0,0.7,0.1));
 	}
 

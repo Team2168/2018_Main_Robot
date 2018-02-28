@@ -214,7 +214,7 @@ public class OneDimensionalMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(2);
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(2000);
 		System.out.println("Hello");
 		
 		

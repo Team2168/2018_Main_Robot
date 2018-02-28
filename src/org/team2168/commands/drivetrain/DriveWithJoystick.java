@@ -73,10 +73,10 @@ public class DriveWithJoystick extends Command {
 		
 
 			// reset controller
-			//	Robot.drivetrain.resetPosition();	
-			//	Robot.drivetrain.imu.reset();
-			//	Robot.drivetrain.driveTrainPosController.reset();
-			//	Robot.drivetrain.rotateDriveStraightController.reset();
+				Robot.drivetrain.resetPosition();	
+				Robot.drivetrain.imu.reset();
+				Robot.drivetrain.driveTrainPosController.reset();
+				Robot.drivetrain.rotateDriveStraightController.reset();
 
 			// drivetrain.resetGyro();
 			endDistance = Robot.drivetrain.getAverageDistance() + distanceGoal;
@@ -180,7 +180,6 @@ public class DriveWithJoystick extends Command {
 				Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
 						
 			}
-			System.out.println("Counter: " + intCounter + ", " + (SmartDashboard.getNumber("Recordnumber", 1) > 0.5));
 			
 			
 			

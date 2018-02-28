@@ -21,6 +21,9 @@ public class DriveToLeftScaleFromLeftSide extends CommandGroup {
     	addSequential(new DrivePIDPath(18.0));
     	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));
     	addSequential(new DrivePIDPath(2.0));
+    	addSequential(new RotateXDistancePIDZZZ(130,0.7,0.2));
+ 
+    	addSequential(new DrivePIDPath(4.0));
 
     	
     	

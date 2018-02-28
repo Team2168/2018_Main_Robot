@@ -83,6 +83,7 @@ public class DrivePIDPath extends Command {
 		Robot.drivetrain.rightSpeedController.Enable();
 		Robot.drivetrain.rightSpeedController.setSetPoint(setPointRight);
     
+		Robot.drivetrain.rotateDriveStraightController.reset();
 		counter = 0;
 		oldClock = Timer.getFPGATimestamp();
 		
@@ -152,6 +153,8 @@ public class DrivePIDPath extends Command {
 	protected void end() {
 		Robot.drivetrain.leftSpeedController.Pause();
 		Robot.drivetrain.rightSpeedController.Pause();
+		Robot.drivetrain.rotateDriveStraightController.Pause();
+		
     }
 
     //delete me
