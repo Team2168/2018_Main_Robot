@@ -87,19 +87,8 @@ public class OneDimensionalMotionProfiling {
 		// t1 = 681/240 = 1.22
 		
 		//duration of constant velocity
-		System.out.println("ta: "  + Ta);
-		System.out.println("td: " + Td);
-		System.out.println(" ");
-		System.out.println("v0: " + v0);
-		System.out.println("vMax: " + vMax);
-		
-		System.out.println("q1: " + q1);
-		System.out.println("q0: " + q0);
 		Tv = (q1-q0)/vMax - (Ta/2) * (1+v0/vMax) - (Td/2)*(1+(v1/vMax));
-		System.out.println("Ta: " +Ta);
-		System.out.println("Tv: " + Tv);
-		System.out.println("Td: " + Td);
-		System.out.println(" ");
+		
 		if (Tv <= 0) 
 		{
 			Tj1 = aMax / jMax;
@@ -114,13 +103,7 @@ public class OneDimensionalMotionProfiling {
 		
 		double t1 = Ta + Tv + Td;
 		double	T = t1 - t0;
-
-		System.out.println("Ta: " + Ta);
-		System.out.println("Tv: " + Tv);
-		System.out.println("Td: " + Td);
-		System.out.println((int)((T)*spacing));
-		System.out.println("T: " + T);
-		System.out.println("Tv: " + Tv);
+				
 		 time = new double[(int)((T)*spacing)]; 
 		 pos = new double[(int)((T)*spacing)];
 		 vel = new double[(int)((T)*spacing)];		
@@ -143,12 +126,6 @@ public class OneDimensionalMotionProfiling {
 		
 		// Calculation of trajectory for q1 > q2
 		// ??
-		System.out.println("Tj1: " + Tj1);
-		System.out.println("Ta - Tj1: " + (Ta - Tj1));
-		System.out.println("Ta: " +  Ta);
-		System.out.println("aLimA: " +  aLimA);
-		System.out.println("q0: " +  q0);
-		System.out.println("v0: " +  v0);
 		for(int i=0;i<time.length;i++)
 		{
 			//System.out.println(time[i]);
@@ -163,7 +140,6 @@ public class OneDimensionalMotionProfiling {
 			    else if ((time[i] > Tj1) && (time[i] <= Ta - Tj1)) //1/6<t<4/5
 			    {
 			     pos[i] = q0 + v0*(time[i]) + (aLimA/6.0)*(3.0*Math.pow((time[i]), 2) - 3.0*Tj1*(time[i]) + Math.pow(Tj1,2)   );
-			     System.out.println("time[i] " +  time[i] + " pos[i] " +  pos[i]);
 			     //pos =1.228
 			     vel[i] = v0 + aLimA*((time[i] + t0) - (Tj1/2));
 			     acc[i] = jMax*Tj1;
@@ -214,8 +190,7 @@ public class OneDimensionalMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(2000);
-		System.out.println("Hello");
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(20);
 		
 		
 //		for(int i=0; i<oneDirection.getVelArray().length; i++)
