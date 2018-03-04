@@ -3,6 +3,7 @@ package org.team2168.commands.lift.PIDCommands;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,7 +15,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveLiftPIDZZZ extends Command {
 
-	private double setPoint;
+	
+    private double[] setPointLift;
+    
+    OneDimensionalMotionProfiling motion;
+	
+	
+
 	private double maxSpeed;
 	private double minSpeed;
 	private double error = 0.5;  // Rotational degree error, default 0 never ends. 
@@ -23,14 +30,14 @@ public class DriveLiftPIDZZZ extends Command {
     public DriveLiftPIDZZZ() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.lift);
-    	this.setPoint = Robot.lift.liftPOTController.getSetPoint();
     	this.maxSpeed = 1;
     	this.minSpeed = 0;
     }
 
     public DriveLiftPIDZZZ(double setPoint){
  	   this();
- 	   this.setPoint = setPoint;
+ 	  motion = new OneDimensionalMotionProfiling(setPoint);
+ 	 this.setPointLift =  motion.getVelArray();
     }
 
     public DriveLiftPIDZZZ(double setPoint, double maxSpeed){
@@ -57,10 +64,6 @@ public class DriveLiftPIDZZZ extends Command {
     
 	protected void initialize() {
 		double sp = 0;
-		if (!absolute)
-			sp = this.setPoint + Robot.lift.getPotPos();
-		else
-			sp = this.setPoint;
 		Robot.lift.liftPOTController.reset();
 
 		Robot.lift.liftPOTController.setpGain(RobotMap.LIFT_P);
