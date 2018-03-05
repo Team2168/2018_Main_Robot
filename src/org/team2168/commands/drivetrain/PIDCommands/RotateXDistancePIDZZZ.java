@@ -75,6 +75,8 @@ public class RotateXDistancePIDZZZ extends Command {
 		//Robot.drivetrain.gyroSPI.reset();
 		Robot.drivetrain.rotateController.Enable();
 		
+		System.out.println(sp);
+		
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -85,11 +87,8 @@ public class RotateXDistancePIDZZZ extends Command {
 		Robot.drivetrain.rotateController.setMinPosOutput(RobotMap.DRIVE_TRAIN_MIN_ROT_CLOCKWISE_VOLTAGE/Robot.pdp.getBatteryVoltage());
 		Robot.drivetrain.rotateController.setMinNegOutput(-RobotMap.DRIVE_TRAIN_MIN_ROT_COUNTCLOCKWISE_VOLTAGE/Robot.pdp.getBatteryVoltage());
 		
-    	if (setPoint != 0)
-    	{
-    		Robot.drivetrain.rotateController.setSetPoint(setPoint);
-			Robot.drivetrain.tankDrive(Robot.drivetrain.rotateController.getControlOutput(),-Robot.drivetrain.rotateController.getControlOutput());
-    	}
+		Robot.drivetrain.tankDrive(Robot.drivetrain.rotateController.getControlOutput(),-Robot.drivetrain.rotateController.getControlOutput());
+    
 		
     }
 
@@ -97,8 +96,8 @@ public class RotateXDistancePIDZZZ extends Command {
     
 	protected boolean isFinished() {
 		//TODO Should the command be stopped????????!?!?!?!?!? after PID is tuned
-    	//return Robot.drivetrain.rotateController.isFinished();
-		return false;
+    	return Robot.drivetrain.rotateController.isFinished();
+		//return false;
     }
 
     // Called once after isFinished returns true

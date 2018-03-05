@@ -1,6 +1,7 @@
 package org.team2168.commands.auto;
 
 import org.team2168.RobotMap;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
@@ -16,9 +17,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveToRightScaleFromRightSide extends CommandGroup {
 
     public DriveToRightScaleFromRightSide() {
-    	addSequential(new DriveXDistance(27.0,0.7,0.05));
-    	addSequential(new RotateXDistancePIDZZZ(-90,0.7,0.2));
-    	addSequential(new DriveXDistance(3.7,0.7,0.05));
+    	addSequential(new DrivePIDPath(18.0));
+    	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));
+    	addSequential(new DrivePIDPath(2.0));
     	
     	//score on switch (Spit Intake)
    	 	addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 

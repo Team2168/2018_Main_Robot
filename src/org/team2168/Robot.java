@@ -1,6 +1,7 @@
 package org.team2168;
 
 import org.team2168.subsystems.*;
+import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
@@ -82,6 +83,8 @@ public class Robot extends TimedRobot
 	
     //Variable to track blue alliance vs red alliance
     private static boolean blueAlliance = false;
+    
+    public static OneDimensionalMotionProfiling motion;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -116,6 +119,14 @@ public class Robot extends TimedRobot
 		//platform = platform.getInstance();
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
+
+		
+		
+		motion = new OneDimensionalMotionProfiling(15);
+		for(int i=0; i<motion.getVelArray().length; i++)
+			System.out.println(motion.getVelArray()[i]);
+		//Start Thread Only After Every Other Class is Loaded. 
+		
 		
 		//Start Operator Interface
 		oi = OI.getInstance();
@@ -151,7 +162,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
 		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
 
-		//Start Thread Only After Every Other Class is Loaded. 
+
 		ConsolePrinter.startThread();
 		System.out.println("************Robot Done Loading Successfully**********");
 		}
@@ -441,5 +452,6 @@ public class Robot extends TimedRobot
 		LiveWindow.run();
 		
 	}
+	
 	
 }

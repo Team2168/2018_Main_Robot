@@ -5,6 +5,7 @@ import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,8 +27,9 @@ public class DriveWithJoystick extends Command {
 	private double endDistance;
 	private boolean finished;
 	private double angle;
-	private double error = 0.3;
+	private double error = 0.1;
 
+	private int intCounter = 0;
 	private double powerShift;
 
 	double rightSpeed = 0;
@@ -49,11 +51,17 @@ public class DriveWithJoystick extends Command {
 		this.speed = RobotMap.AUTO_NORMAL_SPEED;
 		this.powerShift = 1;
 		this.lastRotateOutput = 0;
-
+		
+		SmartDashboard.putNumber("Recordnumber", 0);
 	}
 
 	// Called just before this Command runs the first time
+	
+	
 	protected void initialize() {
+		
+		
+		intCounter = 0;
 		ctrlStyle = Robot.getControlStyleInt();
 		switch (ctrlStyle) {
 		/**
@@ -62,12 +70,13 @@ public class DriveWithJoystick extends Command {
 		case 1:
 			finished = false;
 			Robot.drivetrain.getInstance();
-			Robot.drivetrain.resetPosition();
+		
 
 			// reset controller
-		//	Robot.drivetrain.imu.reset();
-			Robot.drivetrain.driveTrainPosController.reset();
-			Robot.drivetrain.rotateDriveStraightController.reset();
+				Robot.drivetrain.resetPosition();	
+				Robot.drivetrain.imu.reset();
+				Robot.drivetrain.driveTrainPosController.reset();
+				Robot.drivetrain.rotateDriveStraightController.reset();
 
 			// drivetrain.resetGyro();
 			endDistance = Robot.drivetrain.getAverageDistance() + distanceGoal;
@@ -161,18 +170,19 @@ public class DriveWithJoystick extends Command {
 			
 			if ((Robot.oi.driverJoystick.getLeftStickRaw_Y() < 0.1) && (Robot.oi.driverJoystick.getLeftStickRaw_Y() > -0.1))
 			{
-				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleXValue(), Robot.oi.getGunStyleXValue());
-				System.out.println("Straight: Left: "+ Robot.oi.getGunStyleXValue() + ", Right: "+ Robot.oi.getGunStyleXValue());
+				Robot.drivetrain.tankDrive(Robot.oi.getGunStyleXValue(), Robot.oi.getGunStyleXValue());	
+				
 			} 
 			else {
 				Robot.drivetrain.tankDrive(
 						(Robot.oi.getGunStyleXValue()) + Robot.oi.driverJoystick.getLeftStickRaw_Y(),
 						(Robot.oi.getGunStyleXValue()) - Robot.oi.driverJoystick.getLeftStickRaw_Y());
 				Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
-				System.out.println("Turn: Left: "+ (Robot.oi.getGunStyleYValue() + Robot.oi.driverJoystick.getLeftStickRaw_Y()) + ", Right: "+ (-Robot.oi.getGunStyleYValue() - Robot.oi.driverJoystick.getLeftStickRaw_Y()));
-				
+						
 			}
-
+			
+			
+			
 			break;
 
 		/**
@@ -228,10 +238,13 @@ public class DriveWithJoystick extends Command {
 	protected void end() {
 		Robot.drivetrain.tankDrive(0.0, 0.0);
 	}
+	
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		
 		end();
 	}
+	
 }

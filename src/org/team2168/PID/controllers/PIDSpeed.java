@@ -729,6 +729,25 @@ public class PIDSpeed implements TCPMessageInterface {
 		this.sp = sp;
 	}
 
+
+	/**
+	 * @param sp
+	 *            This method sets the setpoint the controller is to achieve. Use
+	 *            this method to change the setpoint, if the controller is enabled
+	 *            it will automatically start to achieve the new setpoint.
+	 */
+	public void setSetPoint(double[] sp) {
+		this.setPointByArray = true;
+
+		// copy array
+		this.setPointArray = new double[sp.length];
+		for (int i = 0; i < setPointArray.length; i++)
+			setPointArray[i] = sp[i];
+
+		this.setPointArrayCounter = 0;
+
+	}
+	
 	/**
 	 * @param sp
 	 *            This method sets the setpoint the controller is to achieve. Use

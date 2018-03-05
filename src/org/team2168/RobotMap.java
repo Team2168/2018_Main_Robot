@@ -285,12 +285,12 @@ public class RobotMap {
 	// PID Gains for Left & Right Speed and Position
 	// Bandwidth =
 	// Phase Margin =
-	public static final double DRIVE_TRAIN_LEFT_SPEED_P = 0.4779;
-	public static final double DRIVE_TRAIN_LEFT_SPEED_I = 1.0526;
+	public static final double DRIVE_TRAIN_LEFT_SPEED_P = 0.04779;
+	public static final double DRIVE_TRAIN_LEFT_SPEED_I = 0.0010526;
 	public static final double DRIVE_TRAIN_LEFT_SPEED_D = 0.0543;
 
-	public static final double DRIVE_TRAIN_RIGHT_SPEED_P = 0.4779;
-	public static final double DRIVE_TRAIN_RIGHT_SPEED_I = 1.0526;
+	public static final double DRIVE_TRAIN_RIGHT_SPEED_P = 0.04779;
+	public static final double DRIVE_TRAIN_RIGHT_SPEED_I = 0.0010526;
 	public static final double DRIVE_TRAIN_RIGHT_SPEED_D = 0.0543;
 
 	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.2;
@@ -305,8 +305,8 @@ public class RobotMap {
 	public static final double ROTATE_POSITION_I = 0.027;
 	public static final double ROTATE_POSITION_D = 0.000000067;
 	
-	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.045 comp
-	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001;
+	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp
+	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
 	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
 	
 	// Shooter PID Speed
