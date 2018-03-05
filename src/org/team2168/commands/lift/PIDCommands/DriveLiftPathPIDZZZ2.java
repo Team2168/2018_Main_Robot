@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Vittorio
  */
-public class DriveLiftPIDZZZ extends Command {
+public class DriveLiftPathPIDZZZ2 extends Command {
 
 	
-	private double setPoint;
+    private double[] setPointLift;
+    
+    OneDimensionalMotionProfiling motion;
 	
 
 	private double maxSpeed;
@@ -24,36 +26,36 @@ public class DriveLiftPIDZZZ extends Command {
 	private double error = 0.5;  // Rotational degree error, default 0 never ends. 
 	private boolean absolute = false;
 	
-    public DriveLiftPIDZZZ() {
+    public DriveLiftPathPIDZZZ2() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.lift);
-    	this.setPoint = Robot.lift.liftPOTController.getSetPoint();
     	this.maxSpeed = 1;
     	this.minSpeed = 0;
     }
 
-    public DriveLiftPIDZZZ(double setPoint){
+    public DriveLiftPathPIDZZZ2(double setPoint){
  	   this();
- 	  this.setPoint = setPoint;
+ 	  motion = new OneDimensionalMotionProfiling(setPoint);
+ 	 this.setPointLift =  motion.getVelArray();
     }
 
-    public DriveLiftPIDZZZ(double setPoint, double maxSpeed){
+    public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed){
   	   this(setPoint);
   	   this.maxSpeed = maxSpeed;
      }
     
-    public DriveLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed){
+    public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed, double minSpeed){
    	   this(setPoint, maxSpeed);
    	   this.minSpeed = minSpeed;
       }    
 
-    public DriveLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error) {
+    public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed, double minSpeed, double error) {
     	this(setPoint, maxSpeed, minSpeed);
     	this.error = error;
     	this.absolute = false;
     }
     
-    public DriveLiftPIDZZZ(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
+    public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
     	this(setPoint, maxSpeed, minSpeed, error);
     	this.absolute = absolute;
     }
@@ -61,10 +63,6 @@ public class DriveLiftPIDZZZ extends Command {
     
 	protected void initialize() {
 		double sp = 0;
-		if (!absolute)
-			sp = this.setPoint + Robot.lift.getPotPos();
-	else
-			sp = this.setPoint;
 		Robot.lift.liftPOTController.reset();
 
 		Robot.lift.liftPOTController.setpGain(RobotMap.LIFT_P);
