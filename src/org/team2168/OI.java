@@ -151,23 +151,29 @@ public class OI {
 		//operatorJoystick.ButtonB().whenPressed(new DisableRachet());
 		
 		////////////////For testing purposes//////////////////////
-		operatorJoystick.ButtonY().whenPressed(new LiftShiftHigh());
-		operatorJoystick.ButtonX().whenPressed(new LiftShiftLow());
-		operatorJoystick.ButtonA().whenPressed(new EnableRachet());
-		operatorJoystick.ButtonB().whenPressed(new DisableRachet());
-		operatorJoystick.ButtonLeftDPad().whenPressed(new EnableBrake());
-		operatorJoystick.ButtonRightDPad().whenPressed(new DisableBrake());
-		
-		//////////////PID Testing///////////////////////////////////////////////
+		testJoystick.ButtonY().whenPressed(new LiftShiftHigh());
+		testJoystick.ButtonX().whenPressed(new LiftShiftLow());
+		testJoystick.ButtonA().whenPressed(new EnableRachet());
+		testJoystick.ButtonB().whenPressed(new DisableRachet());
+		testJoystick.ButtonLeftDPad().whenPressed(new EnableBrake());
+		testJoystick.ButtonRightDPad().whenPressed(new DisableBrake());
+
 		testJoystick.ButtonA().whenPressed(new RotateXDistancePIDZZZ(45,0.5,0.2));
 		testJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
 		testJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.5,0.2));
-		//testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(-90,0.5,0.2));
+		
 		testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(0,0.5,0.2));
 		testJoystick.ButtonUpDPad().whenPressed(new EnableRotateXDistancePIDZZZ(0));
 		testJoystick.ButtonDownDPad().whenPressed(new DrivePIDPause());
-		
 
+		testJoystick.ButtonRightTrigger().whenPressed(new DriveIntakeWheelsWithConstant(1));
+		testJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1));
+		
+		testJoystick.ButtonDownDPad().whenPressed(new RotatePivotUpAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
+		testJoystick.ButtonUpDPad().whenPressed(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
+		
+		testJoystick.ButtonLeftBumper().whenPressed(new OpenIntake());
+		testJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
 		///////////////PID testing//////////////////////////////////////////////////////
 		pidTestJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(10.0, 0.5, 0.1,  1.0));
 		pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
