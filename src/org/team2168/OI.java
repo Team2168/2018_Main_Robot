@@ -158,13 +158,13 @@ public class OI {
 		testJoystick.ButtonLeftDPad().whenPressed(new EnableBrake());
 		testJoystick.ButtonRightDPad().whenPressed(new DisableBrake());
 
-		testJoystick.ButtonA().whenPressed(new RotateXDistancePIDZZZ(45,0.5,0.2));
-		testJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
-		testJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.5,0.2));
+		//testJoystick.ButtonA().whenPressed(new RotateXDistancePIDZZZ(45,0.5,0.2));
+		//testJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
+		//testJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.5,0.2));
 		
-		testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(0,0.5,0.2));
-		testJoystick.ButtonUpDPad().whenPressed(new EnableRotateXDistancePIDZZZ(0));
-		testJoystick.ButtonDownDPad().whenPressed(new DrivePIDPause());
+		//testJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(0,0.5,0.2));
+		//testJoystick.ButtonUpDPad().whenPressed(new EnableRotateXDistancePIDZZZ(0));
+		//testJoystick.ButtonDownDPad().whenPressed(new DrivePIDPause());
 
 		testJoystick.ButtonRightTrigger().whenPressed(new DriveIntakeWheelsWithConstant(1));
 		testJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1));
