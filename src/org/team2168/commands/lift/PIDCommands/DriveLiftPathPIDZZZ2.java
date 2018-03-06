@@ -6,6 +6,7 @@ import org.team2168.RobotMap;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -19,12 +20,13 @@ public class DriveLiftPathPIDZZZ2 extends Command {
     private double[] setPointLift;
     
     OneDimensionalMotionProfiling motion;
-	
-
+	int counter;
+    double ff_term = 1.11;
 	private double maxSpeed;
 	private double minSpeed;
 	private double error = 0.5;  // Rotational degree error, default 0 never ends. 
 	private boolean absolute = false;
+	int directionValue = 1;
 	
     public DriveLiftPathPIDZZZ2() {
         // Use requires() here to declare subsystem dependencies
@@ -37,6 +39,8 @@ public class DriveLiftPathPIDZZZ2 extends Command {
  	   this();
  	  motion = new OneDimensionalMotionProfiling(setPoint);
  	 this.setPointLift =  motion.getVelArray();
+ 	SmartDashboard.putNumber("FF_term_Lift", 1.11);
+	   ff_term = SmartDashboard.getNumber("FF_term_Lift", 1.11);
     }
 
     public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed){
@@ -83,16 +87,16 @@ public class DriveLiftPathPIDZZZ2 extends Command {
     
 	protected void execute() {
 		
-		Robot.lift.driveAllMotors(Robot.lift.liftPOTController.getControlOutput());
-	
 		
+		double liftSpeed = (ff_term*directionValue*setPointLift[counter])/(Robot.pdp.getBatteryVoltage());
+		Robot.lift.driveAllMotors(liftSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     
 	protected boolean isFinished() {
 		//TODO Should the command be stopped????????!?!?!?!?!? after PID is tuned
-    	return Robot.lift.liftPOTController.isFinished();
+    	return (Robot.lift.liftPOTController.isFinished() && Robot.lift.liftPOTController.isSetPointByArray());
 		//return false;
     }
 
