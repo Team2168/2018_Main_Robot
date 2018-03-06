@@ -26,6 +26,7 @@ public class DriveLiftPathPIDZZZ2 extends Command {
 	private double minSpeed;
 	private double error = 0.5;  // Rotational degree error, default 0 never ends. 
 	private boolean absolute = false;
+	private boolean direction = true; //true is forward
 	int directionValue = 1;
 	
     public DriveLiftPathPIDZZZ2() {
@@ -52,16 +53,23 @@ public class DriveLiftPathPIDZZZ2 extends Command {
    	   this(setPoint, maxSpeed);
    	   this.minSpeed = minSpeed;
       }    
-
+    public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed, double minSpeed, boolean direction ){
+    	   this(setPoint, maxSpeed);
+    	   this.minSpeed = minSpeed;
+    	   this.direction = direction;
+       }
+    
     public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed, double minSpeed, double error) {
     	this(setPoint, maxSpeed, minSpeed);
     	this.error = error;
     	this.absolute = false;
+    	this.direction = true;
     }
     
     public DriveLiftPathPIDZZZ2(double setPoint, double maxSpeed, double minSpeed, double error, boolean absolute) {
     	this(setPoint, maxSpeed, minSpeed, error);
     	this.absolute = absolute;
+    	this.direction = true;
     }
     // Called just before this Command runs the first time
     
@@ -86,10 +94,11 @@ public class DriveLiftPathPIDZZZ2 extends Command {
     // Called repeatedly when this Command is scheduled to run
     
 	protected void execute() {
-		
-		
 		double liftSpeed = (ff_term*directionValue*setPointLift[counter])/(Robot.pdp.getBatteryVoltage());
-		Robot.lift.driveAllMotors(liftSpeed);
+		if (direction) {
+		Robot.lift.driveAllMotors(liftSpeed); }
+		else 
+		Robot.lift.driveAllMotors(-liftSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
