@@ -99,8 +99,8 @@ public class RobotMap {
 	//Double Soldenoids PCM ID = 1
 	public static final int LIFT_RACHET_ENGAGE_PCM = 0;
 	public static final int LIFT_RACHET_DISENGAGE_PCM = 1;
-	public static final int LIFT_BRAKE_ENGAGE_PCM = 2;
-	public static final int LIFT_BRAKE_DISENGAGE_PCM = 3;
+	public static final int LIFT_BRAKE_ENGAGE_PCM = 3;
+	public static final int LIFT_BRAKE_DISENGAGE_PCM = 2;
 	public static final int LIFT_HIGH_GEAR_PCM = 4;
 	public static final int LIFT_LOW_GEAR_PCM = 5;
 	public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
@@ -219,8 +219,8 @@ public class RobotMap {
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.8;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
-	public static final double CUBE_PIVOT_CONSTANT_NO_CUBE = 1.0;
-	public static final double CUBE_PIVOT_CONSTANT = 1.0;
+	public static final double CUBE_PIVOT_CONSTANT_NO_CUBE = 4.0;
+	public static final double CUBE_PIVOT_CONSTANT = 4.0;
 	public static final double CUBE_PIVOT_DOWN_CONSTANT = 0.4;
 	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
 	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
@@ -251,7 +251,7 @@ public class RobotMap {
 	public static final double LIFT_POT_VOLTAGE_0 = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
-	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 3.6; //90 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.15; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
 	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
