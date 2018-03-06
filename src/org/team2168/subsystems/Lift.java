@@ -207,7 +207,7 @@ public class Lift extends Subsystem {
 	 */
 	public void driveAllMotors(double speed) {
 		if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged()) ||
-				((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() && Robot.liftRatchetShifter.isRatchetDisEngaged()))
+				((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown()))
 		{
 			disableBrake();
 			driveLiftMotor1(speed);
