@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ScoreCube extends CommandGroup {
 
     public ScoreCube() {
-    	addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
+    	addSequential(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
    	 	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
    	 	addParallel(new StopWheels());
-   	    addParallel(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
+   	    addParallel(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
     }
 }
