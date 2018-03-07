@@ -154,6 +154,7 @@ public class DrivePIDPath extends Command {
 		Robot.drivetrain.leftSpeedController.Pause();
 		Robot.drivetrain.rightSpeedController.Pause();
 		Robot.drivetrain.rotateDriveStraightController.Pause();
+		Robot.drivetrain.tankDrive(0, 0);
 		
     }
 
