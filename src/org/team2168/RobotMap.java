@@ -221,7 +221,7 @@ public class RobotMap {
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
 	public static final double CUBE_PIVOT_CONSTANT_NO_CUBE = 4.0;
 	public static final double CUBE_PIVOT_CONSTANT = 4.0;
-	public static final double CUBE_PIVOT_DOWN_CONSTANT = 0.4;
+	public static final double CUBE_PIVOT_DOWN_CONSTANT = 0.6;
 	public static final double CUBE_INTAKE_TIMEOUT = 0.4;
 	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
 	public static final double CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED = 0.2;
@@ -253,7 +253,7 @@ public class RobotMap {
 	
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.15; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.47; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.9; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
 	

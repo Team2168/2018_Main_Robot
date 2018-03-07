@@ -7,6 +7,7 @@ import org.team2168.PID.pathplanner.*;
 public class OneDimensionalMotionProfiling {
 
 	
+	
 	double delta = 0.0;
 	double q0 = 0.0;
 	double q1 = 100;
@@ -49,12 +50,14 @@ public class OneDimensionalMotionProfiling {
 		S_curves();
 	}
 	
-	public OneDimensionalMotionProfiling(double distance, double v_max, double accel_max)
+	public OneDimensionalMotionProfiling(double distance, double v_max, double accel_max, double j_max)
 	{
 		this.q1 = distance;
 		this.vMax = v_max;
-		S_curves();
 		this.aMax = accel_max;
+		this.jMax = j_max;
+		S_curves();
+		
 	}
 	 
 	

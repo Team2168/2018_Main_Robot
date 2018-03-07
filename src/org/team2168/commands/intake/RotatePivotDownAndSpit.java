@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RotatePivotDownAndSpit extends CommandGroup {
 
     public RotatePivotDownAndSpit() {
-        addSequential(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_DOWN_CONSTANT), 0.4);
-        addSequential(new DriveIntakeWheelsWithConstant(-RobotMap.CUBE_INTAKE_MAX_OUTAKE));
+        addSequential(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT), 0.6);
+        addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
     }
 }
