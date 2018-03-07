@@ -216,6 +216,7 @@ public class RobotMap {
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.2;
+	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.7;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.8;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
@@ -251,9 +252,9 @@ public class RobotMap {
 	public static final double LIFT_POT_VOLTAGE_0 = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
-	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.15; //90 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.46; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.9; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.7; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
 	
