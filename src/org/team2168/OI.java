@@ -7,6 +7,7 @@ import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPause;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.EnableRotatePID;
@@ -176,7 +177,7 @@ public class OI {
 //		testJoystick.ButtonUpDPad().whenPressed(new EnableRotateXDistancePIDZZZ(0));
 //		testJoystick.ButtonDownDPad().whenPressed(new DrivePIDPause());
 //
-//		testJoystick.ButtonRightTrigger().whenPressed(new DriveIntakeWheelsWithConstant(1));
+		testJoystick.ButtonRightTrigger().whenPressed(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic));
 //		testJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1));
 //		
 //		testJoystick.ButtonDownDPad().whenPressed(new RotatePivotUpAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));

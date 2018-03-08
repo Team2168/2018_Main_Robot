@@ -417,6 +417,8 @@ public class PIDPosition implements TCPMessageInterface {
 		this.filterDerivOld = 0;
 		this.olderr = 0;
 		this.olderrsum = 0;
+		this.clock = 0;
+		this.int_d_term = 0;
 	}
 
 	/**

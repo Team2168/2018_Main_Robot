@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class DrivePIDPath extends Command {
+public class DrivePIDPathQuintic extends Command {
 	
 	private double[] setPointLeft;
     private double[] setPointRight;
@@ -24,12 +24,12 @@ public class DrivePIDPath extends Command {
     boolean direction = false;
     int directionValue = 1;
     
-    public DrivePIDPath(double distance )
+    public DrivePIDPathQuintic(double distance )
     {
     	this(distance,false);
     }
     
-    public DrivePIDPath(double distance, boolean reverseDirection )
+    public DrivePIDPathQuintic(double distance, boolean reverseDirection )
     {
     	requires(Robot.drivetrain);
     	motion = new OneDimensionalMotionProfiling(distance);
@@ -38,7 +38,7 @@ public class DrivePIDPath extends Command {
   	   this.direction = reverseDirection;
     }
    
-    public DrivePIDPath(double[] setPointLeft, double[] setPointRight){
+    public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight){
  	   requires(Robot.drivetrain);
  	 
  	   this.setPointLeft =setPointLeft;
@@ -49,7 +49,7 @@ public class DrivePIDPath extends Command {
  	   System.out.println("SetPointLength: " + setPointLeft.length);
     } 
     
-    public DrivePIDPath(double[] setPointLeft, double[] setPointRight, double ff_gain){
+    public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight, double ff_gain){
   	   requires(Robot.drivetrain);
   	   this.setPointLeft = setPointLeft;
   	   this.setPointRight = setPointRight;
@@ -60,7 +60,7 @@ public class DrivePIDPath extends Command {
   	   
      } 
     
-   public DrivePIDPath(double[] setPointLeft, double[] setPointRight, boolean reverseDirection){
+   public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight, boolean reverseDirection){
 	   requires(Robot.drivetrain);
 	   this.setPointLeft = setPointLeft;
 	   this.setPointRight = setPointRight;
@@ -97,7 +97,7 @@ public class DrivePIDPath extends Command {
 		angle = Robot.drivetrain.getHeading();
 		this.lastRotateOutput = 0;
 		
-		Robot.drivetrain.rotateDriveStraightController.Enable();
+		//Robot.drivetrain.rotateDriveStraightController.Enable();
 		
 		//if true we want to reverse else we want to go forward
 		if (direction)
@@ -120,7 +120,7 @@ public class DrivePIDPath extends Command {
 		//ff_term = SmartDashboard.getNumber("FF_term", 0);
 		
 		lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
-		double headingCorrection = (Robot.drivetrain.rotateDriveStraightController.getControlOutput()) ;
+		double headingCorrection = 0;//(Robot.drivetrain.rotateDriveStraightController.getControlOutput()) ;
 		
 		if(counter<setPointLeft.length)
 		{

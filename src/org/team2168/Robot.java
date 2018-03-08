@@ -2,6 +2,7 @@ package org.team2168;
 
 import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
+import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.test.TestAutoCommandGroupA;
 import org.team2168.commands.auto.test.TestCommandC;
@@ -84,12 +85,19 @@ public class Robot extends TimedRobot
     //TX1TurnON tx1;
     
     //Global Position Tracking Class
-    public static DrivetrainIMUGlobalPosition dtIMU;
+   // public static DrivetrainIMUGlobalPosition dtIMU;
 	
     //Variable to track blue alliance vs red alliance
     private static boolean blueAlliance = false;
     
     public static OneDimensionalMotionProfiling motion;
+    
+    
+    public static double[] leftVelPathQuintic;
+    public static double[] rightVelPathQuintic;
+    
+    public static double[] leftVelPathQuintic2;
+    public static double[] rightVelPathQuintic2;
     
     
     public static String gameData = "N A";
@@ -130,9 +138,46 @@ public class Robot extends TimedRobot
 
 		
 		
-		motion = new OneDimensionalMotionProfiling(15);
-		for(int i=0; i<motion.getVelArray().length; i++)
-			System.out.println(motion.getVelArray()[i]);
+//		motion = new OneDimensionalMotionProfiling(15);
+//		for(int i=0; i<motion.getVelArray().length; i++)
+//			System.out.println(motion.getVelArray()[i]);
+//		//Start Thread Only After Every Other Class is Loaded. 
+		
+		//S Path
+//		double[][] waypointPath = new double[][]{
+//				{5, 15, Math.PI/2},
+//				{5, 18, Math.PI/2},
+//				{7, 23, Math.PI/2},
+//				{7, 25, Math.PI/2},
+//		};
+		
+		double[][] waypointPath = new double[][]{
+			{5, 15, Math.PI/2},
+			{5, 18, Math.PI/2},
+			{9, 22, Math.PI/4}
+	};
+
+		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
+		quinticPath.calculate();
+		
+		this.leftVelPathQuintic = quinticPath.getLeftVel();
+		this.rightVelPathQuintic = quinticPath.getRightVel();
+		
+		
+		double[][] waypointPath2 = new double[][]{
+			{5, 15, Math.PI/2},
+			{5, 18, Math.PI/2},
+			{9, 22, 0.002}
+	};
+		
+		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
+		quinticPath2.calculate();
+		
+		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
+		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
+		
+		for(int i=0; i<leftVelPathQuintic.length; i++)
+			System.out.println(leftVelPathQuintic[i]);
 		//Start Thread Only After Every Other Class is Loaded. 
 		
 		
@@ -154,12 +199,22 @@ public class Robot extends TimedRobot
 		//tx1 = new TX1TurnON(RobotMap.PDPThreadPeriod);
 		//tx1.startThread();
 
-		dtIMU = new DrivetrainIMUGlobalPosition(RobotMap.PDPThreadPeriod);
-		dtIMU.startThread();
+		//dtIMU = new DrivetrainIMUGlobalPosition(RobotMap.PDPThreadPeriod);
+		//dtIMU.startThread();
 
 		drivetrain.calibrateGyro();
 		driverstation = DriverStation.getInstance();
 
+
+		
+		
+
+		
+		
+		
+		
+		
+		
 		
 		ConsolePrinter.putSendable("Control Style Chooser", () -> {return Robot.controlStyleChooser;}, true, false);
 		ConsolePrinter.putSendable("Autonomous Mode Chooser", () -> {return Robot.autoChooser;}, true, false);
@@ -170,6 +225,10 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
 		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
 
+		
+		
+		
+		
 
 		ConsolePrinter.startThread();
 		System.out.println("************Robot Done Loading Successfully**********");
@@ -254,7 +313,6 @@ public class Robot extends TimedRobot
 		drivetrain.stopGyroCalibrating();
 		drivetrain.resetGyro();
 		
-		dtIMU.reset();
 		
 		autonomousCommand = (Command) autoChooser.getSelected();
     	
@@ -399,6 +457,7 @@ public class Robot extends TimedRobot
 	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
 	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
 	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
+	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
 	        autoChooser.addObject("Test", new TestCommandC());
 			// autoChooser.addObject("Do Something", new DoSomething());
 		}
