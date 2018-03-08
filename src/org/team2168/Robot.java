@@ -4,6 +4,8 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.pneumatics.*;
+import org.team2168.commands.test.TestAuto;
+import org.team2168.commands.test.TestCommandC;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 
@@ -58,6 +60,9 @@ public class Robot extends TimedRobot
 	private boolean lastGyroCalibrating = false;
 	private double curAngle = 0.0;
 
+	public static String test = "Bye";
+	public static boolean variable = true;
+	
 	//Driverstation Instance
 	public static DriverStation driverstation;
 	
@@ -235,7 +240,8 @@ public class Robot extends TimedRobot
 
     public void autonomousInit() 
     {
-    	
+    	test = "Yo";
+    	variable = true;
     	autoMode = true;
     	
 		matchStarted = true;
@@ -265,7 +271,7 @@ public class Robot extends TimedRobot
      */
 	public void teleopInit() 
 	{
-	    	
+		
 	    	autoMode = false;
 	    	
 			matchStarted = true;
@@ -281,6 +287,7 @@ public class Robot extends TimedRobot
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        
 	        runTime = Timer.getFPGATimestamp();
+	        
 	  }
 	    
 
@@ -386,6 +393,7 @@ public class Robot extends TimedRobot
 	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
 	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
 	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
+	        autoChooser.addObject("Test", new TestCommandC());
 			// autoChooser.addObject("Do Something", new DoSomething());
 		}
 

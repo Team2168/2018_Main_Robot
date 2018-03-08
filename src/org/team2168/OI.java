@@ -109,7 +109,7 @@ public class OI {
 		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		operatorJoystick.ButtonLeftTrigger().whenPressed(new CloseIntake()); //open on comp bot
 		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
-		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true));
+		//operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true));
 		
 		///////////////Intake and pivot up afterwards/////////////////////////////////////////////////////////////////////////
 		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
@@ -140,6 +140,8 @@ public class OI {
 		operatorJoystick.ButtonUpDPad().whileHeld(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
 		operatorJoystick.ButtonUpDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
+		operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
+		operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		////////////////Prepare to climb/////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
