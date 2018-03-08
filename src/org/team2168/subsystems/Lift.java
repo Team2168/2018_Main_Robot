@@ -43,10 +43,17 @@ public class Lift extends Subsystem {
 	public volatile double liftMotor2Voltage;
 	public volatile double liftMotor3Voltage;
 	
+	
+	private boolean liftMotor1Fault = false;
+	private boolean liftMotor2Fault = false;
+	private boolean liftMotor3Fault = false;
+	
     private static LinearInterpolator liftPotInterpolator;
     //TODO get these values plez format for points: (volts, inches)
     private double[][] liftPotRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
     		                          {RobotMap.LIFT_POT_VOLTAGE_MAX,RobotMap.LIFT_POT_MAX_HEIGHT_INCHES}};
+    
+    private int timeCounter = 0;
 
 	/**
 	 * Default constructor for the lift
@@ -108,6 +115,13 @@ public class Lift extends Subsystem {
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
 		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
 		ConsolePrinter.putNumber("Lift Pot Inches", () -> {return getPotPos();}, true, false);
+		
+		
+		ConsolePrinter.putBoolean("Lift Motor1_FAULT", () -> {return liftMotor1Fault;}, true, true);
+		ConsolePrinter.putBoolean("Lift Motor2_FAULT", () -> {return liftMotor2Fault;}, true, true);
+		ConsolePrinter.putBoolean("Lift Motor3_FAULT", () -> {return liftMotor3Fault;}, true, true);
+
+
     
 	}
 	
@@ -206,9 +220,27 @@ public class Lift extends Subsystem {
 	 * @param speed is +1 up and -1 down
 	 */
 	public void driveAllMotors(double speed) {
+		double stallLimit = 35;
+		//lift is stalling
+		if((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) > stallLimit) ||  (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > stallLimit) || (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) > stallLimit))
+		{
+			enableBrake();
+			timeCounter++;
+			
+			//wait for brake to actuate then stop motors
+			if(timeCounter>=1/.02)
+			{
+				driveLiftMotor1(0.0);
+				driveLiftMotor2(0.0);
+				driveLiftMotor3(0.0);
+			}
+		}
+		else
+		{
+			timeCounter = 0;
 		
 		if(RobotMap.ENABLE_LIFT_POT_SAFETY)
-		{
+		{			
 			if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged() && !liftPot.isAtUpperLimit() ) ||
 					((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() ))
 			{
@@ -243,6 +275,11 @@ public class Lift extends Subsystem {
 				driveLiftMotor3(0.0);
 			}	
 		}
+		}
+		
+		isLiftMotor1Failure();
+		isLiftMotor2Failure();
+		isLiftMotor3Failure();
 	}
 	/**
 	 * Enables the pneumatic brake
@@ -275,6 +312,69 @@ public class Lift extends Subsystem {
 	 */
 	public boolean isBrakeDisabled() {
 		return liftBrake.get() == Value.kReverse;
+	}
+	
+	/**
+	 * The purpose of this method is to compare the current of this motor to that of the other motors in
+	 * the same gearbox, if it is less than some percentage of the others, it is not driving the same
+	 * and we throw a fault to be checked later;
+	 * 
+	 * Once the fault is thrown, it is not reset until the bot is reset. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor1Failure()
+	{
+		//create a comparison 
+		double conditionLimtPercent = 0.5;
+		if (!this.liftMotor1Fault)
+		{
+			this.liftMotor1Fault =	(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) 
+				|| Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP)); 
+		}
+	}
+	
+	/**
+	 * The purpose of this method is to compare the current of this motor to that of the other motors in
+	 * the same gearbox, if it is less than some percentage of the others, it is not driving the same
+	 * and we throw a fault to be checked later;
+	 * 
+	 * Once the fault is thrown, it is not reset until the bot is reset. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor2Failure()
+	{
+		//create a comparison 
+		double conditionLimtPercent = 0.5;
+		if (!this.liftMotor1Fault)
+		{
+			this.liftMotor1Fault =	(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) 
+				|| Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP)); 
+		}
+	}
+	
+	/**
+	 * The purpose of this method is to compare the current of this motor to that of the other motors in
+	 * the same gearbox, if it is less than some percentage of the others, it is not driving the same
+	 * and we throw a fault to be checked later;
+	 * 
+	 * Once the fault is thrown, it is not reset until the bot is reset. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor3Failure()
+	{
+		//create a comparison 
+		double conditionLimtPercent = 0.5;
+		if (!this.liftMotor1Fault)
+		{
+			this.liftMotor1Fault =	(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) 
+				|| Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)); 
+		}
 	}
 
 	

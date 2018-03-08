@@ -3,9 +3,9 @@ package org.team2168;
 import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.commands.auto.*;
+import org.team2168.commands.auto.test.TestAutoCommandGroupA;
+import org.team2168.commands.auto.test.TestCommandC;
 import org.team2168.commands.pneumatics.*;
-import org.team2168.commands.test.TestAuto;
-import org.team2168.commands.test.TestCommandC;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 
@@ -90,6 +90,9 @@ public class Robot extends TimedRobot
     private static boolean blueAlliance = false;
     
     public static OneDimensionalMotionProfiling motion;
+    
+    
+    public static String gameData = "N A";
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -232,6 +235,9 @@ public class Robot extends TimedRobot
 		controlStyle = (int) controlStyleChooser.getSelected();
 		autonomousCommand = (Command) autoChooser.getSelected();
 
+		//Continuously get field data
+		getFieldData();
+		
 		// Kill all active commands
 		Scheduler.getInstance().run();
 
@@ -240,16 +246,16 @@ public class Robot extends TimedRobot
 
     public void autonomousInit() 
     {
-    	test = "Yo";
-    	variable = true;
     	autoMode = true;
     	
+    	//get field data one last time
+    	getFieldData();	
 		matchStarted = true;
 		drivetrain.stopGyroCalibrating();
 		drivetrain.resetGyro();
 		
 		dtIMU.reset();
-			
+		
 		autonomousCommand = (Command) autoChooser.getSelected();
     	
         // schedule the autonomous command
@@ -459,6 +465,19 @@ public class Robot extends TimedRobot
 		
 		LiveWindow.run();
 		
+	}
+	
+	public String getFieldData()
+	{
+		String gameMessage = DriverStation.getInstance().getGameSpecificMessage();
+		
+		if(gameMessage.length()==3 && this.gameData != null)
+		{
+			gameData = gameMessage;
+		}
+		else
+			gameData = "N A";
+		return gameData;
 	}
 	
 	

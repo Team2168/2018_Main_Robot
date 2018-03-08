@@ -1,24 +1,28 @@
-package org.team2168.commands.test;
+package org.team2168.commands.auto.test;
+
+import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TestCommandB extends Command {
-	public String testb = "testb";
-    public TestCommandB() {
+public class TestCommand extends Command {
+
+	public String test = "Left, Left, Left";
+    public TestCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	//test = Robot.test;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(testb);
+    	System.out.println(test);
     }
 
     // Make this return true when this Command no longer needs to run execute()
