@@ -1,13 +1,13 @@
-package org.team2168.commands.auto.test;
+package org.team2168.commands.auto.selector;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TestCommandB extends Command {
-	public String testb = "Right, Right, Right";
-    public TestCommandB() {
+public class Priority extends Command {
+
+    public Priority() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -18,7 +18,6 @@ public class TestCommandB extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(testb);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,5 +1,5 @@
 
-package org.team2168.commands.auto;
+package org.team2168.commands.auto.massComp;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
@@ -19,9 +19,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drive To swtich from Left side
  */
-public class DriveToLeftScaleFromLeftSide extends CommandGroup {
+public class DriveToLeftScaleAndLeftSwitchFromLeftSide extends CommandGroup {
 
-    public DriveToLeftScaleFromLeftSide() {
+    public DriveToLeftScaleAndLeftSwitchFromLeftSide() {
     	
     	//drive stright to null territory
     	addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));

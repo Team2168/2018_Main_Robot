@@ -1,4 +1,4 @@
-package org.team2168.commands.auto;
+package org.team2168.commands.auto.massComp;
 
 import org.team2168.RobotMap;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drive to right scale from left side
  */
-public class DriveToRightScaleFromLeftSide extends CommandGroup {
+public class DriveToRightScaleAndRightSwitchFromLeftSide extends CommandGroup {
 
-    public DriveToRightScaleFromLeftSide() {
+    public DriveToRightScaleAndRightSwitchFromLeftSide() {
     	
     	addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(15.0));

@@ -1,4 +1,4 @@
-package org.team2168.commands.auto;
+package org.team2168.commands.auto.massComp;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
@@ -34,12 +34,12 @@ public class DriveToLeftSwitchAndRightScaleFromLeft extends CommandGroup {
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic2, Robot.rightVelPathQuintic2));
     	//addSequential(new DrivePIDPath(1.0));
     	
-    	addSequential(new RotateXDistancePIDZZZ(87.0,0.53,0.1,0.5,true));
-    	addSequential(new RotateXDistancePIDZZZ(87.0,0.53,0.1,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(89.0,0.53,0.1,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(89.0,0.53,0.1,0.5,true));
     	//addSequential(new DrivePIDPath(1.0));
     	//addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
-    	addSequential(new DrivePIDPath(10.0));
-    	addSequential(new RotateXDistancePIDZZZ(120.0,0.53,0.1,0.5,true));
+    	addSequential(new DrivePIDPath(11.0));
+    	addSequential(new RotateXDistancePIDZZZ(150.0,0.53,0.1,0.5,true));
 
     	addParallel(new DrivePIDPath(3));
     	addSequential(new IntakeUntilCube());
