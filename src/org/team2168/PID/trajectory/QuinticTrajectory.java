@@ -84,8 +84,14 @@ public class QuinticTrajectory
 		double[][] waypointPath = new double[][]{
 				{5, 15, Math.PI/2},
 				{5, 19, Math.PI/2},
-				{9, 26, Math.PI/4}
+				{8, 26, Math.PI/4}
 		};
+		
+		double[][] waypointPath2 = new double[][]{
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 32, Math.PI/2}
+	};
 		
 //		//Square Path
 //		double[][] waypointPath = new double[][]{
@@ -118,6 +124,8 @@ public class QuinticTrajectory
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
 		quinticPath.calculate();
 
+		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
+		quinticPath2.calculate();
 
 		
 		
@@ -137,31 +145,35 @@ public class QuinticTrajectory
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
+		fig3.addData(quinticPath2.leftPath, Color.blue);
+		fig3.addData(quinticPath2.rightPath, Color.magenta);
+		fig3.addData(waypointPath2, null, Color.black);
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
 		
 		
 		//Velocity
-				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-				fig4.yGridOn();
-				fig4.xGridOn();
-				fig4.setYLabel("Velocity (ft/sec)");
-				fig4.setXLabel("time (seconds)");
-				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-				fig4.addData(quinticPath.rightVelocity, Color.magenta);
-				fig4.addData(quinticPath.leftVelocity, Color.cyan);
-				
-				
-				//Velocity
-				FalconLinePlot fig5 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-				fig5.yGridOn();
-				fig5.xGridOn();
-				fig5.setYLabel("accel (ft^2/sec)");
-				fig5.setXLabel("time (seconds)");
-				fig5.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-				fig5.addData(quinticPath.rightAccel, Color.magenta);
-				fig5.addData(quinticPath.leftAccel, Color.cyan);
-				
-				
+//		
+//				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+//				fig4.yGridOn();
+//				fig4.xGridOn();
+//				fig4.setYLabel("Velocity (ft/sec)");
+//				fig4.setXLabel("time (seconds)");
+//				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+//				fig4.addData(quinticPath.rightVelocity, Color.magenta);
+//				fig4.addData(quinticPath.leftVelocity, Color.cyan);
+//				
+//				
+//				//Velocity
+//				FalconLinePlot fig5 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+//				fig5.yGridOn();
+//				fig5.xGridOn();
+//				fig5.setYLabel("accel (ft^2/sec)");
+//				fig5.setXLabel("time (seconds)");
+//				fig5.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+//				fig5.addData(quinticPath.rightAccel, Color.magenta);
+//				fig5.addData(quinticPath.leftAccel, Color.cyan);
+//				
+//				
 
 		
 	}

@@ -6,6 +6,7 @@ import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
+import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZNoBattery;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.RotatePivotDownAutomatically;
@@ -22,19 +23,21 @@ public class DriveToLeftSwitchAndRightScaleFromLeft extends CommandGroup {
 
     public DriveToLeftSwitchAndRightScaleFromLeft() {
     	
-    	addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));
+    	//addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic));
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
     	
     	addSequential(new DrivePIDPath(2.5, true)); //drive backwards
+    	addSequential(new RotateXDistancePIDZZZNoBattery(-25.0,0.53,0.1,0.5,true));
     	addSequential(new RotateXDistancePIDZZZ(-25.0,0.53,0.1,0.5,true));
     	
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic2, Robot.rightVelPathQuintic2));
     	//addSequential(new DrivePIDPath(1.0));
     	
     	addSequential(new RotateXDistancePIDZZZ(87.0,0.53,0.1,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(87.0,0.53,0.1,0.5,true));
     	//addSequential(new DrivePIDPath(1.0));
-    	addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
+    	//addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
     	addSequential(new DrivePIDPath(10.0));
     	addSequential(new RotateXDistancePIDZZZ(120.0,0.53,0.1,0.5,true));
 

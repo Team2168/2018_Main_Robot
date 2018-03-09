@@ -156,6 +156,8 @@ public class Robot extends TimedRobot
 			{5, 18, Math.PI/2},
 			{9, 22, Math.PI/4}
 	};
+	
+	
 
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
 		quinticPath.calculate();
@@ -165,9 +167,9 @@ public class Robot extends TimedRobot
 		
 		
 		double[][] waypointPath2 = new double[][]{
-			{5, 15, Math.PI/2},
-			{5, 18, Math.PI/2},
-			{9, 22, 0.002}
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 34.9, Math.PI/2}
 	};
 		
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
