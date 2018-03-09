@@ -216,7 +216,7 @@ public class RobotMap {
 	public static final boolean INTAKE_LEFT_REVERSE = false;
 	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.2;
-	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.7;
+	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.9;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.8;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;

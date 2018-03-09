@@ -1,16 +1,19 @@
 package org.team2168;
 
-import org.team2168.commands.auto.DriveToLeftScaleFromLeftSide;
-import org.team2168.commands.auto.DriveToRightScaleFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
+import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZNoBattery;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPause;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.EnableRotatePID;
 import org.team2168.commands.drivetrain.PIDCommands.EnableRotateXDistancePIDZZZ;
+import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPath;
 import org.team2168.commands.guidingArm.CloseDownGuidingArm;
 import org.team2168.commands.guidingArm.OpenGuidingArm;
 import org.team2168.commands.intake.CloseIntake;
@@ -19,6 +22,7 @@ import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OpenIntake;
+import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.RotatePivotDownAndSpit;
 import org.team2168.commands.lift.DisableBrake;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
@@ -104,20 +108,20 @@ public class OI {
 		
 		
 		////////////////Intake Cube and lift to exchange////////////////////////////////////////////////////
-		operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCube());
-		operatorJoystick.ButtonLeftTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
-		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
-		operatorJoystick.ButtonLeftTrigger().whenPressed(new CloseIntake()); //open on comp bot
-		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
-		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
+		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
+		operatorJoystick.ButtonRightTrigger().whenPressed(new CloseIntake()); //open on comp bot
+		operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCube());
+		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
+		//operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true));
 		
 		///////////////Intake and pivot up afterwards/////////////////////////////////////////////////////////////////////////
-		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
-		operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
-	    operatorJoystick.ButtonRightTrigger().whenPressed(new CloseIntake()); //open for comp bot
-		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
-		operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
+//		operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCube());
+//		operatorJoystick.ButtonLeftTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
+//	    operatorJoystick.ButtonLeftTrigger().whenPressed(new CloseIntake()); //open for comp bot
+//		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
+//		operatorJoystick.ButtonLeftTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
+//		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
 		
 		
@@ -128,8 +132,8 @@ public class OI {
 		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
-		////////////////Just spit//////////////////////////////////////////////////////////////////////////////////////////
-		operatorJoystick.ButtonLeftBumper().whenPressed(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
+		////////////////Just spit Low Speed//////////////////////////////////////////////////////////////////////////////////////////
+		operatorJoystick.ButtonLeftBumper().whenPressed(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE*0.5));
 		operatorJoystick.ButtonLeftBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
 		/////////////////Emergency Raise Intake////////////////////////////////////////
@@ -140,6 +144,8 @@ public class OI {
 		operatorJoystick.ButtonUpDPad().whileHeld(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
 		operatorJoystick.ButtonUpDPad().whenReleased(new RotatePivotUpAutomatically(0.0));
 		
+		operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
+		operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		////////////////Prepare to climb/////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
@@ -174,7 +180,7 @@ public class OI {
 //		testJoystick.ButtonUpDPad().whenPressed(new EnableRotateXDistancePIDZZZ(0));
 //		testJoystick.ButtonDownDPad().whenPressed(new DrivePIDPause());
 //
-//		testJoystick.ButtonRightTrigger().whenPressed(new DriveIntakeWheelsWithConstant(1));
+		testJoystick.ButtonRightTrigger().whenPressed(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic));
 //		testJoystick.ButtonRightBumper().whenPressed(new DriveIntakeWheelsWithConstant(-1));
 //		
 //		testJoystick.ButtonDownDPad().whenPressed(new RotatePivotUpAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
@@ -188,8 +194,10 @@ public class OI {
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
 		//pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		//pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
-		pidTestJoystick.ButtonA().whenPressed(new DriveLiftPathPIDZZZ(10.0, 12.0, 12.0, 30.0));
-		pidTestJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0));
+		pidTestJoystick.ButtonA().whenPressed(new RotatePIDPath(10.0, true));
+		
+		
+		pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZNoBattery(-25.0,0.53,0.1,0.5,true));
 		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(33.0, 0.5, 0.16,1.0,true));
 		pidTestJoystick.ButtonX().whenPressed((new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true)));
 		

@@ -2,7 +2,11 @@ package org.team2168;
 
 import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
+import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
+import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
+import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
+import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
@@ -58,6 +62,9 @@ public class Robot extends TimedRobot
 	private boolean lastGyroCalibrating = false;
 	private double curAngle = 0.0;
 
+	public static String test = "Bye";
+	public static boolean variable = true;
+	
 	//Driverstation Instance
 	public static DriverStation driverstation;
 	
@@ -72,6 +79,10 @@ public class Robot extends TimedRobot
     static int controlStyle;
     public static SendableChooser<Number> controlStyleChooser;
     
+  //Driver Joystick Chooser
+    static int autoPriority;
+    public static SendableChooser<Number> autoPriorityChooser;
+    
 
 	double runTime = Timer.getFPGATimestamp();
     
@@ -79,12 +90,22 @@ public class Robot extends TimedRobot
     //TX1TurnON tx1;
     
     //Global Position Tracking Class
-    public static DrivetrainIMUGlobalPosition dtIMU;
+   // public static DrivetrainIMUGlobalPosition dtIMU;
 	
     //Variable to track blue alliance vs red alliance
     private static boolean blueAlliance = false;
     
     public static OneDimensionalMotionProfiling motion;
+    
+    
+    public static double[] leftVelPathQuintic;
+    public static double[] rightVelPathQuintic;
+    
+    public static double[] leftVelPathQuintic2;
+    public static double[] rightVelPathQuintic2;
+    
+    
+    public static String gameData = "N A";
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -122,9 +143,48 @@ public class Robot extends TimedRobot
 
 		
 		
-		motion = new OneDimensionalMotionProfiling(15);
-		for(int i=0; i<motion.getVelArray().length; i++)
-			System.out.println(motion.getVelArray()[i]);
+//		motion = new OneDimensionalMotionProfiling(15);
+//		for(int i=0; i<motion.getVelArray().length; i++)
+//			System.out.println(motion.getVelArray()[i]);
+//		//Start Thread Only After Every Other Class is Loaded. 
+		
+		//S Path
+//		double[][] waypointPath = new double[][]{
+//				{5, 15, Math.PI/2},
+//				{5, 18, Math.PI/2},
+//				{7, 23, Math.PI/2},
+//				{7, 25, Math.PI/2},
+//		};
+		
+		double[][] waypointPath = new double[][]{
+			{5, 15, Math.PI/2},
+			{5, 18, Math.PI/2},
+			{9, 22, Math.PI/4}
+	};
+	
+	
+
+		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
+		quinticPath.calculate();
+		
+		this.leftVelPathQuintic = quinticPath.getLeftVel();
+		this.rightVelPathQuintic = quinticPath.getRightVel();
+		
+		
+		double[][] waypointPath2 = new double[][]{
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 34.9, Math.PI/2}
+	};
+		
+		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
+		quinticPath2.calculate();
+		
+		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
+		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
+		
+		for(int i=0; i<leftVelPathQuintic.length; i++)
+			System.out.println(leftVelPathQuintic[i]);
 		//Start Thread Only After Every Other Class is Loaded. 
 		
 		
@@ -139,6 +199,10 @@ public class Robot extends TimedRobot
 		
 		//Initialize Control Selector Choices
 		controlStyleSelectInit();
+		
+		//Initialize Control Selector Choices
+		AutoPrioritySelectInit();
+				
 
 		pdp = new PowerDistribution(RobotMap.PDPThreadPeriod);
 		pdp.startThread();
@@ -146,12 +210,22 @@ public class Robot extends TimedRobot
 		//tx1 = new TX1TurnON(RobotMap.PDPThreadPeriod);
 		//tx1.startThread();
 
-		dtIMU = new DrivetrainIMUGlobalPosition(RobotMap.PDPThreadPeriod);
-		dtIMU.startThread();
+		//dtIMU = new DrivetrainIMUGlobalPosition(RobotMap.PDPThreadPeriod);
+		//dtIMU.startThread();
 
 		drivetrain.calibrateGyro();
 		driverstation = DriverStation.getInstance();
 
+
+		
+		
+
+		
+		
+		
+		
+		
+		
 		
 		ConsolePrinter.putSendable("Control Style Chooser", () -> {return Robot.controlStyleChooser;}, true, false);
 		ConsolePrinter.putSendable("Autonomous Mode Chooser", () -> {return Robot.autoChooser;}, true, false);
@@ -162,6 +236,10 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
 		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
 
+		
+		
+		
+		
 
 		ConsolePrinter.startThread();
 		System.out.println("************Robot Done Loading Successfully**********");
@@ -227,6 +305,9 @@ public class Robot extends TimedRobot
 		controlStyle = (int) controlStyleChooser.getSelected();
 		autonomousCommand = (Command) autoChooser.getSelected();
 
+		//Continuously get field data
+		getFieldData();
+		
 		// Kill all active commands
 		Scheduler.getInstance().run();
 
@@ -235,15 +316,15 @@ public class Robot extends TimedRobot
 
     public void autonomousInit() 
     {
-    	
     	autoMode = true;
     	
+    	//get field data one last time
+    	getFieldData();	
 		matchStarted = true;
 		drivetrain.stopGyroCalibrating();
 		drivetrain.resetGyro();
 		
-		dtIMU.reset();
-			
+		
 		autonomousCommand = (Command) autoChooser.getSelected();
     	
         // schedule the autonomous command
@@ -265,7 +346,7 @@ public class Robot extends TimedRobot
      */
 	public void teleopInit() 
 	{
-	    	
+		
 	    	autoMode = false;
 	    	
 			matchStarted = true;
@@ -281,6 +362,7 @@ public class Robot extends TimedRobot
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        
 	        runTime = Timer.getFPGATimestamp();
+	        
 	  }
 	    
 
@@ -321,6 +403,41 @@ public class Robot extends TimedRobot
 			} else {
 				return "None";
 			}
+		}
+
+		/**
+		 * Get the name of auto priority
+		 * 
+		 * @return the name of auto priority
+		 */
+		public static String getAutoPriority() {
+			String retVal = "";
+
+			switch (autoPriority) {
+			case 0:
+				retVal = "Switch";
+				break;
+			case 1:
+				retVal = "Scale";
+				break;
+			default:
+				retVal = "Invalid Auto Priority";
+			}
+
+			return retVal;
+		}
+
+		/**
+		 * Adds control styles to the selector
+		 */
+		public void AutoPrioritySelectInit() {
+			autoPriorityChooser = new SendableChooser<>();
+			autoPriorityChooser.addObject("Switch", 0);
+			autoPriorityChooser.addDefault("Scale", 1);
+		}
+
+		public static int getAutoPriorityInt() {
+			return (int) autoPriorityChooser.getSelected();
 		}
 
 		/**
@@ -366,26 +483,31 @@ public class Robot extends TimedRobot
 			return (int) controlStyleChooser.getSelected();
 		}
 
+		
+		
+		
 		/**
 		 * Adds the autos to the selector
 		 */
 		public void autoSelectInit() {
 			autoChooser = new SendableChooser<Command>();
 			autoChooser.addDefault("Do Nothing", new DoNothing());
-			autoChooser.addObject("2018 Right Switch From Center", new DriveToRightSwitch());
-	        autoChooser.addObject("2018 Left Switch From Center", new DriveToLeftSwitch());
-	        autoChooser.addObject("2018 Left Switch From Center and left scale", new DriveToLeftSwitchAndLeftScale());
-	        autoChooser.addObject("2018 Right Switch From Center and right scale", new DriveToRightSwitchAndRightScale());
-	        autoChooser.addObject("2018 Left Switch From Center and right scale ", new DriveToLeftSwitchAndRightScale());
-	        autoChooser.addObject("2018 Right Switch From Center and left scale", new DriveToRightSwitchAndLeftScale());
-	        autoChooser.addObject("2018 Left Scale From Left Side", new DriveToLeftScaleFromLeftSide());
-	        autoChooser.addObject("2018 Right Scale From Right Side", new DriveToRightScaleFromRightSide());
-	        autoChooser.addObject("2018 Right Scale from Left side", new DriveToRightScaleFromLeftSide());
-	        autoChooser.addObject("2018 Left Scale from Right side", new DriveToLeftScaleFromRightSide());
-	        autoChooser.addObject("2018 Left Switch from Left side", new DriveToLeftSwitchFromLeftSide());
-	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
-	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
-	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
+//			autoChooser.addObject("2018 Right Switch From Center", new DriveToRightSwitch());
+//	        autoChooser.addObject("2018 Left Switch From Center", new DriveToLeftSwitch());
+//	        autoChooser.addObject("2018 Left Switch From Center and left scale", new DriveToLeftSwitchAndLeftScale());
+//	        autoChooser.addObject("2018 Right Switch From Center and right scale", new DriveToRightSwitchAndRightScale());
+//	        autoChooser.addObject("2018 Left Switch From Center and right scale ", new DriveToLeftSwitchAndRightScale());
+//	        autoChooser.addObject("2018 Right Switch From Center and left scale", new DriveToRightSwitchAndLeftScale());
+//	        autoChooser.addObject("2018 Left Scale From Left Side", new DriveToLeftScaleFromLeftSide());
+//	        autoChooser.addObject("2018 Right Scale From Right Side", new DriveToRightScaleFromRightSide());
+//	        autoChooser.addObject("2018 Right Scale from Left side", new DriveToRightScaleFromLeftSide());
+//	        autoChooser.addObject("2018 Left Scale from Right side", new DriveToLeftScaleFromRightSide());
+//	        autoChooser.addObject("2018 Left Switch from Left side", new DriveToLeftSwitchFromLeftSide());
+//	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
+//	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
+//	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
+	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
+	        autoChooser.addObject("Test", new AutoStartLeft2Cube());
 			// autoChooser.addObject("Do Something", new DoSomething());
 		}
 
@@ -451,6 +573,19 @@ public class Robot extends TimedRobot
 		
 		LiveWindow.run();
 		
+	}
+	
+	public String getFieldData()
+	{
+		String gameMessage = DriverStation.getInstance().getGameSpecificMessage();
+		
+		if(gameMessage.length()==3 && this.gameData != null)
+		{
+			gameData = gameMessage;
+		}
+		else
+			gameData = "N A";
+		return gameData;
 	}
 	
 	

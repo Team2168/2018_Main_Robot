@@ -43,10 +43,31 @@ public class Lift extends Subsystem {
 	public volatile double liftMotor2Voltage;
 	public volatile double liftMotor3Voltage;
 	
+	
+	private boolean liftMotor1Fault = false;
+	private boolean liftMotor2Fault = false;
+	private boolean liftMotor3Fault = false;
+	
+	private boolean liftMotor1HighCurrent = false;
+	private boolean liftMotor2HighCurrent = false;
+	private boolean liftMotor3HighCurrent = false;
+	
+	private boolean liftMotor1HighThenZeroCurrent = false;
+	private boolean liftMotor2HighThenZeroCurrent = false;
+	private boolean liftMotor3HighThenZeroCurrent = false;
+	
+	private boolean isLiftMotor1BreakerTrip = false;
+	private boolean isLiftMotor2BreakerTrip = false;
+	private boolean isLiftMotor3BreakerTrip = false;
+	
+	
+	
     private static LinearInterpolator liftPotInterpolator;
     //TODO get these values plez format for points: (volts, inches)
     private double[][] liftPotRange = {{RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES},
     		                          {RobotMap.LIFT_POT_VOLTAGE_MAX,RobotMap.LIFT_POT_MAX_HEIGHT_INCHES}};
+    
+    private int timeCounter = 0;
 
 	/**
 	 * Default constructor for the lift
@@ -82,7 +103,6 @@ public class Lift extends Subsystem {
 				RobotMap.LIFT_P,
 				RobotMap.LIFT_I,
 				RobotMap.LIFT_D,
-				RobotMap.LIFT_N,
 				liftPot,
 				RobotMap.LIFT_PID_PERIOD);
     	
@@ -108,6 +128,17 @@ public class Lift extends Subsystem {
 		ConsolePrinter.putBoolean("Is Lift Fully Down", () -> {return Robot.lift.isLiftFullyDown();}, true, false);
 		ConsolePrinter.putNumber("Lift Raw Pot", () -> {return getRawPot();}, true, false);
 		ConsolePrinter.putNumber("Lift Pot Inches", () -> {return getPotPos();}, true, false);
+		
+		
+		ConsolePrinter.putBoolean("Lift Motor1_FAULT", () -> {return liftMotor1Fault;}, true, true);
+		ConsolePrinter.putBoolean("Lift Motor2_FAULT", () -> {return liftMotor2Fault;}, true, true);
+		ConsolePrinter.putBoolean("Lift Motor3_FAULT", () -> {return liftMotor3Fault;}, true, true);
+		
+		ConsolePrinter.putBoolean("Lift Motor1_Breaker_Trip", () -> {return isLiftMotor1BreakerTrip;}, true, true);
+		ConsolePrinter.putBoolean("Lift Motor2_Breaker_Trip", () -> {return isLiftMotor2BreakerTrip;}, true, true);
+		ConsolePrinter.putBoolean("Lift Motor3_Breaker_Trip", () -> {return isLiftMotor3BreakerTrip;}, true, true);
+
+
     
 	}
 	
@@ -207,10 +238,29 @@ public class Lift extends Subsystem {
 	 */
 	public void driveAllMotors(double speed) {
 		
-		if(RobotMap.ENABLE_LIFT_POT_SAFETY)
+				double stallLimit = 35;
+		//lift is stalling
+		if((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) > stallLimit) ||  (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > stallLimit) || (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) > stallLimit))
 		{
+			enableBrake();
+			timeCounter++;
+			
+			//wait for brake to actuate then stop motors
+			if(timeCounter>=1/.02)
+			{
+				driveLiftMotor1(0.0);
+				driveLiftMotor2(0.0);
+				driveLiftMotor3(0.0);
+			}
+		}
+		else
+		{
+			timeCounter = 0;
+		
+		if(RobotMap.ENABLE_LIFT_POT_SAFETY)
+		{			
 			if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged() && !liftPot.isAtUpperLimit() ) ||
-					((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() ))
+					((speed < -RobotMap.LIFT_MIN_SPEED)))
 			{
 				disableBrake();
 				driveLiftMotor1(speed);
@@ -243,6 +293,15 @@ public class Lift extends Subsystem {
 				driveLiftMotor3(0.0);
 			}	
 		}
+		}
+		
+		isLiftMotor1Failure();
+		isLiftMotor2Failure();
+		isLiftMotor3Failure();
+		
+		isLiftMotor1BreakerTrip();
+		isLiftMotor2BreakerTrip();
+		isLiftMotor3BreakerTrip();
 	}
 	/**
 	 * Enables the pneumatic brake
@@ -276,7 +335,157 @@ public class Lift extends Subsystem {
 	public boolean isBrakeDisabled() {
 		return liftBrake.get() == Value.kReverse;
 	}
+	
+	/**
+	 * The purpose of this method is to compare the current of this motor to that of the other motors in
+	 * the same gearbox, if it is less than some percentage of the others, it is not driving the same
+	 * and we throw a fault to be checked later;
+	 * 
+	 * Once the fault is thrown, it is not reset until the bot is reset. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor1Failure()
+	{
+		//create a comparison 
+		double conditionLimtPercent = 0.5;
+		if (!this.liftMotor1Fault && this.liftMotor1Voltage >= RobotMap.LIFT_MIN_SPEED)
+		{
+			this.liftMotor1Fault =	((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > 2) 
+					|| (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) > 2) ); 		}
+	}
+	
+	/**
+	 * The purpose of this method is to compare the current of this motor to that of the other motors in
+	 * the same gearbox, if it is less than some percentage of the others, it is not driving the same
+	 * and we throw a fault to be checked later;
+	 * 
+	 * Once the fault is thrown, it is not reset until the bot is reset. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor2Failure()
+	{
+		//create a comparison 
+		double conditionLimtPercent = 0.5;
+		if (!this.liftMotor2Fault && this.liftMotor2Voltage >= RobotMap.LIFT_MIN_SPEED)
+		{
+			this.liftMotor2Fault =	((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) > 2) 
+					|| (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) > 2) ); 
+			}
+	}
+	
+	/**
+	 * The purpose of this method is to compare the current of this motor to that of the other motors in
+	 * the same gearbox, if it is less than some percentage of the others, it is not driving the same
+	 * and we throw a fault to be checked later;
+	 * 
+	 * Once the fault is thrown, it is not reset until the bot is reset. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor3Failure()
+	{
+		//create a comparison 
+		double conditionLimtPercent = 0.5;
+		if (!this.liftMotor3Fault && this.liftMotor3Voltage >= RobotMap.LIFT_MIN_SPEED)
+		{
+			this.liftMotor3Fault =	((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) > 2) 
+				|| (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) <= conditionLimtPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > 2) ); 
+		}
+	}
+	
 
+	/**
+	 * The purpose of this method is to compare the try and determine if we had a tripped breaker which
+	 * for our purposes has a signature that while driving the motor, we see current, then zero current, then sometime later current.
+	 * 
+	 * If we never see current again, we don't assume it is a tripped breaker but rather a blown motor captured by the other motor fault
+	 * 
+	 * This is a special case of the motor fault. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor1BreakerTrip()
+	{
+		//we are trying to drive motor
+		if (this.liftMotor1Voltage >= RobotMap.LIFT_MIN_SPEED)
+		{
+			//did motor ever get to a high current?
+			if(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) > 15)
+				liftMotor1HighCurrent = true;
+			
+			if(liftMotor1HighCurrent && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) < 1)
+				liftMotor1HighThenZeroCurrent = true;
+			
+			if (!this.isLiftMotor1BreakerTrip && liftMotor1HighThenZeroCurrent)
+				this.isLiftMotor1BreakerTrip = Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP) > 3;
+						
+		}
+	}
+	
+	/**
+	 * The purpose of this method is to compare the try and determine if we had a tripped breaker which
+	 * for our purposes has a signature that while driving the motor, we see current, then zero current, then sometime later current.
+	 * 
+	 * If we never see current again, we don't assume it is a tripped breaker but rather a blown motor captured by the other motor fault
+	 * 
+	 * This is a special case of the motor fault. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor2BreakerTrip()
+	{
+		//we are trying to drive motor
+		if (this.liftMotor2Voltage >= RobotMap.LIFT_MIN_SPEED)
+		{
+			//did motor ever get to a high current?
+			if(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > 35)
+				liftMotor2HighCurrent = true;
+			
+			if(liftMotor2HighCurrent && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) < 1)
+				liftMotor2HighThenZeroCurrent = true;
+			
+			if (!this.isLiftMotor2BreakerTrip && liftMotor2HighThenZeroCurrent)
+				this.isLiftMotor2BreakerTrip = Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > 3;
+						
+		}
+	}
+	
+	
+	/**
+	 * The purpose of this method is to compare the try and determine if we had a tripped breaker which
+	 * for our purposes has a signature that while driving the motor, we see current, then zero current, then sometime later current.
+	 * 
+	 * If we never see current again, we don't assume it is a tripped breaker but rather a blown motor captured by the other motor fault
+	 * 
+	 * This is a special case of the motor fault. 
+	 * 
+	 * TODO: Write to a file for between bot shutdown persistance;
+	 * @return
+	 */
+	private void isLiftMotor3BreakerTrip()
+	{
+		//we are trying to drive motor
+		if (this.liftMotor3Voltage >= RobotMap.LIFT_MIN_SPEED)
+		{
+			//did motor ever get to a high current?
+			if(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) > 35)
+				liftMotor3HighCurrent = true;
+			
+			if(liftMotor3HighCurrent && Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) < 1)
+				liftMotor3HighThenZeroCurrent = true;
+			
+			if (!this.isLiftMotor3BreakerTrip && liftMotor3HighThenZeroCurrent)
+				this.isLiftMotor3BreakerTrip = Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_3_PDP) > 3;
+						
+		}
+	}
 	
 	
 	

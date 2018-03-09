@@ -1,4 +1,4 @@
-package org.team2168.commands.auto;
+package org.team2168.commands.auto.massComp;
 
 import org.team2168.RobotMap;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
@@ -16,15 +16,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drive to right scale from left side
  */
-public class DriveToRightScaleFromLeftSide extends CommandGroup {
+public class DriveToRightScaleAndRightSwitchFromLeftSide extends CommandGroup {
 
-    public DriveToRightScaleFromLeftSide() {
+    public DriveToRightScaleAndRightSwitchFromLeftSide() {
     	
     	addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(15.0));
     	addSequential(new RotateXDistancePIDZZZ(89.0,0.63,0.1,0.5,true));
     	addSequential(new DrivePIDPath(12.7));
-    	addSequential(new RotateXDistancePIDZZZ(0.0,0.7,0.1,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(-10.0,0.7,0.1,0.5,true));
     
     	//drive lift to score height
     	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
@@ -37,13 +37,14 @@ public class DriveToRightScaleFromLeftSide extends CommandGroup {
     	addSequential(new RotateXDistancePIDZZZ(210.0,0.63,0.1,0.5,true));
     	
     	
-    	addParallel(new DrivePIDPath(4.0));
+    	addParallel(new DrivePIDPath(3.0));
     	addSequential(new IntakeUntilCube());
     	
     	//score second cube
     	//drive lift to score height
+    	addParallel(new DrivePIDPath(1.0, true)); //drive backwards
     	addSequential(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DrivePIDPath(2.0));
+    	addSequential(new DrivePIDPath(2.0)); //put bumpers against wall
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE), 0.4 );
     	
     	

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class DrivePIDPath extends Command {
+public class RotatePIDPath extends Command {
 	
 	private double[] setPointLeft;
     private double[] setPointRight;
@@ -24,12 +24,12 @@ public class DrivePIDPath extends Command {
     boolean direction = false;
     int directionValue = 1;
     
-    public DrivePIDPath(double distance )
+    public RotatePIDPath(double distance )
     {
     	this(distance,false);
     }
     
-    public DrivePIDPath(double distance, boolean reverseDirection )
+    public RotatePIDPath(double distance, boolean reverseDirection )
     {
     	requires(Robot.drivetrain);
     	motion = new OneDimensionalMotionProfiling(distance);
@@ -38,7 +38,7 @@ public class DrivePIDPath extends Command {
   	   this.direction = reverseDirection;
     }
    
-    public DrivePIDPath(double[] setPointLeft, double[] setPointRight){
+    public RotatePIDPath(double[] setPointLeft, double[] setPointRight){
  	   requires(Robot.drivetrain);
  	 
  	   this.setPointLeft =setPointLeft;
@@ -49,7 +49,7 @@ public class DrivePIDPath extends Command {
  	   System.out.println("SetPointLength: " + setPointLeft.length);
     } 
     
-    public DrivePIDPath(double[] setPointLeft, double[] setPointRight, double ff_gain){
+    public RotatePIDPath(double[] setPointLeft, double[] setPointRight, double ff_gain){
   	   requires(Robot.drivetrain);
   	   this.setPointLeft = setPointLeft;
   	   this.setPointRight = setPointRight;
@@ -60,7 +60,7 @@ public class DrivePIDPath extends Command {
   	   
      } 
     
-   public DrivePIDPath(double[] setPointLeft, double[] setPointRight, boolean reverseDirection){
+   public RotatePIDPath(double[] setPointLeft, double[] setPointRight, boolean reverseDirection){
 	   requires(Robot.drivetrain);
 	   this.setPointLeft = setPointLeft;
 	   this.setPointRight = setPointRight;
@@ -125,7 +125,7 @@ public class DrivePIDPath extends Command {
 		if(counter<setPointLeft.length)
 		{
 			double speedLeft = (ff_term*directionValue*setPointLeft[counter])/(Robot.pdp.getBatteryVoltage());
-			double speedRight = (ff_term*directionValue*setPointRight[counter])/(Robot.pdp.getBatteryVoltage());
+			double speedRight = (ff_term*-directionValue*setPointRight[counter])/(Robot.pdp.getBatteryVoltage());
 			if (Math.abs(speedLeft)<0.12 && counter!=0)
 				speedLeft = directionValue*0.12;
 			

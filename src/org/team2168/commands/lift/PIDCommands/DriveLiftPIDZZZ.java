@@ -63,8 +63,9 @@ public class DriveLiftPIDZZZ extends Command {
 		double sp = 0;
 		if (!absolute)
 			sp = this.setPoint + Robot.lift.getPotPos();
-	else
+		else
 			sp = this.setPoint;
+		
 		Robot.lift.liftPOTController.reset();
 
 		Robot.lift.liftPOTController.setpGain(RobotMap.LIFT_P);
