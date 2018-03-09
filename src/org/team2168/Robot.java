@@ -216,8 +216,6 @@ public class Robot extends TimedRobot
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
 		
-		for(int i=0; i<leftVelPathQuintic.length; i++)
-			System.out.println(leftVelPathQuintic[i]);
 		//Start Thread Only After Every Other Class is Loaded. 
 		
 		
@@ -336,6 +334,7 @@ public class Robot extends TimedRobot
 		
 		getControlStyleInt();
 		controlStyle = (int) controlStyleChooser.getSelected();
+		autoPriority = (int) autoPriorityChooser.getSelected();
 		autonomousCommand = (Command) autoChooser.getSelected();
 
 		//Continuously get field data

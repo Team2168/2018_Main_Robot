@@ -84,7 +84,7 @@ public class QuinticTrajectory
 		double[][] waypointPath = new double[][]{
 			{10, 18, Math.PI/2}, //For Right switch from center 
 			{10, 19, Math.PI/2},
-			{5.5, 24, Math.PI/2}
+			{5.5, 24, -Math.PI/4}
 
 		};
 		
@@ -212,11 +212,11 @@ public class QuinticTrajectory
 	   
 
 	    long end = System.nanoTime();
-	    System.out.println("Final time is " + (end - start)/1e9 + " seconds");
-	    
-	    System.out.println("Total Length = " + this.totalSplineLength);
-		System.out.println("Traj num segments=" + this.traj.getNumSegments() );
-	    
+//	    System.out.println("Final time is " + (end - start)/1e9 + " seconds");
+//	    
+//	    System.out.println("Total Length = " + this.totalSplineLength);
+//		System.out.println("Traj num segments=" + this.traj.getNumSegments() );
+//	    
 	    
 	    fixHeadings();
 	   
@@ -224,12 +224,12 @@ public class QuinticTrajectory
 	    
 	    
 	    
-	    System.out.println("Left = " + leftRightTraj.left.getNumSegments());
+//	    System.out.println("Left = " + leftRightTraj.left.getNumSegments());
 	    
 	    copyWheelPaths();
 	    
-	    print(this.leftPath);
-	    print(this.leftVelocity);
+//	    print(this.leftPath);
+//	    print(this.leftVelocity);
 	    
 		
 	}
