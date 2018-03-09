@@ -79,6 +79,10 @@ public class Robot extends TimedRobot
     static int controlStyle;
     public static SendableChooser<Number> controlStyleChooser;
     
+  //Driver Joystick Chooser
+    static int autoPriority;
+    public static SendableChooser<Number> autoPriorityChooser;
+    
 
 	double runTime = Timer.getFPGATimestamp();
     
@@ -195,6 +199,10 @@ public class Robot extends TimedRobot
 		
 		//Initialize Control Selector Choices
 		controlStyleSelectInit();
+		
+		//Initialize Control Selector Choices
+		AutoPrioritySelectInit();
+				
 
 		pdp = new PowerDistribution(RobotMap.PDPThreadPeriod);
 		pdp.startThread();
@@ -398,6 +406,41 @@ public class Robot extends TimedRobot
 		}
 
 		/**
+		 * Get the name of auto priority
+		 * 
+		 * @return the name of auto priority
+		 */
+		public static String getAutoPriority() {
+			String retVal = "";
+
+			switch (autoPriority) {
+			case 0:
+				retVal = "Switch";
+				break;
+			case 1:
+				retVal = "Scale";
+				break;
+			default:
+				retVal = "Invalid Auto Priority";
+			}
+
+			return retVal;
+		}
+
+		/**
+		 * Adds control styles to the selector
+		 */
+		public void AutoPrioritySelectInit() {
+			autoPriorityChooser = new SendableChooser<>();
+			autoPriorityChooser.addObject("Switch", 0);
+			autoPriorityChooser.addDefault("Scale", 1);
+		}
+
+		public static int getAutoPriorityInt() {
+			return (int) autoPriorityChooser.getSelected();
+		}
+
+		/**
 		 * Get the name of an control style.
 		 * 
 		 * @return the name of the control style.
@@ -440,6 +483,9 @@ public class Robot extends TimedRobot
 			return (int) controlStyleChooser.getSelected();
 		}
 
+		
+		
+		
 		/**
 		 * Adds the autos to the selector
 		 */
