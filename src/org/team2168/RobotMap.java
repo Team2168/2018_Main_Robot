@@ -79,7 +79,7 @@ public class RobotMap {
 //	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
 //	public static final int SHOOTER_ENCODER_B = 22; //PWM 18 on board
 	public static final int PRACTICE_BOT_JUMPER = 24;
-	
+	public static final int PWM_LIGHTS = 18;
 
 	// PBOT Differences
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;

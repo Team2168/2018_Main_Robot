@@ -8,6 +8,7 @@ import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,6 +21,7 @@ private static CubeIntakeWheels instance = null;
 	
 	private static VictorSP intakeMotorLeft;
 	private static VictorSP intakeMotorRight;
+	private static Victor lights;
 	private static AnalogInput intakeIRSensor;
 	public static volatile double intakeMotorLeftVoltage;
 	public static volatile double intakeMotorRightVoltage;
@@ -28,6 +30,7 @@ private static CubeIntakeWheels instance = null;
 		intakeMotorLeft = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_LEFT);
 		intakeMotorRight = new VictorSP(RobotMap.CUBE_INTAKE_MOTOR_RIGHT);
 		intakeIRSensor = new AnalogInput(RobotMap.CUBE_INTAKE_IR_SENSOR1);
+		lights = new Victor(RobotMap.PWM_LIGHTS);
 		
 		ConsolePrinter.putNumber("Cube Raw IR", () -> {return getRawIRVoltage();}, true, false);
 		ConsolePrinter.putBoolean("isCubePresent", () -> {return isCubePresent();}, true, false);
@@ -47,6 +50,15 @@ private static CubeIntakeWheels instance = null;
 			instance = new CubeIntakeWheels();
 		return instance;
 	}
+	/**
+	 * Set light speed where postive turns them on and negative turns them off
+	 * @param set
+	 */
+	public void setLights(double set) {
+		lights.set(set);
+	}
+		
+	
 	/**
 	 * Takes in a double speed and sets it to intake lift motor 
 	 * @param speed is a double between -1 and 1

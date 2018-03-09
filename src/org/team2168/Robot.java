@@ -104,6 +104,13 @@ public class Robot extends TimedRobot
     public static double[] leftVelPathQuintic2;
     public static double[] rightVelPathQuintic2;
     
+    public static double[] leftVelPathQuintic3;
+    public static double[] rightVelPathQuintic3;
+    
+    public static double[] leftVelPathQuintic4;
+    public static double[] rightVelPathQuintic4;
+ 
+    
     
     public static String gameData = "N A";
 
@@ -157,14 +164,31 @@ public class Robot extends TimedRobot
 //		};
 		
 		double[][] waypointPath = new double[][]{
-			{5, 15, Math.PI/2},
+			{5, 15, Math.PI/2}, //For left switch & right scale from left side
 			{5, 18, Math.PI/2},
 			{9, 22, Math.PI/4}
+			
+			
 	};
+	
+	double[][] waypointPath3 = new double[][]{
+		{5, 17, Math.PI/2}, //For Right switch from center 
+		{5, 19, Math.PI/2},
+		{8.5, 23, Math.PI/2},
+		{8.5, 24, Math.PI/2}
+	};
+	
+	double[][] waypointPath4 = new double[][]{
+		{10, 18, Math.PI/2}, //For l switch from center 
+		{10, 19, Math.PI/2},
+		{5, 24,Math.PI/2}
+	};
+	
 	
 	
 
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
+		quinticPath.calculate();
 		quinticPath.calculate();
 		
 		this.leftVelPathQuintic = quinticPath.getLeftVel();
@@ -178,7 +202,16 @@ public class Robot extends TimedRobot
 	};
 		
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
+		QuinticTrajectory quinticPath3= new QuinticTrajectory(waypointPath3);
+		QuinticTrajectory quinticPath4= new QuinticTrajectory(waypointPath4);
 		quinticPath2.calculate();
+		quinticPath3.calculate();
+		quinticPath4.calculate();
+		this.leftVelPathQuintic3 = quinticPath3.getLeftVel();
+		this.rightVelPathQuintic3 = quinticPath3.getRightVel();
+		
+		this.leftVelPathQuintic4 = quinticPath4.getLeftVel();
+		this.rightVelPathQuintic4 = quinticPath4.getRightVel();
 		
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
@@ -234,7 +267,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
-		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false);
+		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false); //Ill show you de wei
 
 		
 		
@@ -378,6 +411,12 @@ public class Robot extends TimedRobot
 	        Scheduler.getInstance().run();
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
+	        if (cubeIntakeWheels.isCubePresent())
+	        	cubeIntakeWheels.setLights(1);
+	        else 
+	        	cubeIntakeWheels.setLights(-1);
+	        
+	        	
 	        
 	        
 
@@ -507,6 +546,8 @@ public class Robot extends TimedRobot
 //	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
 //	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
 	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
+	        autoChooser.addObject("2018 Center right", new DriveToRightSwitch());
+	        autoChooser.addObject("2018 Center left", new DriveToLeftSwitch());
 	        autoChooser.addObject("Test", new AutoStartLeft2Cube());
 			// autoChooser.addObject("Do Something", new DoSomething());
 		}
