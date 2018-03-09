@@ -147,7 +147,7 @@ public class OI {
 		
 		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(80.0, 0.5, 0.16,1.0,true));
 		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(7.0, 0.5, 0.16,1.0,true));
-		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(4.0, 0.7, 0.16,1.0,true));
+		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
 		operatorJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(65.0, 0.5, 0.16,1.0,true));
 		////////////////Raise platform/////////////////////////////
 		

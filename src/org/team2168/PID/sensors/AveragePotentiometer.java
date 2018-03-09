@@ -20,6 +20,9 @@ public class AveragePotentiometer implements PIDSensorInterface {
 	private double[] averagorArray;
 	private int arrayPos = 0; // Next array position to put values to be
 	// averaged
+	
+	private double minVoltage;
+	private double maxVoltage;
 
 	AnalogInput potentiometer;
 	LinearInterpolator interpolator;
@@ -38,6 +41,9 @@ public class AveragePotentiometer implements PIDSensorInterface {
 
 		this.averagorSize = averageN;
 		this.averagorArray = new double[averagorSize];
+		
+		this.minVoltage = zeroVoltage;
+		this.maxVoltage = maxVoltage;
 
 	}
 	
@@ -77,6 +83,16 @@ public class AveragePotentiometer implements PIDSensorInterface {
 
 	public double getRawPos() {
 		return potentiometer.getVoltage();
+	}
+	
+	public boolean isAtUpperLimit()
+	{
+		return getRawPos()>=maxVoltage;
+	}
+	
+	public boolean isAtLowerLimit()
+	{
+		return getRawPos()<=minVoltage;
 	}
 
 	/**

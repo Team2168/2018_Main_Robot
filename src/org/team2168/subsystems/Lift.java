@@ -206,23 +206,44 @@ public class Lift extends Subsystem {
 	 * @param speed is +1 up and -1 down
 	 */
 	public void driveAllMotors(double speed) {
-		if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged()) ||
-				((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown()))
+		
+		if(RobotMap.ENABLE_LIFT_POT_SAFETY)
 		{
-			disableBrake();
-			driveLiftMotor1(speed);
-			driveLiftMotor2(speed);
-			driveLiftMotor3(speed); 
+			if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged() && !liftPot.isAtUpperLimit() ) ||
+					((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() ))
+			{
+				disableBrake();
+				driveLiftMotor1(speed);
+				driveLiftMotor2(speed);
+				driveLiftMotor3(speed); 
+			}
+			else 
+			{
+				enableBrake();
+				driveLiftMotor1(0.0);
+				driveLiftMotor2(0.0);
+				driveLiftMotor3(0.0);
+			}
 		}
-		else 
+		else
 		{
-			enableBrake();
-			driveLiftMotor1(0.0);
-			driveLiftMotor2(0.0);
-			driveLiftMotor3(0.0);
+			if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged()) ||
+					((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() ))
+			{
+				disableBrake();
+				driveLiftMotor1(speed);
+				driveLiftMotor2(speed);
+				driveLiftMotor3(speed); 
+			}
+			else 
+			{
+				enableBrake();
+				driveLiftMotor1(0.0);
+				driveLiftMotor2(0.0);
+				driveLiftMotor3(0.0);
+			}	
 		}
 	}
-
 	/**
 	 * Enables the pneumatic brake
 	 */
