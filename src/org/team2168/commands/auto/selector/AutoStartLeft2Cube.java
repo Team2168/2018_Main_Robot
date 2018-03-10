@@ -26,24 +26,32 @@ public class AutoStartLeft2Cube extends Command {
     		Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());
     		System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());");
     	}
-    	else if (Robot.gameData.equals("LRL")) {
-    		if (Robot.getAutoPriorityInt() == 1)
-    			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
-    	System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
-    	}
-    		else
-    			Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());
-    			System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());");	
-    	else if (Robot.gameData.equals("RRR"))
-    		if (Robot.getAutoPriorityInt() == 1)
+    	else if (Robot.gameData.equals("LRL")) 
+    	{
+    		if (Robot.getAutoPriorityInt() == 1) //scale priority
     		{
-    		Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());
-    		System.out.println("Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());");
+    			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
+    			System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
     		}
-    		else {
+    		else
+    		{
+    			Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());
+    			System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft())");	
+    		}
+    	}
+    	else if (Robot.gameData.equals("RRR"))
+    	{
+    			if (Robot.getAutoPriorityInt() == 1) //scale priority
+    			{
+    				Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());
+    				System.out.println("Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());");
+    			}
+    			else 
+    			{
     			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
     			System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
     			
+    			}
     		}
     	else if (Robot.gameData.equals("RLR"))
     	{
