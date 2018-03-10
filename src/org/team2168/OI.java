@@ -1,5 +1,7 @@
 package org.team2168;
 
+import org.team2168.commands.auto.DriveToLeftSwitch;
+import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
@@ -132,7 +134,7 @@ public class OI {
 		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		operatorJoystick.ButtonRightBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
-		////////////////Just spit Low Speed//////////////////////////////////////////////////////////////////////////////////////////
+		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftBumper().whenPressed(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE*0.5));
 		operatorJoystick.ButtonLeftBumper().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
@@ -146,11 +148,12 @@ public class OI {
 		
 		operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
 		operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
+		
 		////////////////Prepare to climb/////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
-		
+		////////////////Lift Pid commands////////////////////////////////////////////////////
 		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(80.0, 0.5, 0.16,1.0,true));
 		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(7.0, 0.5, 0.16,1.0,true));
 		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
@@ -194,10 +197,11 @@ public class OI {
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
 		//pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		//pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
-		pidTestJoystick.ButtonA().whenPressed(new RotatePIDPath(10.0, true));
+		pidTestJoystick.ButtonA().whenPressed(new DriveToLeftSwitch());
+		pidTestJoystick.ButtonB().whenPressed(new DriveToRightSwitch());
 		
 		
-		pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZNoBattery(-25.0,0.53,0.1,0.5,true));
+		
 		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(33.0, 0.5, 0.16,1.0,true));
 		pidTestJoystick.ButtonX().whenPressed((new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true)));
 		

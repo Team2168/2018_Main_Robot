@@ -17,7 +17,7 @@ import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Drive to right scale from left side
+ * Drive to left switch and right scale
  */
 public class DriveToLeftSwitchAndRightScaleFromLeft extends CommandGroup {
 

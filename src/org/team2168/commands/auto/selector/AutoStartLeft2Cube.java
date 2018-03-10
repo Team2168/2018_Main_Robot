@@ -22,24 +22,35 @@ public class AutoStartLeft2Cube extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (Robot.gameData.equals("LLL"))
+    	if (Robot.gameData.equals("LLL")) {
     		Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());
-    	else if (Robot.gameData.equals("LRL"))
-    		Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());
-    	else if (Robot.gameData.equals("RRR"))
-    		Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());
-    	else if (Robot.gameData.equals("RLR"))
-    	{
+    		System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());");
+    	}
+    	else if (Robot.gameData.equals("LRL")) {
     		if (Robot.getAutoPriorityInt() == 1)
-    			Scheduler.getInstance().add(new DriveToLeftScaleAndRightSwitchFromLeftSide());
+    			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
+    	System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
+    	}
+    		else
+    			Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());
+    			System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());");	
+    	else if (Robot.gameData.equals("RRR"))
+    		if (Robot.getAutoPriorityInt() == 1)
+    		{
+    		Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());
+    		System.out.println("Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());");
+    		}
     		else {
     			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
+    			System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
+    			
     		}
-    			
+    	else if (Robot.gameData.equals("RLR"))
+    	{
+      			Scheduler.getInstance().add(new DriveToLeftScaleAndRightSwitchFromLeftSide());
+      			System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndRightSwitchFromLeftSide());");
     	}
-    			
-    	
- 
+    		
     		
     }
 
