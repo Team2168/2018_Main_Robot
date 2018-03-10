@@ -5,6 +5,7 @@ import org.team2168.commands.auto.massComp.DriveToLeftScaleAndRightSwitchFromLef
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.LeftScaleOnlyFromLeftSide;
 import org.team2168.commands.auto.massComp.RightScaleOnlyFromLeftSide;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,20 +26,14 @@ public class AutoStartLeft2Cube extends Command {
     	if (Robot.gameData.equals("LLL")) {
     		Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());
     		System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());");
-    	}
-    	else if (Robot.gameData.equals("LRL")) 
-    	{
-    		if (Robot.getAutoPriorityInt() == 1) //scale priority
-    		{
-    			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
-    			System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
     		}
-    		else
+    	
+    	else if (Robot.gameData.equals("LRL")) 
     		{
     			Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());
     			System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft())");	
     		}
-    	}
+    	
     	else if (Robot.gameData.equals("RRR"))
     	{
     			if (Robot.getAutoPriorityInt() == 1) //scale priority

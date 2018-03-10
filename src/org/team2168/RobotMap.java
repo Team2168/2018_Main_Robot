@@ -89,12 +89,12 @@ public class RobotMap {
 	//Double Soldenoids PCM ID = 0
 	public final static int DRIVETRAIN_LOW_GEAR_PCM = 0;
 	public final static int DRIVETRAIN_HIGH_GEAR_PCM = 1;
-	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 2;
-	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 3;
+	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 6;
+	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 7;
 	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
 	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 6;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 7;//Forklift
+	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 2;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 3;//Forklift
 	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
 	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	

@@ -21,7 +21,7 @@ public class ClimbGuideArm extends Subsystem {
 	 * Default constructors for Climb guide arm
 	 */
 	private ClimbGuideArm() {
-		guidingArm = new DoubleSolenoid(RobotMap.PCM_CAN_ID,RobotMap.CLIMB_GUIDE_ARM_RAISE_PCM, RobotMap.CLIMB_GUIDE_ARM_LOWER_PCM);
+		guidingArm = new DoubleSolenoid(RobotMap.PCM_CAN_ID_2,RobotMap.CLIMB_GUIDE_ARM_RAISE_PCM, RobotMap.CLIMB_GUIDE_ARM_LOWER_PCM);
 			}
 	
 	/**
