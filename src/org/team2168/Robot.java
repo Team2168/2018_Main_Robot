@@ -47,6 +47,7 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
+	public static IntakePivotPiston intakePivotPiston;
 	//public static Platform platform;
 	public static Pneumatics pneumatics;
 	
@@ -135,6 +136,7 @@ public class Robot extends TimedRobot
 		//platform = platform.getInstance();
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
+		intakePivotPiston = IntakePivotPiston.getInstance();
 
 		
 		

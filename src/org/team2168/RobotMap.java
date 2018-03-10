@@ -81,7 +81,7 @@ public class RobotMap {
 	public static final int PRACTICE_BOT_JUMPER = 24;
 	
 
-	// PBOT Differences
+	// PBOT Differences 
 	// public static final int GEAR_INTAKE_ARM_HALL_EFECT_PBOT = 0;
 	
 	//Solenoid Channels//////////////////////////////////////////
@@ -105,6 +105,9 @@ public class RobotMap {
 	public static final int LIFT_LOW_GEAR_PCM = 5;
 	public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
 	public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 8;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 9;
+	
 
 
 	//Analog Input Channels////////////////////////////////////////////////////
