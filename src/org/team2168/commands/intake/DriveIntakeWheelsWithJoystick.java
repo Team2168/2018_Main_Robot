@@ -22,7 +22,7 @@ public class DriveIntakeWheelsWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakeWheels.driveAllMotors(OI.getDriveIntakeWheelsJoystickValue() * RobotMap.CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED );
+    	Robot.cubeIntakeWheels.driveAllMotors(-OI.getDriveIntakeWheelsJoystickValue() * RobotMap.CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED );
     }
 
     // Make this return true when this Command no longer needs to run execute()

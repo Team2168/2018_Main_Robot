@@ -217,8 +217,8 @@ public class RobotMap {
 	/*************************************************************************
 	 *                         CUBE INTAKE PARAMETERS                        *
 	 *************************************************************************/
-	public static final boolean INTAKE_LEFT_REVERSE = false;
-	public static final boolean INTAKE_RIGHT_REVERSE = false;
+	public static final boolean INTAKE_LEFT_REVERSE = true;
+	public static final boolean INTAKE_RIGHT_REVERSE = true;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.2;
 	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.9;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
@@ -251,7 +251,7 @@ public class RobotMap {
 	public static final double LIFT_MIN_SPEED = 0.15;
 	
 	
-	public static final double LIFT_POT_VOLTAGE_MAX = 3.6; //85 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
 	public static final double LIFT_POT_VOLTAGE_0 = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;

@@ -24,7 +24,7 @@ public class DriveToLeftScaleAndRightSwitchFromLeftSide extends CommandGroup {
     public DriveToLeftScaleAndRightSwitchFromLeftSide() {
     	
     	//drive stright to null territory
-    	addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));
+    	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(18.0));
     	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));
     	

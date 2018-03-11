@@ -8,6 +8,7 @@ import org.team2168.commands.auto.massComp.DriveStraight;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
 import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
+import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
@@ -183,9 +184,13 @@ public class Robot extends TimedRobot
 	};
 	
 	double[][] waypointPath4 = new double[][]{
+		//{10, 18, Math.PI/2}, //For l switch from center 
+		//{10, 19, Math.PI/2},
+		//{5, 24,Math.PI/2}
+		
 		{10, 18, Math.PI/2}, //For l switch from center 
-		{10, 19, Math.PI/2},
-		{5, 24,Math.PI/2}
+		{10, 18.5, Math.PI/2},
+		{4.5, 24,Math.PI/2}
 	};
 	
 	
@@ -264,6 +269,7 @@ public class Robot extends TimedRobot
 		
 		ConsolePrinter.putSendable("Control Style Chooser", () -> {return Robot.controlStyleChooser;}, true, false);
 		ConsolePrinter.putSendable("Autonomous Mode Chooser", () -> {return Robot.autoChooser;}, true, false);
+		ConsolePrinter.putSendable("Priority Mode Chooser", () -> {return Robot.autoPriorityChooser;}, true, false);
 		ConsolePrinter.putString("AutoName", () -> {return Robot.getAutoName();}, true, false);
 		ConsolePrinter.putString("Control Style Name", () -> {return Robot.getControlStyleName();}, true, false);
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
@@ -414,10 +420,7 @@ public class Robot extends TimedRobot
 	        Scheduler.getInstance().run();
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
-	        if (cubeIntakeWheels.isCubePresent())
-	        	cubeIntakeWheels.setLights(1);
-	        else 
-	        	cubeIntakeWheels.setLights(-1);
+	        updateLights();
 	        
 	        	
 	        
@@ -447,6 +450,8 @@ public class Robot extends TimedRobot
 			}
 		}
 
+		
+		
 		/**
 		 * Get the name of auto priority
 		 * 
@@ -552,6 +557,7 @@ public class Robot extends TimedRobot
 	        autoChooser.addObject("2018 Center right", new DriveToRightSwitch());
 	        autoChooser.addObject("2018 Center left", new DriveToLeftSwitch());
 	        autoChooser.addObject("Center Auto", new AutoStartCenter1Cube());
+	        autoChooser.addObject("Left 1Auto", new AutoStartLeft1Cube());
 			autoChooser.addObject("Straight", new DriveStraight());
 		}
 
@@ -631,6 +637,13 @@ public class Robot extends TimedRobot
 			gameData = "N A";
 		return gameData;
 	}
+	private void updateLights()  {                          
+	if (cubeIntakeWheels.isCubePresent())
+    	cubeIntakeWheels.setLights(1);
+    else 
+    	cubeIntakeWheels.setLights(-1);
+	}
+	
 	
 	
 }
