@@ -25,9 +25,13 @@ public class DriveToRightSwitch extends CommandGroup {
     	addParallel(new ExtendPivotPiston());
     	addParallel(new IntakeUntilCube());
     	addParallel(new OperationKeepCube());
+    	addSequential(new Sleep(), 1.0);
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3));
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
+    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5,true), 2.0);
+    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5, true), 2.0 );
+    	addSequential(new DrivePIDPath(2.5));
+    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.4);
    	 	addSequential(new StopWheels());
     	
     	 

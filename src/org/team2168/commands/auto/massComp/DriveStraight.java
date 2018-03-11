@@ -9,7 +9,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DriveStraight extends CommandGroup {
 
-    public DriveStraight() {
+    public DriveStraight(double dist) {
         addSequential(new DrivePIDPath(12.0));
+    }
+    
+    public DriveStraight() {
+        addSequential(new DrivePIDPath(9.5));
     }
 }

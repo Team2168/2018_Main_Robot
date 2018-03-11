@@ -231,6 +231,7 @@ public class RobotMap {
 	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
 	public static final double CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED = 0.2;
 	public static final double CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED = 1.0; 
+	public static final double AUTO_CUBE_INTAKE_VALUE = 0.4;
 	
 	/*************************************************************************
 	 *                         SCISSOR LIFT PARAMETERS                       *
@@ -244,7 +245,7 @@ public class RobotMap {
 	public static final boolean LIFT_MOTOR2_REVERSE = true;
 	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
-	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.7; 
+	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0; 
 	public static final double LIFT_UP_MIN_VOLTAGE = 1.2;
 	public static final double LIFT_DOWN_MIN_VOLTAGE = 1.2;
 	

@@ -83,9 +83,10 @@ public class QuinticTrajectory
 //		//Square Path
 		double[][] waypointPath = new double[][]{
 			{10, 18, Math.PI/2}, //For l switch from center 
-			{10, 18.5, Math.PI/2},
-			{4.5, 24,Math.PI/2}
+			//{10, 18.5, Math.PI/2},
+			{4.2, 22,Math.PI*.999}
 
+			
 		};
 		
 		double[][] waypointPath2 = new double[][]{
