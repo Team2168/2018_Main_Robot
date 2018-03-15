@@ -14,7 +14,7 @@ public class IntakePivotPiston extends Subsystem {
 	private static DoubleSolenoid CubeIntakePivotPiston;
 	
 	public IntakePivotPiston() {
-		CubeIntakePivotPiston = new DoubleSolenoid(RobotMap.CUBE_INTAKE_PIVOT_PISTON_EXTEND, RobotMap.CUBE_INTAKE_PIVOT_PISTON_RETRACT);;
+		CubeIntakePivotPiston = new DoubleSolenoid(RobotMap.PCM_CAN_ID, RobotMap.CUBE_INTAKE_PIVOT_PISTON_EXTEND, RobotMap.CUBE_INTAKE_PIVOT_PISTON_RETRACT);;
 	}
 	
 	public static IntakePivotPiston getInstance(){

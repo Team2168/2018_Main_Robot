@@ -4,8 +4,12 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
+import org.team2168.commands.auto.massComp.DriveStraight;
+import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
+import org.team2168.commands.auto.massComp.DriveToRightSwitch;
 import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
+import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
@@ -549,8 +553,8 @@ public class Robot extends TimedRobot
 	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
 	        autoChooser.addObject("2018 Center right", new DriveToRightSwitch());
 	        autoChooser.addObject("2018 Center left", new DriveToLeftSwitch());
-	        autoChooser.addObject("Test", new AutoStartLeft2Cube());
-			// autoChooser.addObject("Do Something", new DoSomething());
+	        autoChooser.addObject("Center Auto", new AutoStartCenter1Cube());
+			autoChooser.addObject("Straight", new DriveStraight());
 		}
 
 		/**
