@@ -19,15 +19,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drive to right switch boiii
  */
-public class DriveToRightSwitch extends CommandGroup {
+public class DriveToRightScaleFromLeft extends CommandGroup {
 
-    public DriveToRightSwitch() {
+    public DriveToRightScaleFromLeft() {
     	addParallel(new ExtendPivotPiston());
     	addParallel(new IntakeUntilCube());
     	addParallel(new OperationKeepCube());
     	addSequential(new Sleep(), 1.0);
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));
+    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic5, Robot.rightVelPathQuintic5, Robot.headingQuintic5));
 //    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5,true), 2.0);
 //    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5, true), 2.0 );
 //    	addSequential(new DrivePIDPath(2.5));
