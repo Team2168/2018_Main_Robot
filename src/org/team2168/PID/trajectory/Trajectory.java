@@ -152,7 +152,7 @@ public class Trajectory {
 			str += i + "\t";
 			str += segment.x + "\t";
 			str += segment.y + "\t";
-			str += segment.heading + "\t";
+			str += segment.heading*180/Math.PI + "\t";
 			str += "\n";
 		}
 

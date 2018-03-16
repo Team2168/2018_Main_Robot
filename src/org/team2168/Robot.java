@@ -3,6 +3,8 @@ package org.team2168;
 import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
+import org.team2168.auto.paths.LeftSwitchFromCenterPath;
+import org.team2168.auto.paths.RightSwitchFromCenterPath;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.massComp.DriveStraight;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
@@ -177,23 +179,9 @@ public class Robot extends TimedRobot
 			
 	};
 	
-	double[][] waypointPath3 = new double[][]{
-		{5, 17, Math.PI/2}, //For Right switch from center 
-		{5, 19, Math.PI/2},
-		{8.5, 23, Math.PI/2},
-		{8.5, 24, Math.PI/2}
-	};
 	
-	double[][] waypointPath4 = new double[][]{
-		//{10, 18, Math.PI/2}, //For l switch from center 
-		//{10, 19, Math.PI/2},
-		//{5, 24,Math.PI/2}
+	
 		
-		{10, 18, Math.PI/2}, //For l switch from center 
-		//{10, 18.5, Math.PI/2},
-		{4.2, 22,Math.PI*.999}
-	};
-	
 	
 	
 
@@ -212,19 +200,12 @@ public class Robot extends TimedRobot
 	};
 		
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
-		QuinticTrajectory quinticPath3= new QuinticTrajectory(waypointPath3);
-		QuinticTrajectory quinticPath4= new QuinticTrajectory(waypointPath4);
 		quinticPath2.calculate();
-		quinticPath3.calculate();
-		quinticPath4.calculate();
-		this.leftVelPathQuintic3 = quinticPath3.getLeftVel();
-		this.rightVelPathQuintic3 = quinticPath3.getRightVel();
-		
-		this.leftVelPathQuintic4 = quinticPath4.getLeftVel();
-		this.rightVelPathQuintic4 = quinticPath4.getRightVel();
-		
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
+		
+		new LeftSwitchFromCenterPath();
+		new RightSwitchFromCenterPath();
 		
 		//Start Thread Only After Every Other Class is Loaded. 
 		

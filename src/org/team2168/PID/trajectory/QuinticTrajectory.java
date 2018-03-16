@@ -52,7 +52,7 @@ public class QuinticTrajectory
 	public double[][] leftAccel;
 	public double[][] rightJerk;
 	public double[][] leftJerk;
-
+	public double[] heading;
 	
 	double totalSplineLength = 0;
 
@@ -82,17 +82,22 @@ public class QuinticTrajectory
 		
 //		//Square Path
 		double[][] waypointPath = new double[][]{
-			{10, 18, Math.PI/2}, //For l switch from center 
-			//{10, 18.5, Math.PI/2},
-			{4.2, 22,Math.PI*.999}
-
+//			{5, 17, 0}, //For Right switch from center 
+//			{5, 19, Math.PI/2},
+//			{8.5, 23, Math.PI/2},
+//			{8.5, 24, Math.PI/2*0.987}
+			
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 34.9, Math.PI/2}
+			
+			
 			
 		};
 		
 		double[][] waypointPath2 = new double[][]{
-			{6, 26, 2.36},
-			{5, 28, 1.79},
-			{5, 32, Math.PI/2}
+		{6, 20, Math.PI/2},
+		{6, 26, Math.PI/2}		
 	};
 		
 //		//Square Path
@@ -125,9 +130,13 @@ public class QuinticTrajectory
 		
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
 		quinticPath.calculate();
+		//System.out.println(quinticPath.traj.toStringEuclidean());
 
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
 		quinticPath2.calculate();
+		
+		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
+			System.out.println(quinticPath.getHeadingDeg()[i]);
 
 		
 		
@@ -147,9 +156,9 @@ public class QuinticTrajectory
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
-		fig3.addData(quinticPath2.leftPath, Color.blue);
-		fig3.addData(quinticPath2.rightPath, Color.magenta);
-		fig3.addData(waypointPath2, null, Color.black);
+	//	fig3.addData(quinticPath2.leftPath, Color.blue);
+	//	fig3.addData(quinticPath2.rightPath, Color.magenta);
+	//	fig3.addData(waypointPath2, null, Color.black);
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
 		
 		
@@ -418,6 +427,7 @@ public class QuinticTrajectory
 		  
 		  this.leftVel = new double[this.leftRightTraj.right.getNumSegments()];
 		  this.rightVel =  new double[this.leftRightTraj.right.getNumSegments()];
+		  this.heading =  new double[this.leftRightTraj.right.getNumSegments()];
 		  
 		  //copy left
 		  for( int i =0; i < this.leftRightTraj.left.getNumSegments(); i++)
@@ -434,6 +444,7 @@ public class QuinticTrajectory
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
+			  this.heading[i] =	this.traj.segments_[i].heading*180/Math.PI;
 			  
 			  
 			  this.leftAccel[i][0] = this.leftRightTraj.left.getSegment(i).dt*i;
@@ -458,6 +469,11 @@ public class QuinticTrajectory
 	  public double[] getRightVel()
 	  {
 		  return this.rightVel;
+	  }
+	  
+	  public double[] getHeadingDeg()
+	  {
+		  return this.heading;
 	  }
 	  
 	  
