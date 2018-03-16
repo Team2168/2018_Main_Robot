@@ -87,17 +87,18 @@ public class QuinticTrajectory
 //			{8.5, 23, Math.PI/2},
 //			{8.5, 24, Math.PI/2*0.987}
 			
-			{6, 26, 2.36},
-			{5, 28, 1.79},
-			{5, 34.9, Math.PI/2}
+			{5, 17, 0}, //Right switch Path
+			{6, 17, 0},
+			{13, 22.5, 0}
 			
 			
 			
 		};
 		
 		double[][] waypointPath2 = new double[][]{
-		{6, 20, Math.PI/2},
-		{6, 26, Math.PI/2}		
+			{5, 17, 0}, //Right switch Path
+			{6, 17, 0},
+			{13, 12.5, 0}	
 	};
 		
 //		//Square Path
@@ -156,22 +157,22 @@ public class QuinticTrajectory
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
-	//	fig3.addData(quinticPath2.leftPath, Color.blue);
-	//	fig3.addData(quinticPath2.rightPath, Color.magenta);
-	//	fig3.addData(waypointPath2, null, Color.black);
+		fig3.addData(quinticPath2.leftPath, Color.blue);
+		fig3.addData(quinticPath2.rightPath, Color.magenta);
+		fig3.addData(waypointPath2, null, Color.black);
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
 		
 		
 		//Velocity
 //		
-//				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-//				fig4.yGridOn();
-//				fig4.xGridOn();
-//				fig4.setYLabel("Velocity (ft/sec)");
-//				fig4.setXLabel("time (seconds)");
-//				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-//				fig4.addData(quinticPath.rightVelocity, Color.magenta);
-//				fig4.addData(quinticPath.leftVelocity, Color.cyan);
+				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+				fig4.yGridOn();
+				fig4.xGridOn();
+				fig4.setYLabel("Velocity (ft/sec)");
+				fig4.setXLabel("time (seconds)");
+				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+				fig4.addData(quinticPath.rightVelocity, Color.magenta);
+				fig4.addData(quinticPath.leftVelocity, Color.cyan);
 //				
 //				
 //				//Velocity
@@ -444,7 +445,7 @@ public class QuinticTrajectory
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
-			  this.heading[i] =	this.traj.segments_[i].heading*180/Math.PI;
+			  this.heading[i] =	ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI);
 			  
 			  
 			  this.leftAccel[i][0] = this.leftRightTraj.left.getSegment(i).dt*i;

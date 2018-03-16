@@ -113,9 +113,11 @@ public class Robot extends TimedRobot
     
     public static double[] leftVelPathQuintic3;
     public static double[] rightVelPathQuintic3;
+    public static double[] headingQuintic3;
     
     public static double[] leftVelPathQuintic4;
     public static double[] rightVelPathQuintic4;
+    public static double[] headingQuintic4;
  
     
     
@@ -187,7 +189,6 @@ public class Robot extends TimedRobot
 
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
 		quinticPath.calculate();
-		quinticPath.calculate();
 		
 		this.leftVelPathQuintic = quinticPath.getLeftVel();
 		this.rightVelPathQuintic = quinticPath.getRightVel();
@@ -204,8 +205,38 @@ public class Robot extends TimedRobot
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
 		
-		new LeftSwitchFromCenterPath();
-		new RightSwitchFromCenterPath();
+		
+	    double[][] waypointPath3 = new double[][]{
+			{5, 17, 0}, //Right switch Path
+			{6, 17, 0},
+			{12, 12.5, 0}
+	    
+	};
+
+
+		QuinticTrajectory quinticPath3 = new QuinticTrajectory(waypointPath3);
+		quinticPath3.calculate();
+		this.leftVelPathQuintic3 = quinticPath3.getLeftVel();
+		this.rightVelPathQuintic3 = quinticPath3.getRightVel();
+		this.headingQuintic3 = quinticPath3.getHeadingDeg();
+		
+	    double[][] waypointPath4 = new double[][]{
+	    	//{5, 17, Math.PI/2}, //For Right switch from center 
+			//{5, 19, Math.PI/2},
+			//{8.5, 23, Math.PI/2},
+			//{8.5, 24, Math.PI/2}
+			
+			{5, 17, 0}, //Right switch Path
+			{6, 17, 0},
+			{12, 22.5, 0}
+		};
+
+
+		QuinticTrajectory quinticPath4 = new QuinticTrajectory(waypointPath4);
+		quinticPath4.calculate();
+		this.leftVelPathQuintic4 = quinticPath4.getLeftVel();
+		this.rightVelPathQuintic4 = quinticPath4.getRightVel();
+		this.headingQuintic4 = quinticPath4.getHeadingDeg();
 		
 		//Start Thread Only After Every Other Class is Loaded. 
 		

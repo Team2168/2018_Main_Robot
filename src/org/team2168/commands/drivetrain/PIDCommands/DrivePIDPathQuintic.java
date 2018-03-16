@@ -13,6 +13,7 @@ public class DrivePIDPathQuintic extends Command {
 	
 	private double[] setPointLeft;
     private double[] setPointRight;
+    private double[] setPointHeading;
     
     OneDimensionalMotionProfiling motion;
 	
@@ -23,6 +24,8 @@ public class DrivePIDPathQuintic extends Command {
     double lastRotateOutput;
     boolean direction = false;
     int directionValue = 1;
+    
+    private boolean headingByArray = false;
     
     public DrivePIDPathQuintic(double distance )
     {
@@ -48,6 +51,20 @@ public class DrivePIDPathQuintic extends Command {
  	   
  	   System.out.println("SetPointLength: " + setPointLeft.length);
     } 
+    
+    public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight,  double[] setPointHeading){
+   	   requires(Robot.drivetrain);
+   	 
+   	   this.setPointLeft =setPointLeft;
+   	   this.setPointRight = setPointRight;
+   	   this.setPointHeading = setPointHeading;
+   	   
+   	   direction = false;
+   	   this.headingByArray= true;
+
+   	   
+   	   System.out.println("SetPointLength: " + setPointLeft.length);
+      } 
     
     public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight, double ff_gain){
   	   requires(Robot.drivetrain);
@@ -83,6 +100,12 @@ public class DrivePIDPathQuintic extends Command {
 		Robot.drivetrain.rightSpeedController.setSetPoint(setPointRight);
     
 		Robot.drivetrain.rotateDriveStraightController.reset();
+		if(this.headingByArray)
+			Robot.drivetrain.rotateDriveStraightController.setSetPoint(setPointHeading);
+		
+		Robot.drivetrain.rotateDriveStraightController.Enable();
+		
+		
 		counter = 0;
 		oldClock = Timer.getFPGATimestamp();
 		
@@ -120,7 +143,7 @@ public class DrivePIDPathQuintic extends Command {
 		//ff_term = SmartDashboard.getNumber("FF_term", 0);
 		
 		lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
-		double headingCorrection = 0;//(Robot.drivetrain.rotateDriveStraightController.getControlOutput()) ;
+		double headingCorrection = (Robot.drivetrain.rotateDriveStraightController.getControlOutput()) ;
 		
 		if(counter<setPointLeft.length)
 		{
@@ -137,6 +160,7 @@ public class DrivePIDPathQuintic extends Command {
 			
 			SmartDashboard.putNumber("DriveArrayLeftSpeed", speedLeft);
 			SmartDashboard.putNumber("DriveArrayRightSpeed", speedRight);
+			SmartDashboard.putNumber("DriveArrayHeading", Robot.drivetrain.rotateDriveStraightController.getSetPoint());
 		}
 
     }
