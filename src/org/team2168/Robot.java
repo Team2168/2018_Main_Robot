@@ -3,8 +3,6 @@ package org.team2168;
 import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
-import org.team2168.auto.paths.LeftSwitchFromCenterPath;
-import org.team2168.auto.paths.RightSwitchFromCenterPath;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.massComp.DriveStraight;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
@@ -170,13 +168,6 @@ public class Robot extends TimedRobot
 //			System.out.println(motion.getVelArray()[i]);
 //		//Start Thread Only After Every Other Class is Loaded. 
 		
-		//S Path
-//		double[][] waypointPath = new double[][]{
-//				{5, 15, Math.PI/2},
-//				{5, 18, Math.PI/2},
-//				{7, 23, Math.PI/2},
-//				{7, 25, Math.PI/2},
-//		};
 		
 		double[][] waypointPath = new double[][]{
 			{5, 15, Math.PI/2}, //For left switch & right scale from left side
@@ -185,12 +176,6 @@ public class Robot extends TimedRobot
 			
 			
 	};
-	
-	
-	
-		
-	
-	
 
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
 		quinticPath.calculate();
@@ -207,11 +192,13 @@ public class Robot extends TimedRobot
 		
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
 		quinticPath2.calculate();
+	
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
 		
-		
-	    double[][] waypointPath3 = new double[][]{
+	
+	    double[][] waypointPath3 = new double[][]
+      {
 			{5, 17, 0}, //Right switch Path
 			{6, 17, 0},
 			{12, 12.5, 0}

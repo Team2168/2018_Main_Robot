@@ -20,12 +20,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
 
     public LeftSwitchOnlyFromLeftSide() {
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new ExtendPivotPiston());
-    	addParallel(new IntakeUntilCube());
-    	addSequential(new Sleep(), 0.5);
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.5);
+    	addSequential(new RobotRunPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	//addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic));
     	addSequential(new DrivePIDPath(10.5));

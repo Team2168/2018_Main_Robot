@@ -19,20 +19,20 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drive to right scale from left side
  */
-public class DriveToRightScaleAndRightSwitchFromLeftSide extends CommandGroup {
+public class DriveToRightScaleAndRightSwitchFromLeftSideV2 extends CommandGroup {
 
-    public DriveToRightScaleAndRightSwitchFromLeftSide() {
+    public DriveToRightScaleAndRightSwitchFromLeftSideV2() {
     	
     	addSequential(new RobotRunPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DrivePIDPath(15.0));
-    	addSequential(new RotateXDistancePIDZZZ(89.0,0.63,0.1,0.5,true));
-    	addSequential(new DrivePIDPath(12.7));
-    	addSequential(new RotateXDistancePIDZZZ(-10.0,0.7,0.1,0.5,true));
+    	//addSequential(new DrivePIDPath(15.0));
+    	//addSequential(new RotateXDistancePIDZZZ(89.0,0.63,0.1,0.5,true));
+    	//addSequential(new DrivePIDPath(12.7));
+    	//addSequential(new RotateXDistancePIDZZZ(-10.0,0.7,0.1,0.5,true));
     
     	//drive lift to score height
     	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DrivePIDPath(0.6));
+    	//addSequential(new DrivePIDPath(0.6));
     	
     	
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE), 0.4 );

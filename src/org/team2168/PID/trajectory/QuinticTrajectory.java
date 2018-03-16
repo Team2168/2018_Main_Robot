@@ -82,11 +82,11 @@ public class QuinticTrajectory
 		
 //		//Square Path
 		double[][] waypointPath = new double[][]{
-//			{5, 17, 0}, //For Right switch from center 
-//			{5, 19, Math.PI/2},
-//			{8.5, 23, Math.PI/2},
-//			{8.5, 24, Math.PI/2*0.987}
-			
+		//	{5, 17, 0}, //For Right switch from center 
+		//	{5, 19, Math.PI/2},
+		//	{8.5, 23, Math.PI/2},
+		//	{8.5, 24, Math.PI/2*0.987}
+      
 			//use for 1switch auto
 //			{10, 24, 0},
 //			{20, 24, 0},
@@ -165,9 +165,11 @@ public class QuinticTrajectory
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
+
 		//fig3.addData(quinticPath2.leftPath, Color.blue);
 		//fig3.addData(quinticPath2.rightPath, Color.magenta);
 		//fig3.addData(waypointPath2, null, Color.black);
+ 
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
 		
 		

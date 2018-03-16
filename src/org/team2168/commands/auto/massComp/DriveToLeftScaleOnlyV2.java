@@ -19,12 +19,7 @@ public class DriveToLeftScaleOnlyV2 extends CommandGroup {
 
     public DriveToLeftScaleOnlyV2() {
     	//drive stright to null territory
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new ExtendPivotPiston());
-    	addParallel(new IntakeUntilCube());
-    	addSequential(new Sleep(), 0.5);
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 0.75);
+    	addSequential(new RobotRunPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(19.0));
     	addSequential(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));

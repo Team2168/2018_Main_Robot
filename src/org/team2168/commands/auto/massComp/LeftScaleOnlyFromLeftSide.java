@@ -19,11 +19,7 @@ public class LeftScaleOnlyFromLeftSide extends CommandGroup {
 
     public LeftScaleOnlyFromLeftSide() {
     	//drive stright to null territory
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new ExtendPivotPiston());
-    	addParallel(new IntakeUntilCube());
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.5);
+    	addSequential(new RobotRunPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(17.5));
     	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));

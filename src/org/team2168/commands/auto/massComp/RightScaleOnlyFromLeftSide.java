@@ -17,10 +17,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightScaleOnlyFromLeftSide extends CommandGroup {
 
     public RightScaleOnlyFromLeftSide() {
-    	addParallel(new ExtendPivotPiston());
-    	addParallel(new IntakeUntilCube());
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.0);
+    	addSequential(new RobotRunPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(15.0));
     	addSequential(new RotateXDistancePIDZZZ(89.0,0.63,0.1,0.5,true));
