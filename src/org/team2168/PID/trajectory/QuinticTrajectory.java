@@ -87,10 +87,18 @@ public class QuinticTrajectory
 //			{8.5, 23, Math.PI/2},
 //			{8.5, 24, Math.PI/2*0.987}
 			
-			{5, 17, 0}, //Right switch Path
-			{6, 17, 0},
-			{13, 22.5, 0}
+			//use for 1switch auto
+//			{10, 24, 0},
+//			{20, 24, 0},
+//			{25, 20, -Math.PI/2+0.0001},
+//			{25, 8, -Math.PI/2+0.0001},
+//			{27,5, 0}
 			
+			{10, 24, 0},
+			{24, 24, 0},
+			{27, 20, -Math.PI/2+0.0001},
+			{27, 12, -Math.PI/2+0.0001},
+			{29, 10, 0}
 			
 			
 		};
@@ -157,22 +165,22 @@ public class QuinticTrajectory
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
-		fig3.addData(quinticPath2.leftPath, Color.blue);
-		fig3.addData(quinticPath2.rightPath, Color.magenta);
-		fig3.addData(waypointPath2, null, Color.black);
+		//fig3.addData(quinticPath2.leftPath, Color.blue);
+		//fig3.addData(quinticPath2.rightPath, Color.magenta);
+		//fig3.addData(waypointPath2, null, Color.black);
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
 		
 		
 		//Velocity
 //		
-				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-				fig4.yGridOn();
-				fig4.xGridOn();
-				fig4.setYLabel("Velocity (ft/sec)");
-				fig4.setXLabel("time (seconds)");
-				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-				fig4.addData(quinticPath.rightVelocity, Color.magenta);
-				fig4.addData(quinticPath.leftVelocity, Color.cyan);
+//				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+//				fig4.yGridOn();
+//				fig4.xGridOn();
+//				fig4.setYLabel("Velocity (ft/sec)");
+//				fig4.setXLabel("time (seconds)");
+//				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+//				fig4.addData(quinticPath.rightVelocity, Color.magenta);
+//				fig4.addData(quinticPath.leftVelocity, Color.cyan);
 //				
 //				
 //				//Velocity

@@ -120,6 +120,11 @@ public class Robot extends TimedRobot
     public static double[] headingQuintic4;
  
     
+    public static double[] leftVelPathQuintic5;
+    public static double[] rightVelPathQuintic5;
+    public static double[] headingQuintic5;
+ 
+    
     
     public static String gameData = "N A";
 
@@ -239,6 +244,34 @@ public class Robot extends TimedRobot
 		this.headingQuintic4 = quinticPath4.getHeadingDeg();
 		
 		//Start Thread Only After Every Other Class is Loaded. 
+		
+	    double[][] waypointPath5 = new double[][]{
+	    	//{5, 17, Math.PI/2}, //For Right switch from center 
+			//{5, 19, Math.PI/2},
+			//{8.5, 23, Math.PI/2},
+			//{8.5, 25, Math.PI/2}
+			
+//			{10, 24, 0},
+//			{23, 24, 0},
+//			{27, 20, -Math.PI/2+0.0001},
+//			{27, 8, -Math.PI/2+0.0001},
+//			{29,5, 0}
+			
+			{10, 24, 0},
+			{24, 24, 0},
+			{27, 20, -Math.PI/2+0.0001},
+			{27, 10, -Math.PI/2+0.0001},
+			{29, 8, 0}
+			
+		};
+		
+		QuinticTrajectory quinticPath5 = new QuinticTrajectory(waypointPath5);
+		quinticPath5.calculate();
+		this.leftVelPathQuintic5 = quinticPath5.getLeftVel();
+		this.rightVelPathQuintic5 = quinticPath5.getRightVel();
+		this.headingQuintic5 = quinticPath5.getHeadingDeg();
+
+		
 		
 		
 		//Start Operator Interface
@@ -574,7 +607,7 @@ public class Robot extends TimedRobot
 	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
 			autoChooser.addObject("Drive Straight Only", new DriveStraight());
-			autoChooser.addObject("LeftScale", new DriveToLeftScaleOnlyV2());
+			autoChooser.addObject("RightScaleTest", new DriveToRightScaleFromLeft());
 		}
 
 		/**
