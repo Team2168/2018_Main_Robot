@@ -27,10 +27,8 @@ public class DriveToLeftScaleAndRightSwitchFromLeftSide extends CommandGroup {
     public DriveToLeftScaleAndRightSwitchFromLeftSide() {
     	
     	//drive stright to null territory
-    	addParallel(new ExtendPivotPiston());
-    	addParallel(new IntakeUntilCube());
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.0);
+    	
+    	addSequential(new RobotRunPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(18.0));
     	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));

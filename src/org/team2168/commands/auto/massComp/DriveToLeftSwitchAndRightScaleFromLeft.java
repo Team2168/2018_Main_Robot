@@ -27,10 +27,7 @@ public class DriveToLeftSwitchAndRightScaleFromLeft extends CommandGroup {
     public DriveToLeftSwitchAndRightScaleFromLeft() {
     	
     	//addParallel(new DriveLiftPIDZZZ(33.0, 0.5, 0.1,1.0,true));
-    	addParallel(new ExtendPivotPiston());
-    	addParallel(new IntakeUntilCube());
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.0);
+    	addSequential(new RobotRunPrep());
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic));
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
     	
