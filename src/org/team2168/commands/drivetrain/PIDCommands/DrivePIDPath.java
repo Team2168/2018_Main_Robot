@@ -62,6 +62,7 @@ public class DrivePIDPath extends Command {
   	   
   	   direction = false;
   	   this.headingByArray= true;
+
   	   
   	   System.out.println("SetPointLength: " + setPointLeft.length);
      } 
@@ -103,6 +104,10 @@ public class DrivePIDPath extends Command {
 		if(this.headingByArray)
 			Robot.drivetrain.rotateDriveStraightController.setSetPoint(setPointRight);
 		
+
+    
+		Robot.drivetrain.rotateDriveStraightController.setSetPoint(setPointRight);
+
 		Robot.drivetrain.rotateDriveStraightController.reset();
 		counter = 0;
 		oldClock = Timer.getFPGATimestamp();
