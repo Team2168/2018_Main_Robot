@@ -25,13 +25,13 @@ public class AutoStartLeft2Cube extends Command {
     protected void initialize() {
     	if (Robot.gameData.equals("LLL")) {
     		Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());
-    		System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());");
+    		//System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());");
     		}
     	
     	else if (Robot.gameData.equals("LRL")) 
     		{
     			Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft());
-    			System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft())");	
+    			//System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft())");	
     		}
     	
     	else if (Robot.gameData.equals("RRR"))
@@ -39,19 +39,19 @@ public class AutoStartLeft2Cube extends Command {
     			if (Robot.getAutoPriorityInt() == 1) //scale priority
     			{
     				Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());
-    				System.out.println("Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());");
+    				//System.out.println("Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchFromLeftSide());");
     			}
     			else 
     			{
     			Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
-    			System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
+    			//System.out.println("Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());");
     			
     			}
     		}
     	else if (Robot.gameData.equals("RLR"))
     	{
       			Scheduler.getInstance().add(new DriveToLeftScaleAndRightSwitchFromLeftSide());
-      			System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndRightSwitchFromLeftSide());");
+      			//System.out.println("Scheduler.getInstance().add(new DriveToLeftScaleAndRightSwitchFromLeftSide());");
     	}
     		
     		
