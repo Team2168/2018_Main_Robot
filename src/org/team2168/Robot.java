@@ -4,8 +4,12 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
+import org.team2168.commands.auto.massComp.DriveStraight;
+import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
+import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
+import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
@@ -181,9 +185,13 @@ public class Robot extends TimedRobot
 	};
 	
 	double[][] waypointPath4 = new double[][]{
+		//{10, 18, Math.PI/2}, //For l switch from center 
+		//{10, 19, Math.PI/2},
+		//{5, 24,Math.PI/2}
+		
 		{10, 18, Math.PI/2}, //For l switch from center 
-		{10, 19, Math.PI/2},
-		{5, 24,Math.PI/2}
+		//{10, 18.5, Math.PI/2},
+		{4.2, 22,Math.PI*.999}
 	};
 	
 	
@@ -262,6 +270,7 @@ public class Robot extends TimedRobot
 		
 		ConsolePrinter.putSendable("Control Style Chooser", () -> {return Robot.controlStyleChooser;}, true, false);
 		ConsolePrinter.putSendable("Autonomous Mode Chooser", () -> {return Robot.autoChooser;}, true, false);
+		ConsolePrinter.putSendable("Priority Mode Chooser", () -> {return Robot.autoPriorityChooser;}, true, false);
 		ConsolePrinter.putString("AutoName", () -> {return Robot.getAutoName();}, true, false);
 		ConsolePrinter.putString("Control Style Name", () -> {return Robot.getControlStyleName();}, true, false);
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
@@ -412,10 +421,7 @@ public class Robot extends TimedRobot
 	        Scheduler.getInstance().run();
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
-	        if (cubeIntakeWheels.isCubePresent())
-	        	cubeIntakeWheels.setLights(1);
-	        else 
-	        	cubeIntakeWheels.setLights(-1);
+	        updateLights();
 	        
 	        	
 	        
@@ -445,6 +451,8 @@ public class Robot extends TimedRobot
 			}
 		}
 
+		
+		
 		/**
 		 * Get the name of auto priority
 		 * 
@@ -531,7 +539,8 @@ public class Robot extends TimedRobot
 		 */
 		public void autoSelectInit() {
 			autoChooser = new SendableChooser<Command>();
-			autoChooser.addDefault("Do Nothing", new DoNothing());
+			autoChooser.addDefault("Do Nothing", new DriveStraight(8.0));
+//			autoChooser.addDefault("Do Nothing", new DoNothing());
 //			autoChooser.addObject("2018 Right Switch From Center", new DriveToRightSwitch());
 //	        autoChooser.addObject("2018 Left Switch From Center", new DriveToLeftSwitch());
 //	        autoChooser.addObject("2018 Left Switch From Center and left scale", new DriveToLeftSwitchAndLeftScale());
@@ -546,11 +555,14 @@ public class Robot extends TimedRobot
 //	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
 //	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
 //	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
-	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
-	        autoChooser.addObject("2018 Center right", new DriveToRightSwitch());
-	        autoChooser.addObject("2018 Center left", new DriveToLeftSwitch());
-	        autoChooser.addObject("Test", new AutoStartLeft2Cube());
-			// autoChooser.addObject("Do Something", new DoSomething());
+//	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
+//	        autoChooser.addObject("2018 Center right", new DriveToRightSwitch());
+//	        autoChooser.addObject("2018 Center left", new DriveToLeftSwitch());
+	        autoChooser.addObject("Center Auto 1 Cube", new AutoStartCenter1Cube());
+	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
+	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
+			autoChooser.addObject("Drive Straight Only", new DriveStraight());
+			autoChooser.addObject("LeftScale", new DriveToLeftScaleOnlyV2());
 		}
 
 		/**
@@ -629,6 +641,13 @@ public class Robot extends TimedRobot
 			gameData = "N A";
 		return gameData;
 	}
+	private void updateLights()  {                          
+	if (cubeIntakeWheels.isCubePresent())
+    	cubeIntakeWheels.setLights(1);
+    else 
+    	cubeIntakeWheels.setLights(-1);
+	}
+	
 	
 	
 }

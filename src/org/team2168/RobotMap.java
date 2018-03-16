@@ -89,10 +89,12 @@ public class RobotMap {
 	//Double Soldenoids PCM ID = 0
 	public final static int DRIVETRAIN_LOW_GEAR_PCM = 0;
 	public final static int DRIVETRAIN_HIGH_GEAR_PCM = 1;
-	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 2;
-	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 3;
+	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 6;
+	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 7;
 	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
-	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;    //Forklift
+	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 2;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 3;//Forklift
 	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
 	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	
@@ -105,8 +107,7 @@ public class RobotMap {
 	public static final int LIFT_LOW_GEAR_PCM = 5;
 	public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
 	public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 8;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 9;
+	
 	
 
 
@@ -216,8 +217,8 @@ public class RobotMap {
 	/*************************************************************************
 	 *                         CUBE INTAKE PARAMETERS                        *
 	 *************************************************************************/
-	public static final boolean INTAKE_LEFT_REVERSE = false;
-	public static final boolean INTAKE_RIGHT_REVERSE = false;
+	public static final boolean INTAKE_LEFT_REVERSE = true;
+	public static final boolean INTAKE_RIGHT_REVERSE = true;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.2;
 	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.9;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
@@ -230,6 +231,7 @@ public class RobotMap {
 	public static final double CUBE_INTAKE_PIVOT_MIN_SPEED = 0.2;
 	public static final double CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED = 0.2;
 	public static final double CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED = 1.0; 
+	public static final double AUTO_CUBE_INTAKE_VALUE = 0.4;
 	
 	/*************************************************************************
 	 *                         SCISSOR LIFT PARAMETERS                       *
@@ -243,14 +245,14 @@ public class RobotMap {
 	public static final boolean LIFT_MOTOR2_REVERSE = true;
 	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
-	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.7; 
+	public static final double LIFT_MAX_JOYSTICK_SPEED = 1.0; 
 	public static final double LIFT_UP_MIN_VOLTAGE = 1.2;
 	public static final double LIFT_DOWN_MIN_VOLTAGE = 1.2;
 	
 	public static final double LIFT_MIN_SPEED = 0.15;
 	
 	
-	public static final double LIFT_POT_VOLTAGE_MAX = 3.6; //85 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
 	public static final double LIFT_POT_VOLTAGE_0 = 0.47; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
