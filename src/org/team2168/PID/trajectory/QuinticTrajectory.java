@@ -86,25 +86,27 @@ public class QuinticTrajectory
 		//	{5, 19, Math.PI/2},
 		//	{8.5, 23, Math.PI/2},
 		//	{8.5, 24, Math.PI/2*0.987}
+      
+			//use for 1switch auto
+//			{10, 24, 0},
+//			{20, 24, 0},
+//			{25, 20, -Math.PI/2+0.0001},
+//			{25, 8, -Math.PI/2+0.0001},
+//			{27,5, 0}
 			
-			//{4, 16, Math.PI/2},
-			//{4, 19, Math.PI/2},
-			//{6, 21, Math.PI*.999},
-			//{10, 21, Math.PI*.999},
-			//{14, 25, Math.PI/2}
-			
-			{4, 19, 0.0},
-			{7, 19, 0.0},
-			{9, 17, Math.PI/2*.999},
-			{9, 10, Math.PI/2*.999},
-			{13, 6, 0.0}
+			{10, 24, 0},
+			{24, 24, 0},
+			{27, 20, -Math.PI/2+0.0001},
+			{27, 12, -Math.PI/2+0.0001},
+			{29, 10, 0}
 			
 			
 		};
 		
 		double[][] waypointPath2 = new double[][]{
-		{6, 20, Math.PI/2},
-		{6, 26, Math.PI/2}		
+			{5, 17, 0}, //Right switch Path
+			{6, 17, 0},
+			{13, 12.5, 0}	
 	};
 		
 //		//Square Path
@@ -164,10 +166,10 @@ public class QuinticTrajectory
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
 
-	//	fig3.addData(quinticPath2.leftPath, Color.blue);
-	//	fig3.addData(quinticPath2.rightPath, Color.magenta);
-	//	fig3.addData(waypointPath2, null, Color.black);
-
+		//fig3.addData(quinticPath2.leftPath, Color.blue);
+		//fig3.addData(quinticPath2.rightPath, Color.magenta);
+		//fig3.addData(waypointPath2, null, Color.black);
+ 
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
 		
 		
@@ -453,7 +455,7 @@ public class QuinticTrajectory
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
-			  this.heading[i] =	this.traj.segments_[i].heading*180/Math.PI;
+			  this.heading[i] =	ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI);
 			  
 			  
 			  this.leftAccel[i][0] = this.leftRightTraj.left.getSegment(i).dt*i;
