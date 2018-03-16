@@ -13,6 +13,7 @@ public class DrivePIDPath extends Command {
 	
 	private double[] setPointLeft;
     private double[] setPointRight;
+    private double[] setPointHeading;
     
     OneDimensionalMotionProfiling motion;
 	
@@ -49,6 +50,19 @@ public class DrivePIDPath extends Command {
  	   System.out.println("SetPointLength: " + setPointLeft.length);
     } 
     
+    
+    public DrivePIDPath(double[] setPointLeft, double[] setPointRight,  double[] setPointHeading){
+  	   requires(Robot.drivetrain);
+  	 
+  	   this.setPointLeft =setPointLeft;
+  	   this.setPointRight = setPointRight;
+  	   this.setPointHeading = setPointHeading;
+  	   
+  	   direction = false;
+  	   
+  	   System.out.println("SetPointLength: " + setPointLeft.length);
+     } 
+    
     public DrivePIDPath(double[] setPointLeft, double[] setPointRight, double ff_gain){
   	   requires(Robot.drivetrain);
   	   this.setPointLeft = setPointLeft;
@@ -58,7 +72,8 @@ public class DrivePIDPath extends Command {
   	   direction = false;
   	   
   	   
-     } 
+     }
+    
     
    public DrivePIDPath(double[] setPointLeft, double[] setPointRight, boolean reverseDirection){
 	   requires(Robot.drivetrain);
@@ -82,6 +97,7 @@ public class DrivePIDPath extends Command {
 		Robot.drivetrain.rightSpeedController.Enable();
 		Robot.drivetrain.rightSpeedController.setSetPoint(setPointRight);
     
+		Robot.drivetrain.rotateDriveStraightController.setSetPoint(setPointRight);
 		Robot.drivetrain.rotateDriveStraightController.reset();
 		counter = 0;
 		oldClock = Timer.getFPGATimestamp();
