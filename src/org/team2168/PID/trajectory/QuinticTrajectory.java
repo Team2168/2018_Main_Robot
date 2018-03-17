@@ -121,7 +121,6 @@ public class QuinticTrajectory
 			{5, 34.9, Math.PI/2}
 			
 		};
-		
 		double[][] waypointPath2 = new double[][]{
 			{5, 17, 0}, //Right switch Path
 			{6, 17, 0},
@@ -162,6 +161,7 @@ public class QuinticTrajectory
 
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
 		quinticPath2.calculate();
+		quinticPath2.makeFile();
 		
 		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
 			System.out.println(quinticPath.getHeadingDeg()[i]);
@@ -233,17 +233,10 @@ public class QuinticTrajectory
 	    config.max_vel = 8.0;
 	}
 	
-	public static void startThread() {
-		if (started) {
-			return;
-		}
-		started = true;
-
-		executor = new java.util.Timer();
-		executor.schedule(new ConsolePrintTask(), 0L, ConsolePrinter.period);
+	public void makeFile() {
 
 		try {
-			File file = new File("/home/lvuser/Paths");
+			File file = new File("Paths"); ///home/lvuser/Paths
 			if (!file.exists()) {
 				if (file.mkdir()) {
 					System.out.println("Path directory is created!");
@@ -251,8 +244,10 @@ public class QuinticTrajectory
 					System.out.println("Failed to create path directory!");
 				}
 			}
-			log = new PrintWriter("/home/lvuser/Paths/" + "-Path.txt");
-			log.println(dataFileHeader());
+			log = new PrintWriter("Paths/" + "Path.txt");
+			log.println(this.traj.getNumSegments());
+			for(int i = 0; i<this.traj.getNumSegments(); i++)
+				log.println(this.leftVel[i] +"\t" + this.rightVel[i] +"\t" + this.heading[i]);
 			log.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -260,65 +255,7 @@ public class QuinticTrajectory
 		}
 
 	}
-	private static class ConsolePrintTask extends TimerTask {
-		private ConsolePrintTask() {
-		}
-
-		/**
-		 * Called periodically in its own thread
-		 */
-		public void run() {
-			ConsolePrinter.dataToDashboard();
-			ConsolePrinter.dataToFile();
-		}
-	}
-	private static void dataToDashboard() {
-		Iterator<String> i = dashboardKeys.iterator();
-		String key;
-
-		while (i.hasNext()) {
-			key = i.next();
-			data.get(key).put(key);
-		}
-	}
-
-	private static String dataFileHeader() {
-		Iterator<String> i;
-		String key;
-		String output = "";
-
-		if (RobotMap.PRINT_SD_DEBUG_DATA) {
-			i = fileKeys.iterator();
-			// Build string
-			while (i.hasNext()) {
-				key = i.next();
-				output = output.concat(key + "\t");
-			}
-		}
-		return output;
-	}
-
-	public static void dataToFile() {
-		Iterator<String> i;
-		String key;
-		String output = "";
-
-		if (RobotMap.PRINT_SD_DEBUG_DATA) {
-			i = fileKeys.iterator();
-			// Build string
-			while (i.hasNext()) {
-				key = i.next();
-				output = output.concat(data.get(key).valueToString() + "\t");
-			}
-			if (log != null) {
-				// send string to log file
-				log.println(output);
-				log.flush();
-			} else {
-				System.out.println("Path file is null");
-			}
-		}
-	}
+	
 	
 	
 	
