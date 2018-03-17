@@ -1,13 +1,13 @@
 package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
-import org.team2168.commands.auto.DriveToLeftSwitch;
 import org.team2168.commands.auto.DriveToRightScaleFromLeft;
-import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveStraight;
 import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
+import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
+import org.team2168.commands.auto.massComp.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.LeftScaleOnlyFromLeftSide;
 import org.team2168.commands.auto.massComp.LeftSwitchOnlyFromLeftSide;
 import org.team2168.commands.auto.massComp.RightScaleOnlyFromLeftSide;

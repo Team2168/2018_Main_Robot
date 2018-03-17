@@ -1,9 +1,9 @@
 package org.team2168;
 
-import org.team2168.commands.auto.DriveToLeftSwitch;
-import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
 import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.RobotRunPrep;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;

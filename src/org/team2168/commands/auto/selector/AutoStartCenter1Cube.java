@@ -1,12 +1,12 @@
 package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
-import org.team2168.commands.auto.DriveToLeftSwitch;
-import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndRightSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.RightScaleOnlyFromLeftSide;
 
 import edu.wpi.first.wpilibj.command.Command;

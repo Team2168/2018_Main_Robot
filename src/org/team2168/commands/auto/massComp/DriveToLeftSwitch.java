@@ -1,7 +1,8 @@
-package org.team2168.commands.auto;
+package org.team2168.commands.auto.massComp;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.commands.auto.Sleep;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
@@ -53,7 +54,7 @@ public class DriveToLeftSwitch extends CommandGroup {
    	 	addSequential(new DrivePIDPath(driveToCube));  //6
    	 	addParallel(new OperationKeepCube());
    	 	addSequential(new DrivePIDPath(backupSecondCube,true));
-   	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.7,0.2,0.5,true));
+   	 	addSequential(new RotateXDistancePIDZZZ(-15.0,0.7,0.2,0.5,true));
    	    addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
    	 	addSequential(new DrivePIDPath(4.0));
    	    addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.4);
