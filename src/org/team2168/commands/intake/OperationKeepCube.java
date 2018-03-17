@@ -19,7 +19,7 @@ public class OperationKeepCube extends Command {
     protected void initialize() {
     	
     }
-
+ 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.cubeIntakeWheels.isCubePresent())
@@ -27,6 +27,8 @@ public class OperationKeepCube extends Command {
     	else if(Robot.cubeIntakeWheels.getRawIRVoltage() < 2.3 && Robot.cubeIntakeWheels.getRawIRVoltage() > 1.5)
 
     		Robot.cubeIntakeWheels.driveAllMotors(RobotMap.CUBE_INTAKE_MAX_INTAKE * .5);
+    	else
+    		Robot.cubeIntakeWheels.driveAllMotors(RobotMap.CUBE_INTAKE_MAX_INTAKE);
     }
 
     // Make this return true when this Command no longer needs to run execute()
