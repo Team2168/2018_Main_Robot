@@ -1,7 +1,23 @@
 package org.team2168.PID.trajectory;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.TimeZone;
+import java.util.TimerTask;
 
+import org.team2168.RobotMap;
 import org.team2168.PID.pathplanner.FalconLinePlot;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
+import org.team2168.utils.consoleprinter.Loggable;
 
 
 /**
@@ -53,6 +69,12 @@ public class QuinticTrajectory
 	public double[][] rightJerk;
 	public double[][] leftJerk;
 	public double[] heading;
+	private static boolean started = false;
+	private static java.util.Timer executor;
+	private static PrintWriter log;
+	private static LinkedHashSet<String> fileKeys;
+	private static LinkedHashSet<String> dashboardKeys;
+	private static HashMap<String, Loggable> data;
 	
 	double totalSplineLength = 0;
 
@@ -94,12 +116,9 @@ public class QuinticTrajectory
 //			{25, 8, -Math.PI/2+0.0001},
 //			{27,5, 0}
 			
-			{10, 24, 0},
-			{24, 24, 0},
-			{27, 20, -Math.PI/2+0.0001},
-			{27, 12, -Math.PI/2+0.0001},
-			{29, 10, 0}
-			
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 34.9, Math.PI/2}
 			
 		};
 		
@@ -213,6 +232,95 @@ public class QuinticTrajectory
 	    config.max_jerk = 30.0;
 	    config.max_vel = 8.0;
 	}
+	
+	public static void startThread() {
+		if (started) {
+			return;
+		}
+		started = true;
+
+		executor = new java.util.Timer();
+		executor.schedule(new ConsolePrintTask(), 0L, ConsolePrinter.period);
+
+		try {
+			File file = new File("/home/lvuser/Paths");
+			if (!file.exists()) {
+				if (file.mkdir()) {
+					System.out.println("Path directory is created!");
+				} else {
+					System.out.println("Failed to create path directory!");
+				}
+			}
+			log = new PrintWriter("/home/lvuser/Paths/" + "-Path.txt");
+			log.println(dataFileHeader());
+			log.flush();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	private static class ConsolePrintTask extends TimerTask {
+		private ConsolePrintTask() {
+		}
+
+		/**
+		 * Called periodically in its own thread
+		 */
+		public void run() {
+			ConsolePrinter.dataToDashboard();
+			ConsolePrinter.dataToFile();
+		}
+	}
+	private static void dataToDashboard() {
+		Iterator<String> i = dashboardKeys.iterator();
+		String key;
+
+		while (i.hasNext()) {
+			key = i.next();
+			data.get(key).put(key);
+		}
+	}
+
+	private static String dataFileHeader() {
+		Iterator<String> i;
+		String key;
+		String output = "";
+
+		if (RobotMap.PRINT_SD_DEBUG_DATA) {
+			i = fileKeys.iterator();
+			// Build string
+			while (i.hasNext()) {
+				key = i.next();
+				output = output.concat(key + "\t");
+			}
+		}
+		return output;
+	}
+
+	public static void dataToFile() {
+		Iterator<String> i;
+		String key;
+		String output = "";
+
+		if (RobotMap.PRINT_SD_DEBUG_DATA) {
+			i = fileKeys.iterator();
+			// Build string
+			while (i.hasNext()) {
+				key = i.next();
+				output = output.concat(data.get(key).valueToString() + "\t");
+			}
+			if (log != null) {
+				// send string to log file
+				log.println(output);
+				log.flush();
+			} else {
+				System.out.println("Path file is null");
+			}
+		}
+	}
+	
+	
 	
 	public void calculate()
 	{
