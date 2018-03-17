@@ -30,14 +30,14 @@ public class DriveToLeftScaleAndLeftSwitchFromLeftSide extends CommandGroup {
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new ExtendPivotPiston());
     	addParallel(new IntakeUntilCube());
-    	addSequential(new Sleep(), 0.5);
+    	//addSequential(new Sleep(), 0.5);
     	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 0.75);
+    	//addSequential(new Sleep(), 0.75); 
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(16.5));
     	//drive lift to score height
     	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
-    	addSequential(new RotateXDistancePIDZZZ(45,0.7,0.2));
+    	addSequential(new RotateXDistancePIDZZZ(45,1.0,0.4), 0.6);
     	
     	
 

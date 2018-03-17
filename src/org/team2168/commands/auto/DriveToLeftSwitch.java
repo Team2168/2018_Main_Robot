@@ -44,11 +44,14 @@ public class DriveToLeftSwitch extends CommandGroup {
    	 	addSequential(new StopWheels());
    	 	
    	 	
+   	 	//second cube
    	 	addSequential(new DrivePIDPath(backupSecondCube,true)); //drive back 3
+   	 	addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
    	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.7,0.2,0.5,true));
    	    addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
-   	 	addParallel(new IntakeUntilCube());
+   	 	addParallel(new IntakeUntilCube()); 
    	 	addSequential(new DrivePIDPath(driveToCube));  //6
+   	 	addParallel(new OperationKeepCube());
    	 	addSequential(new DrivePIDPath(backupSecondCube,true));
    	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.7,0.2,0.5,true));
    	    addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
