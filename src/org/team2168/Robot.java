@@ -9,8 +9,10 @@ import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
 import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
+import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
+import org.team2168.commands.auto.selector.AutoStartLeft3Cube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
@@ -571,30 +573,15 @@ public class Robot extends TimedRobot
 		 */
 		public void autoSelectInit() {
 			autoChooser = new SendableChooser<Command>();
-			autoChooser.addDefault("Do Nothing", new DriveStraight(8.0));
-//			autoChooser.addDefault("Do Nothing", new DoNothing());
-//			autoChooser.addObject("2018 Right Switch From Center", new DriveToRightSwitch());
-//	        autoChooser.addObject("2018 Left Switch From Center", new DriveToLeftSwitch());
-//	        autoChooser.addObject("2018 Left Switch From Center and left scale", new DriveToLeftSwitchAndLeftScale());
-//	        autoChooser.addObject("2018 Right Switch From Center and right scale", new DriveToRightSwitchAndRightScale());
-//	        autoChooser.addObject("2018 Left Switch From Center and right scale ", new DriveToLeftSwitchAndRightScale());
-//	        autoChooser.addObject("2018 Right Switch From Center and left scale", new DriveToRightSwitchAndLeftScale());
-//	        autoChooser.addObject("2018 Left Scale From Left Side", new DriveToLeftScaleFromLeftSide());
-//	        autoChooser.addObject("2018 Right Scale From Right Side", new DriveToRightScaleFromRightSide());
-//	        autoChooser.addObject("2018 Right Scale from Left side", new DriveToRightScaleFromLeftSide());
-//	        autoChooser.addObject("2018 Left Scale from Right side", new DriveToLeftScaleFromRightSide());
-//	        autoChooser.addObject("2018 Left Switch from Left side", new DriveToLeftSwitchFromLeftSide());
-//	        autoChooser.addObject("2018 Right Switch from Right side", new DriveToRightSwitchFromRightSide());
-//	        autoChooser.addObject("2018 Left Switch from Right side", new DriveToLeftSwitchFromRightSide());
-//	        autoChooser.addObject("2018 Right Switch from Left side", new DriveToRightSwitchFromLeftSide());
-//	        autoChooser.addObject("2018 Boss Shit Left", new DriveToLeftSwitchAndRightScaleFromLeft());
-//	        autoChooser.addObject("2018 Center right", new DriveToRightSwitch());
-//	        autoChooser.addObject("2018 Center left", new DriveToLeftSwitch());
+			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
 	        autoChooser.addObject("Center Auto 1 Cube", new AutoStartCenter1Cube());
+	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter2Cube());	        
 	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
-			autoChooser.addObject("Drive Straight Only", new DriveStraight());
+	        autoChooser.addObject("Left Auto 3 Cube", new AutoStartLeft3Cube());
+	        
 			autoChooser.addObject("RightScaleTest", new DriveToRightScaleFromLeft());
+			autoChooser.addObject("Do nothing", new Sleep());
 		}
 
 		/**
