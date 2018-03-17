@@ -93,13 +93,21 @@ public class QuinticTrajectory
 //			{25, 20, -Math.PI/2+0.0001},
 //			{25, 8, -Math.PI/2+0.0001},
 //			{27,5, 0}
+	
 			
-			{10, 24, 0},
-			{24, 24, 0},
-			{27, 20, -Math.PI/2+0.0001},
-			{27, 12, -Math.PI/2+0.0001},
-			{29, 10, 0}
+			// Unshifted LeftStart->RightScale
+//			{10, 24, 0},
+//			{24, 24, 0},
+//			{27, 20, -Math.PI/2+0.0001},
+//			{27, 12, -Math.PI/2+0.0001},
+//			{29, 10, 0}
 			
+			//Left Start, right Scale -- It looks prettyy
+			{2.5, 26, 0},
+			{17, 26, 0},
+			{20, 22, -Math.PI/2+0.0001},
+			{20, 12, -Math.PI/2+0.0001},
+			{24.5, 8.5, 0}
 			
 		};
 		
@@ -161,7 +169,7 @@ public class QuinticTrajectory
 
 //		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
 		double fieldWidth = 32;
-		fig3.setXTic(0, 40, 1);
+		fig3.setXTic(0, 30, 1);
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
@@ -182,10 +190,10 @@ public class QuinticTrajectory
 		edge = new double[][] {{1,16-27/2.0+2+4.81/12},{1+2+10.9/12, 16-27/2.0}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1+2+10.9/12,16+27/2.0},{39,16+27/2.0}};
+		edge = new double[][] {{1+2+10.9/12,16+27/2.0},{29,16+27/2.0}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1+2+10.9/12, 16-27/2.0},{39,16-27/2.0}};
+		edge = new double[][] {{1+2+10.9/12, 16-27/2.0},{29,16-27/2.0}};
 		fig3.addData(edge, Color.black);
 		
 		edge = new double[][] {{28,16+27/2.0}, {28, 16-27/2.0}};
