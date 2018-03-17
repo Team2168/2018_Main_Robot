@@ -4,6 +4,7 @@ import org.team2168.commands.auto.DriveToLeftSwitch;
 import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
+import org.team2168.commands.auto.massComp.RobotRunPrep;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
@@ -164,7 +165,7 @@ public class OI {
 		
 		////////////////Lift Pid commands////////////////////////////////////////////////////
 		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(80.0, 0.5, 0.16,1.0,true));
-		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(7.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(4.0, 0.5, 0.16,1.0,true));
 		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
 		operatorJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(65.0, 0.5, 0.16,1.0,true));
 		////////////////Raise platform/////////////////////////////
@@ -177,7 +178,7 @@ public class OI {
 		//operatorJoystick.ButtonB().whenPressed(new DisableRachet());
 		
 		////////////////For testing purposes//////////////////////
-		//testJoystick.ButtonY().whenPressed(new LiftShiftHigh());
+		testJoystick.ButtonRightTrigger().whenPressed(new RobotRunPrep());
 		//testJoystick.ButtonX().whenPressed(new LiftShiftLow());
 		//testJoystick.ButtonA().whenPressed(new EnableRachet());
 		//testJoystick.ButtonB().whenPressed(new DisableRachet());

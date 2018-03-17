@@ -55,16 +55,84 @@ public class DrivePIDPathQuintic extends Command {
     public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight,  double[] setPointHeading){
    	   requires(Robot.drivetrain);
    	 
+   	   direction = false;
+   	   
    	   this.setPointLeft =setPointLeft;
    	   this.setPointRight = setPointRight;
    	   this.setPointHeading = setPointHeading;
    	   
-   	   direction = false;
+
+   	   if(!direction)
+   	   {
+   		   this.setPointLeft = setPointLeft;
+    	   this.setPointRight = setPointRight;
+    	   this.setPointHeading = setPointHeading;
+   		   
+   	   }
+   	   //we want to drive the path backwards
+   	   // swap the left and right wheels, and negate the velocitys, also correct
+   	   //heading to be 180 from current position
+   	   else
+   	   {
+   		   this.setPointLeft = setPointRight;
+   	   	   this.setPointRight = setPointLeft;
+   	   	   this.setPointHeading = setPointHeading;
+   	   	   
+   	   	   for (int i=0; i<this.setPointHeading.length; i++)
+   	   	   {
+   	   		   this.setPointLeft[i] = -this.setPointLeft[i];
+   	   		   this.setPointRight[i] = -this.setPointRight[i];
+   	   		   this.setPointHeading[i] = 180-this.setPointHeading[i];
+   	   	   }
+   	   }
+   	   
    	   this.headingByArray= true;
 
    	   
    	   System.out.println("SetPointLength: " + setPointLeft.length);
-      } 
+      }
+    
+    
+    public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight,  double[] setPointHeading, boolean direction){
+    	   requires(Robot.drivetrain);
+    	 
+    	   this.direction = direction;
+    	   
+    	   this.setPointLeft =setPointLeft;
+    	   this.setPointRight = setPointRight;
+    	   this.setPointHeading = setPointHeading;
+    	   
+
+    	   if(!direction)
+    	   {
+    		   this.setPointLeft = setPointLeft;
+     	   this.setPointRight = setPointRight;
+     	   this.setPointHeading = setPointHeading;
+    		   
+    	   }
+    	   //we want to drive the path backwards
+    	   // swap the left and right wheels, and negate the velocitys, also correct
+    	   //heading to be 180 from current position
+    	   else
+    	   {
+    		   this.setPointLeft = setPointRight;
+    	   	   this.setPointRight = setPointLeft;
+    	   	   this.setPointHeading = setPointHeading;
+    	   	   
+    	   	   for (int i=0; i<this.setPointHeading.length; i++)
+    	   	   {
+    	   		   this.setPointLeft[i] = -this.setPointLeft[i];
+    	   		   this.setPointRight[i] = -this.setPointRight[i];
+    	   		   this.setPointHeading[i] = 180-this.setPointHeading[i];
+    	   	   }
+    	   }
+    	   
+    	   this.headingByArray= true;
+
+    	   
+    	   System.out.println("SetPointLength: " + setPointLeft.length);
+       }
+    
     
     public DrivePIDPathQuintic(double[] setPointLeft, double[] setPointRight, double ff_gain){
   	   requires(Robot.drivetrain);

@@ -2,8 +2,11 @@ package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
 import org.team2168.commands.auto.DriveToLeftSwitch;
+import org.team2168.commands.auto.DriveToRightScaleFromLeft;
 import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveStraight;
+import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSide;
+import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.massComp.LeftScaleOnlyFromLeftSide;
 import org.team2168.commands.auto.massComp.LeftSwitchOnlyFromLeftSide;
@@ -27,7 +30,7 @@ public class AutoStartLeft1Cube extends Command {
     	if (Robot.gameData.equals("LLL"))
     	{
     		//if (Robot.getAutoPriorityInt() == 1) //scale priority
-    			Scheduler.getInstance().add(new DriveToLeftScaleOnlyV2());
+    			Scheduler.getInstance().add(new DriveToLeftScaleAndLeftSwitchFromLeftSide());
     		//else
     			//Scheduler.getInstance().add(new LeftSwitchOnlyFromLeftSide());
     	}
@@ -35,9 +38,9 @@ public class AutoStartLeft1Cube extends Command {
     		Scheduler.getInstance().add(new LeftSwitchOnlyFromLeftSide());
     	else if (Robot.gameData.equals("RRR"))
 //    		Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
-    		Scheduler.getInstance().add(new DriveStraight());
+    		Scheduler.getInstance().add(new DriveToRightScaleFromLeft());
     	else if (Robot.gameData.equals("RLR"))
-      		Scheduler.getInstance().add(new DriveToLeftScaleOnlyV2());
+      		Scheduler.getInstance().add(new DriveToLeftScale2CubeFromLeftSide());
     }
   
 
