@@ -110,9 +110,13 @@ public class QuinticTrajectory
 //			{19, 13.5, -Math.PI/2+0.0001},
 //			{21, 11.5, 0}
 			
-			{2, 15.5, 0}, //Right switch Path
-			{3, 15.5, 0},
-			{10.5, 10.5, 0}	
+			{10, 24, 0},
+			{24, 24, 0},
+			{27, 20, -Math.PI/2+0.0001},
+			{27, 14, -Math.PI/2+0.0001}
+			//{27, 13, -Math.PI/2+0.0001},
+			//{27, 10, -Math.PI/2+0.0001},
+			//{29, 8, 0}
 			
 			
 //			//Left Start, right Scale -- It looks prettyy
@@ -187,8 +191,8 @@ public class QuinticTrajectory
 		QuinticTrajectory quinticPath3= new QuinticTrajectory(waypointPath3);
 		quinticPath3.calculate();
 		
-		for(int i = 0; i<quinticPath2.traj.getNumSegments(); i++)
-			System.out.println(quinticPath2.getHeadingDeg()[i]);
+		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
+			System.out.println(quinticPath.getHeadingDeg()[i]);
 
 		
 		
@@ -206,8 +210,8 @@ public class QuinticTrajectory
 		double fieldWidth = 32;
 		fig3.setXTic(0, 30, 1);
 		fig3.setYTic(0, fieldWidth, 1);
-	//	fig3.addData(quinticPath.rightPath, Color.magenta);
-	//	fig3.addData(quinticPath.leftPath, Color.blue);
+		fig3.addData(quinticPath.rightPath, Color.magenta);
+		fig3.addData(quinticPath.leftPath, Color.blue);
 
 		fig3.addData(quinticPath2.leftPath, Color.blue);
 		fig3.addData(quinticPath2.rightPath, Color.magenta);
@@ -538,7 +542,7 @@ public class QuinticTrajectory
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
-			  this.heading[i] =	180+(ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI));
+			  this.heading[i] =	(ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI));
 			  
 			  
 			  this.leftAccel[i][0] = this.leftRightTraj.left.getSegment(i).dt*i;

@@ -247,7 +247,8 @@ public class Robot extends TimedRobot
 			{10, 24, 0},
 			{24, 24, 0},
 			{27, 20, -Math.PI/2+0.0001},
-			{27, 13, -Math.PI/2+0.0001},
+			{27, 14, -Math.PI/2+0.0001}
+			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
 			//{29, 8, 0}
 			
@@ -306,6 +307,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putSendable("Priority Mode Chooser", () -> {return Robot.autoPriorityChooser;}, true, false);
 		ConsolePrinter.putString("AutoName", () -> {return Robot.getAutoName();}, true, false);
 		ConsolePrinter.putString("Control Style Name", () -> {return Robot.getControlStyleName();}, true, false);
+		ConsolePrinter.putNumber("Auto Priority Style Name", () -> {return (double) Robot.getAutoPriorityInt();}, true, false);
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
