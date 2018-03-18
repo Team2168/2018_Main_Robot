@@ -94,26 +94,59 @@ public class QuinticTrajectory
 //			{25, 20, -Math.PI/2+0.0001},
 //			{25, 8, -Math.PI/2+0.0001},
 //			{27,5, 0}
+	
 			
+//			// Unshifted LeftStart->RightScale
 //			{10, 24, 0},
 //			{24, 24, 0},
 //			{27, 20, -Math.PI/2+0.0001},
 //			{27, 12, -Math.PI/2+0.0001},
-			//{27, 10, -Math.PI/2+0.0001},
-			//{29, 8, 0}
+//			{29, 10, 0}
 			
-			{10,24,0},
-			{20,24,0},
-			{27,20,-Math.PI/4},
-			//{27,12,Math.PI/4},
-		
+			// Moved x back 8, moved y up 1.5
+//			{2, 25.5, 0},
+//			{16, 25.5, 0},
+//			{19, 21.5, -Math.PI/2+0.0001},
+//			{19, 13.5, -Math.PI/2+0.0001},
+//			{21, 11.5, 0}
+			
+			{2, 15.5, 0}, //Right switch Path
+			{3, 15.5, 0},
+			{10.5, 10.5, 0}	
+			
+			
+//			//Left Start, right Scale -- It looks prettyy
+//			{2.5, 26, 0},
+//			{17, 26, 0},
+//			{20, 22, -Math.PI/2+0.0001},
+//			{20, 12, -Math.PI/2+0.0001},
+//			{24.5, 8.5, 0}
+			
 		};
 		
 		double[][] waypointPath2 = new double[][]{
+//			{14.5, 23.5, Math.PI/2}, //Right switch Path
+//			{17, 26, 0+0.0001},
+//			{22, 22, 0}	
 			
-			{5, 17, 0}, //Right switch Path
-			{6, 17, 0},
-			{13.5, 21, 0}
+			{17, 26, Math.PI/2}, //Right switch Path
+			{18, 27, 0+0.0001}
+		
+			
+			
+//			{2, 15.5, 0}, //Right switch Path
+//			{3, 15.5, 0},
+//			{10.5, 19.5, 0}	
+	};
+		
+	double[][] waypointPath3 = new double[][]{
+		
+		
+		{2, 25.5, 0},
+		{16, 25.5, 0},
+		{19, 21.5, -Math.PI/2+0.0001},
+		{19, 13.5, -Math.PI/2+0.0001},
+		{21, 11.5, 0}
 	};
 		
 //		//Square Path
@@ -151,8 +184,11 @@ public class QuinticTrajectory
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
 		quinticPath2.calculate();
 		
-		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
-			System.out.println(quinticPath.getHeadingDeg()[i]);
+		QuinticTrajectory quinticPath3= new QuinticTrajectory(waypointPath3);
+		quinticPath3.calculate();
+		
+		for(int i = 0; i<quinticPath2.traj.getNumSegments(); i++)
+			System.out.println(quinticPath2.getHeadingDeg()[i]);
 
 		
 		
@@ -168,16 +204,56 @@ public class QuinticTrajectory
 
 //		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
 		double fieldWidth = 32;
-		fig3.setXTic(0, 40, 1);
+		fig3.setXTic(0, 30, 1);
 		fig3.setYTic(0, fieldWidth, 1);
-		fig3.addData(quinticPath.rightPath, Color.magenta);
-		fig3.addData(quinticPath.leftPath, Color.blue);
+	//	fig3.addData(quinticPath.rightPath, Color.magenta);
+	//	fig3.addData(quinticPath.leftPath, Color.blue);
 
-		//fig3.addData(quinticPath2.leftPath, Color.blue);
-		//fig3.addData(quinticPath2.rightPath, Color.magenta);
-		//fig3.addData(waypointPath2, null, Color.black);
+		fig3.addData(quinticPath2.leftPath, Color.blue);
+		fig3.addData(quinticPath2.rightPath, Color.magenta);
+		fig3.addData(waypointPath2, null, Color.black);
  
+//		fig3.addData(quinticPath3.leftPath, Color.blue);
+//		fig3.addData(quinticPath3.rightPath, Color.magenta);
+//		fig3.addData(waypointPath3, null, Color.black);
+		
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
+		
+		//outline field perimeter
+		double[][] edge = {{1,16+27/2.0-2-4.81/12},{1,16-27/2.0+2+4.81/12}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{1,16+27/2.0-2-4.81/12},{1+2+10.9/12,16+27/2.0}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{1,16-27/2.0+2+4.81/12},{1+2+10.9/12, 16-27/2.0}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{1+2+10.9/12,16+27/2.0},{29,16+27/2.0}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{1+2+10.9/12, 16-27/2.0},{29,16-27/2.0}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{28,16+27/2.0}, {28, 16-27/2.0}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{12+7.6/12, 16+27/2.0-7-1.5/12}, {16+3.2/12, 16+27/2.0-7-1.5/12}, {16+3.2/12, 16-27/2.0+7+1.5/12}, {12+7.6/12, 16-27/2.0+7+1.5/12}, {12+7.6/12, 16+27/2.0-7-1.5/12}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{12+7.6/12,16+27/2.0-11-7.75/12}, {12+7.6/12-3.5, 16+27/2.0-11-7.75/12}, {12+7.6/12-3.5, 16-27/2.0+11+7.75/12}, {12+7.6/12, 16-27/2.0+11+7.75/12}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{12+7.6/12-3.5, 16+1.875},{12+7.6/12-3.5, 16-1.875}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{28,16+28/2.0-5-11.6/12}, {28-1-11.7/12, 16+28/2.0-5-11.6/12}, {28-1-11.7/12,  16+28/2.0-5-11.6/12-2-1.4/12}, 
+			{28-1-11.7/12-3-2.9/12, 16+28/2.0-5-11.6/12-2-1.4/12}, {28-1-11.7/12-3-2.9/12, 16-28/2.0+5+11.6/12+2+1.4/12}, {28-1-11.7/12, 16-28/2.0+5+11.6/12+2+1.4/12},
+			{28-1-11.7/12, 16-28/2.0+5+11.6/12}, {28, 16-28/2.0+5+11.6/12}};
+		fig3.addData(edge, Color.black);
+		
+		edge = new double[][] {{1,16+27/2.0-8-6.25/12}, {1+2+11.7/12, 16+27/2.0-8-6.25/12}, {1+2+11.7/12, 16+27/2.0-8-4-6.25/12}, {1, 16+27/2.0-8-4-6.25/12}};
+		fig3.addData(edge, Color.black);
 		
 		
 		//Velocity
@@ -462,7 +538,7 @@ public class QuinticTrajectory
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
-			  this.heading[i] =	ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI);
+			  this.heading[i] =	180+(ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI));
 			  
 			  
 			  this.leftAccel[i][0] = this.leftRightTraj.left.getSegment(i).dt*i;
