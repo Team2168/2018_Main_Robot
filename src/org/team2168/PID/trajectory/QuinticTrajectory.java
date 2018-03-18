@@ -1,7 +1,23 @@
 package org.team2168.PID.trajectory;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.TimeZone;
+import java.util.TimerTask;
 
+import org.team2168.RobotMap;
 import org.team2168.PID.pathplanner.FalconLinePlot;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
+import org.team2168.utils.consoleprinter.Loggable;
 
 
 /**
@@ -53,6 +69,12 @@ public class QuinticTrajectory
 	public double[][] rightJerk;
 	public double[][] leftJerk;
 	public double[] heading;
+	private static boolean started = false;
+	private static java.util.Timer executor;
+	private static PrintWriter log;
+	private static LinkedHashSet<String> fileKeys;
+	private static LinkedHashSet<String> dashboardKeys;
+	private static HashMap<String, Loggable> data;
 	
 	double totalSplineLength = 0;
 
@@ -94,15 +116,11 @@ public class QuinticTrajectory
 //			{25, 8, -Math.PI/2+0.0001},
 //			{27,5, 0}
 			
-			{10, 24, 0},
-			{24, 24, 0},
-			{27, 20, -Math.PI/2+0.0001},
-			{27, 12, -Math.PI/2+0.0001},
-			{29, 10, 0}
-			
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 34.9, Math.PI/2}
 			
 		};
-		
 		double[][] waypointPath2 = new double[][]{
 			{5, 17, 0}, //Right switch Path
 			{6, 17, 0},
@@ -143,6 +161,7 @@ public class QuinticTrajectory
 
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
 		quinticPath2.calculate();
+		quinticPath2.makeFile();
 		
 		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
 			System.out.println(quinticPath.getHeadingDeg()[i]);
@@ -213,6 +232,32 @@ public class QuinticTrajectory
 	    config.max_jerk = 30.0;
 	    config.max_vel = 8.0;
 	}
+	
+	public void makeFile() {
+
+		try {
+			File file = new File("Paths"); ///home/lvuser/Paths
+			if (!file.exists()) {
+				if (file.mkdir()) {
+					System.out.println("Path directory is created!");
+				} else {
+					System.out.println("Failed to create path directory!");
+				}
+			}
+			log = new PrintWriter("Paths/" + "Path.txt");
+			log.println(this.traj.getNumSegments());
+			for(int i = 0; i<this.traj.getNumSegments(); i++)
+				log.println(this.leftVel[i] +"\t" + this.rightVel[i] +"\t" + this.heading[i]);
+			log.flush();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
 	
 	public void calculate()
 	{
