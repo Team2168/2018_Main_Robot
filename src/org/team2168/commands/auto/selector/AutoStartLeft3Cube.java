@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  * Shit gets real
  */
-public class AutoStartleft3Cube extends Command {
+public class AutoStartLeft3Cube extends Command {
 
-    public AutoStartleft3Cube() {
+    public AutoStartLeft3Cube() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
