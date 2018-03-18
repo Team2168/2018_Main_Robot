@@ -199,9 +199,9 @@ public class Robot extends TimedRobot
 	
 	    double[][] waypointPath3 = new double[][]
       {
-			{5, 17, 0}, //Right switch Path
+	    	{5, 17, 0}, //Right switch Path
 			{6, 17, 0},
-			{12, 12.5, 0}
+			{13.5, 14, 0} //need to add 1.5 to 12.6 //for 4th match
 	    
 	};
 
@@ -218,9 +218,9 @@ public class Robot extends TimedRobot
 			//{8.5, 23, Math.PI/2},
 			//{8.5, 24, Math.PI/2}
 			
-			{5, 17, 0}, //Right switch Path
+	    	{5, 17, 0}, //Right switch Path
 			{6, 17, 0},
-			{12, 22.5, 0}
+			{13.5, 21, 0} 
 		};
 
 
@@ -247,8 +247,9 @@ public class Robot extends TimedRobot
 			{10, 24, 0},
 			{24, 24, 0},
 			{27, 20, -Math.PI/2+0.0001},
-			{27, 10, -Math.PI/2+0.0001},
-			{29, 8, 0}
+			{27, 13, -Math.PI/2+0.0001},
+			//{27, 10, -Math.PI/2+0.0001},
+			//{29, 8, 0}
 			
 		};
 		

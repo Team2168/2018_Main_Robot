@@ -245,7 +245,7 @@ public class RobotMap {
 	public static final boolean LIFT_MOTOR2_REVERSE = true;
 	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
-	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.6; 
+	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.85; 
 	public static final double LIFT_UP_MIN_VOLTAGE = 1.2;
 	public static final double LIFT_DOWN_MIN_VOLTAGE = 1.2;
 	
@@ -254,7 +254,7 @@ public class RobotMap {
 	
 	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0 = 0.47; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0 = 0.68; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.46; //90 degrees

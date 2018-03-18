@@ -53,6 +53,7 @@ public class QuinticTrajectory
 	public double[][] rightJerk;
 	public double[][] leftJerk;
 	public double[] heading;
+	public boolean reverse = false;
 	
 	double totalSplineLength = 0;
 
@@ -94,19 +95,25 @@ public class QuinticTrajectory
 //			{25, 8, -Math.PI/2+0.0001},
 //			{27,5, 0}
 			
-			{10, 24, 0},
-			{24, 24, 0},
-			{27, 20, -Math.PI/2+0.0001},
-			{27, 12, -Math.PI/2+0.0001},
-			{29, 10, 0}
+//			{10, 24, 0},
+//			{24, 24, 0},
+//			{27, 20, -Math.PI/2+0.0001},
+//			{27, 12, -Math.PI/2+0.0001},
+			//{27, 10, -Math.PI/2+0.0001},
+			//{29, 8, 0}
 			
-			
+			{10,24,0},
+			{20,24,0},
+			{27,20,-Math.PI/4},
+			//{27,12,Math.PI/4},
+		
 		};
 		
 		double[][] waypointPath2 = new double[][]{
+			
 			{5, 17, 0}, //Right switch Path
 			{6, 17, 0},
-			{13, 12.5, 0}	
+			{13.5, 21, 0}
 	};
 		
 //		//Square Path
@@ -473,12 +480,13 @@ public class QuinticTrajectory
 	  
 	  public double[] getLeftVel()
 	  {
-		  
-		  return this.leftVel;
+		 
+			  return this.leftVel;
 	  }
 	  
 	  public double[] getRightVel()
 	  {
+		 
 		  return this.rightVel;
 	  }
 	  
