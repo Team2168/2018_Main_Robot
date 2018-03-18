@@ -32,16 +32,16 @@ public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
 
     	//drive to side of left switch
-    	addSequential(new DrivePIDPath(10.5));
+    	addSequential(new DrivePIDPath(10.0));
     	
     	
     	//rotate into switch
-    	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2, 0.5, true),2.0);
-    	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2 ,0.5, true ),1.0);
+    	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2, 0.5, true),4.0);
+    	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2 ,0.5, true ),2.0);
     
     	
     	//spit
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
+    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *0.5),0.4);
     	addSequential(new StopWheels());
     	
     	

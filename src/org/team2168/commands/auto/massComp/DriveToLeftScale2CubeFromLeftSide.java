@@ -44,17 +44,17 @@ public class DriveToLeftScale2CubeFromLeftSide extends CommandGroup {
     	
     	//addSequential(new DrivePIDPath(2.0));
     	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4 );
-    	addSequential(new RotateXDistancePIDZZZ(150,0.7,0.23,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(150,0.7,0.4,0.5,true));
     	//get second cube
-    	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
+    	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
     	
-    	addParallel(new DrivePIDPath(5.0));
+    	addParallel(new DrivePIDPath(6.0));
     	addSequential(new IntakeUntilCube());
     	
     	
     	
     	//score second cube on scale
-    	addSequential(new DrivePIDPath(4.0,true)); //drive back
+    	addSequential(new DrivePIDPath(4.7,true)); //drive back
     	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(45,1.0,0.4,0.5,true));
     	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4 );
