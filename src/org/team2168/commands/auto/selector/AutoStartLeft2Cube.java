@@ -34,7 +34,7 @@ public class AutoStartLeft2Cube extends Command {
     			//System.out.println("Scheduler.getInstance().add(new DriveToLeftSwitchAndRightScaleFromLeft())");	
     		}
     	
-    	else if (Robot.gameData.equals("RRR"))
+    	else if (Robot.gameData.equals("RRR")) 
     	{
     			if (Robot.getAutoPriorityInt() == 1) //scale priority
     			{

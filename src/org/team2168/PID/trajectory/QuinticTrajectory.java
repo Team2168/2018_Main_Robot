@@ -53,6 +53,7 @@ public class QuinticTrajectory
 	public double[][] rightJerk;
 	public double[][] leftJerk;
 	public double[] heading;
+	public boolean reverse = false;
 	
 	double totalSplineLength = 0;
 
@@ -555,12 +556,13 @@ public class QuinticTrajectory
 	  
 	  public double[] getLeftVel()
 	  {
-		  
-		  return this.leftVel;
+		 
+			  return this.leftVel;
 	  }
 	  
 	  public double[] getRightVel()
 	  {
+		 
 		  return this.rightVel;
 	  }
 	  

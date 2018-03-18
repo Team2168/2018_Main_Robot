@@ -1,9 +1,9 @@
 package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
-import org.team2168.commands.auto.DriveToLeftSwitch;
-import org.team2168.commands.auto.DriveToRightSwitch;
 import org.team2168.commands.auto.massComp.DriveStraight;
+import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
+import org.team2168.commands.auto.massComp.DriveToRightSwitch;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
