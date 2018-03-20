@@ -307,7 +307,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putSendable("Priority Mode Chooser", () -> {return Robot.autoPriorityChooser;}, true, false);
 		ConsolePrinter.putString("AutoName", () -> {return Robot.getAutoName();}, true, false);
 		ConsolePrinter.putString("Control Style Name", () -> {return Robot.getControlStyleName();}, true, false);
-		ConsolePrinter.putNumber("Auto Priority Style Name", () -> {return (double) Robot.getAutoPriorityInt();}, true, false);
+		ConsolePrinter.putString("Auto Priority Name", () -> {return Robot.getAutoPriority();}, true, false);
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
@@ -511,7 +511,7 @@ public class Robot extends TimedRobot
 		}
 
 		/**
-		 * Adds control styles to the selector
+		 * Adds auto priorities to the selector
 		 */
 		public void AutoPrioritySelectInit() {
 			autoPriorityChooser = new SendableChooser<>();
