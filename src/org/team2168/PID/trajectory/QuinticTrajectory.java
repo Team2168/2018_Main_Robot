@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -161,10 +162,11 @@ public class QuinticTrajectory
 
 		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
 		quinticPath2.calculate();
-		quinticPath2.makeFile();
+		quinticPath2.makeFile("path2");
+		quinticPath2.getFile("path2");
 		
-		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
-			System.out.println(quinticPath.getHeadingDeg()[i]);
+//		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
+//			System.out.println(quinticPath.getHeadingDeg()[i]);
 
 		
 		
@@ -233,8 +235,7 @@ public class QuinticTrajectory
 	    config.max_vel = 8.0;
 	}
 	
-	public void makeFile() {
-
+	public void makeFile(String Filename) {
 		try {
 			File file = new File("Paths"); ///home/lvuser/Paths
 			if (!file.exists()) {
@@ -244,10 +245,10 @@ public class QuinticTrajectory
 					System.out.println("Failed to create path directory!");
 				}
 			}
-			log = new PrintWriter("Paths/" + "Path.txt");
+			log = new PrintWriter("Paths/" + Filename + " path.txt");
 			log.println(this.traj.getNumSegments());
 			for(int i = 0; i<this.traj.getNumSegments(); i++)
-				log.println(this.leftVel[i] +"\t" + this.rightVel[i] +"\t" + this.heading[i]);
+				log.println(this.leftPath[i] +"\t" + this.rightPath[i] +"\t" + this.leftVel[i] +"\t" + this.rightVel[i] +"\t" + this.heading[i]);
 			log.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -256,8 +257,39 @@ public class QuinticTrajectory
 
 	}
 	
+	int lineNo;
+	String line = "";
 	
+	public void getFile(String Filename) {
+		try {
+			File file = new File("Paths"); ///home/lvuser/Paths
+			if (!file.exists()) {
+				makeFile(Filename);
+				System.out.println("File did not exsist, making it now tho");
+			}
+			FileReader fr = new FileReader("Paths/" + Filename + " path.txt");
+			BufferedReader br = new BufferedReader(fr);
+			for (lineNo=1;lineNo<10700;lineNo++)
+			{
+				if(lineNo==1)
+				{
+				line = br.readLine();
+				}
+				else 
+					br.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+		e.printStackTrace();
+		System.out.println("Line:"  + line );
+		}
+	}
 	
+
 	
 	public void calculate()
 	{
@@ -300,13 +332,13 @@ public class QuinticTrajectory
 		
 	}
 	
-	public static void print(double[] path)
-	{
-		System.out.println("X: \t Y:");
-
-		for(double u: path)
-			System.out.println(u);
-	}
+//	public static void print(double[] path)
+//	{
+//		System.out.println("X: \t Y:");
+//
+//		for(double u: path)
+//			System.out.println(u);
+//	}
 
 
 
@@ -314,13 +346,13 @@ public class QuinticTrajectory
 	 * Prints Cartesian Coordinates to the System Output as Column Vectors in the Form X	Y
 	 * @param path
 	 */
-	public static void print(double[][] path)
-	{
-		System.out.println("X: \t Y:");
-
-		for(double[] u: path)
-			System.out.println(u[0]+ "\t" +u[1]);
-	}
+//	public static void print(double[][] path)
+//	{
+//		System.out.println("X: \t Y:");
+//
+//		for(double[] u: path)
+//			System.out.println(u[0]+ "\t" +u[1]);
+//	}
 
 	/**
 	 * Performs a deep copy of a 2 Dimensional Array looping thorough each element in the 2D array
