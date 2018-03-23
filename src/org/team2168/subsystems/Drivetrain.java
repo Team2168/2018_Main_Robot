@@ -372,8 +372,8 @@ public class Drivetrain extends Subsystem {
 	 */
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		if(Robot.lift.getPotPos() > 45  ) {
-		leftSpeed = leftSpeed * 0.5;
-		rightSpeed = rightSpeed * 0.5;
+		leftSpeed = leftSpeed * 0.3;
+		rightSpeed = rightSpeed * 0.3;
 		}
 			
 		driveLeft(leftSpeed);

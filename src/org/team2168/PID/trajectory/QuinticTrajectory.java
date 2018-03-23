@@ -110,9 +110,9 @@ public class QuinticTrajectory
 //			{19, 13.5, -Math.PI/2+0.0001},
 //			{21, 11.5, 0}
 			
-	    	{1, 15.5, 0}, //Right switch Path
-			{2, 15.5, 0},
-			{9.5, 12.5, 0} //need to add 1.5 to 12.6 //for 4th match//need to add 1.5 to 12.6 //for 4th match
+			{2, 26, 0},
+			{21, 26, 0},
+			{25, 24.5, -Math.PI/6}
 			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
 			//{29, 8, 0}

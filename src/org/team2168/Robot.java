@@ -260,23 +260,26 @@ public class Robot extends TimedRobot
 		
 		
 		
-		double[][] waypointPath6 = new double[][]{
-			{2, 26, 0},
-			{21, 26, 0},
-			{25, 24.5, -Math.PI/6}				
-		};
+
 		
 		QuinticTrajectory quinticPath5 = new QuinticTrajectory(waypointPath5);
 		quinticPath5.calculate();
 		this.leftVelPathQuintic5 = quinticPath5.getLeftVel();
 		this.rightVelPathQuintic5 = quinticPath5.getRightVel();
 		this.headingQuintic5 = quinticPath5.getHeadingDeg();
+
+		double[][] waypointPath6 = new double[][]{
+			{2, 26, 0},
+			{15.5, 26, 0},
+			{19.5, 24.5, -Math.PI/6}				
+		};
 		
 		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
 		quinticPath6.calculate();
-		this.leftVelPathQuintic6 = quinticPath5.getLeftVel();
-		this.rightVelPathQuintic6 = quinticPath5.getRightVel();
-		this.headingQuintic6 = quinticPath5.getHeadingDeg();
+		
+		this.leftVelPathQuintic6 = quinticPath6.getLeftVel();
+		this.rightVelPathQuintic6 = quinticPath6.getRightVel();
+		this.headingQuintic6 = quinticPath6.getHeadingDeg();
 
 		
 		
