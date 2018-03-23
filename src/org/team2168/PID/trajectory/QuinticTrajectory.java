@@ -110,15 +110,10 @@ public class QuinticTrajectory
 //			{19, 13.5, -Math.PI/2+0.0001},
 //			{21, 11.5, 0}
 			
-			{6, 26, 2.36},
-			{5, 28, 1.79},
-			{5, 34.9, Math.PI/2},
-			
-			{5, 15, Math.PI/2}, //For left switch & right scale from left side
-			{5, 18, Math.PI/2},
-			{9, 22, Math.PI/4}
-			
-			
+			{1, 26, 0}, //For left switch & right scale from left side
+			{11.5, 27.0, 0},
+			{13.0, 25.5, -Math.PI/2 + 0.0001}		
+			//{27, 20, 0}	
 			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
 			//{29, 8, 0}
@@ -305,6 +300,14 @@ public class QuinticTrajectory
 	    config.max_acc = 4.0;
 	    config.max_jerk = 30.0;
 	    config.max_vel = 8.0;
+	}
+	
+	public QuinticTrajectory(double[][] path, double maxVel, double maxAccel)
+	{
+		
+		this(path);
+	    config.max_vel = maxVel;
+	    config.max_vel = maxAccel;
 	}
 	
 	public void calculate()

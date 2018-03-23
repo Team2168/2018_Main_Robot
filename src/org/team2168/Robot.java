@@ -105,9 +105,11 @@ public class Robot extends TimedRobot
     
     public static double[] leftVelPathQuintic;
     public static double[] rightVelPathQuintic;
+    public static double[] headingQuintic;
     
     public static double[] leftVelPathQuintic2;
     public static double[] rightVelPathQuintic2;
+    public static double[] headingQuintic2;
     
     public static double[] leftVelPathQuintic3;
     public static double[] rightVelPathQuintic3;
@@ -174,10 +176,9 @@ public class Robot extends TimedRobot
 		
 		
 		double[][] waypointPath = new double[][]{
-			{5, 15, Math.PI/2}, //For left switch & right scale from left side
-			{5, 18, Math.PI/2},
-			{9, 22, Math.PI/4}
-			
+			{1, 26, 0}, //For left switch & right scale from left side
+			{11.5, 27.0, 0},
+			{13.0, 25.5, -Math.PI/2 + 0.0001}		
 			
 	};
 
@@ -186,19 +187,24 @@ public class Robot extends TimedRobot
 		
 		this.leftVelPathQuintic = quinticPath.getLeftVel();
 		this.rightVelPathQuintic = quinticPath.getRightVel();
+		this.headingQuintic = quinticPath.getHeadingDeg();
 		
 		
 		double[][] waypointPath2 = new double[][]{
-			{6, 26, 2.36},
-			{5, 28, 1.79},
-			{5, 34.9, Math.PI/2}
+			{14.5, 23.5, Math.PI/2},
+			{21, 27.0, 0+0.0001},
+			{22.5, 27.0, 0}
+			
+			//{27, 20, 0}	
+
 	};
 		
-		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
+		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2, 3.0, 20.0);
 		quinticPath2.calculate();
 	
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
+		this.headingQuintic2 = quinticPath2.getHeadingDeg();
 		
 	
 	    double[][] waypointPath3 = new double[][]
@@ -251,7 +257,7 @@ public class Robot extends TimedRobot
 			{10, 24, 0},
 			{24, 24, 0},
 			{27, 20, -Math.PI/2+0.0001},
-			{27, 14, -Math.PI/2+0.0001}
+			{27, 17, -Math.PI/2+0.0001}
 			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
 			//{29, 8, 0}
