@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DriveToRightSwitch extends CommandGroup {
 	
-	double backupSecondCube = 4.0;
+	double backupSecondCube = 6.0;
 	double driveToCube = 5.0;
 	double rotateSecondCube = 50;
 
@@ -40,18 +40,23 @@ public class DriveToRightSwitch extends CommandGroup {
    	 	addSequential(new StopWheels());
    	 	
    	 	
-
+   	    addSequential(new DrivePIDPath(backupSecondCube,true)); //drive back 3
+   	    addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
    	 	
-   	 	addSequential(new DrivePIDPath(backupSecondCube,true)); //drive back 3
-   	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.7,0.2,0.5,true)); 
-   	    addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
-   	 	addParallel(new IntakeUntilCube());
-   	 	addSequential(new DrivePIDPath(driveToCube));  //6
+   	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.7,0.2,0.5,true));
+   	    addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.7,0.2,0.5,true));
+   	    
+   	 
+   	    addParallel(new DrivePIDPath(driveToCube));  //6
+   	 	addSequential(new IntakeUntilCube());
    	 	addParallel(new OperationKeepCube());
    	 	addSequential(new DrivePIDPath(backupSecondCube,true));
+   	 	
+   	 	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
    	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.7,0.2,0.5,true));
-   	    addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-   	 	addSequential(new DrivePIDPath(4.0));
+   	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.7,0.2,0.5,true));
+   	    
+   	    addSequential(new DrivePIDPath(6.0));
    	    addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.4);
 	 	addSequential(new StopWheels());
    	 	

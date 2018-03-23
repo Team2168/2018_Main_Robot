@@ -1,5 +1,6 @@
 package org.team2168;
 
+import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSideV2;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
 import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
@@ -179,6 +180,7 @@ public class OI {
 		
 		////////////////For testing purposes//////////////////////
 		testJoystick.ButtonRightTrigger().whenPressed(new RobotRunPrep());
+		testJoystick.ButtonLeftTrigger().whenPressed(new DriveToLeftScale2CubeFromLeftSideV2());
 		//testJoystick.ButtonX().whenPressed(new LiftShiftLow());
 		//testJoystick.ButtonA().whenPressed(new EnableRachet());
 		//testJoystick.ButtonB().whenPressed(new DisableRachet());

@@ -121,6 +121,10 @@ public class Robot extends TimedRobot
     public static double[] leftVelPathQuintic5;
     public static double[] rightVelPathQuintic5;
     public static double[] headingQuintic5;
+    
+    public static double[] leftVelPathQuintic6;
+    public static double[] rightVelPathQuintic6;
+    public static double[] headingQuintic6;
  
     
     
@@ -199,9 +203,9 @@ public class Robot extends TimedRobot
 	
 	    double[][] waypointPath3 = new double[][]
       {
-	    	{5, 17, 0}, //Right switch Path
-			{6, 17, 0},
-			{13.5, 14, 0} //need to add 1.5 to 12.6 //for 4th match
+	    	{1, 15.5, 0}, //Right switch Path
+			{2, 15.5, 0},
+			{9.5, 11.5, 0} //need to add 1.5 to 12.6 //for 4th match
 	    
 	};
 
@@ -218,9 +222,9 @@ public class Robot extends TimedRobot
 			//{8.5, 23, Math.PI/2},
 			//{8.5, 24, Math.PI/2}
 			
-	    	{5, 17, 0}, //Right switch Path
-			{6, 17, 0},
-			{13.5, 21, 0} 
+	    	{1, 15.5, 0}, //Right switch Path
+			{2, 15.5, 0},
+			{9.5, 19.5, 0} 
 		};
 
 
@@ -254,11 +258,25 @@ public class Robot extends TimedRobot
 			
 		};
 		
+		
+		
+		double[][] waypointPath6 = new double[][]{
+			{2, 26, 0},
+			{21, 26, 0},
+			{25, 24.5, -Math.PI/6}				
+		};
+		
 		QuinticTrajectory quinticPath5 = new QuinticTrajectory(waypointPath5);
 		quinticPath5.calculate();
 		this.leftVelPathQuintic5 = quinticPath5.getLeftVel();
 		this.rightVelPathQuintic5 = quinticPath5.getRightVel();
 		this.headingQuintic5 = quinticPath5.getHeadingDeg();
+		
+		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
+		quinticPath6.calculate();
+		this.leftVelPathQuintic6 = quinticPath5.getLeftVel();
+		this.rightVelPathQuintic6 = quinticPath5.getRightVel();
+		this.headingQuintic6 = quinticPath5.getHeadingDeg();
 
 		
 		
