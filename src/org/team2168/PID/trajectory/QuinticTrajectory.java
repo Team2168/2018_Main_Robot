@@ -110,9 +110,15 @@ public class QuinticTrajectory
 //			{19, 13.5, -Math.PI/2+0.0001},
 //			{21, 11.5, 0}
 			
-			{2, 26, 0},
-			{17, 28, 0},
-			{19.1, 27.5, -Math.PI/3}
+			{6, 26, 2.36},
+			{5, 28, 1.79},
+			{5, 34.9, Math.PI/2},
+			
+			{5, 15, Math.PI/2}, //For left switch & right scale from left side
+			{5, 18, Math.PI/2},
+			{9, 22, Math.PI/4}
+			
+			
 			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
 			//{29, 8, 0}
