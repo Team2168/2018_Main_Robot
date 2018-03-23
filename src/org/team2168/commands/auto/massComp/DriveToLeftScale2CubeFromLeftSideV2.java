@@ -37,28 +37,27 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
     	//drive lift to score height
-    	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
-    	addSequential(new RotateXDistancePIDZZZ(45,1.0,0.4), 0.6);
+//    	addSequential(new DrivePIDPath(2.0,true)); //drive back
+    	addSequential(new Sleep(), 1.2);
     	
+ //   	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
+ //  	addSequential(new DriveIntakeWheelsWithConstant(-1.0), 0.5);
     	
-
-    	
-    	//addSequential(new DrivePIDPath(2.0));
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4);
+ 
     	addSequential(new RotateXDistancePIDZZZ(150,0.7,0.4,0.5,true));
-    	//get second cube
-    	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
-    	
-    	addParallel(new DrivePIDPath(6.0));
-    	addSequential(new IntakeUntilCube());
+ //   	addSequential(new Sleep(), 0.6);
+//    	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
+//    	
+    	addSequential(new DrivePIDPath(4.0));
+//    	addSequential(new IntakeUntilCube());
     	
     	
     	
     	//score second cube on scale
     	addSequential(new DrivePIDPath(4.7,true)); //drive back
-    	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
+//    	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(45,1.0,0.4,0.5,true));
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4 );
+//    	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4 );
     	
     	//score second cube
     	//drive lift to score height

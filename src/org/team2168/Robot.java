@@ -269,9 +269,21 @@ public class Robot extends TimedRobot
 		this.headingQuintic5 = quinticPath5.getHeadingDeg();
 
 		double[][] waypointPath6 = new double[][]{
+//			{2, 26, 0},
+//			{15.5, 26, 0},
+//			{19.5, 25.5, -Math.PI/6}
+			
+//			{2, 26, 0},
+//			{18.5, 27.5, 0},
+//			{23.5, 26, -Math.PI/2.5}
+			
+			
 			{2, 26, 0},
-			{15.5, 26, 0},
-			{19.5, 24.5, -Math.PI/6}				
+			{14.3, 27, 0},
+			{19.1, 26.5, -Math.PI/5}
+//			{2, 26, 0},
+//			{17.5, 26, 0},
+//			{21.5, 26, -Math.PI/3.5}
 		};
 		
 		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
