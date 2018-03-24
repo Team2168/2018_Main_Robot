@@ -45,8 +45,8 @@ public class DriveToRightSwitch extends CommandGroup {
    	    addSequential(new DrivePIDPath(backupSecondCube,true)); //drive back 3
    	    addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
    	 	
-   	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.2,0.5,true));
-   	    addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.2,0.5,true));
+   	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
+   	    addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
    	    
    	    addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
 	 	addParallel(new IntakeUntilCube()); 
