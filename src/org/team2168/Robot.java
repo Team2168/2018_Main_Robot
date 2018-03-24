@@ -179,8 +179,7 @@ public class Robot extends TimedRobot
 			
 	};
 
-		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
-		quinticPath.calculate();
+		QuinticTrajectory quinticPath= new QuinticTrajectory("path1", waypointPath);
 		
 		this.leftVelPathQuintic = quinticPath.getLeftVel();
 		this.rightVelPathQuintic = quinticPath.getRightVel();
@@ -192,8 +191,7 @@ public class Robot extends TimedRobot
 			{5, 34.9, Math.PI/2}
 	};
 		
-		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
-		quinticPath2.calculate();
+		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2",waypointPath2);
 	
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
@@ -208,8 +206,8 @@ public class Robot extends TimedRobot
 	};
 
 
-		QuinticTrajectory quinticPath3 = new QuinticTrajectory(waypointPath3);
-		quinticPath3.calculate();
+		QuinticTrajectory quinticPath3 = new QuinticTrajectory("path3",waypointPath3);
+		
 		this.leftVelPathQuintic3 = quinticPath3.getLeftVel();
 		this.rightVelPathQuintic3 = quinticPath3.getRightVel();
 		this.headingQuintic3 = quinticPath3.getHeadingDeg();
@@ -226,8 +224,8 @@ public class Robot extends TimedRobot
 		};
 
 
-		QuinticTrajectory quinticPath4 = new QuinticTrajectory(waypointPath4);
-		quinticPath4.calculate();
+		QuinticTrajectory quinticPath4 = new QuinticTrajectory("path4",waypointPath4);
+		
 		this.leftVelPathQuintic4 = quinticPath4.getLeftVel();
 		this.rightVelPathQuintic4 = quinticPath4.getRightVel();
 		this.headingQuintic4 = quinticPath4.getHeadingDeg();
@@ -254,8 +252,7 @@ public class Robot extends TimedRobot
 			
 		};
 		
-		QuinticTrajectory quinticPath5 = new QuinticTrajectory(waypointPath5);
-		quinticPath5.calculate();
+		QuinticTrajectory quinticPath5 = new QuinticTrajectory("path5",waypointPath5);
 		this.leftVelPathQuintic5 = quinticPath5.getLeftVel();
 		this.rightVelPathQuintic5 = quinticPath5.getRightVel();
 		this.headingQuintic5 = quinticPath5.getHeadingDeg();
