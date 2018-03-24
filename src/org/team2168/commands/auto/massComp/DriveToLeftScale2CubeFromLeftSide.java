@@ -30,7 +30,7 @@ public class DriveToLeftScale2CubeFromLeftSide extends CommandGroup {
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new ExtendPivotPiston());
     	addParallel(new IntakeUntilCube());
-    	//addSequential(new Sleep(), 0.5);
+    	addSequential(new Sleep(), 0.5);
     	addParallel(new OperationKeepCube());
     	//addSequential(new Sleep(), 0.75);
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
