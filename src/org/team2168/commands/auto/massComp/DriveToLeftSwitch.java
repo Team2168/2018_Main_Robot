@@ -30,17 +30,18 @@ public class DriveToLeftSwitch extends CommandGroup {
 	double rotateSecondCube = -50;
 
     public DriveToLeftSwitch() {
+    	//this is da monnay for the the intake to go down
     	addParallel(new ExtendPivotPiston());
     	addParallel(new IntakeUntilCube());
     	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.0);
+    	addSequential(new Sleep(), 0.5);
+    	
+    	
+    	//move lift up and drive path to left switch
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic4, Robot.rightVelPathQuintic4, Robot.headingQuintic4)); 	
     	
-//    	addSequential(new DrivePIDPath(1.0));
-//    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5,true), 2.0 );
-//    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5, true), 2.0);
-//    	addSequential(new DrivePIDPath(2.5));
+    	//spit cube after path
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE * 0.4),0.4);
    	 	addSequential(new StopWheels());
    	 	
