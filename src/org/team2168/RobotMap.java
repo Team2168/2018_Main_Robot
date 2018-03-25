@@ -93,8 +93,8 @@ public class RobotMap {
 	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 7;
 	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
 	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 2;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 3;//Forklift
+	public static final int FLIPPY_FLOOPED = 2;
+	public static final int FLIPPER_FLUPED = 3;//Forklift
 	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
 	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	
@@ -219,7 +219,7 @@ public class RobotMap {
 	 *************************************************************************/
 	public static final boolean INTAKE_LEFT_REVERSE = true;
 	public static final boolean INTAKE_RIGHT_REVERSE = true;
-	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.2;
+	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.9; //was 2.2\\
 	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.9;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.8;
@@ -254,7 +254,7 @@ public class RobotMap {
 	
 	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0 = 0.68; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0 = 0.73; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.46; //90 degrees
@@ -355,4 +355,14 @@ public class RobotMap {
 	 ******************************************************************/
 	public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
 	public static final int I2C_ADDRESS = 10;
+	
+	/******************************************************************
+	 *                        Aiden Parameters                         *
+	 ******************************************************************/
+	
+	public static final String DID_AIDEN_PUSH_IT = "only if liam said he could"; //so false
+	
+	
+	
+	
 }

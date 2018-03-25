@@ -110,9 +110,13 @@ public class QuinticTrajectory
 //			{19, 13.5, -Math.PI/2+0.0001},
 //			{21, 11.5, 0}
 			
-			{2, 15.5, 0}, //Right switch Path
-			{3, 15.5, 0},
-			{10.5, 10.5, 0}	
+			{1, 26, 0}, //For left switch & right scale from left side
+			{11.5, 27.0, 0},
+			{13.0, 25.5, -Math.PI/2 + 0.0001}		
+			//{27, 20, 0}	
+			//{27, 13, -Math.PI/2+0.0001},
+			//{27, 10, -Math.PI/2+0.0001},
+			//{29, 8, 0}
 			
 			
 //			//Left Start, right Scale -- It looks prettyy
@@ -129,8 +133,9 @@ public class QuinticTrajectory
 //			{17, 26, 0+0.0001},
 //			{22, 22, 0}	
 			
-			{17, 26, Math.PI/2}, //Right switch Path
-			{18, 27, 0+0.0001}
+			{1, 15.5, 0}, //Right switch Path
+			{2, 15.5, 0},
+			{9.5, 19.5, 0} 
 		
 			
 			
@@ -187,8 +192,8 @@ public class QuinticTrajectory
 		QuinticTrajectory quinticPath3= new QuinticTrajectory(waypointPath3);
 		quinticPath3.calculate();
 		
-		for(int i = 0; i<quinticPath2.traj.getNumSegments(); i++)
-			System.out.println(quinticPath2.getHeadingDeg()[i]);
+		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
+			System.out.println(quinticPath.getHeadingDeg()[i]);
 
 		
 		
@@ -206,8 +211,8 @@ public class QuinticTrajectory
 		double fieldWidth = 32;
 		fig3.setXTic(0, 30, 1);
 		fig3.setYTic(0, fieldWidth, 1);
-	//	fig3.addData(quinticPath.rightPath, Color.magenta);
-	//	fig3.addData(quinticPath.leftPath, Color.blue);
+		fig3.addData(quinticPath.rightPath, Color.magenta);
+		fig3.addData(quinticPath.leftPath, Color.blue);
 
 		fig3.addData(quinticPath2.leftPath, Color.blue);
 		fig3.addData(quinticPath2.rightPath, Color.magenta);
@@ -295,6 +300,14 @@ public class QuinticTrajectory
 	    config.max_acc = 4.0;
 	    config.max_jerk = 30.0;
 	    config.max_vel = 8.0;
+	}
+	
+	public QuinticTrajectory(double[][] path, double maxVel, double maxAccel)
+	{
+		
+		this(path);
+	    config.max_vel = maxVel;
+	    config.max_vel = maxAccel;
 	}
 	
 	public void calculate()
@@ -538,7 +551,7 @@ public class QuinticTrajectory
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
-			  this.heading[i] =	180+(ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI));
+			  this.heading[i] =	(ChezyMath.boundAngleNeg180to180Degrees(360-this.traj.segments_[i].heading*180/Math.PI));
 			  
 			  
 			  this.leftAccel[i][0] = this.leftRightTraj.left.getSegment(i).dt*i;

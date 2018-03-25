@@ -95,8 +95,6 @@ public class DrivePIDPathQuintic extends Command {
     	   	   
     	   	   for (int i=0; i<this.setPointHeading.length; i++)
     	   	   {
-    	   		   this.setPointLeft[i] = -this.setPointLeft[i];
-    	   		   this.setPointRight[i] = -this.setPointRight[i];
     	   		   this.setPointHeading[i] = 180+this.setPointHeading[i];
     	   	   }
     	   }
