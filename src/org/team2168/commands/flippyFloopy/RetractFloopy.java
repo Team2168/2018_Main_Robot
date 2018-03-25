@@ -1,4 +1,4 @@
-package org.team2168.commands.intakePivotPiston;
+package org.team2168.commands.flippyFloopy;
 
 import org.team2168.Robot;
 
@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RetractPivotPiston extends Command {
+public class RetractFloopy extends Command {
 
-    public RetractPivotPiston() {
+    public RetractFloopy() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.intakePivotPiston);
+        requires(Robot.flipperyFloopyFlupy);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class RetractPivotPiston extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intakePivotPiston.retractPivotPiston();
+    	Robot.flipperyFloopyFlupy.retractFlippy();
     }
 
     // Make this return true when this Command no longer needs to run execute()

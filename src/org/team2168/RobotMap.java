@@ -93,8 +93,8 @@ public class RobotMap {
 	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 7;
 	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
 	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_EXTEND = 2;
-	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 3;//Forklift
+	public static final int FLIPPY_FLOOPED = 2;
+	public static final int FLIPPER_FLUPED = 3;//Forklift
 	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
 	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	
@@ -355,4 +355,14 @@ public class RobotMap {
 	 ******************************************************************/
 	public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
 	public static final int I2C_ADDRESS = 10;
+	
+	/******************************************************************
+	 *                        Aiden Parameters                         *
+	 ******************************************************************/
+	
+	public static final String DID_AIDEN_PUSH_IT = "only if liam said he could"; //so false
+	
+	
+	
+	
 }

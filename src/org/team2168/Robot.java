@@ -53,9 +53,10 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
-	public static IntakePivotPiston intakePivotPiston;
+	public static FlipperyFloopyFlupy flipperyFloopyFlupy;
 	//public static Platform platform;
 	public static Pneumatics pneumatics;
+	
 	
 
 	// Variables for initializing and calibrating the Gyro
@@ -166,7 +167,7 @@ public class Robot extends TimedRobot
 		//platform = platform.getInstance();
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
-		intakePivotPiston = IntakePivotPiston.getInstance();
+		flipperyFloopyFlupy = FlipperyFloopyFlupy.getInstance();
 
 		
 		
