@@ -7,12 +7,14 @@ import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.massComp.DriveStraight;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
-import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
+
 import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
-import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
+
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
-import org.team2168.commands.auto.selector.AutoStartLeft3Cube;
+
+import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
+
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
@@ -54,9 +56,10 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
-	public static IntakePivotPiston intakePivotPiston;
+	public static FlipperyFloopyFlupy flipperyFloopyFlupy;
 	//public static Platform platform;
 	public static Pneumatics pneumatics;
+	
 	
 
 	// Variables for initializing and calibrating the Gyro
@@ -107,9 +110,11 @@ public class Robot extends TimedRobot
     
     public static double[] leftVelPathQuintic;
     public static double[] rightVelPathQuintic;
+    public static double[] headingQuintic;
     
     public static double[] leftVelPathQuintic2;
     public static double[] rightVelPathQuintic2;
+    public static double[] headingQuintic2;
     
     public static double[] leftVelPathQuintic3;
     public static double[] rightVelPathQuintic3;
@@ -123,6 +128,10 @@ public class Robot extends TimedRobot
     public static double[] leftVelPathQuintic5;
     public static double[] rightVelPathQuintic5;
     public static double[] headingQuintic5;
+    
+    public static double[] leftVelPathQuintic6;
+    public static double[] rightVelPathQuintic6;
+    public static double[] headingQuintic6;
  
     
     
@@ -161,7 +170,7 @@ public class Robot extends TimedRobot
 		//platform = platform.getInstance();
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
-		intakePivotPiston = IntakePivotPiston.getInstance();
+		flipperyFloopyFlupy = FlipperyFloopyFlupy.getInstance();
 
 		
 		
@@ -172,10 +181,9 @@ public class Robot extends TimedRobot
 		
 		
 		double[][] waypointPath = new double[][]{
-			{5, 15, Math.PI/2}, //For left switch & right scale from left side
-			{5, 18, Math.PI/2},
-			{9, 22, Math.PI/4}
-			
+			{1, 26, 0}, //For left switch & right scale from left side
+			{11.5, 27.0, 0},
+			{13.0, 25.5, -Math.PI/2 + 0.0001}		
 			
 	};
 
@@ -183,25 +191,30 @@ public class Robot extends TimedRobot
 		
 		this.leftVelPathQuintic = quinticPath.getLeftVel();
 		this.rightVelPathQuintic = quinticPath.getRightVel();
+		this.headingQuintic = quinticPath.getHeadingDeg();
 		
 		
 		double[][] waypointPath2 = new double[][]{
-			{6, 26, 2.36},
-			{5, 28, 1.79},
-			{5, 34.9, Math.PI/2}
+			{14.5, 23.5, Math.PI/2},
+			{21, 27.0, 0+0.0001},
+			{22.5, 27.0, 0}
+			
+			//{27, 20, 0}	
+
 	};
 		
+
 		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2",waypointPath2);
-	
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
+		this.headingQuintic2 = quinticPath2.getHeadingDeg();
 		
 	
 	    double[][] waypointPath3 = new double[][]
       {
-			{5, 17, 0}, //Right switch Path
-			{6, 17, 0},
-			{12, 12.5, 0}
+	    	{1, 15.5, 0}, //Right switch Path
+			{2, 15.5, 0},
+			{9.5, 11.5, 0} //need to add 1.5 to 12.6 //for 4th match
 	    
 	};
 
@@ -218,9 +231,9 @@ public class Robot extends TimedRobot
 			//{8.5, 23, Math.PI/2},
 			//{8.5, 24, Math.PI/2}
 			
-			{5, 17, 0}, //Right switch Path
-			{6, 17, 0},
-			{12, 22.5, 0}
+	    	{1, 15.5, 0}, //Right switch Path
+			{2, 15.5, 0},
+			{9.5, 19.5, 0} 
 		};
 
 
@@ -247,15 +260,47 @@ public class Robot extends TimedRobot
 			{10, 24, 0},
 			{24, 24, 0},
 			{27, 20, -Math.PI/2+0.0001},
-			{27, 10, -Math.PI/2+0.0001},
-			{29, 8, 0}
+			{27, 17, -Math.PI/2+0.0001}
+			//{27, 13, -Math.PI/2+0.0001},
+			//{27, 10, -Math.PI/2+0.0001},
+			//{29, 8, 0}
 			
 		};
 		
+
 		QuinticTrajectory quinticPath5 = new QuinticTrajectory("path5",waypointPath5);
 		this.leftVelPathQuintic5 = quinticPath5.getLeftVel();
 		this.rightVelPathQuintic5 = quinticPath5.getRightVel();
 		this.headingQuintic5 = quinticPath5.getHeadingDeg();
+
+		double[][] waypointPath6 = new double[][]{
+//			{2, 26, 0},
+//			{15.5, 26, 0},
+//			{19.5, 25.5, -Math.PI/6}
+			
+//			{2, 26, 0},
+//			{18.5, 27.5, 0},
+//			{23.5, 26, -Math.PI/2.5}
+			
+			
+			//{2, 26, 0},  //OG Path
+			//{14.3, 27, 0},
+			//{19.1, 26.5, -Math.PI/5}
+			
+			{2, 26, 0}, //crazy path
+			{20.3, 26.5, 0},
+			{22.1, 26.5, -Math.PI/3}
+//			{2, 26, 0},
+//			{17.5, 26, 0},
+//			{21.5, 26, -Math.PI/3.5}
+		};
+		
+		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
+		quinticPath6.calculate();
+		
+		this.leftVelPathQuintic6 = quinticPath6.getLeftVel();
+		this.rightVelPathQuintic6 = quinticPath6.getRightVel();
+		this.headingQuintic6 = quinticPath6.getHeadingDeg();
 
 		
 		
@@ -304,6 +349,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putSendable("Priority Mode Chooser", () -> {return Robot.autoPriorityChooser;}, true, false);
 		ConsolePrinter.putString("AutoName", () -> {return Robot.getAutoName();}, true, false);
 		ConsolePrinter.putString("Control Style Name", () -> {return Robot.getControlStyleName();}, true, false);
+		ConsolePrinter.putString("Auto Priority Name", () -> {return Robot.getAutoPriority();}, true, false);
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
@@ -507,7 +553,7 @@ public class Robot extends TimedRobot
 		}
 
 		/**
-		 * Adds control styles to the selector
+		 * Adds auto priorities to the selector
 		 */
 		public void AutoPrioritySelectInit() {
 			autoPriorityChooser = new SendableChooser<>();
@@ -571,14 +617,14 @@ public class Robot extends TimedRobot
 		public void autoSelectInit() {
 			autoChooser = new SendableChooser<Command>();
 			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
-	        autoChooser.addObject("Center Auto 1 Cube", new AutoStartCenter1Cube());
-	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter2Cube());	        
+			autoChooser.addObject("Do Nothing", new DoNothing());
+	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter1Cube());	        
 	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
-	        autoChooser.addObject("Left Auto 3 Cube", new AutoStartLeft3Cube());
-	        
+			autoChooser.addObject("Left Auto 2 Cube Super Dooper", new AutoStartLeft2CubeSuperDooperPooper());
 			autoChooser.addObject("RightScaleTest", new DriveToRightScaleFromLeft());
-			autoChooser.addObject("Do nothing", new Sleep());
+
+
 		}
 
 		/**

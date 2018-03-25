@@ -1,4 +1,4 @@
-package org.team2168.commands.auto.selector;
+package org.team2168.commands.flippyFloopy;
 
 import org.team2168.Robot;
 
@@ -7,22 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TestCommand extends Command {
+public class ExtendFlippy extends Command {
 
-	public String test = "Left, Left, Left";
-    public TestCommand() {
+    public ExtendFlippy() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.flipperyFloopyFlupy);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//test = Robot.test;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(test);
+    	Robot.flipperyFloopyFlupy.extendFloppy();
     }
 
     // Make this return true when this Command no longer needs to run execute()

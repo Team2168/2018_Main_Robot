@@ -15,38 +15,43 @@ import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**1
+/**
  *
  */
-public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
+public class DriveToLeftSwitchFromLeftSide2 extends CommandGroup {
 
-	
-
-    public LeftSwitchOnlyFromLeftSide() {
+    public DriveToLeftSwitchFromLeftSide2() {
+        
+    	
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new ExtendFlippy());
     	addParallel(new IntakeUntilCube());
     	addSequential(new Sleep(), 0.5);
     	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 0.75);
-    	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-
-    	//drive to side of left switch
-    	addSequential(new DrivePIDPath(10.0));
+    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic, Robot.headingQuintic));
     	
     	
-    	//rotate into switch
-    	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2, 0.5, true),4.0);
-    	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2 ,0.5, true ),2.0);
-    
+    	
+    	
     	
     	//spit
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *0.5),0.4);
     	addSequential(new StopWheels());
     	
+    	//Get to second Cube
+    	addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
+    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic2, Robot.rightVelPathQuintic2, Robot.headingQuintic2, true));
+    	addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));
+    	addParallel(new DrivePIDPath(5.5));
+    	addSequential(new IntakeUntilCube());
+    	//Score Second Cube
+    	addSequential(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
+    	addSequential(new DrivePIDPath(1.0));
+    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE), 0.4 );
     	
-    	//get second cube for switch
     	
-
-}
+    	
+    	
+           }
 }
