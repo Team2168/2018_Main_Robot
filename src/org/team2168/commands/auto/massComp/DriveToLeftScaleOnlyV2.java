@@ -24,12 +24,14 @@ public class DriveToLeftScaleOnlyV2 extends CommandGroup {
     	addParallel(new IntakeUntilCube());
     	addSequential(new Sleep(), 0.5);
     	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 0.75);
+    	
+    	//addSequential(new Sleep(), 0.75);
+    	
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(18.0));
     	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
-    	addSequential(new RotateXDistancePIDZZZ(60,0.7,0.4, 0.5, true),4.0);
-    	addSequential(new RotateXDistancePIDZZZ(60,0.7,0.4 ,0.5, true ),1.0);
+    	addSequential(new RotateXDistancePIDZZZ(60,0.9,0.4, 0.5, true),4.0);
+    	addSequential(new RotateXDistancePIDZZZ(60,0.9,0.4 ,0.5, true ),1.0);
     	
     
     	
