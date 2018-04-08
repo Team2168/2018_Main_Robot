@@ -1,7 +1,7 @@
 package org.team2168.commands.intake;
 
-import org.team2168.commands.flippyFloopy.ExtendFlippy;
-import org.team2168.commands.flippyFloopy.RetractFloopy;
+import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
+import org.team2168.commands.flippyFloopy.DisEngageIntakePivotHardStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class IntakeUntilCubeAndPivotUp extends CommandGroup {
 
     public IntakeUntilCubeAndPivotUp() {
-    	addParallel(new ExtendFlippy());
+    	addParallel(new EngageIntakePivotHardStop());
     	addParallel(new IntakeUntilCube());
     	addSequential(new OperationKeepCube());
     	

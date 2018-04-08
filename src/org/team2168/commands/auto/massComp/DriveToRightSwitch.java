@@ -8,7 +8,7 @@ import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
-import org.team2168.commands.flippyFloopy.ExtendFlippy;
+import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
@@ -28,7 +28,7 @@ public class DriveToRightSwitch extends CommandGroup {
 
     public DriveToRightSwitch() {
     	//this is da monnay for the the intake to go down
-    	addParallel(new ExtendFlippy());
+    	addParallel(new EngageIntakePivotHardStop());
     	addParallel(new IntakeUntilCube());
     	addParallel(new OperationKeepCube());
     	addSequential(new Sleep(), 0.5);

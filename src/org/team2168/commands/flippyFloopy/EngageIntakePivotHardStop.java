@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExtendFlippy extends Command {
+public class EngageIntakePivotHardStop extends Command {
 
-    public ExtendFlippy() {
+    public EngageIntakePivotHardStop() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.flipperyFloopyFlupy);
     }

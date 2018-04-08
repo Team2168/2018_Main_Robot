@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RetractFloopy extends Command {
+public class DisEngageIntakePivotHardStop extends Command {
 
-    public RetractFloopy() {
+    public DisEngageIntakePivotHardStop() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.flipperyFloopyFlupy);
     }
