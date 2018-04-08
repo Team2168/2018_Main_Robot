@@ -89,12 +89,15 @@ public class RobotMap {
 	//Double Soldenoids PCM ID = 0
 	public final static int DRIVETRAIN_LOW_GEAR_PCM = 0;
 	public final static int DRIVETRAIN_HIGH_GEAR_PCM = 1;
-	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 6;
-	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 7;
-	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
-	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
-	public static final int FLIPPY_FLOOPED = 2;
-	public static final int FLIPPER_FLUPED = 3;//Forklift
+	public static final int CUBE_INTAKE_GRIPPER_EXTENDED_PCM = 4;
+	public static final int CUBE_INTAKE_GRIPPER_RETRACTED_PCM = 5;
+	public static final int CUBE_INATKE_PIVOT_PISTON_EXTEND = 6;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 7;
+	
+	//public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
+	//public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
+	public static final int FLIPPY_FLOOPED = 3;
+	public static final int FLIPPER_FLUPED = 2;//Forklift
 	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
 	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	
@@ -105,8 +108,8 @@ public class RobotMap {
 	public static final int LIFT_BRAKE_DISENGAGE_PCM = 2;
 	public static final int LIFT_HIGH_GEAR_PCM = 4;
 	public static final int LIFT_LOW_GEAR_PCM = 5;
-	public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
-	public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
+	//public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
+	//public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
 	
 	
 
@@ -257,9 +260,11 @@ public class RobotMap {
 	public static final double LIFT_POT_VOLTAGE_0 = 0.84; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
-	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.46; //90 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
+	//public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 0.7; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
 	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.7; //0 degrees
+	//public static final double LIFT_POT_VOLTAGE_0_PBOT = 4.46; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
 	

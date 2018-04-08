@@ -44,7 +44,6 @@ public class Robot extends TimedRobot
 	public static OI oi;
 	
 	//Subsystems
-	public static ClimbGuideArm climbGuideArm;
 	public static CubeIntakeWheels cubeIntakeWheels;
 	public static CubeIntakeGripper cubeIntakeGripper;
 	public static CubeIntakePivot cubeIntakePivot;
@@ -54,6 +53,7 @@ public class Robot extends TimedRobot
 	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
 	public static FlipperyFloopyFlupy flipperyFloopyFlupy;
+	public static IntakePivotPiston intakePivotPiston;
 	//public static Platform platform;
 	public static Pneumatics pneumatics;
 	
@@ -155,7 +155,7 @@ public class Robot extends TimedRobot
 
 				
 		// Instantiate the subsystems
-		climbGuideArm = ClimbGuideArm.getInstance();
+		intakePivotPiston = IntakePivotPiston.getInstance();
 		cubeIntakeGripper = CubeIntakeGripper.getInstance();
 		cubeIntakePivot = CubeIntakePivot.getInstance();
 		cubeIntakeWheels =  CubeIntakeWheels.getInstance();
