@@ -174,15 +174,15 @@ public class RobotMap {
 	 *                         DRIVETRAIN PARAMETERS                         *
 	 *************************************************************************/
 	// TODO check if the reverse values match the physical robot
-	public static final boolean DT_REVERSE_LEFT1 = false;
-	public static final boolean DT_REVERSE_LEFT2 = false;
-	public static final boolean DT_REVERSE_RIGHT1 = true;
-	public static final boolean DT_REVERSE_RIGHT2 = true;
+	public static final boolean DT_REVERSE_LEFT1 = false; //false
+	public static final boolean DT_REVERSE_LEFT2 = false; //false
+	public static final boolean DT_REVERSE_RIGHT1 = true; //true
+	public static final boolean DT_REVERSE_RIGHT2 = true; //true
 	
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 	// TODO find ratio
 	private static final double DRIVE_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
-	private static final double DRIVE_WHEEL_DIAMETER = 6.0;
+	private static final double DRIVE_WHEEL_DIAMETER = 3.89;   //6.0;
 	public static final int DRIVE_ENCODER_PULSE_PER_ROT = (int) (DRIVE_PULSE_PER_ROTATION * DRIVE_GEAR_RATIO); // pulse
 																												// per
 																												// rotation
@@ -307,8 +307,8 @@ public class RobotMap {
 	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.0001412646174233;
 	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.0074778888124088;
 
-	public static final double ROTATE_POSITION_P = 0.024;
-	public static final double ROTATE_POSITION_I = 0.027;
+	public static final double ROTATE_POSITION_P = 0.055;
+	public static final double ROTATE_POSITION_I = 0.001;
 	public static final double ROTATE_POSITION_D = 0.000000067;
 	
 	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp

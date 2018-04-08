@@ -21,6 +21,7 @@ import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.EnableRotatePID;
 import org.team2168.commands.drivetrain.PIDCommands.EnableRotateXDistancePIDZZZ;
 import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPath;
+import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPathV2;
 import org.team2168.commands.guidingArm.CloseDownGuidingArm;
 import org.team2168.commands.guidingArm.OpenGuidingArm;
 import org.team2168.commands.intake.CloseIntake;
@@ -215,13 +216,13 @@ public class OI {
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
 		//pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		//pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
-		pidTestJoystick.ButtonA().whenPressed(new DriveToLeftSwitch());
-		pidTestJoystick.ButtonB().whenPressed(new DriveToRightSwitch());
+		pidTestJoystick.ButtonA().whenPressed(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
+		pidTestJoystick.ButtonB().whenPressed(new RotatePIDPathV2(90,false));
 		
 		
+		pidTestJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(45,0.6,0.2,0.1,true));
 		
-		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(33.0, 0.5, 0.16,1.0,true));
-		pidTestJoystick.ButtonX().whenPressed((new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true)));
+		pidTestJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.6,0.2,0.1,true));
 		
 		
 		pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));

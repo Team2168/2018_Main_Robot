@@ -9,16 +9,19 @@ public class OneDimensionalMotionProfiling {
 	
 	
 	double delta = 0.0;
-	double q0 = 0.0;
-	double q1 = 100;
-	double v0 = 0.5;
-	double v1 =  0.5;
+	double q0 = 50;
+	double q1 = 40;
+	double v0 = 0;
+	double v1 =  0;
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
-	double vMax = 12.0;
-	double aMax = 8.0;
-	double jMax = 30.0;
+	
+	double error = q1-q0;
+	
+	double vMax = 60;
+	double aMax = 17;
+	double jMax = 120;
 	
 	double vMin = -vMax;
 	double aMin = -aMax;
@@ -56,6 +59,30 @@ public class OneDimensionalMotionProfiling {
 		this.vMax = v_max;
 		this.aMax = accel_max;
 		this.jMax = j_max;
+		S_curves();
+		
+	}
+	
+	public OneDimensionalMotionProfiling(double start, double distance, double v_max, double accel_max, double j_max)
+	{
+		this.q0 = start;
+		this.q1 = distance;
+		
+		
+		double error = q1-q0;
+		
+		if(error<10)
+		{
+			this.vMax = 50;
+			this.aMax = 17;
+			this.jMax = 120;
+		}
+		else
+		{
+			this.vMax = v_max;
+			this.aMax = accel_max;
+			this.jMax = j_max;
+		}
 		S_curves();
 		
 	}
@@ -193,7 +220,7 @@ public class OneDimensionalMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(20);
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(90);
 		
 		
 //		for(int i=0; i<oneDirection.getVelArray().length; i++)
@@ -230,6 +257,14 @@ double fieldWidth = 27.0;
 		fig5.setXLabel("time (seconds)");
 		fig5.setTitle("Accel Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig5.addData(oneDirection.time,oneDirection.acc, Color.black);
+		
+		FalconLinePlot fig6 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		fig6.yGridOn();
+		fig6.xGridOn();
+		fig6.setYLabel("Accel (ft/sec/sec)");
+		fig6.setXLabel("time (seconds)");
+		fig6.setTitle("Jerk Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+		fig6.addData(oneDirection.time,oneDirection.jerk, Color.black);
 	
 		
 	}

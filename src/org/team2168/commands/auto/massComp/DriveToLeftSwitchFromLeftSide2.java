@@ -38,7 +38,7 @@ public class DriveToLeftSwitchFromLeftSide2 extends CommandGroup {
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *0.5),0.4);
     	addSequential(new StopWheels());
     	
-    	//Get to second Cube
+    	//Drop it low and get dat cube
     	addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic2, Robot.rightVelPathQuintic2, Robot.headingQuintic2, true));
     	addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));

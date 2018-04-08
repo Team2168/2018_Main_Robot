@@ -27,24 +27,21 @@ public class DriveToRightSwitch extends CommandGroup {
 	double rotateSecondCube = 50;
 
     public DriveToRightSwitch() {
-    	
+    	//this is da monnay for the the intake to go down
     	addParallel(new ExtendFlippy());
     	addParallel(new IntakeUntilCube());
     	addParallel(new OperationKeepCube());
     	addSequential(new Sleep(), 0.5);
-    	
-    	
+    	//move lift up and drive path to right switch
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));
-
-    	
+    	//spit cube after path    	
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.4);
    	 	addSequential(new StopWheels());
    	 	
-   	 	
+    	//second cube
    	    addSequential(new DrivePIDPath(backupSecondCube,true)); //drive back 3
-   	    addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
-   	 	
+   	    addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));	 	
    	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
    	    addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
    	    
