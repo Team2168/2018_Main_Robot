@@ -106,8 +106,17 @@ public class OI {
 		
 		/*************************************************************************
 		 *                         Operator Joystick         		              *
-		 *************************************************************************/
+		  *************************************************************************/
 		
+		
+		pidTestJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
+		pidTestJoystick.ButtonLeftBumper().whenPressed(new CloseIntake());
+		
+		pidTestJoystick.ButtonUpDPad().whenReleased(new ExtendPivotWithPiston());
+		pidTestJoystick.ButtonDownDPad().whenReleased(new RetractPivotWithPiston());
+		
+		pidTestJoystick.ButtonRightDPad().whenPressed(new EngageIntakePivotHardStop());
+		pidTestJoystick.ButtonLeftDPad().whenPressed(new DisEngageIntakePivotHardStop());
 		//Start will be climb
 		//operatorJoystick.ButtonStart().whenPressed(new CloseDownGuidingArm());
 		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftLow());
@@ -115,6 +124,10 @@ public class OI {
 		
 		////////////////Lower Platform///////////////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new LowerPlatform());
+		
+		operatorJoystick.ButtonLeftTrigger().whileHeld(new OpenIntake());
+		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
+		
 		
 
 		/////////////////Emergency Lower Intake/////////////////////////////////////////
@@ -136,7 +149,7 @@ public class OI {
 		
 		///////////////Intake and pivot up afterwards/////////////////////////////////////////////////////////////////////////
 		
-		operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCubeAndPivotUp());
+		//operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCubeAndPivotUp());
 		
 //		operatorJoystick.ButtonLeftTrigger().whileHeld(new IntakeUntilCube());
 //		operatorJoystick.ButtonLeftTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
@@ -186,8 +199,8 @@ public class OI {
 		//testJoystick.ButtonLeftTrigger().whenPressed(new DriveToLeftScale2CubeFromLeftSideV2());
 		
 		
-		testJoystick.ButtonLeftBumper().whenPressed(new test());	
-		testJoystick.ButtonLeftTrigger().whenPressed(new DisEngageIntakePivotHardStop());
+		//testJoystick.ButtonLeftBumper().whenPressed(new test());	
+		//testJoystick.ButtonLeftTrigger().whenPressed(new DisEngageIntakePivotHardStop());
 		
 		//testJoystick.ButtonX().whenPressed(new LiftShiftLow());
 		//testJoystick.ButtonA().whenPressed(new EnableRachet());
@@ -221,12 +234,14 @@ public class OI {
 		pidTestJoystick.ButtonB().whenPressed(new RotatePIDPathV2(90,false));
 		
 		
-		pidTestJoystick.ButtonY().whenPressed(new RotateXDistancePIDZZZ(45,0.6,0.2,0.1,true));
+		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
 		
-		pidTestJoystick.ButtonX().whenPressed(new RotateXDistancePIDZZZ(90,0.6,0.2,0.1,true));
+		pidTestJoystick.ButtonX().whenPressed(new DriveToLeftScale2CubeFromLeftSideV2());
 		
 		
-		pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));
+		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));
+		
+		
 		
 		
 	}

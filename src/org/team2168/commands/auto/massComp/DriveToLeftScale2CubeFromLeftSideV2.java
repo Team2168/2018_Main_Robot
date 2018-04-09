@@ -16,6 +16,7 @@ import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.StopWheels;
+import org.team2168.commands.intake.test;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,8 +30,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//drive stright to null territory
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new EngageIntakePivotHardStop());
-    	addParallel(new IntakeUntilCube());
+    	addSequential(new test());
     	addSequential(new Sleep(), 0.5);
     	addParallel(new OperationKeepCube());
     	//addSequential(new Sleep(), 0.75);
@@ -42,7 +42,8 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//drive lift to score height
     	addSequential(new DrivePIDPath(2.0,true)); //drive back
-    	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
+    	addSequential(new RotateXDistancePIDZZZ(70,0.6,0.2,0.5,true));
+    	addSequential(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
     	addSequential(new DriveIntakeWheelsWithConstant(-1.0), 0.5);
     	
  
@@ -58,7 +59,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//score second cube on scale
     	addSequential(new DrivePIDPath(4.7,true)); //drive back
-    	addSequential(new DriveLiftPIDZZZ(80.0, 0.9, 0.1,1.0,true));
+    	addSequential(new DriveLiftPIDZZZ(75.0, 0.9, 0.1,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
     	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
     	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4 );

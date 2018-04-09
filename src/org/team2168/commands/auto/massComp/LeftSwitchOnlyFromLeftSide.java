@@ -11,6 +11,7 @@ import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.StopWheels;
+import org.team2168.commands.intake.test;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -24,8 +25,7 @@ public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
 
     public LeftSwitchOnlyFromLeftSide() {
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new EngageIntakePivotHardStop());
-    	addParallel(new IntakeUntilCube());
+    	addSequential(new test());
     	addSequential(new Sleep(), 0.5);
     	addParallel(new OperationKeepCube());
     	addSequential(new Sleep(), 0.75);
