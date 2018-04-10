@@ -8,7 +8,7 @@ import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
-import org.team2168.commands.intake.test;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightScaleOnlyFromLeftSide extends CommandGroup {
 
     public RightScaleOnlyFromLeftSide() {
-    	addSequential(new test());
+    	addSequential(new RobotPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPath(15.0));
     	addSequential(new RotateXDistancePIDZZZ(89.0,0.63,0.1,0.5,true));

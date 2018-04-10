@@ -25,7 +25,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPathV2;
 import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.RotatePivotUpAutomatically;
-import org.team2168.commands.intake.test;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.IntakeUntilCubeAndPivotUp;
@@ -181,7 +181,7 @@ public class OI {
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
 		////////////////Lift Pid commands////////////////////////////////////////////////////
-		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(80.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
 		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(4.0, 0.5, 0.16,1.0,true));
 		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
 		operatorJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(40.0, 0.5, 0.16,1.0,true));
@@ -231,12 +231,12 @@ public class OI {
 		//pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		//pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
 		pidTestJoystick.ButtonA().whenPressed(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
-		pidTestJoystick.ButtonB().whenPressed(new RotatePIDPathV2(90,false));
+		pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(142,0.6,0.2,0.5,true));
 		
 		
-		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
+		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
 		
-		pidTestJoystick.ButtonX().whenPressed(new DriveToLeftScale2CubeFromLeftSideV2());
+		pidTestJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
 		
 		
 		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));

@@ -263,7 +263,7 @@ public class RobotMap {
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
 	//public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 0.7; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.74; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.78; //0 degrees
 	//public static final double LIFT_POT_VOLTAGE_0_PBOT = 4.46; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
@@ -362,10 +362,17 @@ public class RobotMap {
 	public static final int I2C_ADDRESS = 10;
 	
 	/******************************************************************
+	 *                        Kevin PARAMETERS                        *
+	 ******************************************************************/
+	public static final boolean KEVIN_IS_DA_BOMB = true;
+	public static final boolean GUYANA_HAS_SUNK = false; //debatable
+
+	/******************************************************************
 	 *                        Aiden Parameters                         *
 	 ******************************************************************/
 	
-	public static final String DID_AIDEN_PUSH_IT = "only if liam said he could"; //so false
+	public static final String DID_AIDEN_PUSH_IT = "only if Liam said he could"; //so false
+	public static final boolean DID_AIDEN_WRITE_A_PATH = false;
 	
 	
 	

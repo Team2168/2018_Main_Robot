@@ -290,7 +290,7 @@ public class Robot extends TimedRobot
 			//{14.3, 27, 0},
 			//{19.1, 26.5, -Math.PI/5}
 			
-			{2, 26, 0}, //crazy path
+			{2, 26.5, 0}, //crazy path
 			{20.3, 26.5, 0},
 			{22.1, 26.5, -Math.PI/3}
 //			{2, 26, 0},

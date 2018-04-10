@@ -9,19 +9,19 @@ public class OneDimensionalMotionProfiling {
 	
 	
 	double delta = 0.0;
-	double q0 = 50;
-	double q1 = 40;
-	double v0 = 0;
-	double v1 =  0;
+	double q0 = 0.0;
+	double q1 = 100;
+	double v0 = 0.5;
+	double v1 =  0.5;
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
 	
 	double error = q1-q0;
 	
-	double vMax = 60;
-	double aMax = 17;
-	double jMax = 120;
+	double vMax = 12.0;
+	double aMax = 8.0;
+	double jMax = 30.0;
 	
 	double vMin = -vMax;
 	double aMin = -aMax;

@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class test extends CommandGroup {
+public class RobotPrep extends CommandGroup {
 
-    public test() {
+    public RobotPrep() {
       addParallel(new RetractPivotWithPiston());
       addParallel(new EngageIntakePivotHardStop());
       addSequential(new Sleep(),0.5);

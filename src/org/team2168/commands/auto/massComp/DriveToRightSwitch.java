@@ -13,6 +13,7 @@ import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.StopWheels;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -28,10 +29,7 @@ public class DriveToRightSwitch extends CommandGroup {
 
     public DriveToRightSwitch() {
     	//this is da monnay for the the intake to go down
-    	addParallel(new EngageIntakePivotHardStop());
-    	addParallel(new IntakeUntilCube());
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 0.5);
+    	addSequential(new RobotPrep());
     	//move lift up and drive path to right switch
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));

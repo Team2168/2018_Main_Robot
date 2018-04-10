@@ -15,7 +15,7 @@ import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.StopWheels;
-import org.team2168.commands.intake.test;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,8 +29,7 @@ public class DriveToLeftScale2CubeFromLeftSide extends CommandGroup {
     	
     	//drive stright to null territory
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addSequential(new test());
-    	addSequential(new Sleep(), 0.5);
+    	addSequential(new RobotPrep());
     	addParallel(new OperationKeepCube());
     	//addSequential(new Sleep(), 0.75);
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));

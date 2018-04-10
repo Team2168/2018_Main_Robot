@@ -12,6 +12,7 @@ import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.StopWheels;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -23,9 +24,7 @@ public class DriveToRightScaleFromLeft extends CommandGroup {
 
     public DriveToRightScaleFromLeft() {
     	addParallel(new EngageIntakePivotHardStop());
-    	addParallel(new IntakeUntilCube());
-    	addParallel(new OperationKeepCube());
-    	addSequential(new Sleep(), 1.0);
+    	addSequential(new RobotPrep());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic5, Robot.rightVelPathQuintic5, Robot.headingQuintic5));
 //    	addSequential(new RotateXDistancePIDZZZ(0,0.7,0.2, 0.5,true), 2.0);

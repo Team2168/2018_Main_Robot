@@ -10,6 +10,7 @@ import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.intake.StopWheels;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
@@ -23,10 +24,7 @@ public class DriveToLeftSwitchFromLeftSide2 extends CommandGroup {
     public DriveToLeftSwitchFromLeftSide2() {
         
     	
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new EngageIntakePivotHardStop());
-    	addParallel(new IntakeUntilCube());
-    	addSequential(new Sleep(), 0.5);
+    	addSequential(new RobotPrep());
     	addParallel(new OperationKeepCube());
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic, Robot.headingQuintic));
     	
