@@ -12,6 +12,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
+import org.team2168.commands.intake.ExtendPivotWithPiston;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.intake.OperationKeepCube;
@@ -32,7 +33,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//drive stright to null territory
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addSequential(new RobotPrep());
+    	addParallel(new RobotPrep());
     	addParallel(new OperationKeepCube());
     	//addSequential(new Sleep(), 0.75);
     	
@@ -43,15 +44,17 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//drive lift to score height
     	addSequential(new DrivePIDPath(0.5,true)); //drive back
+    	addParallel(new DriveLiftPIDZZZ(70.0, 0.9, 0.1,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(70,0.6,0.2,0.5,true));
-    	addSequential(new DriveLiftPIDZZZ(70.0, 0.9, 0.1,1.0,true));
+    	
     	addSequential(new DriveIntakeWheelsWithConstant(-1.0), 0.4);
     	
  
     	//addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));
+    	addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(152,0.6,0.2,0.5,true));
 
-    	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
+    	
     	addParallel(new OpenIntake());
     	addSequential(new DrivePIDPath(7.0));	
     	addSequential(new IntakeUntilCube(), 0.7);
@@ -61,8 +64,9 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	//score second cube on scale
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
-    	addSequential(new DrivePIDPath(4.7,true)); //drive back
-    	addSequential(new DriveLiftPIDZZZ(50.0, 0.9, 0.1,1.0,true));
+    	addSequential(new DrivePIDPath(4.3,true)); //drive back
+    	addParallel(new ExtendPivotWithPiston());
+    	addParallel(new DriveLiftPIDZZZ(40.0, 0.9, 0.1,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
     	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
     	addSequential(new DriveLiftPIDZZZ(75.0, 0.9, 0.1,1.0,true));
