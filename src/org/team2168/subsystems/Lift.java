@@ -262,10 +262,21 @@ public class Lift extends Subsystem {
 			if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged() && !liftPot.isAtUpperLimit() ) ||
 					((speed < -RobotMap.LIFT_MIN_SPEED)))
 			{
+			if(Robot.isAutoMode())	
+				if(Robot.lift.getPotPos() > 60 && ( speed > 0)) {
+					Robot.intakePivotPiston.retracPivotPiston();	
+					}
+			if(!Robot.isAutoMode())
+			if(Robot.lift.getPotPos() > 79 && ( speed > 0)) {
+				Robot.intakePivotPiston.retracPivotPiston();	
+				}
+				
 				disableBrake();
 				driveLiftMotor1(speed);
 				driveLiftMotor2(speed);
 				driveLiftMotor3(speed); 
+				
+				
 			}
 			else 
 			{
@@ -280,10 +291,19 @@ public class Lift extends Subsystem {
 			if ((speed > RobotMap.LIFT_MIN_SPEED && !isLiftFullyUp() && Robot.liftRatchetShifter.isRatchetDisEngaged()) ||
 					((speed < -RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown() ))
 			{
+				if(Robot.isAutoMode())	
+					if(Robot.lift.getPotPos() > 60 && ( speed > 0)) {
+						Robot.intakePivotPiston.retracPivotPiston();	
+						}
+				if(!Robot.isAutoMode())
+				if(Robot.lift.getPotPos() > 79 && ( speed > 0)) {
+					Robot.intakePivotPiston.retracPivotPiston();	
+					}
 				disableBrake();
 				driveLiftMotor1(speed);
 				driveLiftMotor2(speed);
 				driveLiftMotor3(speed); 
+				
 			}
 			else 
 			{

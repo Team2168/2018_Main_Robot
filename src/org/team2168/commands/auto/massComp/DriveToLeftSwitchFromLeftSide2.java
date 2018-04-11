@@ -6,10 +6,11 @@ import org.team2168.commands.auto.Sleep;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
-import org.team2168.commands.flippyFloopy.ExtendFlippy;
+import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;
+import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.intake.StopWheels;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
@@ -23,10 +24,7 @@ public class DriveToLeftSwitchFromLeftSide2 extends CommandGroup {
     public DriveToLeftSwitchFromLeftSide2() {
         
     	
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
-    	addParallel(new ExtendFlippy());
-    	addParallel(new IntakeUntilCube());
-    	addSequential(new Sleep(), 0.5);
+    	addSequential(new RobotPrep());
     	addParallel(new OperationKeepCube());
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic, Robot.headingQuintic));
     	
@@ -38,7 +36,7 @@ public class DriveToLeftSwitchFromLeftSide2 extends CommandGroup {
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *0.5),0.4);
     	addSequential(new StopWheels());
     	
-    	//Get to second Cube
+    	//Drop it low and get dat cube
     	addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic2, Robot.rightVelPathQuintic2, Robot.headingQuintic2, true));
     	addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));

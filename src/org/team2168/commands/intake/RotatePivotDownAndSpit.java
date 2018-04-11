@@ -2,7 +2,7 @@ package org.team2168.commands.intake;
 
 import org.team2168.RobotMap;
 import org.team2168.commands.auto.Sleep;
-import org.team2168.commands.flippyFloopy.ExtendFlippy;
+import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RotatePivotDownAndSpit extends CommandGroup {
 
     public RotatePivotDownAndSpit() {
-        addSequential(new ExtendFlippy(), 0.6);
+        addSequential(new EngageIntakePivotHardStop(), 0.6);
         addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
     }
 }

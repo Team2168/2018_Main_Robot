@@ -89,12 +89,15 @@ public class RobotMap {
 	//Double Soldenoids PCM ID = 0
 	public final static int DRIVETRAIN_LOW_GEAR_PCM = 0;
 	public final static int DRIVETRAIN_HIGH_GEAR_PCM = 1;
-	public static final int CUBE_INTAKE_GRIPPER_LOWERED_PCM = 6;
-	public static final int CUBE_INTAKE_GRIPPER_RAISED_PCM = 7;
-	public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
-	public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
-	public static final int FLIPPY_FLOOPED = 2;
-	public static final int FLIPPER_FLUPED = 3;//Forklift
+	public static final int CUBE_INTAKE_GRIPPER_EXTENDED_PCM = 4;
+	public static final int CUBE_INTAKE_GRIPPER_RETRACTED_PCM = 5;
+	public static final int CUBE_INATKE_PIVOT_PISTON_EXTEND = 6;
+	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 7;
+	
+	//public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
+	//public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
+	public static final int FLIPPY_FLOOPED = 3;
+	public static final int FLIPPER_FLUPED = 2;//Forklift
 	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
 	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
 	
@@ -105,8 +108,8 @@ public class RobotMap {
 	public static final int LIFT_BRAKE_DISENGAGE_PCM = 2;
 	public static final int LIFT_HIGH_GEAR_PCM = 4;
 	public static final int LIFT_LOW_GEAR_PCM = 5;
-	public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
-	public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
+	//public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
+	//public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
 	
 	
 
@@ -174,15 +177,15 @@ public class RobotMap {
 	 *                         DRIVETRAIN PARAMETERS                         *
 	 *************************************************************************/
 	// TODO check if the reverse values match the physical robot
-	public static final boolean DT_REVERSE_LEFT1 = false;
-	public static final boolean DT_REVERSE_LEFT2 = false;
-	public static final boolean DT_REVERSE_RIGHT1 = true;
-	public static final boolean DT_REVERSE_RIGHT2 = true;
+	public static final boolean DT_REVERSE_LEFT1 = false; //false
+	public static final boolean DT_REVERSE_LEFT2 = false; //false
+	public static final boolean DT_REVERSE_RIGHT1 = true; //true
+	public static final boolean DT_REVERSE_RIGHT2 = true; //true
 	
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 	// TODO find ratio
 	private static final double DRIVE_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
-	private static final double DRIVE_WHEEL_DIAMETER = 6.0;
+	private static final double DRIVE_WHEEL_DIAMETER = 6.0;   //6.0;
 	public static final int DRIVE_ENCODER_PULSE_PER_ROT = (int) (DRIVE_PULSE_PER_ROTATION * DRIVE_GEAR_RATIO); // pulse
 																												// per
 																												// rotation
@@ -220,7 +223,7 @@ public class RobotMap {
 	public static final boolean INTAKE_LEFT_REVERSE = true;
 	public static final boolean INTAKE_RIGHT_REVERSE = true;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.9; //was 2.2\\
-	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.9;
+	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.8;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
 	public static final double CUBE_INTAKE_MAX_OUTAKE = -0.8;
 	public static final double CUBE_INTAKE_MAX_INTAKE = 1.0;
@@ -257,9 +260,11 @@ public class RobotMap {
 	public static final double LIFT_POT_VOLTAGE_0 = 0.84; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
-	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.46; //90 degrees
+	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
+	//public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 0.7; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
 	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.7; //0 degrees
+	//public static final double LIFT_POT_VOLTAGE_0_PBOT = 4.46; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
 	
@@ -307,8 +312,8 @@ public class RobotMap {
 	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.0001412646174233;
 	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.0074778888124088;
 
-	public static final double ROTATE_POSITION_P = 0.024;
-	public static final double ROTATE_POSITION_I = 0.027;
+	public static final double ROTATE_POSITION_P = 0.055;
+	public static final double ROTATE_POSITION_I = 0.001;
 	public static final double ROTATE_POSITION_D = 0.000000067;
 	
 	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp
@@ -357,10 +362,17 @@ public class RobotMap {
 	public static final int I2C_ADDRESS = 10;
 	
 	/******************************************************************
+	 *                        Kevin PARAMETERS                        *
+	 ******************************************************************/
+	public static final boolean KEVIN_IS_DA_BOMB = true;
+	public static final boolean GUYANA_HAS_SUNK = false; //debatable
+
+	/******************************************************************
 	 *                        Aiden Parameters                         *
 	 ******************************************************************/
 	
-	public static final String DID_AIDEN_PUSH_IT = "only if liam said he could"; //so false
+	public static final String DID_AIDEN_PUSH_IT = "only if Liam said he could"; //so false
+	public static final boolean DID_AIDEN_WRITE_A_PATH = false;
 	
 	
 	

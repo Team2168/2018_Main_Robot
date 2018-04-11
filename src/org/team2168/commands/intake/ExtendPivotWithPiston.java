@@ -1,17 +1,17 @@
-package org.team2168.commands.guidingArm;
+package org.team2168.commands.intake;
 
 import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Extends the 
+ *
  */
-public class CloseDownGuidingArm extends Command {
+public class ExtendPivotWithPiston extends Command {
 
-    public CloseDownGuidingArm() {
+    public ExtendPivotWithPiston() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.climbGuideArm);
+        requires(Robot.intakePivotPiston);
     }
 
     // Called just before this Command runs the first time
@@ -20,13 +20,13 @@ public class CloseDownGuidingArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climbGuideArm.retractArm();
+    	Robot.intakePivotPiston.extendPivotPiston();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.climbGuideArm.isArmRetracted();
-    }
+        return Robot.intakePivotPiston.getPistonStatus();
+        }
 
     // Called once after isFinished returns true
     protected void end() {

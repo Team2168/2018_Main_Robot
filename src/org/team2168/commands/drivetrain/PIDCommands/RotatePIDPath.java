@@ -13,6 +13,7 @@ public class RotatePIDPath extends Command {
 	
 	private double[] setPointLeft;
     private double[] setPointRight;
+    private double[] setPointHeading;
     
     OneDimensionalMotionProfiling motion;
 	
@@ -23,6 +24,7 @@ public class RotatePIDPath extends Command {
     double lastRotateOutput;
     boolean direction = false;
     int directionValue = 1;
+    private boolean headingByArray = false;
     
     public RotatePIDPath(double distance )
     {
@@ -32,45 +34,16 @@ public class RotatePIDPath extends Command {
     public RotatePIDPath(double distance, boolean reverseDirection )
     {
     	requires(Robot.drivetrain);
-    	motion = new OneDimensionalMotionProfiling(distance);
+    	motion = new OneDimensionalMotionProfiling(distance,12.0,8.0,30.0);
+    	
   	   this.setPointLeft =  motion.getVelArray();
   	   this.setPointRight = motion.getVelArray();
+  	   this.setPointHeading = motion.getPosArray();
   	   this.direction = reverseDirection;
+  	   this.headingByArray = true;
     }
    
-    public RotatePIDPath(double[] setPointLeft, double[] setPointRight){
- 	   requires(Robot.drivetrain);
- 	 
- 	   this.setPointLeft =setPointLeft;
- 	   this.setPointRight = setPointRight;
- 	   
- 	   direction = false;
- 	   
- 	   System.out.println("SetPointLength: " + setPointLeft.length);
-    } 
     
-    public RotatePIDPath(double[] setPointLeft, double[] setPointRight, double ff_gain){
-  	   requires(Robot.drivetrain);
-  	   this.setPointLeft = setPointLeft;
-  	   this.setPointRight = setPointRight;
-  	   ff_term = ff_gain;
-  	   
-  	   direction = false;
-  	   
-  	   
-     } 
-    
-   public RotatePIDPath(double[] setPointLeft, double[] setPointRight, boolean reverseDirection){
-	   requires(Robot.drivetrain);
-	   this.setPointLeft = setPointLeft;
-	   this.setPointRight = setPointRight;
-	   SmartDashboard.putNumber("FF_term", 0);
-	   ff_term = SmartDashboard.getNumber("FF_term", 0);
-	   
-	   direction = reverseDirection;
-	   
-	   
-   }
 
     // Called just before this Command runs the first time
 	protected void initialize() {
@@ -81,6 +54,8 @@ public class RotatePIDPath extends Command {
 		Robot.drivetrain.rightSpeedController.reset();
 		Robot.drivetrain.rightSpeedController.Enable();
 		Robot.drivetrain.rightSpeedController.setSetPoint(setPointRight);
+		if(this.headingByArray)
+			Robot.drivetrain.rotateDriveStraightController.setSetPoint(setPointHeading);
     
 		Robot.drivetrain.rotateDriveStraightController.reset();
 		counter = 0;
@@ -110,7 +85,7 @@ public class RotatePIDPath extends Command {
     
 	protected void execute() 
 	{
-    	//Robot.drivetrain.tankDrive(Robot.drivetrain.leftSpeedController.getControlOutput(),
+		//Robot.drivetrain.tankDrive(Robot.drivetrain.leftSpeedController.getControlOutput(),
     	//Robot.drivetrain.rightSpeedController.getControlOutput());
         
 		double currTime = Timer.getFPGATimestamp(); 
@@ -125,7 +100,7 @@ public class RotatePIDPath extends Command {
 		if(counter<setPointLeft.length)
 		{
 			double speedLeft = (ff_term*directionValue*setPointLeft[counter])/(Robot.pdp.getBatteryVoltage());
-			double speedRight = (ff_term*-directionValue*setPointRight[counter])/(Robot.pdp.getBatteryVoltage());
+			double speedRight = (ff_term*directionValue*setPointRight[counter])/(Robot.pdp.getBatteryVoltage());
 			if (Math.abs(speedLeft)<0.12 && counter!=0)
 				speedLeft = directionValue*0.12;
 			
@@ -137,11 +112,13 @@ public class RotatePIDPath extends Command {
 			
 			SmartDashboard.putNumber("DriveArrayLeftSpeed", speedLeft);
 			SmartDashboard.putNumber("DriveArrayRightSpeed", speedRight);
+			SmartDashboard.putNumber("DriveArrayHeading", Robot.drivetrain.rotateDriveStraightController.getSetPoint());
 		}
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    
     
 	protected boolean isFinished() {
         return (!Robot.drivetrain.leftSpeedController.isSetPointByArray() &&  Robot.drivetrain.leftSpeedController.isFinished()) && (!Robot.drivetrain.rightSpeedController.isSetPointByArray() &&  Robot.drivetrain.rightSpeedController.isFinished());
