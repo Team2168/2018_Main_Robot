@@ -132,10 +132,9 @@ public class QuinticTrajectory
 //			{14.5, 23.5, Math.PI/2}, //Right switch Path
 //			{17, 26, 0+0.0001},
 //			{22, 22, 0}	
-			
-			{1, 15.5, 0}, //Right switch Path
-			{2, 15.5, 0},
-			{9.5, 19.5, 0} 
+			{19, 20.5, Math.PI/(4/3)},
+			{22.1, 26.5, -Math.PI/3}
+//			{20, 25, Math.PI/6}
 		
 			
 			

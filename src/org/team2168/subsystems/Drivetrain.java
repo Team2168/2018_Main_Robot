@@ -373,7 +373,7 @@ public class Drivetrain extends Subsystem {
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		if(Robot.isAutoMode())
 		{	
-			if(Robot.lift.getPotPos() > 45  ) {
+			if(Robot.lift.getPotPos() > 50  ) {
 				leftSpeed = leftSpeed * 0.5;
 				rightSpeed = rightSpeed * 0.5;
 				}

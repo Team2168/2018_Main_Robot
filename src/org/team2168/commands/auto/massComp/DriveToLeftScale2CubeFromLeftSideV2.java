@@ -10,8 +10,10 @@ import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXUntilCube;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
+import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
+import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.RotatePivotUpAutomatically;
@@ -46,21 +48,25 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addSequential(new DriveIntakeWheelsWithConstant(-1.0), 0.4);
     	
  
-    	addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));
-    	addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));
+    	//addSequential(new RotateXDistancePIDZZZ(140,0.6,0.2,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(152,0.6,0.2,0.5,true));
 
     	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
-    	
-    	addSequential(new DrivePIDPath(7.0));
-    	addSequential(new IntakeUntilCube());
+    	addParallel(new OpenIntake());
+    	addSequential(new DrivePIDPath(7.0));	
+    	addSequential(new IntakeUntilCube(), 0.7);
     	
     	
     	
     	//score second cube on scale
+    	addParallel(new CloseIntake());
+    	addParallel(new OperationKeepCube());
     	addSequential(new DrivePIDPath(4.7,true)); //drive back
+    	addSequential(new DriveLiftPIDZZZ(50.0, 0.9, 0.1,1.0,true));
+    	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
     	addSequential(new DriveLiftPIDZZZ(75.0, 0.9, 0.1,1.0,true));
-    	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
-    	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
+    	addSequential(new DriveLiftPIDZZZ(75.0, 0.9, 0.1,1.0,true));
     	addSequential(new DriveIntakeWheelsWithConstant(-0.7), 0.4 );
     	
    
