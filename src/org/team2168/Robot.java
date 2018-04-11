@@ -7,11 +7,14 @@ import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.massComp.DriveStraight;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
-import org.team2168.commands.auto.selector.TestAutoCommandGroupA;
+
 import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
+
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
+
 import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
+
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
@@ -184,8 +187,7 @@ public class Robot extends TimedRobot
 			
 	};
 
-		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
-		quinticPath.calculate();
+		QuinticTrajectory quinticPath= new QuinticTrajectory("path1", waypointPath);
 		
 		this.leftVelPathQuintic = quinticPath.getLeftVel();
 		this.rightVelPathQuintic = quinticPath.getRightVel();
@@ -201,9 +203,8 @@ public class Robot extends TimedRobot
 
 	};
 		
-		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2, 3.0, 20.0);
-		quinticPath2.calculate();
-	
+
+		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2",waypointPath2);
 		this.leftVelPathQuintic2 = quinticPath2.getLeftVel();
 		this.rightVelPathQuintic2 = quinticPath2.getRightVel();
 		this.headingQuintic2 = quinticPath2.getHeadingDeg();
@@ -218,8 +219,8 @@ public class Robot extends TimedRobot
 	};
 
 
-		QuinticTrajectory quinticPath3 = new QuinticTrajectory(waypointPath3);
-		quinticPath3.calculate();
+		QuinticTrajectory quinticPath3 = new QuinticTrajectory("path3",waypointPath3);
+		
 		this.leftVelPathQuintic3 = quinticPath3.getLeftVel();
 		this.rightVelPathQuintic3 = quinticPath3.getRightVel();
 		this.headingQuintic3 = quinticPath3.getHeadingDeg();
@@ -236,8 +237,8 @@ public class Robot extends TimedRobot
 		};
 
 
-		QuinticTrajectory quinticPath4 = new QuinticTrajectory(waypointPath4);
-		quinticPath4.calculate();
+		QuinticTrajectory quinticPath4 = new QuinticTrajectory("path4",waypointPath4);
+		
 		this.leftVelPathQuintic4 = quinticPath4.getLeftVel();
 		this.rightVelPathQuintic4 = quinticPath4.getRightVel();
 		this.headingQuintic4 = quinticPath4.getHeadingDeg();
@@ -266,12 +267,8 @@ public class Robot extends TimedRobot
 			
 		};
 		
-		
-		
 
-		
-		QuinticTrajectory quinticPath5 = new QuinticTrajectory(waypointPath5);
-		quinticPath5.calculate();
+		QuinticTrajectory quinticPath5 = new QuinticTrajectory("path5",waypointPath5);
 		this.leftVelPathQuintic5 = quinticPath5.getLeftVel();
 		this.rightVelPathQuintic5 = quinticPath5.getRightVel();
 		this.headingQuintic5 = quinticPath5.getHeadingDeg();
@@ -619,15 +616,15 @@ public class Robot extends TimedRobot
 		 */
 		public void autoSelectInit() {
 			autoChooser = new SendableChooser<Command>();
-			autoChooser.addObject("Do Nothing", new DriveStraight(8.0));
-	        autoChooser.addObject("Center Auto 1 Cube", new AutoStartCenter1Cube());
+			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
+			autoChooser.addObject("Do Nothing", new DoNothing());
+	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter1Cube());	        
 	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
-			autoChooser.addDefault("Drive Straight Only", new DriveStraight());
 			autoChooser.addObject("Left Auto 2 Cube Super Dooper", new AutoStartLeft2CubeSuperDooperPooper());
 			autoChooser.addObject("RightScaleTest", new DriveToRightScaleFromLeft());
-			
-			
+
+
 		}
 
 		/**

@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class ConsolePrinter {
 	private static ConsolePrinter instance = null;
 	private static java.util.Timer executor;
-	private static long period = 100; // ms
+	public static long period = 100; // ms
 	private static boolean started = false;
 	private static PrintWriter log;
 	private static HashMap<String, Loggable> data;
@@ -249,7 +249,7 @@ public class ConsolePrinter {
 	 * Writes current values for all data elements to the log file for data elements
 	 * that have file logging enabled.
 	 */
-	private static void dataToFile() {
+	public static void dataToFile() {
 		Iterator<String> i;
 		String key;
 		String output = "";
@@ -275,7 +275,7 @@ public class ConsolePrinter {
 	 * Sends current values for all data elements to the dashboard for data elements
 	 * that have dashboard enabled.
 	 */
-	private static void dataToDashboard() {
+	public static void dataToDashboard() {
 		Iterator<String> i = dashboardKeys.iterator();
 		String key;
 

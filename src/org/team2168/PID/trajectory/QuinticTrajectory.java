@@ -1,7 +1,24 @@
 package org.team2168.PID.trajectory;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.TimeZone;
+import java.util.TimerTask;
 
+import org.team2168.RobotMap;
 import org.team2168.PID.pathplanner.FalconLinePlot;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
+import org.team2168.utils.consoleprinter.Loggable;
 
 
 /**
@@ -53,7 +70,13 @@ public class QuinticTrajectory
 	public double[][] rightJerk;
 	public double[][] leftJerk;
 	public double[] heading;
+
+	private static PrintWriter log;
+
+	private static String directory = "/home/lvuser/Path/";
+
 	public boolean reverse = false;
+
 	
 	double totalSplineLength = 0;
 
@@ -61,6 +84,7 @@ public class QuinticTrajectory
 	{
 		
 		System.out.println("Hello World");
+		System.out.flush();
 		
 		
 //		// straight path		
@@ -95,7 +119,6 @@ public class QuinticTrajectory
 //			{25, 8, -Math.PI/2+0.0001},
 //			{27,5, 0}
 	
-			
 //			// Unshifted LeftStart->RightScale
 //			{10, 24, 0},
 //			{24, 24, 0},
@@ -125,9 +148,9 @@ public class QuinticTrajectory
 //			{20, 22, -Math.PI/2+0.0001},
 //			{20, 12, -Math.PI/2+0.0001},
 //			{24.5, 8.5, 0}
+
 			
 		};
-		
 		double[][] waypointPath2 = new double[][]{
 //			{14.5, 23.5, Math.PI/2}, //Right switch Path
 //			{17, 26, 0+0.0001},
@@ -183,21 +206,39 @@ public class QuinticTrajectory
 //		};
 		
 		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
-		quinticPath.calculate();
+//		quinticPath.calculate();
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-		QuinticTrajectory quinticPath2= new QuinticTrajectory(waypointPath2);
-		quinticPath2.calculate();
+		QuinticTrajectory quinticPath2= new QuinticTrajectory("path3.txt", waypointPath2);
 		
-		QuinticTrajectory quinticPath3= new QuinticTrajectory(waypointPath3);
-		quinticPath3.calculate();
-		
-		for(int i = 0; i<quinticPath.traj.getNumSegments(); i++)
-			System.out.println(quinticPath.getHeadingDeg()[i]);
+
 
 		
 		
 		//Lets create a bank image
+
+//		FalconLinePlot fig3 = new FalconLinePlot(waypointPath, null, Color.black);
+//		fig3.yGridOn();
+//		fig3.xGridOn();
+//		fig3.setYLabel("Y (feet)");
+//		fig3.setXLabel("X (feet)");
+//		fig3.setTitle("Quintic Path (Robot Complete Path)");
+//		//fig3.setTitle("Top Down View of FRC Field (30ft x 27ft) \n shows global position of robot path, along with left and right wheel trajectories");
+//
+//
+////		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
+//		double fieldWidth = 32;
+//		fig3.setXTic(0, 40, 1);
+//		fig3.setYTic(0, fieldWidth, 1);
+//		fig3.addData(quinticPath.rightPath, Color.magenta);
+//		fig3.addData(quinticPath.leftPath, Color.blue);
+//
+//		//fig3.addData(quinticPath2.leftPath, Color.blue);
+//		//fig3.addData(quinticPath2.rightPath, Color.magenta);
+//		//fig3.addData(waypointPath2, null, Color.black);
+// 
+//		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
+
 		FalconLinePlot fig3 = new FalconLinePlot(waypointPath, null, Color.black);
 		fig3.yGridOn();
 		fig3.xGridOn();
@@ -223,6 +264,7 @@ public class QuinticTrajectory
 //		fig3.addData(waypointPath3, null, Color.black);
 		
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
+
 		
 		//outline field perimeter
 		double[][] edge = {{1,16+27/2.0-2-4.81/12},{1,16-27/2.0+2+4.81/12}};
@@ -302,6 +344,103 @@ public class QuinticTrajectory
 	    config.max_vel = 8.0;
 	}
 	
+	public QuinticTrajectory(String filename, double[][] path)
+	{
+		this(path);
+		checkFileExist(filename);
+		
+	}
+	
+	private void makeFile(String Filename) {
+		try {
+			File file = new File(directory); ///home/lvuser/Paths
+			if (!file.exists()) {
+				if (file.mkdir()) {
+					System.out.println("Path directory is created!");
+				} else {
+					System.out.println("Failed to create path directory!");
+				}
+			}
+			log = new PrintWriter(directory + Filename);
+			log.println(this.traj.getNumSegments());
+			for(int i = 0; i<this.traj.getNumSegments(); i++)
+				log.println(this.leftVel[i] +"," + this.rightVel[i] +"," + this.heading[i]);
+			log.flush();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	private void checkFileExist(String filename) 
+	{
+		String line = "";
+		
+		try 
+		{
+				File file = new File(directory + filename); ///home/lvuser/Paths
+				if (!file.exists()) 
+				{
+					calculate();
+					makeFile(filename);
+					System.out.println("Printed File! " + directory+filename);
+				}
+				else
+				{
+					boolean isFirstLine = true;
+					int filecounter = 0;
+					FileReader fr = new FileReader(directory + filename);
+					String[] values;	
+					BufferedReader br = new BufferedReader(fr);
+					
+					while((line = br.readLine()) != null)
+					{
+						//System.out.println(line);
+						values = line.split(",");
+					
+					if(isFirstLine) 
+					{
+						this.leftVel = new double[Integer.parseInt(values[0])];
+						this.rightVel = new double[Integer.parseInt(values[0])];
+						this.heading = new double[Integer.parseInt(values[0])];
+						isFirstLine = false;
+					}
+					else 
+					{
+						this.leftVel[filecounter] = Double.parseDouble(values[0]) ;
+						this.rightVel[filecounter] =  Double.parseDouble(values[1]);
+						this.heading[filecounter] = Double.parseDouble(values[2]);
+						
+						filecounter++;
+					}	
+				}
+					
+					br.close();
+					System.out.println("Trajectory Read from file " +directory+filename);
+//					System.out.println(this.leftVel.length);
+//					for(int i=0; i<this.leftVel.length; i++)
+//					{
+//						System.out.println(this.leftVel[i] +"," + this.rightVel[i] +"," + this.getHeadingDeg()[i]);
+//						System.out.flush();
+//					}
+				
+				}
+			}		
+			catch (FileNotFoundException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+				
+			}
+	}
+	
+
 	public QuinticTrajectory(double[][] path, double maxVel, double maxAccel)
 	{
 		
@@ -309,6 +448,7 @@ public class QuinticTrajectory
 	    config.max_vel = maxVel;
 	    config.max_vel = maxAccel;
 	}
+
 	
 	public void calculate()
 	{
@@ -351,13 +491,13 @@ public class QuinticTrajectory
 		
 	}
 	
-	public static void print(double[] path)
-	{
-		System.out.println("X: \t Y:");
-
-		for(double u: path)
-			System.out.println(u);
-	}
+//	public static void print(double[] path)
+//	{
+//		System.out.println("X: \t Y:");
+//
+//		for(double u: path)
+//			System.out.println(u);
+//	}
 
 
 
@@ -365,13 +505,13 @@ public class QuinticTrajectory
 	 * Prints Cartesian Coordinates to the System Output as Column Vectors in the Form X	Y
 	 * @param path
 	 */
-	public static void print(double[][] path)
-	{
-		System.out.println("X: \t Y:");
-
-		for(double[] u: path)
-			System.out.println(u[0]+ "\t" +u[1]);
-	}
+//	public static void print(double[][] path)
+//	{
+//		System.out.println("X: \t Y:");
+//
+//		for(double[] u: path)
+//			System.out.println(u[0]+ "\t" +u[1]);
+//	}
 
 	/**
 	 * Performs a deep copy of a 2 Dimensional Array looping thorough each element in the 2D array
