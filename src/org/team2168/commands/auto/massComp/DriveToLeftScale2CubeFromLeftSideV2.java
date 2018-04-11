@@ -64,7 +64,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	//score second cube on scale
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
-    	addSequential(new DrivePIDPath(4.3,true)); //drive back
+    	addSequential(new DrivePIDPath(4.0,true)); //drive back
     	addParallel(new ExtendPivotWithPiston());
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.9, 0.1,1.0,true));
     	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
