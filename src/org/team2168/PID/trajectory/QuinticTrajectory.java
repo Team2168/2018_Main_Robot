@@ -73,8 +73,10 @@ public class QuinticTrajectory
 
 	private static PrintWriter log;
 
-	private static String directory = "/home/lvuser/Path/";
+	//private static String directory = "/home/lvuser/Path/";
+	private static String directory = "Path/";
 
+	
 	public boolean reverse = false;
 
 	
@@ -134,8 +136,8 @@ public class QuinticTrajectory
 //			{21, 11.5, 0}
 			
 			{2, 26.5, 0}, //crazy path
-			{20.3, 26.5, 0},
-			{22.1, 26.5, -Math.PI/3}	
+			{12.3, 26.5, 0},
+			{17.1, 25.5, -0.349}
 			//{27, 20, 0}	
 			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
@@ -155,8 +157,8 @@ public class QuinticTrajectory
 //			{14.5, 23.5, Math.PI/2}, //Right switch Path
 //			{17, 26, 0+0.0001},
 //			{22, 22, 0}	
-			{19, 20.5, Math.PI/(4/3)},
-			{22.1, 26.5, -Math.PI/3}
+			{19, 20.5, 0},
+			{22.1, 26.5, 0}
 //			{20, 25, Math.PI/6}
 		
 			
@@ -171,9 +173,8 @@ public class QuinticTrajectory
 		
 		{2, 25.5, 0},
 		{16, 25.5, 0},
-		{19, 21.5, -Math.PI/2+0.0001},
-		{19, 13.5, -Math.PI/2+0.0001},
-		{21, 11.5, 0}
+		{19, 21.5, -Math.PI/4+0.0001},
+
 	};
 		
 //		//Square Path
@@ -204,12 +205,12 @@ public class QuinticTrajectory
 //				
 //		};
 		
-		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
-//		quinticPath.calculate();
+		QuinticTrajectory quinticPath= new QuinticTrajectory("path1.txt", waypointPath);
+		quinticPath.calculate();
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-		QuinticTrajectory quinticPath2= new QuinticTrajectory("path3.txt", waypointPath2);
-		
+		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
+		quinticPath2.calculate();
 
 
 		
@@ -254,9 +255,9 @@ public class QuinticTrajectory
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
 
-		fig3.addData(quinticPath2.leftPath, Color.blue);
-		fig3.addData(quinticPath2.rightPath, Color.magenta);
-		fig3.addData(waypointPath2, null, Color.black);
+//		fig3.addData(quinticPath2.leftPath, Color.blue);
+//		fig3.addData(quinticPath2.rightPath, Color.magenta);
+//		fig3.addData(waypointPath2, null, Color.black);
  
 //		fig3.addData(quinticPath3.leftPath, Color.blue);
 //		fig3.addData(quinticPath3.rightPath, Color.magenta);
@@ -304,14 +305,14 @@ public class QuinticTrajectory
 		
 		//Velocity
 //		
-//				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-//				fig4.yGridOn();
-//				fig4.xGridOn();
-//				fig4.setYLabel("Velocity (ft/sec)");
-//				fig4.setXLabel("time (seconds)");
-//				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-//				fig4.addData(quinticPath.rightVelocity, Color.magenta);
-//				fig4.addData(quinticPath.leftVelocity, Color.cyan);
+				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+				fig4.yGridOn();
+				fig4.xGridOn();
+				fig4.setYLabel("Velocity (ft/sec)");
+				fig4.setXLabel("time (seconds)");
+				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+				fig4.addData(quinticPath.rightVelocity, Color.magenta);
+				fig4.addData(quinticPath.leftVelocity, Color.cyan);
 //				
 //				
 //				//Velocity
@@ -338,9 +339,9 @@ public class QuinticTrajectory
 		
 		config = new TrajectoryGenerator.Config();
 	    config.dt = .02;
-	    config.max_acc = 4.0;
+	    config.max_acc = 8.0;
 	    config.max_jerk = 30.0;
-	    config.max_vel = 8.0;
+	    config.max_vel = 10.0;
 	}
 	
 	public QuinticTrajectory(String filename, double[][] path)

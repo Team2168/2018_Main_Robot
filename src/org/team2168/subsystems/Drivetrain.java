@@ -374,8 +374,8 @@ public class Drivetrain extends Subsystem {
 		if(Robot.isAutoMode())
 		{	
 			if(Robot.lift.getPotPos() > 50  ) {
-				leftSpeed = leftSpeed * 0.5;
-				rightSpeed = rightSpeed * 0.5;
+				leftSpeed = leftSpeed;
+				rightSpeed = rightSpeed;
 				}
 		}
 		else

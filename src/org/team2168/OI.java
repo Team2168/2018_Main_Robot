@@ -1,5 +1,6 @@
 package org.team2168;
 
+import org.team2168.PID.trajectory.OneDimensionalRotation;
 import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSideV2;
 import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
@@ -195,7 +196,7 @@ public class OI {
 		//operatorJoystick.ButtonB().whenPressed(new DisableRachet());
 		
 		////////////////For testing purposes//////////////////////
-		//testJoystick.ButtonRightTrigger().whenPressed(new RobotRunPrep());
+		testJoystick.ButtonRightTrigger().whenPressed(new RobotPrep());
 		//testJoystick.ButtonLeftTrigger().whenPressed(new DriveToLeftScale2CubeFromLeftSideV2());
 		
 		
@@ -230,8 +231,9 @@ public class OI {
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
 		//pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		//pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
-		pidTestJoystick.ButtonA().whenPressed(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
-		pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(142,0.6,0.2,0.5,true));
+		pidTestJoystick.ButtonA().whenPressed(new DrivePIDPathQuintic(0, 90, 2500, 3000, 30000));//rotate A to B
+		pidTestJoystick.ButtonB().whenPressed(new DrivePIDPathQuintic(90,0, 2500, 3000, 30000));//rotate A to B
+		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(142,0.6,0.2,0.5,true));
 		
 		
 		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
