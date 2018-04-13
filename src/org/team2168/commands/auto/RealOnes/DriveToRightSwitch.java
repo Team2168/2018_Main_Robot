@@ -1,4 +1,4 @@
-package org.team2168.commands.auto.massComp;
+package org.team2168.commands.auto.RealOnes;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
@@ -29,7 +29,10 @@ public class DriveToRightSwitch extends CommandGroup {
 
     public DriveToRightSwitch() {
     	//this is da monnay for the the intake to go down
+    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addSequential(new RobotPrep());
+    	addParallel(new OperationKeepCube());
+    	addSequential(new Sleep(), 0.4);
     	//move lift up and drive path to right switch
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));
@@ -39,11 +42,11 @@ public class DriveToRightSwitch extends CommandGroup {
    	 	
     	//second cube
    	    addSequential(new DrivePIDPath(backupSecondCube,true)); //drive back 3
-   	    addParallel(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));	 	
+   	    addParallel(new DriveLiftPIDZZZ(0.0, 0.7, 0.1,1.0,true));	 	
    	 	addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
    	    addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
    	    
-   	    addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.1,1.0,true));
+   	    addSequential(new DriveLiftPIDZZZ(0.0, 0.7, 0.1,1.0,true));
 	 	addParallel(new IntakeUntilCube()); 
    	    addSequential(new DrivePIDPath(driveToCube));  //6
    	 	addParallel(new OperationKeepCube());

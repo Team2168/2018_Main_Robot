@@ -217,8 +217,7 @@ public class DrivePIDPathQuintic extends Command {
 	   	   this.setPointHeading = temp;
 	   }
  	   
-
- 	  SmartDashboard.putNumber("FF_term", 2.1);
+ 	  this.ff_term = 1.1;
  	   System.out.println("SetPointLength: " + setPointLeft.length);
 	
 	}

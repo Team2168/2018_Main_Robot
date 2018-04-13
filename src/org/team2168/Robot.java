@@ -4,10 +4,9 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
-import org.team2168.commands.auto.massComp.DriveStraight;
-import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
-import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
-
+import org.team2168.commands.auto.RealOnes.DriveStraight;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
 
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;

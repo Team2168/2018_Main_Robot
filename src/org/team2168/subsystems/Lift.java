@@ -267,7 +267,7 @@ public class Lift extends Subsystem {
 //					Robot.intakePivotPiston.retracPivotPiston();	
 //					}
 			if(!Robot.isAutoMode())
-			if(Robot.lift.getPotPos() > 79 && ( speed > 0)) {
+			if(Robot.lift.getPotPos() > 15 && ( speed > 0)) {
 				Robot.intakePivotPiston.retracPivotPiston();	
 				}
 				
@@ -296,7 +296,7 @@ public class Lift extends Subsystem {
 						Robot.intakePivotPiston.retracPivotPiston();	
 						}
 				if(!Robot.isAutoMode())
-				if(Robot.lift.getPotPos() > 79 && ( speed > 0)) {
+				if(Robot.lift.getPotPos() > 15 && ( speed > 0)) {
 					Robot.intakePivotPiston.retracPivotPiston();	
 					}
 				disableBrake();

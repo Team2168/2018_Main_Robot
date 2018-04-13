@@ -1,13 +1,13 @@
 package org.team2168;
 
 import org.team2168.PID.trajectory.OneDimensionalRotation;
-import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSideV2;
-import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
-import org.team2168.commands.auto.massComp.DriveToLeftSwitch;
-import org.team2168.commands.auto.massComp.DriveToLeftSwitchFromLeftSide2;
-import org.team2168.commands.auto.massComp.DriveToRightScaleAndRightSwitchFromLeftSide;
-import org.team2168.commands.auto.massComp.DriveToRightSwitch;
-import org.team2168.commands.auto.massComp.RobotRunPrep;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
+import org.team2168.commands.auto.RealOnes.DriveToLeftSwitch;
+import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;
+import org.team2168.commands.auto.RealOnes.DriveToRightScaleAndRightSwitchFromLeftSide;
+import org.team2168.commands.auto.RealOnes.DriveToRightSwitch;
+import org.team2168.commands.auto.RealOnes.RobotRunPrep;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
@@ -156,7 +156,7 @@ public class OI {
 //		operatorJoystick.ButtonLeftTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 //	    operatorJoystick.ButtonLeftTrigger().whenPressed(new CloseIntake()); //open for comp bot
 //		operatorJoystick.ButtonLeftTrigger().whenReleased(new CloseIntake());
-//		operatorJoystick.ButtonLeftTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
+//		operatorJoystick oooooo.ButtonLeftTrigger().whenReleased(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT_NO_CUBE));
 //		operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		
 		
@@ -168,7 +168,7 @@ public class OI {
 		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
 		
 		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
-		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE*0.5));
+		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.35));
 		
 
 
@@ -179,7 +179,7 @@ public class OI {
 		
 		////////////////Prepare to climb/////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
-		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
+		  //operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
 		////////////////Lift Pid commands////////////////////////////////////////////////////
 		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));

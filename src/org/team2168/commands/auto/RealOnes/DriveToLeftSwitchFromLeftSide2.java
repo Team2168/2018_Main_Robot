@@ -1,4 +1,4 @@
-package org.team2168.commands.auto.massComp;
+package org.team2168.commands.auto.RealOnes;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
@@ -26,9 +26,10 @@ public class DriveToLeftSwitchFromLeftSide2 extends CommandGroup {
     	
     	addSequential(new RobotPrep());
     	addParallel(new OperationKeepCube());
+    	addParallel(new DriveLiftPIDZZZ(50, 0.7, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic, Robot.rightVelPathQuintic, Robot.headingQuintic));
     	
-    	
+    
     	
     	
     	

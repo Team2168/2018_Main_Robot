@@ -1,5 +1,5 @@
 
-package org.team2168.commands.auto.massComp;
+package org.team2168.commands.auto.RealOnes;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
@@ -39,30 +39,30 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	
     	
-    	addParallel(new DriveLiftPIDZZZ(75.0, 0.5, 0.1,1.0,true));
+    	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
     	
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.5), 0.3);
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.275), 0.3);
     	
     	
     	//drive lift down and get second cube
-    	addParallel(new DriveLiftPIDZZZ(45, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addSequential(new DrivePIDPath(2.2,true)); //drive back
+    	addSequential(new DriveLiftPIDZZZ(45, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addParallel(new  DrivePIDPathQuintic(20, 170, 2500, 3000, 30000));//rotate A to B
-    	addSequential(new DriveLiftPIDZZZ(1.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
+    	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addSequential(new RotateXDistancePIDZZZ(170,0.5,0.15,0.1,true),0.2);
     	
     	//get 2nd cube
     	addSequential(new RetractPivotWithPiston());
     	addParallel(new OpenIntake());
     	addParallel(new IntakeUntilCube(), 0.7);
-    	addSequential(new DrivePIDPath(3.0));
+    	addSequential(new DrivePIDPath(3.5));
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
     	
     	
     	//Score second cube
-    	addParallel(new ExtendPivotWithPiston());
+    	//addParallel(new ExtendPivotWithPiston());
     	addSequential(new DrivePIDPath(2.5,true)); //drive back
     	
     	addSequential(new  DrivePIDPathQuintic(170, 20, 2500, 3000, 30000));//rotate A to B
@@ -79,6 +79,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
 
 //    	
+
     	//get 3rd cube
     	addSequential(new RetractPivotWithPiston());
     	addParallel(new OpenIntake());
@@ -90,9 +91,10 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	
     	//Score second cube
-    	addParallel(new ExtendPivotWithPiston());
+    	//addParallel(new ExtendPivotWithPiston());
     	addSequential(new DrivePIDPath(3.5,true)); //drive back
     	
    
     }
 }
+ 																									

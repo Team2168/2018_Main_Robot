@@ -371,19 +371,20 @@ public class Drivetrain extends Subsystem {
 	 *            forward, 0 is stationary
 	 */
 	public void tankDrive(double leftSpeed, double rightSpeed) {
-		if(Robot.isAutoMode())
+		if(!Robot.isAutoMode())
 		{	
-			if(Robot.lift.getPotPos() > 50  ) {
-				leftSpeed = leftSpeed;
-				rightSpeed = rightSpeed;
-				}
-		}
-		else
-		{
-			if(Robot.lift.getPotPos() > 45  ) {
-			leftSpeed = leftSpeed * 0.3;
-			rightSpeed = rightSpeed * 0.3;
-		}
+//			if(Robot.lift.getPotPos() > 50  ) {
+//				leftSpeed = leftSpeed;
+//				rightSpeed = rightSpeed;
+//				}
+//		}
+//		else
+//		{
+			if(Robot.lift.getPotPos() > 30  ) 
+			{
+				leftSpeed = leftSpeed * 0.3;
+				rightSpeed = rightSpeed * 0.3;
+			}
 		}
 			
 		driveLeft(leftSpeed);
