@@ -165,13 +165,26 @@ public class OI {
 //		operatorJoystick.ButtonRightBumper().whileHeld(new RotatePivotDownAndSpit());
 		operatorJoystick.ButtonRightBumper().whenPressed(new EngageIntakePivotHardStop());
 		operatorJoystick.ButtonRightBumper().whenPressed(new CloseIntake()); //open on comp bot
-		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE));
+		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.45));
 		
 		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.35));
 		
 
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
 		operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
