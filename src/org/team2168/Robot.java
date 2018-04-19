@@ -16,12 +16,14 @@ import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
 
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
+import org.team2168.utils.I2CLights;
 import org.team2168.utils.PowerDistribution;
 
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -58,6 +60,8 @@ public class Robot extends TimedRobot
 	public static IntakePivotPiston intakePivotPiston;
 	//public static Platform platform;
 	public static Pneumatics pneumatics;
+	public static I2C i2c;
+	byte[] toSend = new byte[1];
 	
 	
 
@@ -170,8 +174,7 @@ public class Robot extends TimedRobot
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
 		flipperyFloopyFlupy = FlipperyFloopyFlupy.getInstance();
-
-		
+		i2c = new I2C(I2C.Port.kOnboard, 8);
 		
 //		motion = new OneDimensionalMotionProfiling(15);
 //		for(int i=0; i<motion.getVelArray().length; i++)
@@ -411,6 +414,9 @@ public class Robot extends TimedRobot
 			drivetrain.startGyroCalibrating();
 		
 		drivetrain.calibrateGyro();
+		callArduino();
+		
+		
 	}
 
 	public void disabledPeriodic() 
@@ -418,7 +424,7 @@ public class Robot extends TimedRobot
 
 		//Keep track of Gunstyle Controller Variables
 		
-		
+		callArduino();
 		getControlStyleInt();
 		controlStyle = (int) controlStyleChooser.getSelected();
 		autoPriority = (int) autoPriorityChooser.getSelected();
@@ -465,7 +471,7 @@ public class Robot extends TimedRobot
      */
 	public void teleopInit() 
 	{
-		
+		callArduino();
 	    	autoMode = false;
 	    	
 			matchStarted = true;
@@ -498,6 +504,7 @@ public class Robot extends TimedRobot
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        updateLights();
+	        i2c.write(8, 0);
 	        
 	        	
 	        
@@ -709,6 +716,10 @@ public class Robot extends TimedRobot
     	cubeIntakeWheels.setLights(-1);
 	}
 	
-	
+	private void callArduino() {
+		toSend[0] =  74;
+		i2c.write(8, 'a');
+		System.out.println(i2c.write(8, 'a'));
+	}
 	
 }

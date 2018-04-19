@@ -44,6 +44,18 @@ import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPathPIDZZZ;
 import org.team2168.commands.liftRatchetShifter.DisableRachet;
 import org.team2168.commands.liftRatchetShifter.EnableRachet;
+import org.team2168.commands.lights.AutoWithoutCube;
+import org.team2168.commands.lights.ClimbingPattern;
+import org.team2168.commands.lights.DisabledPattern;
+import org.team2168.commands.lights.DisconnectPattern;
+import org.team2168.commands.lights.ForksDeployedPattern;
+import org.team2168.commands.lights.LiftHigh;
+import org.team2168.commands.lights.LiftLow;
+import org.team2168.commands.lights.LiftMed;
+import org.team2168.commands.lights.SpitPattern;
+import org.team2168.commands.lights.SuckPattern;
+import org.team2168.commands.lights.TeleopWithoutCube;
+import org.team2168.commands.lights.WithCubePattern;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -108,6 +120,10 @@ public class OI {
 		/*************************************************************************
 		 *                         Operator Joystick         		              *
 		  *************************************************************************/
+		
+		
+		
+		
 		
 		
 		pidTestJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
@@ -256,7 +272,20 @@ public class OI {
 		
 		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));
 		
+		//Light Testing//////////////////////////////////////////////////////// 
 		
+				testJoystick.ButtonA().whenPressed(new DisabledPattern());
+				testJoystick.ButtonB().whenPressed(new TeleopWithoutCube());
+				testJoystick.ButtonX().whenPressed(new AutoWithoutCube());
+				testJoystick.ButtonY().whenPressed(new ClimbingPattern());
+				testJoystick.ButtonLeftTrigger().whenPressed(new DisconnectPattern());
+				testJoystick.ButtonLeftBumper().whenPressed(new ForksDeployedPattern());
+				testJoystick.ButtonRightBumper().whenPressed(new LiftHigh());
+				testJoystick.ButtonRightTrigger().whenPressed(new LiftMed());
+				testJoystick.ButtonDownDPad().whenPressed(new LiftLow());
+				testJoystick.ButtonLeftDPad().whenPressed(new SpitPattern());
+				testJoystick.ButtonRightDPad().whenPressed(new SuckPattern());
+				testJoystick.ButtonUpDPad().whenPressed(new WithCubePattern());
 		
 		
 	}
