@@ -13,7 +13,7 @@ import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
 
 import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
-
+import org.team2168.commands.auto.selector.AutoStartRight2Cube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.I2CLights;
@@ -139,6 +139,19 @@ public class Robot extends TimedRobot
     public static double[] leftVelPathQuintic7;
     public static double[] rightVelPathQuintic7;
     public static double[] headingQuintic7;
+    
+    public static double[] leftVelPathQuintic8;
+    public static double[] rightVelPathQuintic8;
+    public static double[] headingQuintic8;
+    
+    public static double[] leftVelPathQuintic9;
+    public static double[] rightVelPathQuintic9;
+    public static double[] headingQuintic9;
+    
+    public static double[] leftVelPathQuintic10;
+    public static double[] rightVelPathQuintic10;
+    public static double[] headingQuintic10;
+    
  
     
     
@@ -321,6 +334,42 @@ public class Robot extends TimedRobot
 		this.leftVelPathQuintic7 = quinticPath7.getLeftVel();
 		this.rightVelPathQuintic7 = quinticPath7.getRightVel();
 		this.headingQuintic7 = quinticPath7.getHeadingDeg();
+		
+		double[][] waypointPath8 = new double[][] {
+			{1, 26, 0}, //For right switch 
+			{11.5, 25.0, 0}, //25
+			{13.0, 26.5, Math.PI/2 + 0.0001} //26.5
+		};
+		
+		QuinticTrajectory quinticPath8 = new QuinticTrajectory(waypointPath8);
+		this.leftVelPathQuintic8 = quinticPath8.getLeftVel();
+		this.rightVelPathQuintic8 = quinticPath8.getRightVel();
+		this.headingQuintic8 = quinticPath8.getHeadingDeg();
+		
+		double[][] waypointPath9 = new double[][] {
+			{14.5, 8.5, Math.PI/2}, // 8.5
+			{21, 5.0, 0+0.0001}, //5
+			{22.5, 5.0, 0} //5
+		};
+		
+		QuinticTrajectory quinticPath9 = new QuinticTrajectory(waypointPath9);
+		this.leftVelPathQuintic9 = quinticPath9.getLeftVel();
+		this.rightVelPathQuintic9 = quinticPath9.getRightVel();
+		this.headingQuintic9 = quinticPath9.getHeadingDeg();
+		
+		double[][] waypointPath10 = new double[][] {
+			{10, 8, 0},
+			{24, 8, 0},
+			{27, 12, -Math.PI/2+0.0001},
+			{27, 15, -Math.PI/2+0.0001}
+		};
+		QuinticTrajectory quinticPath10 = new QuinticTrajectory(waypointPath10);
+		this.leftVelPathQuintic10 = quinticPath10.getLeftVel();
+		this.rightVelPathQuintic10 = quinticPath10.getRightVel();
+		this.headingQuintic10 = quinticPath10.getHeadingDeg();
+		
+		
+		
 		
 		//Start Operator Interface
 		oi = OI.getInstance();
@@ -643,7 +692,7 @@ public class Robot extends TimedRobot
 	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
 			autoChooser.addObject("Left Auto 2 Cube Super Dooper", new AutoStartLeft2CubeSuperDooperPooper());
-			autoChooser.addObject("RightScaleTest", new DriveToRightScaleFromLeft());
+			autoChooser.addObject("Right Auto 2 Cube", new AutoStartRight2Cube());
 
 
 		}

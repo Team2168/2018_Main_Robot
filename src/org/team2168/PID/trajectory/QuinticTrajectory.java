@@ -89,84 +89,15 @@ public class QuinticTrajectory
 		System.out.flush();
 		
 		
-//		// straight path		
-//		double[][] waypointPath = new double[][]{
-//				{4, 3, Math.PI/2},
-//				{4, 18, Math.PI/2},
-//		};
-		
-//		//curve Path
-//		double[][] waypointPath = new double[][]{
-//				{0, 0, 1.4217},
-//				{5, 8, 0.28363},
-//				{9, 8, -0.3363},
-//				{15, 5, -0.4363},
-//				{25, 3, 0},
-//				{30, 3, 0},
-//
-//				
-//		};
-		
-//		//Square Path
 		double[][] waypointPath = new double[][]{
-		//	{5, 17, 0}, //For Right switch from center 
-		//	{5, 19, Math.PI/2},
-		//	{8.5, 23, Math.PI/2},
-		//	{8.5, 24, Math.PI/2*0.987}
-      
-			//use for 1switch auto
-//			{10, 24, 0},
-//			{20, 24, 0},
-//			{25, 20, -Math.PI/2+0.0001},
-//			{25, 8, -Math.PI/2+0.0001},
-//			{27,5, 0}
 	
-//			// Unshifted LeftStart->RightScale
-//			{10, 24, 0},
-//			{24, 24, 0},
-//			{27, 20, -Math.PI/2+0.0001},
-//			{27, 12, -Math.PI/2+0.0001},
-//			{29, 10, 0}
-			
-			// Moved x back 8, moved y up 1.5
-//			{2, 25.5, 0},
-//			{16, 25.5, 0},
-//			{19, 21.5, -Math.PI/2+0.0001},
-//			{19, 13.5, -Math.PI/2+0.0001},
-//			{21, 11.5, 0}
-			
-			{2, 26.5, 0}, //crazy path
-			{15.0, 26.5, 0},
-			{18.8, 25.5, -0.349}
-			
-			//{27, 20, 0}	
-			//{27, 13, -Math.PI/2+0.0001},
-			//{27, 10, -Math.PI/2+0.0001},
-			//{29, 8, 0}
-			
-			
-//			//Left Start, right Scale -- It looks prettyy
-//			{2.5, 26, 0},
-//			{17, 26, 0},
-//			{20, 22, -Math.PI/2+0.0001},
-//			{20, 12, -Math.PI/2+0.0001},
-//			{24.5, 8.5, 0}
-
 			
 		};
 		double[][] waypointPath2 = new double[][]{
-//			{14.5, 23.5, Math.PI/2}, //Right switch Path
-//			{17, 26, 0+0.0001},
-//			{22, 22, 0}	
-			//{19, 20.5, 0},
-			//{22.1, 26.5, 0}
-//			{20, 25, Math.PI/6}
-		
-			
-			
-//			{2, 15.5, 0}, //Right switch Path
-//			{3, 15.5, 0},
-//			{10.5, 19.5, 0}	
+			{10, 8, 0},
+			{24, 8, 0},
+			{27, 12, Math.PI/2+0.0001},
+			{27, 15, Math.PI/2+0.0001}
 	};
 		
 	double[][] waypointPath3 = new double[][]{
@@ -176,42 +107,13 @@ public class QuinticTrajectory
 		{16, 25.5, 0},
 		{19, 21.5, -Math.PI/4+0.0001},
 
-	};
-		
-//		//Square Path
-//		double[][] waypointPath = new double[][]{
-//				{5, 3, Math.PI/2},
-//				{5, 18, Math.PI/2},
-//				{10, 24, 0.0001},
-//				{20, 24, 0},
-//				{25, 18, -Math.PI/2+0.0001},
-//				{25, 8, -Math.PI/2},
-//				{20, 4, -Math.PI+0.0001},
-//				{7, 4, -Math.PI},
-//				
-//		};
-//		
-//		//Clockwise Lap path
-//		double[][] waypointPath = new double[][]{
-//				{5, 8, Math.PI/2},
-//				{5, 18, Math.PI/2},
-//				{10, 24, 0.0001},
-//				{20, 24, 0},
-//				{25, 18, -Math.PI/2+0.0001},
-//				{25, 8, -Math.PI/2},
-//				{20, 4, -Math.PI+0.0001},
-//				{10, 4, -Math.PI},
-//				{5, 8,  Math.PI/2+0.0001},
-//				{28, 29,  Math.PI/4},
-//				
-//		};
-		
+	};		
 		QuinticTrajectory quinticPath= new QuinticTrajectory("path1.txt", waypointPath);
 		quinticPath.calculate();
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-		//QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
-		//quinticPath2.calculate();
+	//	QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
+	//	quinticPath2.calculate();
 
 
 		

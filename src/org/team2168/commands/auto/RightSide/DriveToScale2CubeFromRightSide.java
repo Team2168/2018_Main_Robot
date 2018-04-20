@@ -31,7 +31,7 @@ public class DriveToScale2CubeFromRightSide extends CommandGroup {
     	
     	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
     	
-    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
+    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic7, Robot.rightVelPathQuintic7, Robot.headingQuintic7));
     	addParallel(new DriveIntakeWheelsWithConstant(-0.36), 0.4);
     	addSequential(new OpenIntake());
     	
