@@ -120,12 +120,7 @@ public class OI {
 		/*************************************************************************
 		 *                         Operator Joystick         		              *
 		  *************************************************************************/
-		
-		
-		
-		
-		
-		
+
 		pidTestJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
 		pidTestJoystick.ButtonLeftBumper().whenPressed(new CloseIntake());
 		
@@ -185,30 +180,18 @@ public class OI {
 		
 		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.35));
-		
-
-
+				
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		///End game actuations//////////////////////////////////////////
 		operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
 		operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		//operatorJoystick.ButtonBack().whenPressed(new DisableRachet());
 		
 		////////////////Prepare to climb/////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
-		  //operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
+		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
 		////////////////Lift Pid commands////////////////////////////////////////////////////
 		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
@@ -274,18 +257,18 @@ public class OI {
 		
 		//Light Testing//////////////////////////////////////////////////////// 
 		
-				testJoystick.ButtonA().whenPressed(new DisabledPattern());
-				testJoystick.ButtonB().whenPressed(new TeleopWithoutCube());
-				testJoystick.ButtonX().whenPressed(new AutoWithoutCube());
-				testJoystick.ButtonY().whenPressed(new ClimbingPattern());
-				testJoystick.ButtonLeftTrigger().whenPressed(new DisconnectPattern());
-				testJoystick.ButtonLeftBumper().whenPressed(new ForksDeployedPattern());
-				testJoystick.ButtonRightBumper().whenPressed(new LiftHigh());
-				testJoystick.ButtonRightTrigger().whenPressed(new LiftMed());
-				testJoystick.ButtonDownDPad().whenPressed(new LiftLow());
-				testJoystick.ButtonLeftDPad().whenPressed(new SpitPattern());
-				testJoystick.ButtonRightDPad().whenPressed(new SuckPattern());
-				testJoystick.ButtonUpDPad().whenPressed(new WithCubePattern());
+		testJoystick.ButtonA().whenPressed(new DisabledPattern());
+		testJoystick.ButtonB().whenPressed(new TeleopWithoutCube());
+		testJoystick.ButtonX().whenPressed(new AutoWithoutCube());
+		testJoystick.ButtonY().whenPressed(new ClimbingPattern());
+		testJoystick.ButtonLeftTrigger().whenPressed(new DisconnectPattern());
+		testJoystick.ButtonLeftBumper().whenPressed(new ForksDeployedPattern());
+		testJoystick.ButtonRightBumper().whenPressed(new LiftHigh());
+		testJoystick.ButtonRightTrigger().whenPressed(new LiftMed());
+		testJoystick.ButtonDownDPad().whenPressed(new LiftLow());
+		testJoystick.ButtonLeftDPad().whenPressed(new SpitPattern());
+		testJoystick.ButtonRightDPad().whenPressed(new SuckPattern());
+		testJoystick.ButtonUpDPad().whenPressed(new WithCubePattern());
 		
 		
 	}
@@ -322,12 +305,6 @@ public class OI {
 		return driverJoystick.getRightStickRaw_Y();
 	}
 
-	/**
-	 * Method that sets that Left side of the drive train so that it drives with
-	 * Operator RightStick Y
-	 * 
-	 * @author Krystina
-	 */
 	public static double getDriveLiftJoystickValue() {
 		return operatorJoystick.getLeftStickRaw_Y() + pidTestJoystick.getLeftStickRaw_Y();
 	}

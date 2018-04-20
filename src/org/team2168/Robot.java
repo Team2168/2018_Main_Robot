@@ -135,6 +135,10 @@ public class Robot extends TimedRobot
     public static double[] leftVelPathQuintic6;
     public static double[] rightVelPathQuintic6;
     public static double[] headingQuintic6;
+    
+    public static double[] leftVelPathQuintic7;
+    public static double[] rightVelPathQuintic7;
+    public static double[] headingQuintic7;
  
     
     
@@ -304,8 +308,19 @@ public class Robot extends TimedRobot
 		this.rightVelPathQuintic6 = quinticPath6.getRightVel();
 		this.headingQuintic6 = quinticPath6.getHeadingDeg();
 
+		double[][] waypointPath7 = new double [][] {
+			{2, 26.5, 0}, //crazy path
+			{15.0, 26.5, 0},
+			{18.8, 27.5, 0.349}
+			
+		};
 		
+		QuinticTrajectory quinticPath7 = new QuinticTrajectory(waypointPath7);
+		quinticPath6.calculate();
 		
+		this.leftVelPathQuintic7 = quinticPath7.getLeftVel();
+		this.rightVelPathQuintic7 = quinticPath7.getRightVel();
+		this.headingQuintic7 = quinticPath7.getHeadingDeg();
 		
 		//Start Operator Interface
 		oi = OI.getInstance();

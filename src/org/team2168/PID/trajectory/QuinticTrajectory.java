@@ -136,8 +136,9 @@ public class QuinticTrajectory
 //			{21, 11.5, 0}
 			
 			{2, 26.5, 0}, //crazy path
-			{12.3, 26.5, 0},
-			{17.1, 25.5, -0.349}
+			{15.0, 26.5, 0},
+			{18.8, 25.5, -0.349}
+			
 			//{27, 20, 0}	
 			//{27, 13, -Math.PI/2+0.0001},
 			//{27, 10, -Math.PI/2+0.0001},
@@ -157,8 +158,8 @@ public class QuinticTrajectory
 //			{14.5, 23.5, Math.PI/2}, //Right switch Path
 //			{17, 26, 0+0.0001},
 //			{22, 22, 0}	
-			{19, 20.5, 0},
-			{22.1, 26.5, 0}
+			//{19, 20.5, 0},
+			//{22.1, 26.5, 0}
 //			{20, 25, Math.PI/6}
 		
 			
@@ -209,8 +210,8 @@ public class QuinticTrajectory
 		quinticPath.calculate();
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
-		quinticPath2.calculate();
+		//QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
+		//quinticPath2.calculate();
 
 
 		
