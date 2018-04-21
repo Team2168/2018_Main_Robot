@@ -314,7 +314,7 @@ public class Robot extends TimedRobot
 //			{21.5, 26, -Math.PI/3.5}
 		};
 		
-		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
+		QuinticTrajectory quinticPath6 = new QuinticTrajectory("path6",waypointPath6);
 		quinticPath6.calculate();
 		
 		this.leftVelPathQuintic6 = quinticPath6.getLeftVel();
@@ -328,7 +328,7 @@ public class Robot extends TimedRobot
 			
 		};
 		
-		QuinticTrajectory quinticPath7 = new QuinticTrajectory(waypointPath7);
+		QuinticTrajectory quinticPath7 = new QuinticTrajectory("path7",waypointPath7);
 		quinticPath6.calculate();
 		
 		this.leftVelPathQuintic7 = quinticPath7.getLeftVel();
@@ -341,7 +341,7 @@ public class Robot extends TimedRobot
 			{13.0, 26.5, Math.PI/2 + 0.0001} //26.5
 		};
 		
-		QuinticTrajectory quinticPath8 = new QuinticTrajectory(waypointPath8);
+		QuinticTrajectory quinticPath8 = new QuinticTrajectory("path8",waypointPath8);
 		this.leftVelPathQuintic8 = quinticPath8.getLeftVel();
 		this.rightVelPathQuintic8 = quinticPath8.getRightVel();
 		this.headingQuintic8 = quinticPath8.getHeadingDeg();
@@ -352,7 +352,7 @@ public class Robot extends TimedRobot
 			{22.5, 5.0, 0} //5
 		};
 		
-		QuinticTrajectory quinticPath9 = new QuinticTrajectory(waypointPath9);
+		QuinticTrajectory quinticPath9 = new QuinticTrajectory("path9",waypointPath9);
 		this.leftVelPathQuintic9 = quinticPath9.getLeftVel();
 		this.rightVelPathQuintic9 = quinticPath9.getRightVel();
 		this.headingQuintic9 = quinticPath9.getHeadingDeg();
@@ -360,10 +360,10 @@ public class Robot extends TimedRobot
 		double[][] waypointPath10 = new double[][] {
 			{10, 8, 0},
 			{24, 8, 0},
-			{27, 12, -Math.PI/2+0.0001},
-			{27, 15, -Math.PI/2+0.0001}
+			{26.5, 12, -Math.PI/2+0.0001},
+			{26.5, 15, -Math.PI/2+0.0001}
 		};
-		QuinticTrajectory quinticPath10 = new QuinticTrajectory(waypointPath10);
+		QuinticTrajectory quinticPath10 = new QuinticTrajectory("path10",waypointPath10);
 		this.leftVelPathQuintic10 = quinticPath10.getLeftVel();
 		this.rightVelPathQuintic10 = quinticPath10.getRightVel();
 		this.headingQuintic10 = quinticPath10.getHeadingDeg();
@@ -568,7 +568,7 @@ public class Robot extends TimedRobot
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        updateLights();
-	        i2c.write(8, 0);
+	        callArduino();
 	        
 	        	
 	        
@@ -782,8 +782,8 @@ public class Robot extends TimedRobot
 	
 	private void callArduino() {
 		toSend[0] =  74;
-		i2c.write(8, 'a');
-		System.out.println(i2c.write(8, 'a'));
+		//i2c.write(8, 'a');
+		//System.out.println(i2c.write(8, 'a'));
 	}
 	
 }

@@ -263,7 +263,7 @@ public class RobotMap {
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
 	//public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 0.7; //90 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.7; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0_PBOT = 0.88; //0 degrees
 	//public static final double LIFT_POT_VOLTAGE_0_PBOT = 4.46; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
 
