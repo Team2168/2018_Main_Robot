@@ -308,7 +308,7 @@ public class Robot extends TimedRobot
 			
 			{2, 26.5, 0}, //crazy path
 			{15.0, 26.5, 0},
-			{18.8, 25.5, -0.349}
+			{19.3, 25.5, -0.349}
 //			{2, 26, 0},
 //			{17.5, 26, 0},
 //			{21.5, 26, -Math.PI/3.5}
@@ -329,7 +329,7 @@ public class Robot extends TimedRobot
 		};
 		
 		QuinticTrajectory quinticPath7 = new QuinticTrajectory("path7",waypointPath7);
-		quinticPath6.calculate();
+		quinticPath7.calculate();
 		
 		this.leftVelPathQuintic7 = quinticPath7.getLeftVel();
 		this.rightVelPathQuintic7 = quinticPath7.getRightVel();

@@ -39,11 +39,11 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	
     	
-    	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
+    	addParallel(new DriveLiftPIDZZZ(78.0, 0.5, 0.1,1.0,true));
     	
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.36), 0.4);
-    	addSequential(new OpenIntake());
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.5), 0.4);
+    	//addSequential(new OpenIntake());
     	
     	//drive lift down and get second cube
     	
@@ -66,14 +66,14 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//Score second cube
     	//addParallel(new ExtendPivotWithPiston());
-    	addSequential(new DrivePIDPath(1.5,true)); //drive back 2.5
+    	addSequential(new DrivePIDPath(1.8,true)); //drive back 2.5
     	
     	addSequential(new  DrivePIDPathQuintic(150, 20, 2500, 3000, 30000));//rotate A to B
     	addParallel(new RotateXDistancePIDZZZ(20.0,0.9,0.2,0.1,true));
     	addSequential(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
     	addSequential(new DrivePIDPath(1.5)); //drive back 2.2
     	addSequential(new DriveIntakeWheelsWithConstant(-0.3), 0.3);
-    	addParallel(new OpenIntake());
+    	//addParallel(new OpenIntake());
     	
     	//drive lift down and get third cube
     	addSequential(new DrivePIDPath(2.8,true)); //drive back 2.2
@@ -92,7 +92,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
 
     	//get 3rd cube
     	addSequential(new RetractPivotWithPiston());
-    	addParallel(new OpenIntake());
+    	//addParallel(new OpenIntake());
     	addParallel(new IntakeUntilCube(), 0.7);
     	addSequential(new DrivePIDPath(4.9));
     	addParallel(new CloseIntake());
@@ -103,6 +103,11 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	//Score 3rd cube
     	//addParallel(new ExtendPivotWithPiston());
     	addSequential(new DrivePIDPath(4.5,true)); //drive back5
+    	addSequential(new  DrivePIDPathQuintic(120, 35, 2500, 3000, 30000));//rotate A to B
+    	//addParallel(new RotateXDistancePIDZZZ(20,0.5,0.15,0.1,true),0.2);
+    	addSequential(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
+    	addSequential(new DrivePIDPath(4.0));
+    	addSequential(new DriveIntakeWheelsWithConstant(-0.3), 0.3);
     	
     	
     	

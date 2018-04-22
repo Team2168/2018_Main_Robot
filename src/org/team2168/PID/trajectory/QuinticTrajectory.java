@@ -90,11 +90,9 @@ public class QuinticTrajectory
 		
 		
 		double[][] waypointPath = new double[][]{
-			{10, 8, 0},
-			{24, 8, 0},
-			{26.5, 12, -Math.PI/2+0.0001},
-			{26.5, 15, -Math.PI/2+0.0001}
-			
+			{2, 26.5, 0}, //crazy path
+			{15.0, 26.5, 0},
+			{19.5, 27.5, 0.349}
 		};
 		double[][] waypointPath2 = new double[][]{
 			{10, 8, 0},
