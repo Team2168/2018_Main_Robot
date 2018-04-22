@@ -308,13 +308,13 @@ public class Robot extends TimedRobot
 			
 			{2, 26.5, 0}, //crazy path
 			{15.0, 26.5, 0},
-			{19.3, 25.5, -0.349}
+			{19.3, 25.5, -0.349} //works with 19.3 on practice bot
 //			{2, 26, 0},
 //			{17.5, 26, 0},
 //			{21.5, 26, -Math.PI/3.5}
 		};
 		
-		QuinticTrajectory quinticPath6 = new QuinticTrajectory("path6",waypointPath6);
+		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
 		quinticPath6.calculate();
 		
 		this.leftVelPathQuintic6 = quinticPath6.getLeftVel();
