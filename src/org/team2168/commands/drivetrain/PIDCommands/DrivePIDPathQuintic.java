@@ -28,7 +28,7 @@ public class DrivePIDPathQuintic extends Command {
 	double jMax =15000.0;
 	
     int counter;
-    double ff_term = 1.11;
+    double ff_term = 1.15;
     double oldClock;
     double angle;
     double lastRotateOutput;

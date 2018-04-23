@@ -131,7 +131,7 @@ public class OneDimensionalRotation {
 		double aMax = 3000.0;
 		double jMax =30000.0;
 		System.out.println("Hello");
-		 OneDimensionalRotation rot = new OneDimensionalRotation(20, 150, 2500, 3000, 30000);
+		 OneDimensionalRotation rot = new OneDimensionalRotation(40, -10, 2500, 3000, 30000);
 		 
 		 
 		 FalconLinePlot fig3 = new FalconLinePlot(rot.time, rot.pos ,Color.black);
