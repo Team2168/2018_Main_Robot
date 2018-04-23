@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  *
  */
-public class AutoStartCenter1Cube extends Command {
+public class AutoStartCenter2Cube extends Command {
 
-    public AutoStartCenter1Cube() {
+    public AutoStartCenter2Cube() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

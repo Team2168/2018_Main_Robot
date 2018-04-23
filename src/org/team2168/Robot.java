@@ -7,7 +7,7 @@ import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
-import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
+import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
 
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
@@ -688,7 +688,7 @@ public class Robot extends TimedRobot
 			autoChooser = new SendableChooser<Command>();
 			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
 			autoChooser.addObject("Do Nothing", new DoNothing());
-	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter1Cube());	        
+	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter2Cube());	        
 	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
 			autoChooser.addObject("Left Auto 2 Cube Super Dooper", new AutoStartLeft2CubeSuperDooperPooper());
