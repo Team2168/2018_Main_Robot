@@ -252,7 +252,7 @@ public class Robot extends TimedRobot
 			
 	    	{1, 15.5, 0}, //Right switch Path
 			{2, 15.5, 0},
-			{9.5, 19.5, 0} 
+			{10.5, 20.3, 0} 
 		};
 
 
@@ -324,7 +324,7 @@ public class Robot extends TimedRobot
 		double[][] waypointPath7 = new double [][] {
 			{2, 26.5, 0}, //crazy path
 			{15.0, 26.5, 0},
-			{18.8, 27.5, 0.349}
+			{18.9, 27.5, 0.349} //works with 19.3 on practice bot
 			
 		};
 		
@@ -359,9 +359,12 @@ public class Robot extends TimedRobot
 		
 		double[][] waypointPath10 = new double[][] {
 			{10, 8, 0},
-			{24, 8, 0},
-			{26.5, 12, -Math.PI/2+0.0001},
-			{26.5, 15, -Math.PI/2+0.0001}
+			{22.5, 8, 0},
+			{25.5, 12, -Math.PI/2+0.0001},
+			{25.5, 15, -Math.PI/2+0.0001}, //end
+			{25.5, 19, -Math.PI/2+0.0001},
+			{25.5, 24.0, -Math.PI/2+0.0001},
+			{27.5, 26.0, 0}
 		};
 		QuinticTrajectory quinticPath10 = new QuinticTrajectory("path10",waypointPath10);
 		this.leftVelPathQuintic10 = quinticPath10.getLeftVel();
