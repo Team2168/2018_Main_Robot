@@ -17,7 +17,7 @@ public class DrivePIDPath extends Command {
     OneDimensionalMotionProfiling motion;
 	
     int counter;
-    double ff_term = 1.11;
+    double ff_term = 1.15;
     double oldClock;
     double angle;
     double lastRotateOutput;
@@ -29,10 +29,26 @@ public class DrivePIDPath extends Command {
     	this(distance,false);
     }
     
+    public DrivePIDPath(double distance, double v0 ) {
+    	requires(Robot.drivetrain);
+    	motion = new OneDimensionalMotionProfiling(distance, v0);
+  	   this.setPointLeft =  motion.getVelArray();
+  	   this.setPointRight = motion.getVelArray();
+    	
+    }
+    
     public DrivePIDPath(double distance, boolean reverseDirection )
     {
     	requires(Robot.drivetrain);
     	motion = new OneDimensionalMotionProfiling(distance);
+  	   this.setPointLeft =  motion.getVelArray();
+  	   this.setPointRight = motion.getVelArray();
+  	   this.direction = reverseDirection;
+    }
+    public DrivePIDPath(double distance, double v0, boolean reverseDirection )
+    {
+    	requires(Robot.drivetrain);
+    	motion = new OneDimensionalMotionProfiling(distance, v0);
   	   this.setPointLeft =  motion.getVelArray();
   	   this.setPointRight = motion.getVelArray();
   	   this.direction = reverseDirection;
