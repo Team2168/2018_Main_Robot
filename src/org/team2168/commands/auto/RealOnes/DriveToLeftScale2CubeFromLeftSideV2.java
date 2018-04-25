@@ -101,7 +101,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	//get 3rd cube
     	
     	//addParallel(new OpenIntake());
-    	//addParallel(new OpenIntake());
+    	addParallel(new OpenIntake());
     	addParallel(new IntakeUntilCube());
     	addSequential(new DrivePIDPath(3.4, 5.0)); //shit might go down
     	addParallel(new CloseIntake());
@@ -115,7 +115,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addParallel(new DriveLiftPIDZZZ(40.0, 1.0, 0.1,1.0,true));
     	addSequential(new  DrivePIDPathQuintic(120, 35, 2500, 3000, 30000));//rotate A to B
     	//addParallel(new RotateXDistancePIDZZZ(20,0.5,0.15,0.1,true),0.2);
-    	addParallel(new DriveLiftPIDZZZ(70.0, 1.0, 0.1,1.0,true)); //70
+    	addParallel(new DriveLiftPIDZZZ(78.0, 1.0, 0.1,1.0,true)); //70
     	addSequential(new DrivePIDPath(1.6, 5.0)); //shit might go down
     	addParallel(new OpenIntake());
     	addSequential(new DriveIntakeWheelsWithConstant(-0.3), 0.3);

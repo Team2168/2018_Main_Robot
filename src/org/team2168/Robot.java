@@ -359,12 +359,12 @@ public class Robot extends TimedRobot
 		
 		double[][] waypointPath10 = new double[][] {
 			{10, 8, 0},
-			{22.5, 8, 0},
-			{25.5, 12, -Math.PI/2+0.0001},
-			{25.5, 15, -Math.PI/2+0.0001}, //end
-			{25.5, 19, -Math.PI/2+0.0001},
-			{25.5, 24.0, -Math.PI/2+0.0001},
-			{27.5, 26.0, 0}
+			{22.0, 8, 0},
+			{25.0, 12, -Math.PI/2+0.0001},
+			{25.0, 15, -Math.PI/2+0.0001}, //end
+			{25.0, 19, -Math.PI/2+0.0001},
+			{25.0, 24.0, -Math.PI/2+0.0001},
+			{27.0, 26.0, 0}
 		};
 		QuinticTrajectory quinticPath10 = new QuinticTrajectory("path10",waypointPath10);
 		this.leftVelPathQuintic10 = quinticPath10.getLeftVel();
