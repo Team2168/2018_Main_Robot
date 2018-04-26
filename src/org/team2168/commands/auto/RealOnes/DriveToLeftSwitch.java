@@ -16,8 +16,6 @@ import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.RetractPivotWithPiston;
-import org.team2168.commands.intake.RotatePivotDownAutomatically;
-import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.StopWheels;
 import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;

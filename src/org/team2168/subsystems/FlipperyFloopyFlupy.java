@@ -48,7 +48,10 @@ public class FlipperyFloopyFlupy extends Subsystem {
     	this.isFlippyFlooped = false;
     }
     
-    
+    /**
+     * true if extended    
+     * @return
+     */
     public boolean getFlippyStatus() {
     	return isFlippyFlooped;
     }

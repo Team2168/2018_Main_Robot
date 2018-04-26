@@ -5,8 +5,6 @@ import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
-import org.team2168.commands.intake.RotatePivotDownAutomatically;
-import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.StopWheels;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

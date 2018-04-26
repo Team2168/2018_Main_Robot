@@ -4,10 +4,7 @@ import org.team2168.RobotMap;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
-import org.team2168.commands.intake.RotatePivotDownAutomatically;
-import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.StopWheels;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -25,10 +22,9 @@ public class DriveToLeftSwitchAndLeftScale extends CommandGroup {
    	 
    	 
    	    //score on switch (Spit Intake)
-   	 	addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
+   	 	
    	 	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
    	 	addParallel(new StopWheels());
-   	    addParallel(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
 	    
 	    //Go Around Switch
 	    addSequential(new RotateXDistancePIDZZZ(-90,1.0,.22));
@@ -39,7 +35,6 @@ public class DriveToLeftSwitchAndLeftScale extends CommandGroup {
 	    addSequential(new DriveXDistance(2.5, 1.0,0.1));
 	    
 	     //pick up second cube
- 	    addSequential(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
  	    addParallel(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_INTAKE));
  	    addSequential(new DriveXDistance(5.0,0.6,0.1));
  	    addSequential(new DriveXDistance(-4.5,1.0,0.1)); 
@@ -50,11 +45,10 @@ public class DriveToLeftSwitchAndLeftScale extends CommandGroup {
 	 	addSequential(new RotateXDistancePIDZZZ(90,1.0,0.22));
 	 	
 
-	 	//score on switch (Spit Intake)
-   	 	addSequential(new RotatePivotUpAutomatically(RobotMap.CUBE_PIVOT_CONSTANT)); 
+	 	//score on switch (Spit Intake) 
    	 	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE),0.4);
    	 	addParallel(new StopWheels());
-   	    addParallel(new RotatePivotDownAutomatically(RobotMap.CUBE_PIVOT_CONSTANT));
+   	  
 	 	
     }
 }

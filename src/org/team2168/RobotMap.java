@@ -46,7 +46,10 @@ public class RobotMap {
 	public static final int CUBE_INTAKE_MOTOR_LEFT = 7; //2017 gear intake
 	public static final int CUBE_INTAKE_MOTOR_RIGHT = 8; //PWM 19 on board //2017 spare
 	
-	public static final int CUBE_INTAKE_PIVOT_MOTOR = 9;
+	//public static final int CUBE_INTAKE_PIVOT_MOTOR = 9;
+	
+	public static final int WINCH_MOTOR_1 = 9;
+	public static final int WINCH_MOTOR_2 = 19;
 	
 	
 	public static final int PLATFORM_MOTOR = 11; //2017 turret
@@ -132,12 +135,15 @@ public class RobotMap {
 	///////////////////40 Amp////////////////////////////////
 	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 0;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 1;
-	public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 3;
+	//public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 3;
 	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 15;
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
-	public static final int DRIVETRAIN_LEFT_MOTOR_3_PDP = 13;
-	public static final int PLATFORM_1_PDP = 3;
-	public static final int PLATFORM_2_PDP = 12;
+	//public static final int DRIVETRAIN_LEFT_MOTOR_3_PDP = 13;
+	//public static final int PLATFORM_1_PDP = 3;
+	//public static final int PLATFORM_2_PDP = 12;
+	
+	public static final int WINCH_1_PDP = 2;
+	public static final int WINCH_2_PDP = 13;
 	
 	///////////20-30 Amp/////////////////////////////////////
 	public static final int LIFT_MOTOR_1_PDP = 9;
@@ -257,7 +263,7 @@ public class RobotMap {
 	
 	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0 = 0.79; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0 = 0.62; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
@@ -271,6 +277,12 @@ public class RobotMap {
 	public static final boolean ENABLE_LIFT_POT_SAFETY = true;
 	public static final int LIFT_AVG_ENCODER_VAL = 5;
 	
+	/*************************************************************************
+	 *                         Winch PARAMETERS                               *
+	 *************************************************************************/
+	
+	public static final boolean WINCH_MOTOR1_REVERSE = true;
+	public static final boolean WINCH_MOTOR2_REVERSE = false;
 	
 	/*************************************************************************
 	 *                         PDP PARAMETERS                                *

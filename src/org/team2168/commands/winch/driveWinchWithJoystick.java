@@ -1,19 +1,18 @@
-package org.team2168.commands.intake;
+package org.team2168.commands.winch;
 
 import org.team2168.OI;
 import org.team2168.Robot;
-import org.team2168.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveIntakePivotWithJoystick extends Command {
+public class driveWinchWithJoystick extends Command {
 
-    public DriveIntakePivotWithJoystick() {
+    public driveWinchWithJoystick() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.cubeIntakePivot);
+        requires(Robot.winch);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +21,7 @@ public class DriveIntakePivotWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntakePivot.drivePivot(OI.getDriveIntakePivotJoystickValue() * RobotMap.CUBE_INTAKE_PIVOT_JOYSTICK_MAX_SPEED);
+    	Robot.winch.driveWinch(OI.getDriveWinchJoystickValue());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,12 +31,10 @@ public class DriveIntakePivotWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntakePivot.drivePivot(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.cubeIntakePivot.drivePivot(0.0);
     }
 }

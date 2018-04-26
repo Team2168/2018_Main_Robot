@@ -25,9 +25,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPathV2;
 import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
-import org.team2168.commands.intake.RotatePivotUpAutomatically;
 import org.team2168.commands.intake.RobotPrep;
-import org.team2168.commands.intake.RotatePivotDownAutomatically;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.IntakeUntilCubeAndPivotUp;
 import org.team2168.commands.intake.OpenIntake;
@@ -56,6 +54,7 @@ import org.team2168.commands.lights.SpitPattern;
 import org.team2168.commands.lights.SuckPattern;
 import org.team2168.commands.lights.TeleopWithoutCube;
 import org.team2168.commands.lights.WithCubePattern;
+import org.team2168.commands.winch.driveWinchWithConstant;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -185,9 +184,10 @@ public class OI {
 		
 		
 		///End game actuations//////////////////////////////////////////
-		operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
-		operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
-		//operatorJoystick.ButtonBack().whenPressed(new DisableRachet());
+		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
+		operatorJoystick.ButtonBack().whenPressed(new driveWinchWithConstant(0.5));
+		operatorJoystick.ButtonStart().whenPressed(new driveWinchWithConstant(-0.5));
+		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
 		////////////////Prepare to climb/////////////////////////////
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
@@ -243,12 +243,13 @@ public class OI {
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(-45,0.5,0.2));
 		//pidTestJoystick.ButtonX().whenPressed(new DriveToRightScaleFromLeftSide());
 		//pidTestJoystick.ButtonY().whenPressed(new DriveToLeftScaleFromLeftSide());
-		pidTestJoystick.ButtonA().whenPressed(new DrivePIDPathQuintic(0, 90, 2500, 3000, 30000));//rotate A to B
-		pidTestJoystick.ButtonB().whenPressed(new DrivePIDPathQuintic(90,0, 2500, 3000, 30000));//rotate A to B
+		pidTestJoystick.ButtonA().whileHeld(new DriveIntakeWheelsWithConstant(-0.7));//rotate A to B
+		pidTestJoystick.ButtonB().whileHeld(new DriveIntakeWheelsWithConstant(-0.3));//rotate A to B
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(142,0.6,0.2,0.5,true));
 		
 		
-		pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
+		pidTestJoystick.ButtonY().whileHeld(new DriveIntakeWheelsWithConstant(-0.5));
+		//pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
 		
 		pidTestJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.3,1.0,true));
 		
@@ -327,6 +328,11 @@ public class OI {
 		// return
 		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
 		return Robot.oi.driverJoystick.getLeftStickRaw_Y();
+	}
+	public static double getDriveWinchJoystickValue() {
+		// return
+		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
+		return Robot.oi.testJoystick.getLeftStickRaw_Y();
 	}
 	
 }

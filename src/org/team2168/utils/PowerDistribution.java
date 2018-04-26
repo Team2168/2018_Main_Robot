@@ -175,12 +175,7 @@ public class PowerDistribution {
 			return false;
 	}
 
-	public boolean isRightMotorThreeTrip() {
-		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_3_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
+	
 	
 
 	public boolean isLeftMotorOneTrip() {
@@ -197,27 +192,9 @@ public class PowerDistribution {
 			return false;
 	}
 
-	public boolean isLeftMotorThreeTrip() {
-		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_3_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isPlatformMotorOneTrip() {
-		if (channelError[RobotMap.PLATFORM_1_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isPlatformMotorTwoTrip() {
-		if (channelError[RobotMap.PLATFORM_2_PDP] == 2)
-			return true;
-		else
-			return false;
-	}
 	
+
+		
 	public boolean isLiftMotorOneTrip() {
 		if (channelError[RobotMap.LIFT_MOTOR_1_PDP] == 2)
 			return true;
