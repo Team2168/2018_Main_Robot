@@ -263,7 +263,7 @@ public class RobotMap {
 	
 	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0 = 0.62; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0 = 0.63; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
@@ -282,7 +282,7 @@ public class RobotMap {
 	 *************************************************************************/
 	
 	public static final boolean WINCH_MOTOR1_REVERSE = true;
-	public static final boolean WINCH_MOTOR2_REVERSE = false;
+	public static final boolean WINCH_MOTOR2_REVERSE = true;
 	
 	/*************************************************************************
 	 *                         PDP PARAMETERS                                *

@@ -12,7 +12,7 @@ public class driveWinchWithConstant extends Command {
     public driveWinchWithConstant(double speed) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.winch);
-        speed = this.speed;
+        this.speed = speed;
         
     }
 

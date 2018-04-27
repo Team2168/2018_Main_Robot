@@ -39,7 +39,7 @@ public class DriveToRightSwitch extends CommandGroup {
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));
     	//spit cube after path    	
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.2);
+    	addSequential(new DriveIntakeWheelsWithConstant(-0.4),0.2);
    	 	
     	//second cube
    	    addSequential(new DrivePIDPath(3.0,5.0,true)); //drive back 3
@@ -59,7 +59,7 @@ public class DriveToRightSwitch extends CommandGroup {
    	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.6,0.2,0.5,true), 0.2);
    	    
    	    addSequential(new DrivePIDPath(3.0,5.0));
-   	    addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.4);
+   	    addSequential(new DriveIntakeWheelsWithConstant(-0.4),0.4);
 	 	addSequential(new StopWheels());
 	 	
 	 	//third cube
@@ -80,7 +80,7 @@ public class DriveToRightSwitch extends CommandGroup {
    	 	addSequential(new RotateXDistancePIDZZZ(20 ,0.6,0.2,0.5,true), 0.2);
    	    
    	    addSequential(new DrivePIDPath(3.0,5.0));
-   	    addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *.4 ),0.4);
+   	    addSequential(new DriveIntakeWheelsWithConstant(-0.4),0.4);
 	 	addSequential(new StopWheels());
    	 	
     	

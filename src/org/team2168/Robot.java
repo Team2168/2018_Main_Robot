@@ -8,6 +8,8 @@ import org.team2168.commands.auto.RealOnes.DriveStraight;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
+import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
+import org.team2168.commands.auto.RightSide.DriveToScale2CubeFromRightSide;
 import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
 
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
@@ -731,13 +733,16 @@ public class Robot extends TimedRobot
 			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
 			autoChooser.addObject("Do Nothing", new DoNothing());
 	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter2Cube());	        
-	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
-	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
+	        //autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
+	        //autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
 			autoChooser.addObject("Left Auto 3 Dangerous", new AutoStartLeft2CubeSuperDooperPooper());
 			autoChooser.addObject("Right Auto 2 Cube Safe", new AutoStartRight2CubeSafe());
 			autoChooser.addObject("Left Auto 3 Cube Safe", new AutoStartLeft3CubeSafe());
 			autoChooser.addObject("Left Auto 3 Cube Very very (maybe) Safe", new AutoStartLeft3CubeNotSafe());
-			autoChooser.addObject("Dont try this at home", new DriveToLeftScale2CubeFromLeftSideV2());
+//			autoChooser.addObject("Dont try this at home", new DriveToLeftScale2CubeFromLeftSideV2());
+//			autoChooser.addObject("Dont try this at home from right", new DriveToScale2CubeFromRightSide());
+//			autoChooser.addObject("Dont cross me from left", new DriveToRightScaleFromLeft());
+//			autoChooser.addObject("Dont cross me from right", new DriveToLeftScaleFromRightSide());
 
 
 		}
@@ -751,6 +756,7 @@ public class Robot extends TimedRobot
 
 		}
 
+		
 		
 		/**
 		 * Method which checks to see if gyro drifts and resets the gyro. Call this in a

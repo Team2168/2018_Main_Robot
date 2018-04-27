@@ -185,8 +185,10 @@ public class OI {
 		
 		///End game actuations//////////////////////////////////////////
 		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
-		operatorJoystick.ButtonBack().whenPressed(new driveWinchWithConstant(0.5));
-		operatorJoystick.ButtonStart().whenPressed(new driveWinchWithConstant(-0.5));
+		operatorJoystick.ButtonBack().whileHeld(new driveWinchWithConstant(0.5));
+		operatorJoystick.ButtonStart().whileHeld(new driveWinchWithConstant(-0.5));
+		
+		
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
 		////////////////Prepare to climb/////////////////////////////
@@ -208,7 +210,7 @@ public class OI {
 		//operatorJoystick.ButtonB().whenPressed(new DisableRachet());
 		
 		////////////////For testing purposes//////////////////////
-		testJoystick.ButtonRightTrigger().whenPressed(new RobotPrep());
+		//testJoystick.ButtonRightTrigger().whenPressed(new RobotPrep());
 		//testJoystick.ButtonLeftTrigger().whenPressed(new DriveToLeftScale2CubeFromLeftSideV2());
 		
 		
@@ -332,7 +334,7 @@ public class OI {
 	public static double getDriveWinchJoystickValue() {
 		// return
 		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return Robot.oi.testJoystick.getLeftStickRaw_Y();
+		return Robot.oi.operatorJoystick.getRightStickRaw_X();
 	}
 	
 }
