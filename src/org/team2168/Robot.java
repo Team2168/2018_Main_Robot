@@ -321,7 +321,7 @@ public class Robot extends TimedRobot
 			
 			{2, 26.5, 0}, //crazy path
 			{15.0, 26.5, 0},
-			{18.6, 25.5, -0.349} //works with 19.3 on practice bot
+			{18.5, 25.5, -0.349} //works with 19.3 on practice bot
 //			{2, 26, 0},
 //			{17.5, 26, 0},
 //			{21.5, 26, -Math.PI/3.5}
