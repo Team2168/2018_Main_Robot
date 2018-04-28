@@ -39,7 +39,7 @@ public class DriveToRightScaleFromLeft extends CommandGroup {
     	addParallel(new DriveLiftPIDZZZ(35.0, 0.5, 0.1,1.0,true));
     	addParallel(new DrivePIDPath(3.5, 5.0)); //shit might go down
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic5, Robot.rightVelPathQuintic5, Robot.headingQuintic5));
-    	addSequential(new DriveLiftPIDZZZ(74.0, 0.8, 0.1,1.0,true));
+    	addSequential(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true));
     	addSequential(new  DrivePIDPathQuintic(0, -45, 2500, 3000, 30000));//rotate A to B
     	addParallel(new DriveIntakeWheelsWithConstant(-0.45), 0.3);
    
@@ -49,7 +49,7 @@ public class DriveToRightScaleFromLeft extends CommandGroup {
     	addSequential(new Sleep(), .3);
     	addSequential(new CloseIntake());
     	addSequential(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addParallel(new  DrivePIDPathQuintic(-30, -155, 2500, 3000, 30000));//rotate A to B
+    	addParallel(new  DrivePIDPathQuintic(-45, -155, 2500, 3000, 30000));//rotate A to B
     	addParallel(new PivotIntakeDown());
     	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addSequential(new RotateXDistancePIDZZZ(-155,0.5,0.15,0.1,true),0.2);

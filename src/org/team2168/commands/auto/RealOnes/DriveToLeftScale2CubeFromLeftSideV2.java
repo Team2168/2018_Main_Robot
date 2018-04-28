@@ -81,7 +81,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	
     	//backup with cube
-    	addSequential(new DrivePIDPath(1.8, 5.0,true)); //drive back originally 2.3 //stuff will go down
+    	addSequential(new DrivePIDPath(2.3, 5.0,true)); //drive back originally 2.3 //stuff will go down
     	
     	//rotate with cube to scale and raise intake and lift
     	addSequential(new PivotIntakeUp());
@@ -90,12 +90,12 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addParallel(new RotateXDistancePIDZZZ(20.0,0.9,0.2,0.1,true));
  
     	//raise lift up, intake down, drive fwd to scale
-    	addParallel(new DriveLiftPIDZZZ(75.0, 1.0, 0.1,1.0,true)); //70
+    	addParallel(new DriveLiftPIDZZZ(78.0, 1.0, 0.1,1.0,true)); //70
     	addParallel(new PivotIntakeDown());
     	addSequential(new DrivePIDPath(1.6, 5.0)); //drive back 2.2 //stuff might go down
     	
     	//score second cube
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.36), 0.3);
+    	addSequential(new DriveIntakeWheelsWithConstant(-0.4), 0.3);
     	//addParallel(new OpenIntake());
     	
     	
@@ -136,7 +136,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	//lift up, intake down, drive fwd
     	addParallel(new DriveLiftPIDZZZ(75.0, 1.0, 0.1,1.0,true)); //70
     	addParallel(new PivotIntakeDown());
-    	addSequential(new DrivePIDPath(1.0, 3.5)); //stuff might go down
+    	addSequential(new DrivePIDPath(1.6, 3.5)); //stuff might go down
     	
     	//score cube
     	addParallel(new OpenIntake());

@@ -93,23 +93,19 @@ public class QuinticTrajectory
 		
 		
 		double[][] waypointPath = new double[][]{
-			{10, 24, 0},
-			{22.5, 24, 0},
-			{25.5, 20, -Math.PI/2+0.0001},
-			{25.5, 17, -Math.PI/2+0.0001}, //end of comp
-			{25.5, 13, -Math.PI/2+0.0001},
-			{25.5, 8.5, -Math.PI/2+0.0001},
-			{27.5, 6.5, 0}
+			{1, 24, 0},
+			{12.5, 24, 0},
+			{15.5, 20, -Math.PI/2+0.0001},
+			{15.5, 17, -Math.PI/2+0.0001}, //end of comp
+			{15.5, 13, -Math.PI/2+0.0001},
+			{15.5, 9, -Math.PI/2+0.0001},
+			{17.5, 7, 0}
 			
 		};
 		double[][] waypointPath2 = new double[][]{
-			{10, 24, 0},
-			{22.5, 24, 0},
-			{25.5, 20, -Math.PI/2+0.0001},
-			{25.5, 17, -Math.PI/2+0.0001}, //end of comp
-			{25.5, 13, -Math.PI/2+0.0001},
-			{25.5, 8.0, -Math.PI/2+0.0001},
-			{27.5, 6.0, 0}
+			{2, 26.5, 0}, //crazy path
+			{15.0, 26.5, 0},
+			{18.5, 25.5, -0.349} //works with 19.3 on practice bot
 	};
 		
 	double[][] waypointPath3 = new double[][]{
@@ -124,8 +120,8 @@ public class QuinticTrajectory
 		quinticPath.calculate();
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-	//	QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
-	//	quinticPath2.calculate();
+		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
+		quinticPath2.calculate();
 
 
 		
@@ -170,9 +166,9 @@ public class QuinticTrajectory
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
 
-//		fig3.addData(quinticPath2.leftPath, Color.blue);
-//		fig3.addData(quinticPath2.rightPath, Color.magenta);
-//		fig3.addData(waypointPath2, null, Color.black);
+		fig3.addData(quinticPath2.leftPath, Color.blue);
+		fig3.addData(quinticPath2.rightPath, Color.magenta);
+		fig3.addData(waypointPath2, null, Color.black);
  
 //		fig3.addData(quinticPath3.leftPath, Color.blue);
 //		fig3.addData(quinticPath3.rightPath, Color.magenta);
