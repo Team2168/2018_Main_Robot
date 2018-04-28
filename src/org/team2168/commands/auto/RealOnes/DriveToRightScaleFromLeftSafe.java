@@ -6,7 +6,7 @@ import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.OperationKeepCube;
-import org.team2168.commands.intake.RetractPivotWithPiston;
+import org.team2168.commands.intake.PivotIntakeDown;
 import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
 
@@ -21,7 +21,7 @@ public class DriveToRightScaleFromLeftSafe extends CommandGroup {
     	addParallel(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new RobotPrep());
     	addParallel(new OperationKeepCube());
-    	addParallel(new RetractPivotWithPiston()); 
+    	addParallel(new PivotIntakeDown()); 
     	
     	
     	

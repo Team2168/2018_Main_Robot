@@ -60,7 +60,7 @@ public class Robot extends TimedRobot
 	public static Lift lift;
 	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
-	public static FlipperyFloopyFlupy flipperyFloopyFlupy;
+	public static PivotHardStop flipperyFloopyFlupy;
 	public static IntakePivotPiston intakePivotPiston;
 	public static Winch winch;
 	//public static Platform platform;
@@ -202,7 +202,7 @@ public class Robot extends TimedRobot
 		//platform = platform.getInstance();
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
-		flipperyFloopyFlupy = FlipperyFloopyFlupy.getInstance();
+		flipperyFloopyFlupy = PivotHardStop.getInstance();
 		winch = Winch.GetInstance();
 		i2c = new I2C(I2C.Port.kOnboard, 8);
 		

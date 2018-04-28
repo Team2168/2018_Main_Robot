@@ -2,7 +2,7 @@ package org.team2168.commands.auto.RealOnes;
 
 import org.team2168.RobotMap;
 import org.team2168.commands.auto.Sleep;
-import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
+import org.team2168.commands.hardStop.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OperationKeepCube;

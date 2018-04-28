@@ -9,13 +9,13 @@ import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXUntilCube;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
-import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
+import org.team2168.commands.hardStop.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.intake.OperationKeepCube;
-import org.team2168.commands.intake.RetractPivotWithPiston;
+import org.team2168.commands.intake.PivotIntakeDown;
 import org.team2168.commands.intake.StopWheels;
 import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
@@ -36,7 +36,7 @@ public class DriveToLeftSwitch extends CommandGroup {
     	addParallel(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new RobotPrep());
     	addParallel(new OperationKeepCube());
-    	addParallel(new RetractPivotWithPiston()); 
+    	addParallel(new PivotIntakeDown()); 
     	
     	//move lift up and drive path to left switch
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));

@@ -1,4 +1,4 @@
-package org.team2168.commands.flippyFloopy;
+package org.team2168.commands.intake;
 
 import org.team2168.Robot;
 
@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class EngageIntakePivotHardStop extends Command {
+public class PivotIntakeUp extends Command {
 
-    public EngageIntakePivotHardStop() {
+    public PivotIntakeUp() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.flipperyFloopyFlupy);
+        requires(Robot.intakePivotPiston);
     }
 
     // Called just before this Command runs the first time
@@ -20,14 +20,13 @@ public class EngageIntakePivotHardStop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.flipperyFloopyFlupy.extendFloppy();
+    	Robot.intakePivotPiston.extendPivotPiston();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.flipperyFloopyFlupy.getFlippyStatus();
-    	
-    }
+        return Robot.intakePivotPiston.getPistonStatus();
+        }
 
     // Called once after isFinished returns true
     protected void end() {

@@ -1,4 +1,4 @@
-package org.team2168.commands.intake;
+package org.team2168.commands.hardStop;
 
 import org.team2168.Robot;
 
@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RetractPivotWithPiston extends Command {
+public class DisEngageIntakePivotHardStop extends Command {
 
-    public RetractPivotWithPiston() {
+    public DisEngageIntakePivotHardStop() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.intakePivotPiston);
+        requires(Robot.flipperyFloopyFlupy);
     }
 
     // Called just before this Command runs the first time
@@ -20,13 +20,12 @@ public class RetractPivotWithPiston extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intakePivotPiston.retracPivotPiston();
+    	Robot.flipperyFloopyFlupy.retractHardStop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.intakePivotPiston.getPistonStatus();
-    	
+        return false;
     }
 
     // Called once after isFinished returns true

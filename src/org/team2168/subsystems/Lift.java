@@ -281,7 +281,7 @@ public class Lift extends Subsystem {
 							Robot.intakePivotPiston.retracPivotPiston();
 						}
 					}
-					if (!Robot.isAutoMode() && !Robot.flipperyFloopyFlupy.getFlippyStatus()) {
+					if (!Robot.isAutoMode() && !Robot.flipperyFloopyFlupy.getHardStopStatus()) {
 						if (Robot.lift.getPotPos() > 15 && (speed > 0)) {
 							Robot.intakePivotPiston.retracPivotPiston();
 						}

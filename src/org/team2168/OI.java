@@ -13,8 +13,8 @@ import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZNoBattery;
-import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
-import org.team2168.commands.flippyFloopy.DisEngageIntakePivotHardStop;
+import org.team2168.commands.hardStop.DisEngageIntakePivotHardStop;
+import org.team2168.commands.hardStop.EngageIntakePivotHardStop;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPause;
@@ -30,8 +30,8 @@ import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.IntakeUntilCubeAndPivotUp;
 import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.intake.OperationKeepCube;
-import org.team2168.commands.intake.RetractPivotWithPiston;
-import org.team2168.commands.intake.ExtendPivotWithPiston;
+import org.team2168.commands.intake.PivotIntakeDown;
+import org.team2168.commands.intake.PivotIntakeUp;
 import org.team2168.commands.intake.RotatePivotDownAndSpit;
 import org.team2168.commands.lift.DisableBrake;
 import org.team2168.commands.lift.DriveLiftWithJoysticks;
@@ -123,8 +123,8 @@ public class OI {
 		pidTestJoystick.ButtonLeftTrigger().whenPressed(new OpenIntake());
 		pidTestJoystick.ButtonLeftBumper().whenPressed(new CloseIntake());
 		
-		pidTestJoystick.ButtonUpDPad().whenReleased(new ExtendPivotWithPiston());
-		pidTestJoystick.ButtonDownDPad().whenReleased(new RetractPivotWithPiston());
+		pidTestJoystick.ButtonUpDPad().whenReleased(new PivotIntakeUp());
+		pidTestJoystick.ButtonDownDPad().whenReleased(new PivotIntakeDown());
 		
 		pidTestJoystick.ButtonRightDPad().whenPressed(new EngageIntakePivotHardStop());
 		pidTestJoystick.ButtonLeftDPad().whenPressed(new DisEngageIntakePivotHardStop());
@@ -142,8 +142,8 @@ public class OI {
 		
 
 		/////////////////Emergency Lower Intake/////////////////////////////////////////
-		operatorJoystick.ButtonUpDPad().whenReleased(new ExtendPivotWithPiston());
-		operatorJoystick.ButtonDownDPad().whenReleased(new RetractPivotWithPiston());
+		operatorJoystick.ButtonUpDPad().whenReleased(new PivotIntakeUp());
+		operatorJoystick.ButtonDownDPad().whenReleased(new PivotIntakeDown());
 		
 		operatorJoystick.ButtonRightDPad().whenPressed(new EngageIntakePivotHardStop());
 		operatorJoystick.ButtonLeftDPad().whenPressed(new DisEngageIntakePivotHardStop());
