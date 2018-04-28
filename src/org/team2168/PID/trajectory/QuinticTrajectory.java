@@ -61,6 +61,9 @@ public class QuinticTrajectory
 	
 	public double[] leftVel;
 	public double[] rightVel;
+	public double[] leftPos;
+	public double[] rightPos;
+	public double[] time;
 	public double[][] leftPath;
 	public double[][] rightPath;
 	public double[][] rightVelocity;
@@ -216,7 +219,17 @@ public class QuinticTrajectory
 		
 		
 		//Velocity
-//		
+//
+		FalconLinePlot fig33 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		fig33.yGridOn();
+		fig33.xGridOn();
+		fig33.setYLabel("Velocity (ft/sec)");
+		fig33.setXLabel("time (seconds)");
+		fig33.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+		fig33.addData(quinticPath.time,quinticPath.leftPos, Color.magenta);
+		
+		
+		
 				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
 				fig4.yGridOn();
 				fig4.xGridOn();
@@ -586,7 +599,10 @@ public class QuinticTrajectory
 		  
 		  this.leftVel = new double[this.leftRightTraj.right.getNumSegments()];
 		  this.rightVel =  new double[this.leftRightTraj.right.getNumSegments()];
+		  this.leftPos = new double[this.leftRightTraj.right.getNumSegments()];
+		  this.rightPos =  new double[this.leftRightTraj.right.getNumSegments()];
 		  this.heading =  new double[this.leftRightTraj.right.getNumSegments()];
+		  this.time =  new double[this.leftRightTraj.right.getNumSegments()];
 		  
 		  //copy left
 		  for( int i =0; i < this.leftRightTraj.left.getNumSegments(); i++)
@@ -600,6 +616,11 @@ public class QuinticTrajectory
 			  this.leftVelocity[i][1] = this.leftRightTraj.left.getSegment(i).vel;
 			  this.rightVelocity[i][0] = this.leftRightTraj.right.getSegment(i).dt*i;
 			  this.rightVelocity[i][1] = this.leftRightTraj.right.getSegment(i).vel;
+			  
+			  
+			  this.leftPos[i] = this.leftRightTraj.left.getSegment(i).pos;
+			  this.rightPos[i] = this.leftRightTraj.right.getSegment(i).pos;
+			  this.time[i] = this.leftRightTraj.left.getSegment(i).dt*i;
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
