@@ -59,7 +59,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addParallel(new  DrivePIDPathQuintic(20, 150, 2500, 3000, 30000));//rotate A to B
     	addParallel(new RetractPivotWithPiston());
     	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addSequential(new RotateXDistancePIDZZZ(150,0.5,0.15,0.1,true),0.2);
+    	addSequential(new RotateXDistancePIDZZZ(150,0.5,0.15,0.1,true));
     	
     	//get 2nd cube
     	addSequential(new RetractPivotWithPiston());
@@ -73,27 +73,29 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	//Score second cube	
     	addSequential(new DrivePIDPath(1.8, 5.0,true)); //drive back originally 2.3 //stuff will go down
+    	addSequential(new ExtendPivotWithPiston());
     	addParallel(new ExtendPivotWithPiston());
     	addParallel(new DriveLiftPIDZZZ(30, 1.0, 0.2,1.0,true)); //drive lift down slowly
-       	//addParallel(new EngageIntakePivotHardStop());
+       	//addParallel(new EngageIntakePivotHardStop());8
     	addSequential(new DrivePIDPathQuintic(150, 15, 2500, 3000, 30000));//rotate A to B
     	addParallel(new RotateXDistancePIDZZZ(15.0,0.9,0.2,0.1,true));
     	addParallel(new RetractPivotWithPiston());
-    	addParallel(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
+    	addParallel(new DriveLiftPIDZZZ(75.0, 1.0, 0.1,1.0,true)); //70
     	addSequential(new DrivePIDPath(1.6, 5.0)); //drive back 2.2 //stuff might go down
     	addParallel(new RetractPivotWithPiston());
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.4), 0.3);
+    	addSequential(new DriveIntakeWheelsWithConstant(-0.36), 0.3);
     	//addParallel(new OpenIntake());
     	
     	//drive lift down and get third cube
     	addParallel(new ExtendPivotWithPiston());
-    	addParallel(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addSequential(new DrivePIDPath(2.0, 5.0, true)); //drive back 2.2 //stuff will go down 2.0
+    	addParallel(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slCSXowly
+    	addSequential(new DrivePIDPath(2.5, 5.0, true)); //drive back 2.2 //stuff will go down 2.0
+    	
     	addParallel(new CloseIntake());
-    	addParallel(new  DrivePIDPathQuintic(20, 125, 2500, 3000, 30000));//rotate A to B
+    	addParallel(new  DrivePIDPathQuintic(20, 130, 2500, 3000, 30000));//rotate A to B
     	addParallel(new RetractPivotWithPiston());
     	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addSequential(new RotateXDistancePIDZZZ(125,0.5,0.15,0.1,true),0.2);
+    	addSequential(new RotateXDistancePIDZZZ(130,0.5,0.15,0.1,true));
     	
     	
     	
@@ -105,7 +107,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	//get 3rd cube
     	
     	//addParallel(new OpenIntake());
-    	addParallel(new OpenIntake());
+    	//addParallel(new OpenIntake());
     	addParallel(new OperationKeepCube());
     	addSequential(new DrivePIDPath(3.4, 4.0)); //stuff might go down
     	addParallel(new CloseIntake());
@@ -118,7 +120,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addSequential(new DrivePIDPath(3.5, 5.0, true)); //drive back5 
     	addParallel(new DriveLiftPIDZZZ(45.0, 1.0, 0.1,1.0,true));
     	addParallel(new ExtendPivotWithPiston());
-    	addSequential(new  DrivePIDPathQuintic(125, 20, 2500, 3000, 30000));//rotate A to B
+    	addSequential(new  DrivePIDPathQuintic(130, 20, 2500, 3000, 30000));//rotate A to B
     	//addParallel(new RotateXDistancePIDZZZ(20,0.5,0.15,0.1,true),0.2);
     	addParallel(new DriveLiftPIDZZZ(75.0, 1.0, 0.1,1.0,true)); //70
     	//addParallel(new DisEngageIntakePivotHardStop());

@@ -294,8 +294,8 @@ public class Robot extends TimedRobot
 			{25.5, 20, -Math.PI/2+0.0001},
 			{25.5, 17, -Math.PI/2+0.0001}, //end of comp
 			{25.5, 13, -Math.PI/2+0.0001},
-			{25.5, 8.0, -Math.PI/2+0.0001},
-			{27.5, 6.0, 0}
+			{25.5, 8.9, -Math.PI/2+0.0001},
+			{27.5, 6.9, 0}
 			
 		};
 		

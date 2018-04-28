@@ -55,7 +55,7 @@ public class DriveToRightSwitch extends CommandGroup {
    	 	addSequential(new DrivePIDPath(3,5.0,true));
    	 	
    	 	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-   	    addSequential(new  DrivePIDPathQuintic(-50, 10, 2500, 3000, 30000));//rotate A to B
+   	    addSequential(new  DrivePIDPathQuintic(-50, 0, 2500, 3000, 30000));//rotate A to B
    	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.6,0.2,0.5,true), 0.2);
    	    
    	    addSequential(new DrivePIDPath(3.0,5.0));
