@@ -523,6 +523,7 @@ public class Robot extends TimedRobot
 		
 		drivetrain.calibrateGyro();
 		callArduino();
+		//i2c.write(8, 0);
 		
 		
 	}
@@ -579,9 +580,9 @@ public class Robot extends TimedRobot
      */
 	public void teleopInit() 
 	{
-		callArduino();
+		//callArduino();
 	    	autoMode = false;
-	    	
+	    	//Robot.i2c.write(8, 97);
 			matchStarted = true;
 			drivetrain.stopGyroCalibrating();
 	    	
@@ -613,6 +614,7 @@ public class Robot extends TimedRobot
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        updateLights();
 	        callArduino();
+	        //Robot.i2c.write(8, 97);
 	        
 	        	
 	        
@@ -832,7 +834,7 @@ public class Robot extends TimedRobot
 	}
 	
 	private void callArduino() {
-		toSend[0] =  74;
+		//toSend[0] =  74;
 		//i2c.write(8, 'a');
 		//System.out.println(i2c.write(8, 'a'));
 	}
