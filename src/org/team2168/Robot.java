@@ -19,6 +19,9 @@ import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
 import org.team2168.commands.auto.selector.AutoStartLeft3CubeNotSafe;
 import org.team2168.commands.auto.selector.AutoStartLeft3CubeSafe;
 import org.team2168.commands.auto.selector.AutoStartRight2CubeSafe;
+import org.team2168.commands.lights.AutoWithoutCube;
+import org.team2168.commands.lights.SuckPattern;
+import org.team2168.commands.lights.TeleopWithoutCube;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.I2CLights;
@@ -572,6 +575,7 @@ public class Robot extends TimedRobot
     public void autonomousPeriodic() {
     	autoMode = true;
         Scheduler.getInstance().run();
+        Scheduler.getInstance().add(new AutoWithoutCube());
         
     }	
 	
@@ -596,7 +600,7 @@ public class Robot extends TimedRobot
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        
 	        runTime = Timer.getFPGATimestamp();
-	        
+	        Scheduler.getInstance().add(new TeleopWithoutCube());     
 	  }
 	    
 
@@ -826,12 +830,15 @@ public class Robot extends TimedRobot
 			gameData = "N A";
 		return gameData;
 	}
+	
 	private void updateLights()  {                          
-	if (cubeIntakeWheels.isCubePresent())
+	if(!Robot.autoMode) {
+	if (cubeIntakeWheels.isCubePresent()) {
     	cubeIntakeWheels.setLights(1);
+	    Robot.i2c.write(8, 1);}
     else 
     	cubeIntakeWheels.setLights(-1);
-	}
+	}}
 	
 	private void callArduino() {
 		//toSend[0] =  74;

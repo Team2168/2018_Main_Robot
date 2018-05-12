@@ -20,7 +20,7 @@ public class DisconnectPattern extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.i2c.write(8, 10);
+    	Robot.i2c.write(8, 11);
     	System.out.println("sent it");
     }
 

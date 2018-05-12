@@ -2,8 +2,11 @@ package org.team2168.commands.intake;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.commands.lights.SpitPattern;
+import org.team2168.commands.lights.SuckPattern;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
@@ -25,6 +28,9 @@ public class IntakeUntilCube extends Command {
     protected void execute() {
     	if(!Robot.cubeIntakeWheels.isCubePresent())
     		Robot.cubeIntakeWheels.driveAllMotors(RobotMap.CUBE_INTAKE_MAX_INTAKE);
+    	
+    	//Robot.i2c.write(8, 5);
+    		 
     }
     
 
@@ -36,6 +42,7 @@ public class IntakeUntilCube extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.cubeIntakeWheels.driveAllMotors(0.0);
+    	Robot.i2c.write(8, 1);
     	//Robot.cubeIntakeGripper.retractIntake();
     }
 

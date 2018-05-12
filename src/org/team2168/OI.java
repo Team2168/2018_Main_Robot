@@ -151,10 +151,10 @@ public class OI {
 		////////////////Intake Cube and lift to exchange////////////////////////////////////////////////////
 		//operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 		operatorJoystick.ButtonRightTrigger().whenPressed(new EngageIntakePivotHardStop());
-		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
+		operatorJoystick.ButtonRightTrigger().whenPressed(new IntakeUntilCube());
 		operatorJoystick.ButtonRightTrigger().whenPressed(new CloseIntake()); //open on comp bot
 		operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCube());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
+		operatorJoystick.ButtonRightTrigger().whenPressed(new SuckPattern());
 		//operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		//operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true));
 		
@@ -174,11 +174,13 @@ public class OI {
 		////////////////Pivot down & spit a cube  ///////////////////////
 //		operatorJoystick.ButtonRightBumper().whileHeld(new RotatePivotDownAndSpit());
 		operatorJoystick.ButtonRightBumper().whenPressed(new EngageIntakePivotHardStop());
+		operatorJoystick.ButtonRightBumper().whenPressed(new SpitPattern());
 		operatorJoystick.ButtonRightBumper().whenPressed(new CloseIntake()); //open on comp bot
 		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.45));
 		
 		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.35));
+		operatorJoystick.ButtonLeftBumper().whileHeld(new SpitPattern());
 				
 		
 		

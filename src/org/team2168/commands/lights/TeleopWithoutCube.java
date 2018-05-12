@@ -20,7 +20,7 @@ public class TeleopWithoutCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.i2c.write(8, 98);
+    	Robot.i2c.write(8, 7);
     	System.out.println("sent it 6");
     }
 

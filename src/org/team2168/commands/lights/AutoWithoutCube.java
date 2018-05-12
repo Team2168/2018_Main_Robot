@@ -20,7 +20,7 @@ public class AutoWithoutCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.i2c.write(8, 7);
+    	Robot.i2c.write(8, 15);
     	System.out.println("sent it 1");
     }
 

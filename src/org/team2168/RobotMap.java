@@ -75,12 +75,6 @@ public class RobotMap {
 
 
 	//Channels 10-25 on MXP (PWM and DIO)
-//	public static final int CONVELATOR_MOTOR = 10;
-//	public static final int TURRET_MOTOR = 11;
-//	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
-//	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
-//	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
-//	public static final int SHOOTER_ENCODER_B = 22; //PWM 18 on board
 	public static final int PRACTICE_BOT_JUMPER = 24;
 	public static final int PWM_LIGHTS = 18;
 
@@ -97,12 +91,9 @@ public class RobotMap {
 	public static final int CUBE_INATKE_PIVOT_PISTON_EXTEND = 6;
 	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 7;
 	
-	//public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
-	//public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
 	public static final int FLIPPY_FLOOPED = 3;
 	public static final int FLIPPER_FLUPED = 2;//Forklift
-	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
-	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
+
 	
 	//Double Soldenoids PCM ID = 1
 	public static final int LIFT_RACHET_ENGAGE_PCM = 0;
@@ -111,8 +102,6 @@ public class RobotMap {
 	public static final int LIFT_BRAKE_DISENGAGE_PCM = 2;
 	public static final int LIFT_HIGH_GEAR_PCM = 4;
 	public static final int LIFT_LOW_GEAR_PCM = 5;
-	//public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
-	//public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
 	
 	
 
@@ -332,13 +321,7 @@ public class RobotMap {
 	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
 	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
 	
-	// Shooter PID Speed
-	// Bandwidth =
-	// Phase Margin =
-	// public static final double SHOOTER_SPEED_P = 0.000035;
-	// public static final double SHOOTER_SPEED_I = 0.000053;
-	// public static final double SHOOTER_SPEED_D = 0.0000011838;
-	// public static final double SHOOTER_SPEED_N = 6.8807;
+	
 
 	public static final double LIFT_P = 0.024;
 	public static final double LIFT_I = 0.027;
