@@ -44,10 +44,10 @@ public class DriveToRightScaleFromLeft extends CommandGroup {
     	addParallel(new DriveIntakeWheelsWithConstant(-0.45), 0.3);
    
     	addParallel(new PivotIntakeUp());
-    	addParallel(new DrivePIDPath(1.5,true)); //drive back 2.2 //shit will go down
+    	
     	
     	addSequential(new Sleep(), .3);
-    	addSequential(new CloseIntake());
+    	addSequential(new DrivePIDPath(1.9,true)); //drive back 2.2 //shit will go down
     	addSequential(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addParallel(new  DrivePIDPathQuintic(-30, -155, 2500, 3000, 30000));//rotate A to B
     	addParallel(new PivotIntakeDown());

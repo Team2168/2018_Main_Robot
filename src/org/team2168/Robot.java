@@ -390,8 +390,8 @@ public class Robot extends TimedRobot
 		double[][] waypointPath11 = new double[][] {
 			{10, 24, 0},
 			{22.5, 24, 0},
-			{25.5, 20, -Math.PI/2+0.0001},
-			{25.5, 17, -Math.PI/2+0.0001} //end of comp
+			{26.0, 20, -Math.PI/2+0.0001},
+			{26.0, 17, -Math.PI/2+0.0001} //end of comp
 			//{25.5, 13, -Math.PI/2+0.0001},
 			//{25.5, 8.0, -Math.PI/2+0.0001},
 			//{27.5, 6.0, 0}
@@ -517,6 +517,7 @@ public class Robot extends TimedRobot
 	{
 		autoMode = false;
 		matchStarted = false;
+		Robot.i2c.write(8, 4);
 		
 		//If we are not in a match allow Gyro to be recalibrated in Disabled even if a previous 
 		//calibration was performed, we disable this in a match so that if we ever die in a match,

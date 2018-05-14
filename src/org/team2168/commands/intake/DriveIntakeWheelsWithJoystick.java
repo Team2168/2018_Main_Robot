@@ -19,12 +19,13 @@ public class DriveIntakeWheelsWithJoystick extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.cubeIntakeWheels.driveAllMotors(0.0);
+    	Robot.winch.driveWinch(0.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.cubeIntakeWheels.driveAllMotors(-OI.getDriveIntakeWheelsJoystickValue() * RobotMap.CUBE_INTAKE_WHEELS_JOYSTICK_MAX_SPEED );
-    	
+    	Robot.winch.driveWinch(0.0);
     	if (OI.getDriveIntakeWheelsJoystickValue() > 0.2){
     		Robot.i2c.write(8, 5);
     	}

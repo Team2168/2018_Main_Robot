@@ -187,7 +187,7 @@ public class OI {
 		
 		///End game actuations//////////////////////////////////////////
 		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
-		operatorJoystick.ButtonBack().whileHeld(new driveWinchWithConstant(0.5));
+		operatorJoystick.ButtonBack().whileHeld(new driveWinchWithConstant(1.0));
 		operatorJoystick.ButtonStart().whileHeld(new driveWinchWithConstant(-0.5));
 		
 		
@@ -199,9 +199,9 @@ public class OI {
 		
 		////////////////Lift Pid commands////////////////////////////////////////////////////
 		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
-		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(0.5, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonA().whenPressed(new LiftShiftLow());
 		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
-		operatorJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(40.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());
 		////////////////Raise platform/////////////////////////////
 		
 		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());

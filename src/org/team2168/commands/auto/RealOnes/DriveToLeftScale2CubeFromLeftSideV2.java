@@ -80,7 +80,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addSequential(new DrivePIDPathQuintic(150, 15, 2500, 3000, 30000));//rotate A to B
     	addParallel(new RotateXDistancePIDZZZ(15.0,0.9,0.2,0.1,true));
     	addParallel(new PivotIntakeDown());
-    	addParallel(new DriveLiftPIDZZZ(75.0, 1.0, 0.1,1.0,true)); //70
+    	addParallel(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
     	addSequential(new DrivePIDPath(1.6, 5.0)); //drive back 2.2 //stuff might go down
     	addParallel(new PivotIntakeDown());
     	addSequential(new DriveIntakeWheelsWithConstant(-0.36), 0.3);

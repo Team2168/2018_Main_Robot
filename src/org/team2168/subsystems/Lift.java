@@ -290,6 +290,13 @@ public class Lift extends Subsystem {
 					driveLiftMotor1(speed);
 					driveLiftMotor2(speed);
 					driveLiftMotor3(speed);
+					if(Robot.lift.getPotPos() > 0 && Robot.lift.getPotPos() < 30.0)
+						Robot.i2c.write(8, 8);
+					if(Robot.lift.getPotPos() > 30.0 && Robot.lift.getPotPos() < 60.0)
+						Robot.i2c.write(8, 3);
+					if(Robot.lift.getPotPos() > 60.0 && Robot.lift.getPotPos() < 82.5)
+						Robot.i2c.write(8, 11);
+					
 
 				} else {
 					enableBrake();
@@ -313,6 +320,12 @@ public class Lift extends Subsystem {
 					driveLiftMotor1(speed);
 					driveLiftMotor2(speed);
 					driveLiftMotor3(speed);
+					if(Robot.lift.getPotPos() > 0 && Robot.lift.getPotPos() < 30.0)
+						Robot.i2c.write(8, 8);
+					if(Robot.lift.getPotPos() > 30.0 && Robot.lift.getPotPos() < 60.0)
+						Robot.i2c.write(8, 3);
+					if(Robot.lift.getPotPos() > 60.0 && Robot.lift.getPotPos() < 82.5)
+						Robot.i2c.write(8, 11);
 
 				} else {
 					enableBrake();
