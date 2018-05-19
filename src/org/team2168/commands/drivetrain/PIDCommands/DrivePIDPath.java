@@ -23,7 +23,9 @@ public class DrivePIDPath extends Command {
     double lastRotateOutput;
     boolean direction = false;
     int directionValue = 1;
+    public boolean getCommand = false;
     
+      
     public DrivePIDPath(double distance )
     {
     	this(distance,false);
@@ -52,6 +54,28 @@ public class DrivePIDPath extends Command {
   	   this.setPointLeft =  motion.getVelArray();
   	   this.setPointRight = motion.getVelArray();
   	   this.direction = reverseDirection;
+  	   getCommand = false;
+    }
+    
+    public DrivePIDPath(double distance, double v0, boolean reverseDirection, boolean dangerous)
+    {
+    	requires(Robot.drivetrain);
+    	motion = new OneDimensionalMotionProfiling(distance, v0);
+  	   this.setPointLeft =  motion.getVelArray();
+  	   this.setPointRight = motion.getVelArray();
+  	   this.direction = reverseDirection;
+  	   getCommand = true;
+    }
+    
+    public DrivePIDPath(double distance, double v0,  double a0, boolean reverseDirection )
+    {
+    	requires(Robot.drivetrain);
+    	motion = new OneDimensionalMotionProfiling(distance, v0, a0);
+  	   this.setPointLeft =  motion.getVelArray();
+  	   this.setPointRight = motion.getVelArray();
+  	   this.direction = reverseDirection;
+  	   
+  	   
     }
    
     public DrivePIDPath(double[] setPointLeft, double[] setPointRight){
@@ -147,10 +171,14 @@ public class DrivePIDPath extends Command {
 			
 			if (Math.abs(speedRight)<0.12 && counter!=0)
 				speedRight = directionValue*0.12;
-			
+			if(this.getCommand) {
+			Robot.drivetrain.dangerousTankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
+			counter++;
+			}
+			else {
 			Robot.drivetrain.tankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
 			counter++;
-			
+			}
 			SmartDashboard.putNumber("DriveArrayLeftSpeed", speedLeft);
 			SmartDashboard.putNumber("DriveArrayRightSpeed", speedRight);
 		}

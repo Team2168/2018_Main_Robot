@@ -13,6 +13,7 @@ import org.team2168.PID.sensors.AverageEncoder;
 import org.team2168.PID.sensors.IMU;
 import org.team2168.PID.sensors.TCPCamSensor;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.utils.TCPSocketSender;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -370,6 +371,12 @@ public class Drivetrain extends Subsystem {
 	 *            is a double between -1 and 1 negative is reverse, positive if
 	 *            forward, 0 is stationary
 	 */
+	public void dangerousTankDrive(double leftSpeed, double rightSpeed) {
+		driveLeft(leftSpeed);
+		driveRight(rightSpeed);
+		
+	}
+	
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		if(!Robot.isAutoMode())
 		{	

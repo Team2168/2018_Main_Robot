@@ -25,6 +25,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPathV2;
 import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
+import org.team2168.commands.intake.FadeAway;
 import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.IntakeUntilCubeAndPivotUp;
@@ -188,7 +189,9 @@ public class OI {
 		///End game actuations//////////////////////////////////////////
 		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
 		operatorJoystick.ButtonBack().whileHeld(new driveWinchWithConstant(1.0));
+		operatorJoystick.ButtonBack().whenReleased(new driveWinchWithConstant(0.0));
 		operatorJoystick.ButtonStart().whileHeld(new driveWinchWithConstant(-0.5));
+		operatorJoystick.ButtonStart().whenReleased(new driveWinchWithConstant(0.0));
 		
 		
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
@@ -198,7 +201,8 @@ public class OI {
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
 		////////////////Lift Pid commands////////////////////////////////////////////////////
-		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
+//		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonY().whenPressed(new FadeAway());
 		operatorJoystick.ButtonA().whenPressed(new LiftShiftLow());
 		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
 		operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());

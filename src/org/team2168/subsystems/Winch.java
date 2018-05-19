@@ -4,6 +4,10 @@ import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.commands.winch.driveWinchWithJoystick;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,8 +16,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Winch extends Subsystem {
 	public static Winch instance = null;
-	private static Talon winchMotor1;
-	private static Talon winchMotor2;
+	private static WPI_TalonSRX winchMotor1;
+	private static WPI_TalonSRX winchMotor2;
 	public volatile double winchMotor1Voltage;
 	public volatile double winchMotor2Voltage;
 	
@@ -22,8 +26,17 @@ public class Winch extends Subsystem {
 	 * Default constructor for the lift
 	 */
 	private Winch() {
-		winchMotor1 = new Talon(RobotMap.WINCH_MOTOR_1);
-		winchMotor2 = new Talon(RobotMap.WINCH_MOTOR_2);
+		winchMotor1 = new WPI_TalonSRX(5);
+		winchMotor2 = new WPI_TalonSRX(6);
+		Robot.winch.winchMotor1.configPeakCurrentLimit(0, 10);
+		Robot.winch.winchMotor1.configPeakCurrentDuration(200, 10);
+		Robot.winch.winchMotor1.configContinuousCurrentLimit(40, 10);
+		Robot.winch.winchMotor1.enableCurrentLimit(true);
+		
+		Robot.winch.winchMotor2.configPeakCurrentLimit(0, 10);
+		Robot.winch.winchMotor2.configPeakCurrentDuration(200, 10);
+		Robot.winch.winchMotor2.configContinuousCurrentLimit(40, 10);
+		Robot.winch.winchMotor2.enableCurrentLimit(true);
 	}
 	
 	public static Winch GetInstance() {
@@ -35,15 +48,17 @@ public class Winch extends Subsystem {
 	private void driveWinchMotor1(double speed){
 		if (RobotMap.WINCH_MOTOR1_REVERSE)
 			speed = -speed;
-		winchMotor1.set(speed);
+		winchMotor1.set(ControlMode.PercentOutput,speed);
 		winchMotor1Voltage = Robot.pdp.getBatteryVoltage() * speed;
+
+		
 		
 	}
 	
 	private void driveWinchMotor2(double speed){
 		if (RobotMap.WINCH_MOTOR2_REVERSE)
 			speed = -speed;
-		winchMotor2.set(speed);
+		winchMotor2.set(ControlMode.PercentOutput, speed);
 		winchMotor2Voltage = Robot.pdp.getBatteryVoltage() * speed;
 	}
 	
@@ -59,5 +74,7 @@ public class Winch extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new driveWinchWithJoystick());
     }
+    
+    
 }
 

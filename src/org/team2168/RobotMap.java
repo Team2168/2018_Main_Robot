@@ -154,6 +154,8 @@ public class RobotMap {
 	public static final int PCM_CAN_ID = 0;
 	public static final int PCM_CAN_ID_2 = 1;
 	public static final int PDP_CAN_ID = 0;
+	public static final int TALON_ID = 0;
+	public static final int TALON_ID_1 = 1;
 	
 	
 	// Relay Channels///////////////////////////////////////////////////////////
