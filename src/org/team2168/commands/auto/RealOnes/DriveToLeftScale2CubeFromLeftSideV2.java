@@ -45,7 +45,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic6, Robot.rightVelPathQuintic6, Robot.headingQuintic6));
     	//addParallel(new OpenIntake());
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.40), 0.3); //spit
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.45), 0.35); //spit
     	
     	addParallel(new EngageIntakePivotHardStop());
     	//addSequential(new OpenIntake());
@@ -58,7 +58,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addSequential(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addParallel(new  DrivePIDPathQuintic(20, 150, 2500, 3000, 30000));//rotate A to B
     	addParallel(new PivotIntakeDown());
-    	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
+    	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly;
     	addSequential(new RotateXDistancePIDZZZ(150,0.5,0.15,0.1,true));
     	
     	//get 2nd cube
@@ -122,7 +122,7 @@ public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
     	addParallel(new PivotIntakeUp());
     	addSequential(new  DrivePIDPathQuintic(130, 20, 2500, 3000, 30000));//rotate A to B
     	//addParallel(new RotateXDistancePIDZZZ(20,0.5,0.15,0.1,true),0.2);
-    	addParallel(new DriveLiftPIDZZZ(75.0, 1.0, 0.1,1.0,true)); //70
+    	addParallel(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
     	//addParallel(new DisEngageIntakePivotHardStop());
     	addParallel(new PivotIntakeDown());
     	addSequential(new DrivePIDPath(1.0, 3.5)); //stuff might go down

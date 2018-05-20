@@ -56,6 +56,7 @@ import org.team2168.commands.lights.SuckPattern;
 import org.team2168.commands.lights.TeleopWithoutCube;
 import org.team2168.commands.lights.WithCubePattern;
 import org.team2168.commands.winch.driveWinchWithConstant;
+import org.team2168.commands.winch.driveWinchWithJoystick;
 import org.team2168.utils.F310;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -190,7 +191,7 @@ public class OI {
 		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
 		operatorJoystick.ButtonBack().whileHeld(new driveWinchWithConstant(1.0));
 		operatorJoystick.ButtonBack().whenReleased(new driveWinchWithConstant(0.0));
-		operatorJoystick.ButtonStart().whileHeld(new driveWinchWithConstant(-0.5));
+		operatorJoystick.ButtonStart().whenPressed(new driveWinchWithJoystick());
 		operatorJoystick.ButtonStart().whenReleased(new driveWinchWithConstant(0.0));
 		
 		

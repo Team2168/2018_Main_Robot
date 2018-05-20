@@ -30,12 +30,12 @@ public class Winch extends Subsystem {
 		winchMotor2 = new WPI_TalonSRX(6);
 		Robot.winch.winchMotor1.configPeakCurrentLimit(0, 10);
 		Robot.winch.winchMotor1.configPeakCurrentDuration(200, 10);
-		Robot.winch.winchMotor1.configContinuousCurrentLimit(40, 10);
+		Robot.winch.winchMotor1.configContinuousCurrentLimit(40, 0);
 		Robot.winch.winchMotor1.enableCurrentLimit(true);
 		
 		Robot.winch.winchMotor2.configPeakCurrentLimit(0, 10);
 		Robot.winch.winchMotor2.configPeakCurrentDuration(200, 10);
-		Robot.winch.winchMotor2.configContinuousCurrentLimit(40, 10);
+		Robot.winch.winchMotor2.configContinuousCurrentLimit(40, 0);
 		Robot.winch.winchMotor2.enableCurrentLimit(true);
 	}
 	
@@ -63,6 +63,15 @@ public class Winch extends Subsystem {
 	}
 	
 	public void driveWinch(double speed) {
+		Robot.winch.winchMotor1.configPeakCurrentLimit(0, 0);
+		Robot.winch.winchMotor1.configPeakCurrentDuration(200, 0);
+		Robot.winch.winchMotor1.configContinuousCurrentLimit(40, 0);
+		Robot.winch.winchMotor1.enableCurrentLimit(true);
+		
+		Robot.winch.winchMotor2.configPeakCurrentLimit(0, 0);
+		Robot.winch.winchMotor2.configPeakCurrentDuration(200, 0);
+		Robot.winch.winchMotor2.configContinuousCurrentLimit(40, 0);
+		Robot.winch.winchMotor2.enableCurrentLimit(true);
 		driveWinchMotor1(speed);
 		driveWinchMotor2(speed);
 		
@@ -72,7 +81,7 @@ public class Winch extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new driveWinchWithJoystick());
+        //setDefaultCommand(new driveWinchWithJoystick());
     }
     
     
