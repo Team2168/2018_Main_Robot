@@ -248,6 +248,12 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putBoolean("Right Motor One Trip", () -> {return !Robot.pdp.isRightMotorOneTrip();}, true, false);
 		ConsolePrinter.putBoolean("Right Motor Two Trip", () -> {return !Robot.pdp.isRightMotorTwoTrip();}, true, false);
 		
+		ConsolePrinter.putNumber("Right Motor One Command", () -> {return rightMotor1.get();}, true, true);
+		ConsolePrinter.putNumber("Right Motor Two Command", () -> {return rightMotor2.get();}, true, true);
+		
+		ConsolePrinter.putNumber("Left Motor One Command", () -> {return leftMotor1.get();}, true, true);
+		ConsolePrinter.putNumber("Left Motor Two Command", () -> {return leftMotor2.get();}, true, true);
+		
 		ConsolePrinter.putNumber("Drivetrain raw sonar", () -> {return Robot.drivetrain.getSonarVoltage();}, true, false);
 	}
 

@@ -10,6 +10,7 @@ import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
+import org.team2168.commands.auto.RealOnes.TestAuto;
 import org.team2168.commands.auto.RightSide.DriveToScale2CubeFromRightSide;
 import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
 
@@ -169,6 +170,10 @@ public class Robot extends TimedRobot
     public static double[] rightVelPathQuintic12;
     public static double[] headingQuintic12;
     
+    public static double[] leftVelPathQuintic13;
+    public static double[] rightVelPathQuintic13;
+    public static double[] headingQuintic13;
+    
  
     
     
@@ -250,8 +255,7 @@ public class Robot extends TimedRobot
       {
 	    	{1, 15.5, 0}, //Right switch Path
 			{2, 15.5, 0},
-			{9.5, 11.5, 0} //need to add 1.5 to 12.6 //for 4th match
-	    
+			{9.5, 11.5, 0} //need to add 1.5 to 12.6 //for 4th match  
 	};
 
 
@@ -293,13 +297,13 @@ public class Robot extends TimedRobot
 //			{27, 8, -Math.PI/2+0.0001},
 //			{29,5, 0}
 			
-	    	{9, 24, 0},
-			{24.3, 24, 0},
-			{26.8, 20, -Math.PI/2+0.0001},
-			{26.8, 17, -Math.PI/2+0.0001}, //end of comp
-			{26.8, 13, -Math.PI/2+0.0001},
-			{26.8, 8.6, -Math.PI/2+0.0001},
-			{28.8, 6.9, 0}		
+	    	{10, 24, 0},
+			{22.5, 24, 0},
+			{26.0, 20, -Math.PI/2+0.0001},
+			{26.0, 17, -Math.PI/2+0.0001}, //end of comp
+			{26.0, 13, -Math.PI/2+0.0001},
+			{26.0, 8.6, -Math.PI/2+0.0001},
+			{27.2, 6.9, 0}	
 		};
 		
 
@@ -414,6 +418,19 @@ public class Robot extends TimedRobot
 		this.leftVelPathQuintic12 = quinticPath12.getLeftVel();
 		this.rightVelPathQuintic12 = quinticPath12.getRightVel();
 		this.headingQuintic12 = quinticPath12.getHeadingDeg();
+		
+		double[][] waypointPath13= new double[][] {
+			{17.0, 26.5, 0},
+			{19.6, 25.5, -0.349} //works with 19.3 on practice bot
+			//{25.0, 15, -Math.PI/2+0.0001}, //end
+			//{25.0, 19, -Math.PI/2+0.0001},
+			//{25.0, 24.0, -Math.PI/2+0.0001},
+			//{27.0, 26.0, 0}
+		};
+		QuinticTrajectory quinticPath13 = new QuinticTrajectory("path13",waypointPath13);
+		this.leftVelPathQuintic13 = quinticPath13.getLeftVel();
+		this.rightVelPathQuintic13 = quinticPath13.getRightVel();
+		this.headingQuintic13 = quinticPath13.getHeadingDeg();
 		
 		
 		
@@ -746,7 +763,7 @@ public class Robot extends TimedRobot
 			autoChooser.addObject("Right Auto 2 Cube Safe", new AutoStartRight2CubeSafe());
 			autoChooser.addObject("Left Auto 3 Cube Safe", new AutoStartLeft3CubeSafe());
 			autoChooser.addObject("Left Auto 3 Cube Very very (maybe) Safe", new AutoStartLeft3CubeNotSafe());
-			autoChooser.addObject("Dont try this at home", new DriveToLeftScaleAndLeftSwitchV2());
+			autoChooser.addObject("Dont try this at home", new TestAuto());
 //			autoChooser.addObject("Dont try this at home from right", new DriveToScale2CubeFromRightSide());
 //			autoChooser.addObject("Dont cross me from left", new DriveToRightScaleFromLeft());
 //			autoChooser.addObject("Dont cross me from right", new DriveToLeftScaleFromRightSide());

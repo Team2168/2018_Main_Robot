@@ -103,6 +103,7 @@ public class DriveLiftPIDZZZ extends Command {
     
 	protected void end() {
 		Robot.lift.liftPOTController.Pause();
+		Robot.lift.driveAllMotors(0.0);
     }
 
     // Called when another command which requires one or more of the same

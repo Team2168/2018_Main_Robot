@@ -58,6 +58,7 @@ import org.team2168.commands.lights.WithCubePattern;
 import org.team2168.commands.winch.driveWinchWithConstant;
 import org.team2168.commands.winch.driveWinchWithJoystick;
 import org.team2168.utils.F310;
+import org.team2168.utils.LinearInterpolator;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -103,7 +104,12 @@ public class OI {
 
 	public static F310 testJoystick = new F310(RobotMap.COMMANDS_TEST_JOYSTICK);
 	public static F310 pidTestJoystick = new F310(RobotMap.PID_TEST_JOYSTICK);
-
+	private static LinearInterpolator gunStyleInterpolator;
+	private double[][] gunStyleArray = {{-1.0, -1.0},
+	                                    {-.15,0.0},
+	                                    {.15,0.0},
+	                                    {1.0,1.0}};
+			
 	/**
 	 * Private constructor for singleton class which instantiates the OI object
 	 */
@@ -114,6 +120,7 @@ public class OI {
 		 *************************************************************************/
 		driverJoystick.ButtonStart().whenPressed(new ShiftLow());  //add drivetrainshifter
 		driverJoystick.ButtonA().whenPressed(new ShiftHigh());
+		gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
 
 		////////////// Operator Joystick//////////////
 		
@@ -327,21 +334,21 @@ public class OI {
 		return testJoystick.getRightStickRaw_Y();
 	}
 
-	public static double getGunStyleXValue() {
-		// return
-		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return -Robot.oi.driverJoystick.getLeftStickRaw_X();
-	}
-
 	public static double getGunStyleYValue() {
 		// return
 		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return Robot.oi.driverJoystick.getLeftStickRaw_Y();
+		return driverJoystick.getLeftStickRaw_Y();
+	}
+
+	public static double getGunStyleXValue() {
+		// return
+		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
+		return -gunStyleInterpolator.interpolate(driverJoystick.getLeftStickRaw_X());
 	}
 	public static double getDriveWinchJoystickValue() {
 		// return
 		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return Robot.oi.operatorJoystick.getRightStickRaw_X();
+		return operatorJoystick.getRightStickRaw_X();
 	}
 	
 }
