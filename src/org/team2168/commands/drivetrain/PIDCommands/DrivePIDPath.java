@@ -24,11 +24,17 @@ public class DrivePIDPath extends Command {
     boolean direction = false;
     int directionValue = 1;
     public boolean getCommand = false;
+    public boolean useLineDetection = false;
     
       
     public DrivePIDPath(double distance )
     {
     	this(distance,false);
+    }
+    
+    public DrivePIDPath(double distance, boolean detection )
+    {
+    	this(distance,false, detection);
     }
     
     public DrivePIDPath(double distance, double v0 ) {
@@ -39,13 +45,14 @@ public class DrivePIDPath extends Command {
     	
     }
     
-    public DrivePIDPath(double distance, boolean reverseDirection )
+    public DrivePIDPath(double distance, boolean reverseDirection, boolean detection )
     {
     	requires(Robot.drivetrain);
     	motion = new OneDimensionalMotionProfiling(distance);
   	   this.setPointLeft =  motion.getVelArray();
   	   this.setPointRight = motion.getVelArray();
   	   this.direction = reverseDirection;
+  	   this.useLineDetection = detection;
     }
     public DrivePIDPath(double distance, double v0, boolean reverseDirection )
     {
@@ -171,19 +178,34 @@ public class DrivePIDPath extends Command {
 			
 			if (Math.abs(speedRight)<0.12 && counter!=0)
 				speedRight = directionValue*0.12;
-			if(this.getCommand) {
-			Robot.drivetrain.dangerousTankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
-			counter++;
+			
+			if(useLineDetection) {
+				if(Robot.drivetrain.getLinedectorStatus())
+					end();
+				else {
+					if(this.getCommand) {
+						Robot.drivetrain.dangerousTankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
+						counter++;
+					} else {
+						Robot.drivetrain.tankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
+						counter++;
+					}
+				SmartDashboard.putNumber("DriveArrayLeftSpeed", speedLeft);
+				SmartDashboard.putNumber("DriveArrayRightSpeed", speedRight);
+				}
 			}
 			else {
-			Robot.drivetrain.tankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
-			counter++;
-			}
-			SmartDashboard.putNumber("DriveArrayLeftSpeed", speedLeft);
-			SmartDashboard.putNumber("DriveArrayRightSpeed", speedRight);
-		}
-
-    }
+				if(this.getCommand) {
+				Robot.drivetrain.dangerousTankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
+				counter++;
+				}
+				else {
+				Robot.drivetrain.tankDrive(speedLeft+headingCorrection,speedRight-headingCorrection);
+				counter++;
+				}
+				SmartDashboard.putNumber("DriveArrayLeftSpeed", speedLeft);
+				SmartDashboard.putNumber("DriveArrayRightSpeed", speedRight);
+    }}}
 
     // Make this return true when this Command no longer needs to run execute()
     

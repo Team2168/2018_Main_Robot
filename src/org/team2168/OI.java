@@ -1,7 +1,7 @@
 package org.team2168;
 
 import org.team2168.PID.trajectory.OneDimensionalRotation;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitch;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;

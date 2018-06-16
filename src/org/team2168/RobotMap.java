@@ -71,6 +71,7 @@ public class RobotMap {
 	public static final int LIFT_FULLY_UP_LIMIT = 6; //2018 proto
 	public static final int LIFT_FULLY_DOWN_LIMIT = 7; //2018 proto
 	public static final int LIFT_RATCHET_ENGAGE_LIMIT = 8;
+	public static final int LINE_DETECTOR = 9;
 	//public static final int TX1_ON_STATUS = 9;
 
 

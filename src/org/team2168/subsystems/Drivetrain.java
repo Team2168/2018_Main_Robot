@@ -1,6 +1,7 @@
 package org.team2168.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.team2168.OI;
@@ -31,12 +32,14 @@ public class Drivetrain extends Subsystem {
 	private static VictorSP rightMotor1;
 	private static VictorSP rightMotor2;
 
+	private static boolean INVERT_LINE_SENSOR = true; //Line sensor uses negative logic (false = detected)
+	
 	private ADXRS453Gyro gyroSPI;
 	private AverageEncoder drivetrainLeftEncoder;
 	private AverageEncoder drivetrainRightEncoder;
 
 	private static AnalogInput DrivetrainSonarSensor;
-
+	private static DigitalInput lineDetector;
 	
 	private double RightMotor1FPS;
 	private double RightMotor2FPS;
@@ -77,7 +80,7 @@ public class Drivetrain extends Subsystem {
 		leftMotor2 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_2);
 		rightMotor1 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_1);
 		rightMotor2 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_2);
-
+		lineDetector = new DigitalInput(RobotMap.LINE_DETECTOR);
 		
 		if(Robot.isPracticeRobot())
 		{
@@ -247,6 +250,8 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putBoolean("Left Motor Two Trip", () -> {return !Robot.pdp.isLeftMotorTwoTrip();}, true, false);
 		ConsolePrinter.putBoolean("Right Motor One Trip", () -> {return !Robot.pdp.isRightMotorOneTrip();}, true, false);
 		ConsolePrinter.putBoolean("Right Motor Two Trip", () -> {return !Robot.pdp.isRightMotorTwoTrip();}, true, false);
+		
+		ConsolePrinter.putBoolean("Is line detected?", () -> {return getLinedectorStatus();}, true, false);
 		
 		ConsolePrinter.putNumber("Right Motor One Command", () -> {return rightMotor1.get();}, true, true);
 		ConsolePrinter.putNumber("Right Motor Two Command", () -> {return rightMotor2.get();}, true, true);
@@ -467,6 +472,18 @@ public class Drivetrain extends Subsystem {
 	 */
 	public double getSonarVoltage() {
 		return DrivetrainSonarSensor.getVoltage();
+	}
+	
+	/**
+	 * Gets the status of the line detector 
+	 * @return true if line is detected
+	 */
+	public boolean getLinedectorStatus() {
+		if(INVERT_LINE_SENSOR) {
+			return !lineDetector.get();
+		} else {
+			return lineDetector.get();
+		}
 	}
 
 	/**

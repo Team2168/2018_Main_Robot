@@ -5,7 +5,7 @@ import org.team2168.Robot;
 import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitch;
@@ -30,13 +30,13 @@ public class AutoStartLeft1Cube extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if (Robot.gameData.equals("LLL")){
-    			Scheduler.getInstance().add(new DriveToLeftScale2CubeFromLeftSideV2());}
+    			Scheduler.getInstance().add(new DriveToLeftScale3CubeFromLeftSide());}
     	else if (Robot.gameData.equals("RRR"))  		
     		Scheduler.getInstance().add(new DriveToRightScaleFromLeft());
     	else if (Robot.gameData.equals("LRL"))
     		Scheduler.getInstance().add(new LeftSwitchOnlyFromLeftSide());
     	else if (Robot.gameData.equals("RLR"))
-      		Scheduler.getInstance().add(new DriveToLeftScale2CubeFromLeftSideV2());
+      		Scheduler.getInstance().add(new DriveToLeftScale3CubeFromLeftSide());
     }
   
 

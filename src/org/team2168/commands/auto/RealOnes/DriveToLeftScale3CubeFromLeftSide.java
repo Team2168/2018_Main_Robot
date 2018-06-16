@@ -27,9 +27,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drive To swtich from Left side
  */
-public class DriveToLeftScale2CubeFromLeftSideV2 extends CommandGroup {
+public class DriveToLeftScale3CubeFromLeftSide extends CommandGroup {
 
-    public DriveToLeftScale2CubeFromLeftSideV2() {
+    public DriveToLeftScale3CubeFromLeftSide() {
     	
     	//drive stright to null territory
     	addParallel(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);

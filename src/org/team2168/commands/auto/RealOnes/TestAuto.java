@@ -35,53 +35,35 @@ public class TestAuto extends CommandGroup {
     	
     	
     	//addParallel(new DrivePIDPath(5.0, 5.0));
-    	addParallel(new DriveLiftPIDZZZ(75.0, 0.5, 0.1,1.0,true));
     	//addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
-    	addSequential(new DriveXDistance(185.0/12.0, 1.0));
-    	addSequential(new RotateXDistancePIDZZZ(30,0.5,0.24,0.5,true));
-    	addSequential(new DriveXDistance(3.2, 1.0));
+    	addParallel(new DriveLiftPIDZZZ(30.0, 0.5, 0.1,1.0,true));
+    	addSequential(new DriveXDistance(188.0/12.0, 1.0));
+    	addSequential(new RotateXDistancePIDZZZ(90,0.5,0.24,0.5,true));
+    	addSequential(new DriveXDistance(15.0, 1.0));
     	
-    	
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.45), 0.35); //spit
-    	
+    	addSequential(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
+    	addSequential(new RotateXDistancePIDZZZ(-20,0.5,0.24,0.5,true)); //Rotate to scale
+    	addSequential(new DriveXDistance(1.9, 1.0));
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit
+    	//addParallel(new DrivePIDPath(1.8,true)); //drive back 2.2 //stuff will go down
     	addParallel(new EngageIntakePivotHardStop());
+    	addSequential(new DrivePIDPath(2.2,true,false)); //drive back 2.2 //stuff will go down
     	//addSequential(new OpenIntake());
     	
     	//drive lift down and get second cube
     	addParallel(new PivotIntakeUp());
+    	addParallel(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly;
+    	addSequential(new RotateXDistancePIDZZZ(-160,0.5,0.24,0.5,true));
+   	
     	
-    	addParallel(new DrivePIDPath(2.8,true)); //drive back 2.2 //stuff will go down
-    	addSequential(new Sleep(), .3);
-    	addSequential(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addParallel(new  DrivePIDPathQuintic(20, 150, 2500, 3000, 30000));//rotate A to B
-    	addParallel(new PivotIntakeDown());
-    	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly;
-    	addSequential(new RotateXDistancePIDZZZ(150,0.5,0.24,0.5,true));
-    	
-    	//get 2nd cube
     	addSequential(new PivotIntakeDown());
     	addParallel(new OpenIntake());
     	addParallel(new IntakeUntilCube(), 0.7);
     	addParallel(new OperationKeepCube());
-    	addSequential(new DrivePIDPath(2.2, 5.0)); //stuff might go down
+    	addSequential(new DrivePIDPath(2.8, 5.0)); //stuff might go down
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
-        //addParallel(new DriveIntakeWheelsWithConstant(-0.45), 0.35); //spit
-    	
-    	//addParallel(new EngageIntakePivotHardStop());
     	
     	
-    	//drive lift down and get second cube
-    	//addParallel(new PivotIntakeUp());
-    	
-    	//addParallel(new DrivePIDPath(2.8,true)); //drive back 2.2 //stuff will go down
-    	//addSequential(new Sleep(), .3);
-    	
-    	
-    	
-    	
-    	
-    	//addSequential(new DrivePIDPath(12.2));
-    	//addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic13, Robot.rightVelPathQuintic13, Robot.headingQuintic13));
-    }
+    	    }
 }

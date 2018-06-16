@@ -5,7 +5,7 @@ import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
