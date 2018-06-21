@@ -10,6 +10,7 @@ import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
 import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
+import org.team2168.commands.auto.RealOnes.NeverRunMe;
 import org.team2168.commands.auto.RealOnes.TestAuto;
 import org.team2168.commands.auto.RightSide.DriveToScale2CubeFromRightSide;
 import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
@@ -764,7 +765,7 @@ public class Robot extends TimedRobot
 			autoChooser.addObject("Left Auto 3 Cube Safe", new AutoStartLeft3CubeSafe());
 			autoChooser.addObject("Left Auto 3 Cube Very very (maybe) Safe", new AutoStartLeft3CubeNotSafe());
 			autoChooser.addObject("Dont try this at home", new TestAuto());
-//			autoChooser.addObject("Dont try this at home from right", new DriveToScale2CubeFromRightSide());
+			autoChooser.addObject("Dont run me", new NeverRunMe());
 //			autoChooser.addObject("Dont cross me from left", new DriveToRightScaleFromLeft());
 //			autoChooser.addObject("Dont cross me from right", new DriveToLeftScaleFromRightSide());
 

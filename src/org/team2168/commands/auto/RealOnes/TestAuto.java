@@ -36,13 +36,13 @@ public class TestAuto extends CommandGroup {
     	
     	//addParallel(new DrivePIDPath(5.0, 5.0));
     	//addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
-    	addParallel(new DriveLiftPIDZZZ(30.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DriveXDistance(188.0/12.0, 1.0));
-    	addSequential(new RotateXDistancePIDZZZ(90,0.5,0.24,0.5,true));
+    	addParallel(new DriveLiftPIDZZZ(35.0, 0.5, 0.1,1.0,true));
+    	addSequential(new DriveXDistance(185.5/12.0, 1.0));
+    	addSequential(new RotateXDistancePIDZZZ(89,0.5,0.24,0.45,true));
     	addSequential(new DriveXDistance(15.0, 1.0));
     	
-    	addSequential(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
-    	addSequential(new RotateXDistancePIDZZZ(-20,0.5,0.24,0.5,true)); //Rotate to scale
+    	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
+    	addSequential(new RotateXDistancePIDZZZ(-30,0.5,0.24,0.5,true)); //Rotate to scale
     	addSequential(new DriveXDistance(1.9, 1.0));
     	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit
     	//addParallel(new DrivePIDPath(1.8,true)); //drive back 2.2 //stuff will go down
@@ -51,9 +51,9 @@ public class TestAuto extends CommandGroup {
     	//addSequential(new OpenIntake());
     	
     	//drive lift down and get second cube
-    	addParallel(new PivotIntakeUp());
+    	//addParallel(new PivotIntakeUp());
     	addParallel(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly;
-    	addSequential(new RotateXDistancePIDZZZ(-160,0.5,0.24,0.5,true));
+    	addSequential(new RotateXDistancePIDZZZ(-150,0.5,0.24,0.5,true));
    	
     	
     	addSequential(new PivotIntakeDown());
@@ -63,6 +63,13 @@ public class TestAuto extends CommandGroup {
     	addSequential(new DrivePIDPath(2.8, 5.0)); //stuff might go down
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
+    	addSequential(new DrivePIDPath(2.1, 5.0,true)); //drive back originally 2.3 //stuff will go down
+    	addParallel(new DriveLiftPIDZZZ(80, 1.0, 0.2,1.0,true)); //drive lift up
+    	addSequential(new RotateXDistancePIDZZZ(-30,0.5,0.24,0.5,true));
+    	
+    	addSequential(new DrivePIDPath(1.9, 1.0)); //stuff might go down
+    	addParallel(new OpenIntake());
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit
     	
     	
     	    }

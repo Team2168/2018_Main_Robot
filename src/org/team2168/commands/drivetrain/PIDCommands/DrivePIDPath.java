@@ -32,9 +32,9 @@ public class DrivePIDPath extends Command {
     	this(distance,false);
     }
     
-    public DrivePIDPath(double distance, boolean detection )
+    public DrivePIDPath(double distance, boolean reverse )
     {
-    	this(distance,false, detection);
+    	this(distance,reverse,false);
     }
     
     public DrivePIDPath(double distance, double v0 ) {

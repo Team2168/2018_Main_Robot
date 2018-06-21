@@ -1,5 +1,11 @@
 package org.team2168.commands.auto.RealOnes;
 
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
+import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
+import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
+import org.team2168.commands.intake.PivotIntakeDown;
+import org.team2168.commands.lift.PIDCommands.DriveLiftPIDZZZ;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,21 +14,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class NeverRunMe extends CommandGroup {
 
     public NeverRunMe() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	addParallel(new DriveLiftPIDZZZ(35.0, 0.5, 0.1,1.0,true));
+    	addSequential(new DriveXDistance(183/12.0, 1.0));
+    	
+    	addSequential(new RotateXDistancePIDZZZ(89,0.5,0.24,0.45,true));
+    	
+    	addSequential(new DriveXDistance(8.3, 1.0));
+    	addSequential(new RotateXDistancePIDZZZ(0,0.5,0.24,0.45,true));
+    	addSequential(new DriveXDistance(3.1, 1.0));
+    	addParallel(new PivotIntakeDown()); 
+    	addSequential(new RotateXDistancePIDZZZ(90,0.5,0.24,0.45,true));
+    	addSequential(new DriveLiftPIDZZZ(82.0, 0.5, 0.1,1.0,true));
+    	addSequential(new DrivePIDPath(3.1,true));
     }
 }
