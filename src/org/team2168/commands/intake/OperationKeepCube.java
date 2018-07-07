@@ -1,5 +1,6 @@
 package org.team2168.commands.intake;
 
+import org.team2168.OI;
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 
@@ -33,7 +34,7 @@ public class OperationKeepCube extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return (OI.getDriveIntakeWheelsJoystickValue() > .1 || OI.getDriveIntakeWheelsJoystickValue() < -0.1);
     }
 
     // Called once after isFinished returns true

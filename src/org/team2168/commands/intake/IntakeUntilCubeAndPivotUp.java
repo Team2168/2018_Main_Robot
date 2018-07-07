@@ -1,7 +1,7 @@
 package org.team2168.commands.intake;
 
-import org.team2168.commands.flippyFloopy.EngageIntakePivotHardStop;
-import org.team2168.commands.flippyFloopy.DisEngageIntakePivotHardStop;
+import org.team2168.commands.hardStop.DisEngageIntakePivotHardStop;
+import org.team2168.commands.hardStop.EngageIntakePivotHardStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

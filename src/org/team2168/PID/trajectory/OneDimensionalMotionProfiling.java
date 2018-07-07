@@ -10,18 +10,22 @@ public class OneDimensionalMotionProfiling {
 	
 	double delta = 0.0;
 	double q0 = 0.0;
-	double q1 = 100;
-	double v0 = 0.5;
-	double v1 =  0.5;
+	double q1 = 0.3;
+	double v0 = 0.0;
+	double v1 =  0.0;
 	double a0 = 0.0;
 	double a1 = 0.0;
 	double t0 = 0.0;
 	
 	double error = q1-q0;
 	
-	double vMax = 12.0;
+//	double vMax = 2500.0;
+//	double aMax = 3000.0;
+//	double jMax =30000.0;
+	
+	double vMax = 8.0;
 	double aMax = 8.0;
-	double jMax = 30.0;
+	double jMax = 100.0;
 	
 	double vMin = -vMax;
 	double aMin = -aMax;
@@ -39,11 +43,11 @@ public class OneDimensionalMotionProfiling {
 	// vector array thing
 	double spacing = 50.0;
 	
-	double[] time;
-	double[] pos;
-	double[] vel;		
-	double[] acc;
-	double[] jerk;
+	public double[] time;
+	public double[] pos;
+	public double[] vel;		
+	public double[] acc;
+	public double[] jerk;
 	
 	
 	public OneDimensionalMotionProfiling(double distance)
@@ -52,7 +56,12 @@ public class OneDimensionalMotionProfiling {
 		
 		S_curves();
 	}
-	
+	public OneDimensionalMotionProfiling(double distance, double v0)
+	{
+		this.q1 = distance;
+		this.v0 = v0;
+		S_curves();
+	}
 	public OneDimensionalMotionProfiling(double distance, double v_max, double accel_max, double j_max)
 	{
 		this.q1 = distance;
@@ -220,7 +229,7 @@ public class OneDimensionalMotionProfiling {
 	
 	public static void main(String[] args){
 		
-		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(90);
+		OneDimensionalMotionProfiling oneDirection= new OneDimensionalMotionProfiling(0.4);
 		
 		
 //		for(int i=0; i<oneDirection.getVelArray().length; i++)

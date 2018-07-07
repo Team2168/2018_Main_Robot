@@ -1,12 +1,12 @@
 package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
-import org.team2168.commands.auto.DriveToRightScaleFromLeft;
-import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSide;
-import org.team2168.commands.auto.massComp.DriveToLeftScale2CubeFromLeftSideV2;
-import org.team2168.commands.auto.massComp.DriveToLeftScaleAndLeftSwitchFromLeftSide;
-import org.team2168.commands.auto.massComp.DriveToLeftSwitchFromLeftSide2;
-import org.team2168.commands.auto.massComp.LeftSwitchOnlyFromLeftSide;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSide;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
+import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;
+import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
+import org.team2168.commands.auto.RealOnes.LeftSwitchOnlyFromLeftSide;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;

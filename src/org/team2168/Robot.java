@@ -4,25 +4,31 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
-import org.team2168.commands.auto.massComp.DriveStraight;
-import org.team2168.commands.auto.massComp.DriveToLeftScaleOnlyV2;
-import org.team2168.commands.auto.massComp.DriveToLeftSwitchAndRightScaleFromLeft;
-
-import org.team2168.commands.auto.selector.AutoStartCenter1Cube;
+import org.team2168.commands.auto.RealOnes.DriveStraight;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScaleOnlyV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchAndRightScaleFromLeft;
+import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
+import org.team2168.commands.auto.RightSide.DriveToScale2CubeFromRightSide;
+import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
 
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
 
 import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
-
+import org.team2168.commands.auto.selector.AutoStartLeft3CubeNotSafe;
+import org.team2168.commands.auto.selector.AutoStartLeft3CubeSafe;
+import org.team2168.commands.auto.selector.AutoStartRight2CubeSafe;
 import org.team2168.commands.pneumatics.*;
 import org.team2168.utils.Debouncer;
+import org.team2168.utils.I2CLights;
 import org.team2168.utils.PowerDistribution;
 
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -49,16 +55,18 @@ public class Robot extends TimedRobot
 	//Subsystems
 	public static CubeIntakeWheels cubeIntakeWheels;
 	public static CubeIntakeGripper cubeIntakeGripper;
-	public static CubeIntakePivot cubeIntakePivot;
 	public static Drivetrain drivetrain;
 	public static DrivetrainShifter drivetrainShifter;
 	public static Lift lift;
 	public static LiftRatchetShifter liftRatchetShifter;
 	public static LiftShifter liftShifter;
-	public static FlipperyFloopyFlupy flipperyFloopyFlupy;
+	public static PivotHardStop flipperyFloopyFlupy;
 	public static IntakePivotPiston intakePivotPiston;
+	public static Winch winch;
 	//public static Platform platform;
 	public static Pneumatics pneumatics;
+	public static I2C i2c;
+	byte[] toSend = new byte[1];
 	
 	
 
@@ -132,6 +140,31 @@ public class Robot extends TimedRobot
     public static double[] leftVelPathQuintic6;
     public static double[] rightVelPathQuintic6;
     public static double[] headingQuintic6;
+    
+    public static double[] leftVelPathQuintic7;
+    public static double[] rightVelPathQuintic7;
+    public static double[] headingQuintic7;
+    
+    public static double[] leftVelPathQuintic8;
+    public static double[] rightVelPathQuintic8;
+    public static double[] headingQuintic8;
+    
+    public static double[] leftVelPathQuintic9;
+    public static double[] rightVelPathQuintic9;
+    public static double[] headingQuintic9;
+    
+    public static double[] leftVelPathQuintic10;
+    public static double[] rightVelPathQuintic10;
+    public static double[] headingQuintic10;
+    
+    public static double[] leftVelPathQuintic11;
+    public static double[] rightVelPathQuintic11;
+    public static double[] headingQuintic11;
+    
+    public static double[] leftVelPathQuintic12;
+    public static double[] rightVelPathQuintic12;
+    public static double[] headingQuintic12;
+    
  
     
     
@@ -160,7 +193,6 @@ public class Robot extends TimedRobot
 		// Instantiate the subsystems
 		intakePivotPiston = IntakePivotPiston.getInstance();
 		cubeIntakeGripper = CubeIntakeGripper.getInstance();
-		cubeIntakePivot = CubeIntakePivot.getInstance();
 		cubeIntakeWheels =  CubeIntakeWheels.getInstance();
 		drivetrain = Drivetrain.getInstance();
 		drivetrainShifter = DrivetrainShifter.getInstance();
@@ -170,9 +202,9 @@ public class Robot extends TimedRobot
 		//platform = platform.getInstance();
 		pneumatics = Pneumatics.getInstance();
 		//scissorLift = ScissorLift.getInstance();
-		flipperyFloopyFlupy = FlipperyFloopyFlupy.getInstance();
-
-		
+		flipperyFloopyFlupy = PivotHardStop.getInstance();
+		winch = Winch.GetInstance();
+		i2c = new I2C(I2C.Port.kOnboard, 8);
 		
 //		motion = new OneDimensionalMotionProfiling(15);
 //		for(int i=0; i<motion.getVelArray().length; i++)
@@ -233,7 +265,7 @@ public class Robot extends TimedRobot
 			
 	    	{1, 15.5, 0}, //Right switch Path
 			{2, 15.5, 0},
-			{9.5, 19.5, 0} 
+			{10.5, 20.3, 0} 
 		};
 
 
@@ -257,13 +289,13 @@ public class Robot extends TimedRobot
 //			{27, 8, -Math.PI/2+0.0001},
 //			{29,5, 0}
 			
-			{10, 24, 0},
-			{24, 24, 0},
-			{27, 20, -Math.PI/2+0.0001},
-			{27, 17, -Math.PI/2+0.0001}
-			//{27, 13, -Math.PI/2+0.0001},
-			//{27, 10, -Math.PI/2+0.0001},
-			//{29, 8, 0}
+	    	{1, 24, 0},
+			{12.5, 24, 0},
+			{15.5, 20, -Math.PI/2+0.0001},
+			{15.5, 17, -Math.PI/2+0.0001}, //end of comp
+			{15.5, 13, -Math.PI/2+0.0001},
+			{15.5, 9, -Math.PI/2+0.0001},
+			{17.5, 7, 0}
 			
 		};
 		
@@ -288,20 +320,98 @@ public class Robot extends TimedRobot
 			//{19.1, 26.5, -Math.PI/5}
 			
 			{2, 26.5, 0}, //crazy path
-			{20.3, 26.5, 0},
-			{22.1, 26.5, -Math.PI/3}
+			{15.0, 26.5, 0},
+			{18.5, 25.5, -0.349} //works with 19.3 on practice bot
 //			{2, 26, 0},
 //			{17.5, 26, 0},
 //			{21.5, 26, -Math.PI/3.5}
 		};
 		
-		QuinticTrajectory quinticPath6 = new QuinticTrajectory(waypointPath6);
+		QuinticTrajectory quinticPath6 = new QuinticTrajectory("path6",waypointPath6);
 		quinticPath6.calculate();
 		
 		this.leftVelPathQuintic6 = quinticPath6.getLeftVel();
 		this.rightVelPathQuintic6 = quinticPath6.getRightVel();
 		this.headingQuintic6 = quinticPath6.getHeadingDeg();
 
+		double[][] waypointPath7 = new double [][] {
+			{2, 26.5, 0}, //crazy path
+			{15.0, 26.5, 0},
+			{18.6, 27.5, 0.349} //works with 19.3 on practice bot
+			
+		};
+		
+		QuinticTrajectory quinticPath7 = new QuinticTrajectory("path7",waypointPath7);
+		quinticPath7.calculate();
+		
+		this.leftVelPathQuintic7 = quinticPath7.getLeftVel();
+		this.rightVelPathQuintic7 = quinticPath7.getRightVel();
+		this.headingQuintic7 = quinticPath7.getHeadingDeg();
+		
+		double[][] waypointPath8 = new double[][] {
+			{1, 26, 0}, //For right switch 
+			{11.5, 25.0, 0}, //25
+			{13.0, 26.5, Math.PI/2 + 0.0001} //26.5
+		};
+		
+		QuinticTrajectory quinticPath8 = new QuinticTrajectory("path8",waypointPath8);
+		this.leftVelPathQuintic8 = quinticPath8.getLeftVel();
+		this.rightVelPathQuintic8 = quinticPath8.getRightVel();
+		this.headingQuintic8 = quinticPath8.getHeadingDeg();
+		
+		double[][] waypointPath9 = new double[][] {
+			{14.5, 8.5, Math.PI/2}, // 8.5
+			{21, 5.0, 0+0.0001}, //5
+			{22.5, 5.0, 0} //5
+		};
+		
+		QuinticTrajectory quinticPath9 = new QuinticTrajectory("path9",waypointPath9);
+		this.leftVelPathQuintic9 = quinticPath9.getLeftVel();
+		this.rightVelPathQuintic9 = quinticPath9.getRightVel();
+		this.headingQuintic9 = quinticPath9.getHeadingDeg();
+		
+		double[][] waypointPath10 = new double[][] {
+			{10, 8, 0},
+			{22.0, 8, 0},
+			{25.0, 12, -Math.PI/2+0.0001},
+			{25.0, 15, -Math.PI/2+0.0001}, //end
+			{25.0, 19, -Math.PI/2+0.0001},
+			{25.0, 24.0, -Math.PI/2+0.0001},
+			{27.0, 26.0, 0}
+		};
+		QuinticTrajectory quinticPath10 = new QuinticTrajectory("path10",waypointPath10);
+		this.leftVelPathQuintic10 = quinticPath10.getLeftVel();
+		this.rightVelPathQuintic10 = quinticPath10.getRightVel();
+		this.headingQuintic10 = quinticPath10.getHeadingDeg();
+		
+		double[][] waypointPath11 = new double[][] {
+			{10, 24, 0},
+			{22.5, 24, 0},
+			{25.5, 20, -Math.PI/2+0.0001},
+			{25.5, 17, -Math.PI/2+0.0001} //end of comp
+			//{25.5, 13, -Math.PI/2+0.0001},
+			//{25.5, 8.0, -Math.PI/2+0.0001},
+			//{27.5, 6.0, 0}
+		};
+		QuinticTrajectory quinticPath11 = new QuinticTrajectory("path11",waypointPath11);
+		this.leftVelPathQuintic11 = quinticPath11.getLeftVel();
+		this.rightVelPathQuintic11 = quinticPath11.getRightVel();
+		this.headingQuintic11 = quinticPath11.getHeadingDeg();
+		
+		double[][] waypointPath12= new double[][] {
+			{10, 8, 0},
+			{22.0, 8, 0},
+			{25.0, 12, -Math.PI/2+0.0001}
+			//{25.0, 15, -Math.PI/2+0.0001}, //end
+			//{25.0, 19, -Math.PI/2+0.0001},
+			//{25.0, 24.0, -Math.PI/2+0.0001},
+			//{27.0, 26.0, 0}
+		};
+		QuinticTrajectory quinticPath12 = new QuinticTrajectory("path12",waypointPath12);
+		this.leftVelPathQuintic12 = quinticPath12.getLeftVel();
+		this.rightVelPathQuintic12 = quinticPath12.getRightVel();
+		this.headingQuintic12 = quinticPath12.getHeadingDeg();
+		
 		
 		
 		
@@ -412,6 +522,9 @@ public class Robot extends TimedRobot
 			drivetrain.startGyroCalibrating();
 		
 		drivetrain.calibrateGyro();
+		callArduino();
+		
+		
 	}
 
 	public void disabledPeriodic() 
@@ -419,7 +532,7 @@ public class Robot extends TimedRobot
 
 		//Keep track of Gunstyle Controller Variables
 		
-		
+		callArduino();
 		getControlStyleInt();
 		controlStyle = (int) controlStyleChooser.getSelected();
 		autoPriority = (int) autoPriorityChooser.getSelected();
@@ -466,7 +579,7 @@ public class Robot extends TimedRobot
      */
 	public void teleopInit() 
 	{
-		
+		callArduino();
 	    	autoMode = false;
 	    	
 			matchStarted = true;
@@ -499,6 +612,7 @@ public class Robot extends TimedRobot
 	        
 	        controlStyle = (int) controlStyleChooser.getSelected();
 	        updateLights();
+	        callArduino();
 	        
 	        	
 	        
@@ -618,11 +732,17 @@ public class Robot extends TimedRobot
 			autoChooser = new SendableChooser<Command>();
 			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
 			autoChooser.addObject("Do Nothing", new DoNothing());
-	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter1Cube());	        
-	        autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
-	        autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
-			autoChooser.addObject("Left Auto 2 Cube Super Dooper", new AutoStartLeft2CubeSuperDooperPooper());
-			autoChooser.addObject("RightScaleTest", new DriveToRightScaleFromLeft());
+	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter2Cube());	        
+	        //autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
+	        //autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
+			autoChooser.addObject("Left Auto 3 Dangerous", new AutoStartLeft2CubeSuperDooperPooper());
+			autoChooser.addObject("Right Auto 2 Cube Safe", new AutoStartRight2CubeSafe());
+			autoChooser.addObject("Left Auto 3 Cube Safe", new AutoStartLeft3CubeSafe());
+			autoChooser.addObject("Left Auto 3 Cube Very very (maybe) Safe", new AutoStartLeft3CubeNotSafe());
+//			autoChooser.addObject("Dont try this at home", new DriveToLeftScale2CubeFromLeftSideV2());
+//			autoChooser.addObject("Dont try this at home from right", new DriveToScale2CubeFromRightSide());
+//			autoChooser.addObject("Dont cross me from left", new DriveToRightScaleFromLeft());
+//			autoChooser.addObject("Dont cross me from right", new DriveToLeftScaleFromRightSide());
 
 
 		}
@@ -636,6 +756,7 @@ public class Robot extends TimedRobot
 
 		}
 
+		
 		
 		/**
 		 * Method which checks to see if gyro drifts and resets the gyro. Call this in a
@@ -710,6 +831,10 @@ public class Robot extends TimedRobot
     	cubeIntakeWheels.setLights(-1);
 	}
 	
-	
+	private void callArduino() {
+		toSend[0] =  74;
+		//i2c.write(8, 'a');
+		//System.out.println(i2c.write(8, 'a'));
+	}
 	
 }

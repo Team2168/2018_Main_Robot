@@ -61,6 +61,9 @@ public class QuinticTrajectory
 	
 	public double[] leftVel;
 	public double[] rightVel;
+	public double[] leftPos;
+	public double[] rightPos;
+	public double[] time;
 	public double[][] leftPath;
 	public double[][] rightPath;
 	public double[][] rightVelocity;
@@ -74,7 +77,9 @@ public class QuinticTrajectory
 	private static PrintWriter log;
 
 	private static String directory = "/home/lvuser/Path/";
+	//private static String directory = "Path/";
 
+	
 	public boolean reverse = false;
 
 	
@@ -87,83 +92,20 @@ public class QuinticTrajectory
 		System.out.flush();
 		
 		
-//		// straight path		
-//		double[][] waypointPath = new double[][]{
-//				{4, 3, Math.PI/2},
-//				{4, 18, Math.PI/2},
-//		};
-		
-//		//curve Path
-//		double[][] waypointPath = new double[][]{
-//				{0, 0, 1.4217},
-//				{5, 8, 0.28363},
-//				{9, 8, -0.3363},
-//				{15, 5, -0.4363},
-//				{25, 3, 0},
-//				{30, 3, 0},
-//
-//				
-//		};
-		
-//		//Square Path
 		double[][] waypointPath = new double[][]{
-		//	{5, 17, 0}, //For Right switch from center 
-		//	{5, 19, Math.PI/2},
-		//	{8.5, 23, Math.PI/2},
-		//	{8.5, 24, Math.PI/2*0.987}
-      
-			//use for 1switch auto
-//			{10, 24, 0},
-//			{20, 24, 0},
-//			{25, 20, -Math.PI/2+0.0001},
-//			{25, 8, -Math.PI/2+0.0001},
-//			{27,5, 0}
-	
-//			// Unshifted LeftStart->RightScale
-//			{10, 24, 0},
-//			{24, 24, 0},
-//			{27, 20, -Math.PI/2+0.0001},
-//			{27, 12, -Math.PI/2+0.0001},
-//			{29, 10, 0}
-			
-			// Moved x back 8, moved y up 1.5
-//			{2, 25.5, 0},
-//			{16, 25.5, 0},
-//			{19, 21.5, -Math.PI/2+0.0001},
-//			{19, 13.5, -Math.PI/2+0.0001},
-//			{21, 11.5, 0}
-			
-			{2, 26.5, 0}, //crazy path
-			{20.3, 26.5, 0},
-			{22.1, 26.5, -Math.PI/3}	
-			//{27, 20, 0}	
-			//{27, 13, -Math.PI/2+0.0001},
-			//{27, 10, -Math.PI/2+0.0001},
-			//{29, 8, 0}
-			
-			
-//			//Left Start, right Scale -- It looks prettyy
-//			{2.5, 26, 0},
-//			{17, 26, 0},
-//			{20, 22, -Math.PI/2+0.0001},
-//			{20, 12, -Math.PI/2+0.0001},
-//			{24.5, 8.5, 0}
-
+			{1, 24, 0},
+			{12.5, 24, 0},
+			{15.5, 20, -Math.PI/2+0.0001},
+			{15.5, 17, -Math.PI/2+0.0001}, //end of comp
+			{15.5, 13, -Math.PI/2+0.0001},
+			{15.5, 9, -Math.PI/2+0.0001},
+			{17.5, 7, 0}
 			
 		};
 		double[][] waypointPath2 = new double[][]{
-//			{14.5, 23.5, Math.PI/2}, //Right switch Path
-//			{17, 26, 0+0.0001},
-//			{22, 22, 0}	
-			{19, 20.5, Math.PI/(4/3)},
-			{22.1, 26.5, -Math.PI/3}
-//			{20, 25, Math.PI/6}
-		
-			
-			
-//			{2, 15.5, 0}, //Right switch Path
-//			{3, 15.5, 0},
-//			{10.5, 19.5, 0}	
+			{2, 26.5, 0}, //crazy path
+			{15.0, 26.5, 0},
+			{18.5, 25.5, -0.349} //works with 19.3 on practice bot
 	};
 		
 	double[][] waypointPath3 = new double[][]{
@@ -171,45 +113,15 @@ public class QuinticTrajectory
 		
 		{2, 25.5, 0},
 		{16, 25.5, 0},
-		{19, 21.5, -Math.PI/2+0.0001},
-		{19, 13.5, -Math.PI/2+0.0001},
-		{21, 11.5, 0}
-	};
-		
-//		//Square Path
-//		double[][] waypointPath = new double[][]{
-//				{5, 3, Math.PI/2},
-//				{5, 18, Math.PI/2},
-//				{10, 24, 0.0001},
-//				{20, 24, 0},
-//				{25, 18, -Math.PI/2+0.0001},
-//				{25, 8, -Math.PI/2},
-//				{20, 4, -Math.PI+0.0001},
-//				{7, 4, -Math.PI},
-//				
-//		};
-//		
-//		//Clockwise Lap path
-//		double[][] waypointPath = new double[][]{
-//				{5, 8, Math.PI/2},
-//				{5, 18, Math.PI/2},
-//				{10, 24, 0.0001},
-//				{20, 24, 0},
-//				{25, 18, -Math.PI/2+0.0001},
-//				{25, 8, -Math.PI/2},
-//				{20, 4, -Math.PI+0.0001},
-//				{10, 4, -Math.PI},
-//				{5, 8,  Math.PI/2+0.0001},
-//				{28, 29,  Math.PI/4},
-//				
-//		};
-		
-		QuinticTrajectory quinticPath= new QuinticTrajectory(waypointPath);
-//		quinticPath.calculate();
+		{19, 21.5, -Math.PI/4+0.0001},
+
+	};		
+		QuinticTrajectory quinticPath= new QuinticTrajectory("path1.txt", waypointPath);
+		quinticPath.calculate();
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-		QuinticTrajectory quinticPath2= new QuinticTrajectory("path3.txt", waypointPath2);
-		
+		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
+		quinticPath2.calculate();
 
 
 		
@@ -303,15 +215,25 @@ public class QuinticTrajectory
 		
 		
 		//Velocity
-//		
-//				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
-//				fig4.yGridOn();
-//				fig4.xGridOn();
-//				fig4.setYLabel("Velocity (ft/sec)");
-//				fig4.setXLabel("time (seconds)");
-//				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-//				fig4.addData(quinticPath.rightVelocity, Color.magenta);
-//				fig4.addData(quinticPath.leftVelocity, Color.cyan);
+//
+		FalconLinePlot fig33 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		fig33.yGridOn();
+		fig33.xGridOn();
+		fig33.setYLabel("Velocity (ft/sec)");
+		fig33.setXLabel("time (seconds)");
+		fig33.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+		fig33.addData(quinticPath.time,quinticPath.leftPos, Color.magenta);
+		
+		
+		
+				FalconLinePlot fig4 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+				fig4.yGridOn();
+				fig4.xGridOn();
+				fig4.setYLabel("Velocity (ft/sec)");
+				fig4.setXLabel("time (seconds)");
+				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+				fig4.addData(quinticPath.rightVelocity, Color.magenta);
+				fig4.addData(quinticPath.leftVelocity, Color.cyan);
 //				
 //				
 //				//Velocity
@@ -338,9 +260,9 @@ public class QuinticTrajectory
 		
 		config = new TrajectoryGenerator.Config();
 	    config.dt = .02;
-	    config.max_acc = 4.0;
+	    config.max_acc = 8.0;
 	    config.max_jerk = 30.0;
-	    config.max_vel = 8.0;
+	    config.max_vel = 10.0;
 	}
 	
 	public QuinticTrajectory(String filename, double[][] path)
@@ -673,7 +595,10 @@ public class QuinticTrajectory
 		  
 		  this.leftVel = new double[this.leftRightTraj.right.getNumSegments()];
 		  this.rightVel =  new double[this.leftRightTraj.right.getNumSegments()];
+		  this.leftPos = new double[this.leftRightTraj.right.getNumSegments()];
+		  this.rightPos =  new double[this.leftRightTraj.right.getNumSegments()];
 		  this.heading =  new double[this.leftRightTraj.right.getNumSegments()];
+		  this.time =  new double[this.leftRightTraj.right.getNumSegments()];
 		  
 		  //copy left
 		  for( int i =0; i < this.leftRightTraj.left.getNumSegments(); i++)
@@ -687,6 +612,11 @@ public class QuinticTrajectory
 			  this.leftVelocity[i][1] = this.leftRightTraj.left.getSegment(i).vel;
 			  this.rightVelocity[i][0] = this.leftRightTraj.right.getSegment(i).dt*i;
 			  this.rightVelocity[i][1] = this.leftRightTraj.right.getSegment(i).vel;
+			  
+			  
+			  this.leftPos[i] = this.leftRightTraj.left.getSegment(i).pos;
+			  this.rightPos[i] = this.leftRightTraj.right.getSegment(i).pos;
+			  this.time[i] = this.leftRightTraj.left.getSegment(i).dt*i;
 			  
 			  this.leftVel[i] = this.leftVelocity[i][1];
 			  this.rightVel[i] = this.rightVelocity[i][1];
