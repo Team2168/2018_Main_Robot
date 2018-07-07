@@ -1,7 +1,7 @@
 package org.team2168;
 
 import org.team2168.PID.trajectory.OneDimensionalRotation;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitch;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;
@@ -25,6 +25,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.RotatePIDPathV2;
 import org.team2168.commands.intake.CloseIntake;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
+import org.team2168.commands.intake.FadeAway;
 import org.team2168.commands.intake.RobotPrep;
 import org.team2168.commands.intake.IntakeUntilCube;
 import org.team2168.commands.intake.IntakeUntilCubeAndPivotUp;
@@ -55,7 +56,9 @@ import org.team2168.commands.lights.SuckPattern;
 import org.team2168.commands.lights.TeleopWithoutCube;
 import org.team2168.commands.lights.WithCubePattern;
 import org.team2168.commands.winch.driveWinchWithConstant;
+import org.team2168.commands.winch.driveWinchWithJoystick;
 import org.team2168.utils.F310;
+import org.team2168.utils.LinearInterpolator;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -101,7 +104,12 @@ public class OI {
 
 	public static F310 testJoystick = new F310(RobotMap.COMMANDS_TEST_JOYSTICK);
 	public static F310 pidTestJoystick = new F310(RobotMap.PID_TEST_JOYSTICK);
-
+	private static LinearInterpolator gunStyleInterpolator;
+	private double[][] gunStyleArray = {{-1.0, -1.0},
+	                                    {-.15,0.0},
+	                                    {.15,0.0},
+	                                    {1.0,1.0}};
+			
 	/**
 	 * Private constructor for singleton class which instantiates the OI object
 	 */
@@ -112,6 +120,7 @@ public class OI {
 		 *************************************************************************/
 		driverJoystick.ButtonStart().whenPressed(new ShiftLow());  //add drivetrainshifter
 		driverJoystick.ButtonA().whenPressed(new ShiftHigh());
+		gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
 
 		////////////// Operator Joystick//////////////
 		
@@ -151,10 +160,10 @@ public class OI {
 		////////////////Intake Cube and lift to exchange////////////////////////////////////////////////////
 		//operatorJoystick.ButtonRightTrigger().whileHeld(new RotatePivotDownAutomatically(-RobotMap.CUBE_PIVOT_DOWN_CONSTANT));
 		operatorJoystick.ButtonRightTrigger().whenPressed(new EngageIntakePivotHardStop());
-		operatorJoystick.ButtonRightTrigger().whileHeld(new IntakeUntilCube());
+		operatorJoystick.ButtonRightTrigger().whenPressed(new IntakeUntilCube());
 		operatorJoystick.ButtonRightTrigger().whenPressed(new CloseIntake()); //open on comp bot
 		operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCube());
-		operatorJoystick.ButtonRightTrigger().whenReleased(new CloseIntake());
+		operatorJoystick.ButtonRightTrigger().whenPressed(new SuckPattern());
 		//operatorJoystick.ButtonRightTrigger().whenReleased(new DriveIntakeWheelsWithConstant(0.0));
 		//operatorJoystick.ButtonLeftTrigger().whenReleased(new DriveLiftPIDZZZ(10.0, 0.5, 0.16,1.0,true));
 		
@@ -174,11 +183,13 @@ public class OI {
 		////////////////Pivot down & spit a cube  ///////////////////////
 //		operatorJoystick.ButtonRightBumper().whileHeld(new RotatePivotDownAndSpit());
 		operatorJoystick.ButtonRightBumper().whenPressed(new EngageIntakePivotHardStop());
+		operatorJoystick.ButtonRightBumper().whenPressed(new SpitPattern());
 		operatorJoystick.ButtonRightBumper().whenPressed(new CloseIntake()); //open on comp bot
 		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.45));
 		
 		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
 		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.35));
+		operatorJoystick.ButtonLeftBumper().whileHeld(new SpitPattern());
 				
 		
 		
@@ -186,7 +197,9 @@ public class OI {
 		///End game actuations//////////////////////////////////////////
 		//operatorJoystick.ButtonStart().whenPressed(new LiftShiftHigh());
 		operatorJoystick.ButtonBack().whileHeld(new driveWinchWithConstant(1.0));
-		operatorJoystick.ButtonStart().whileHeld(new driveWinchWithConstant(-1.0));
+		operatorJoystick.ButtonBack().whenReleased(new driveWinchWithConstant(0.0));
+		operatorJoystick.ButtonStart().whenPressed(new driveWinchWithJoystick());
+		operatorJoystick.ButtonStart().whenReleased(new driveWinchWithConstant(0.0));
 		
 		
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
@@ -195,11 +208,13 @@ public class OI {
 		//operatorJoystick.ButtonBack().whenPressed(new EnableRachet());
 		//operatorJoystick.ButtonBack().whenPressed(new LiftShiftLow());
 		
-		////////////////Lift Pid commands////////////////////////////////////////////
-		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
-		operatorJoystick.ButtonA().whenPressed(new DriveLiftPIDZZZ(0.5, 0.5, 0.16,1.0,true));
+
+		////////////////Lift Pid commands////////////////////////////////////////////////////
+//		operatorJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(87.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonY().whenPressed(new FadeAway());
+		operatorJoystick.ButtonA().whenPressed(new LiftShiftLow());
 		operatorJoystick.ButtonX().whenPressed(new DriveLiftPIDZZZ(1.5, 0.7, 0.16,0.5,true));
-		operatorJoystick.ButtonB().whenPressed(new DriveLiftPIDZZZ(40.0, 0.5, 0.16,1.0,true));
+		operatorJoystick.ButtonB().whenPressed(new LiftShiftHigh());
 		////////////////Raise platform/////////////////////////////
 		
 		//operatorJoystick.ButtonA().whenPressed(new RaisePlatform());
@@ -320,21 +335,21 @@ public class OI {
 		return testJoystick.getRightStickRaw_Y();
 	}
 
-	public static double getGunStyleXValue() {
-		// return
-		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return -Robot.oi.driverJoystick.getLeftStickRaw_X();
-	}
-
 	public static double getGunStyleYValue() {
 		// return
 		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return Robot.oi.driverJoystick.getLeftStickRaw_Y();
+		return driverJoystick.getLeftStickRaw_Y();
+	}
+
+	public static double getGunStyleXValue() {
+		// return
+		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
+		return -gunStyleInterpolator.interpolate(driverJoystick.getLeftStickRaw_X());
 	}
 	public static double getDriveWinchJoystickValue() {
 		// return
 		// gunStyleInterpolator.interpolate(Robot.oi.driverJoystick.getLeftStickRaw_X());
-		return Robot.oi.operatorJoystick.getRightStickRaw_X();
+		return operatorJoystick.getRightStickRaw_X();
 	}
 	
 }

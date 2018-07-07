@@ -37,6 +37,8 @@ public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
     	//rotate into switch
     	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2, 0.5, true),4.0);
     	addSequential(new RotateXDistancePIDZZZ(90,0.7,0.2 ,0.5, true ),2.0);
+    	
+    	addSequential(new DrivePIDPath(3.0));
     
     	
     	//spit

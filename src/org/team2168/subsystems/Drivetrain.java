@@ -1,6 +1,7 @@
 package org.team2168.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.team2168.OI;
@@ -13,6 +14,7 @@ import org.team2168.PID.sensors.AverageEncoder;
 import org.team2168.PID.sensors.IMU;
 import org.team2168.PID.sensors.TCPCamSensor;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.utils.TCPSocketSender;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
@@ -30,12 +32,14 @@ public class Drivetrain extends Subsystem {
 	private static VictorSP rightMotor1;
 	private static VictorSP rightMotor2;
 
+	private static boolean INVERT_LINE_SENSOR = true; //Line sensor uses negative logic (false = detected)
+	
 	private ADXRS453Gyro gyroSPI;
 	private AverageEncoder drivetrainLeftEncoder;
 	private AverageEncoder drivetrainRightEncoder;
 
 	private static AnalogInput DrivetrainSonarSensor;
-
+	private static DigitalInput lineDetector;
 	
 	private double RightMotor1FPS;
 	private double RightMotor2FPS;
@@ -76,7 +80,7 @@ public class Drivetrain extends Subsystem {
 		leftMotor2 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_2);
 		rightMotor1 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_1);
 		rightMotor2 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_2);
-
+		lineDetector = new DigitalInput(RobotMap.LINE_DETECTOR);
 		
 		if(Robot.isPracticeRobot())
 		{
@@ -247,6 +251,14 @@ public class Drivetrain extends Subsystem {
 		ConsolePrinter.putBoolean("Right Motor One Trip", () -> {return !Robot.pdp.isRightMotorOneTrip();}, true, false);
 		ConsolePrinter.putBoolean("Right Motor Two Trip", () -> {return !Robot.pdp.isRightMotorTwoTrip();}, true, false);
 		
+		ConsolePrinter.putBoolean("Is line detected?", () -> {return getLinedectorStatus();}, true, false);
+		
+		ConsolePrinter.putNumber("Right Motor One Command", () -> {return rightMotor1.get();}, true, true);
+		ConsolePrinter.putNumber("Right Motor Two Command", () -> {return rightMotor2.get();}, true, true);
+		
+		ConsolePrinter.putNumber("Left Motor One Command", () -> {return leftMotor1.get();}, true, true);
+		ConsolePrinter.putNumber("Left Motor Two Command", () -> {return leftMotor2.get();}, true, true);
+		
 		ConsolePrinter.putNumber("Drivetrain raw sonar", () -> {return Robot.drivetrain.getSonarVoltage();}, true, false);
 	}
 
@@ -370,6 +382,12 @@ public class Drivetrain extends Subsystem {
 	 *            is a double between -1 and 1 negative is reverse, positive if
 	 *            forward, 0 is stationary
 	 */
+	public void dangerousTankDrive(double leftSpeed, double rightSpeed) {
+		driveLeft(leftSpeed);
+		driveRight(rightSpeed);
+		
+	}
+	
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		if(!Robot.isAutoMode())
 		{	
@@ -454,6 +472,18 @@ public class Drivetrain extends Subsystem {
 	 */
 	public double getSonarVoltage() {
 		return DrivetrainSonarSensor.getVoltage();
+	}
+	
+	/**
+	 * Gets the status of the line detector 
+	 * @return true if line is detected
+	 */
+	public boolean getLinedectorStatus() {
+		if(INVERT_LINE_SENSOR) {
+			return !lineDetector.get();
+		} else {
+			return lineDetector.get();
+		}
 	}
 
 	/**

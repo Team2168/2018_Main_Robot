@@ -34,14 +34,14 @@ public class DriveToLeftScaleFromRightSide extends CommandGroup {
     	
     	addParallel(new DrivePIDPath(5.0, 5.0));
     	addParallel(new DriveLiftPIDZZZ(35.0, 0.5, 0.1,1.0,true));
-    	addParallel(new DrivePIDPath(3.5, 5.0)); //shit might go down
+    	addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
     	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic10, Robot.rightVelPathQuintic10, Robot.headingQuintic10));
     	addSequential(new DriveLiftPIDZZZ(74.0, 0.8, 0.1,1.0,true));
     	addSequential(new  DrivePIDPathQuintic(0, 30, 2500, 3000, 30000));//rotate A to B
     	addParallel(new DriveIntakeWheelsWithConstant(-0.3), 0.2);
    
     	addParallel(new PivotIntakeUp());
-    	addParallel(new DrivePIDPath(1.5,true)); //drive back 2.2 //shit will go down
+    	addParallel(new DrivePIDPath(1.5,true)); //drive back 2.2 //stuff will go down
     	
     	addSequential(new Sleep(), .3);
     	addSequential(new CloseIntake());
@@ -56,16 +56,16 @@ public class DriveToLeftScaleFromRightSide extends CommandGroup {
     	addParallel(new OpenIntake());
     	addParallel(new IntakeUntilCube(), 0.7);
     	addParallel(new OperationKeepCube());
-    	addSequential(new DrivePIDPath(3.5, 5.0)); //shit might go down
+    	addSequential(new DrivePIDPath(3.5, 5.0)); //stuff might go down
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
     	
-    	addSequential(new DrivePIDPath(2.3, 5.0,true)); //drive back 2.5 //shit will go down
+    	addSequential(new DrivePIDPath(2.3, 5.0,true)); //drive back 2.5 //stuff will go down
        	addParallel(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
     	addSequential(new DrivePIDPathQuintic(165, 20, 2500, 3000, 30000));//rotate A to B
     	addParallel(new RotateXDistancePIDZZZ(20.0,0.9,0.2,0.1,true));
     	addSequential(new DriveLiftPIDZZZ(80.0, 7.0, 0.1,1.0,true)); //70
-    	addSequential(new DrivePIDPath(1.4, 5.0)); //drive back 2.2 //shit might go down
+    	addSequential(new DrivePIDPath(1.4, 5.0)); //drive back 2.2 //stuff might go down
     	addSequential(new DriveIntakeWheelsWithConstant(-0.2), 0.3);
     	
 

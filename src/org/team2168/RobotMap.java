@@ -71,16 +71,11 @@ public class RobotMap {
 	public static final int LIFT_FULLY_UP_LIMIT = 6; //2018 proto
 	public static final int LIFT_FULLY_DOWN_LIMIT = 7; //2018 proto
 	public static final int LIFT_RATCHET_ENGAGE_LIMIT = 8;
+	public static final int LINE_DETECTOR = 9;
 	//public static final int TX1_ON_STATUS = 9;
 
 
 	//Channels 10-25 on MXP (PWM and DIO)
-//	public static final int CONVELATOR_MOTOR = 10;
-//	public static final int TURRET_MOTOR = 11;
-//	public static final int TURRET_LIMIT_SWITCH_RIGHT = 19; //PWM 15 on board
-//	public static final int TURRET_LIMIT_SWITCH_LEFT = 20; //PWM 16 on board
-//	public static final int SHOOTER_ENCODER_A = 21; //PWM 17 on board
-//	public static final int SHOOTER_ENCODER_B = 22; //PWM 18 on board
 	public static final int PRACTICE_BOT_JUMPER = 24;
 	public static final int PWM_LIGHTS = 18;
 
@@ -97,12 +92,9 @@ public class RobotMap {
 	public static final int CUBE_INATKE_PIVOT_PISTON_EXTEND = 6;
 	public static final int CUBE_INTAKE_PIVOT_PISTON_RETRACT = 7;
 	
-	//public static final int PLATFORM_PISTON_EXTEND_PCM = 4;     //Forklift
-	//public static final int PLATFORM_PISTON_RETRACT_PCM = 5;
 	public static final int FLIPPY_FLOOPED = 3;
 	public static final int FLIPPER_FLUPED = 2;//Forklift
-	//public static final int CLIMB_GUIDE_ARM_RAISE = 4; //stolen from forklift
-	//public static final int CLIMB_GUIDE_ARM_LOWER = 5; //^^^^^^^^^^^^^^^^^^^^ For AUSTIN <3 
+
 	
 	//Double Soldenoids PCM ID = 1
 	public static final int LIFT_RACHET_ENGAGE_PCM = 0;
@@ -111,8 +103,6 @@ public class RobotMap {
 	public static final int LIFT_BRAKE_DISENGAGE_PCM = 2;
 	public static final int LIFT_HIGH_GEAR_PCM = 4;
 	public static final int LIFT_LOW_GEAR_PCM = 5;
-	//public static final int CLIMB_GUIDE_ARM_RAISE_PCM = 6;
-	//public static final int CLIMB_GUIDE_ARM_LOWER_PCM = 7;
 	
 	
 
@@ -165,6 +155,8 @@ public class RobotMap {
 	public static final int PCM_CAN_ID = 0;
 	public static final int PCM_CAN_ID_2 = 1;
 	public static final int PDP_CAN_ID = 0;
+	public static final int TALON_ID = 0;
+	public static final int TALON_ID_1 = 1;
 	
 	
 	// Relay Channels///////////////////////////////////////////////////////////
@@ -263,7 +255,7 @@ public class RobotMap {
 	
 	public static final double LIFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
 	public static final double LIFT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double LIFT_POT_VOLTAGE_0 = 0.63; //0 degrees
+	public static final double LIFT_POT_VOLTAGE_0 = 0.66; //0 degrees
 	public static final double LIFT_POT_0_HEIGHT_INCHES = 0.0;
 	
 	public static final double LIFT_POT_VOLTAGE_MAX_PBOT = 4.0; //90 degrees
@@ -332,13 +324,7 @@ public class RobotMap {
 	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
 	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
 	
-	// Shooter PID Speed
-	// Bandwidth =
-	// Phase Margin =
-	// public static final double SHOOTER_SPEED_P = 0.000035;
-	// public static final double SHOOTER_SPEED_I = 0.000053;
-	// public static final double SHOOTER_SPEED_D = 0.0000011838;
-	// public static final double SHOOTER_SPEED_N = 6.8807;
+	
 
 	public static final double LIFT_P = 0.024;
 	public static final double LIFT_I = 0.027;

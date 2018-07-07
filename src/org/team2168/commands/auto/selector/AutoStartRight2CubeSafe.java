@@ -3,7 +3,7 @@ package org.team2168.commands.auto.selector;
 import org.team2168.Robot;
 import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSideV2;
+import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;
 import org.team2168.commands.auto.RightSide.DriveToLeftScaleFromRightSide;

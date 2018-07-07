@@ -62,6 +62,14 @@ public class OneDimensionalMotionProfiling {
 		this.v0 = v0;
 		S_curves();
 	}
+	
+	public OneDimensionalMotionProfiling(double distance, double v0, double aMax)
+	{
+		this.q1 = distance;
+		this.v0 = v0;
+		this.aMax = a0;
+		S_curves();
+	}
 	public OneDimensionalMotionProfiling(double distance, double v_max, double accel_max, double j_max)
 	{
 		this.q1 = distance;
