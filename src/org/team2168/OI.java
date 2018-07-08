@@ -8,6 +8,7 @@ import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;
 import org.team2168.commands.auto.RealOnes.DriveToRightScaleAndRightSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToRightSwitch;
 import org.team2168.commands.auto.RealOnes.RobotRunPrep;
+import org.team2168.commands.auto.RealOnes.TestAuto2;
 import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.commands.drivetrain.ShiftHigh;
 import org.team2168.commands.drivetrain.ShiftLow;
@@ -232,7 +233,7 @@ public class OI {
 		//testJoystick.ButtonLeftBumper().whenPressed(new test());	
 		//testJoystick.ButtonLeftTrigger().whenPressed(new DisEngageIntakePivotHardStop());
 		
-		//testJoystick.ButtonX().whenPressed(new LiftShiftLow());
+		
 		//testJoystick.ButtonA().whenPressed(new EnableRachet());
 		//testJoystick.ButtonB().whenPressed(new DisableRachet());
 		//testJoystick.ButtonLeftDPad().whenPressed(new EnableBrake());
@@ -274,19 +275,19 @@ public class OI {
 		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));
 		
 		//Light Testing//////////////////////////////////////////////////////// 
-		
-		testJoystick.ButtonA().whenPressed(new DisabledPattern());
-		testJoystick.ButtonB().whenPressed(new TeleopWithoutCube());
-		testJoystick.ButtonX().whenPressed(new AutoWithoutCube());
-		testJoystick.ButtonY().whenPressed(new ClimbingPattern());
-		testJoystick.ButtonLeftTrigger().whenPressed(new DisconnectPattern());
-		testJoystick.ButtonLeftBumper().whenPressed(new ForksDeployedPattern());
-		testJoystick.ButtonRightBumper().whenPressed(new LiftHigh());
-		testJoystick.ButtonRightTrigger().whenPressed(new LiftMed());
-		testJoystick.ButtonDownDPad().whenPressed(new LiftLow());
-		testJoystick.ButtonLeftDPad().whenPressed(new SpitPattern());
-		testJoystick.ButtonRightDPad().whenPressed(new SuckPattern());
-		testJoystick.ButtonUpDPad().whenPressed(new WithCubePattern());
+		testJoystick.ButtonX().whenPressed(new TestAuto2());
+//		testJoystick.ButtonA().whenPressed(new DisabledPattern());
+//		testJoystick.ButtonB().whenPressed(new TeleopWithoutCube());
+//		testJoystick.ButtonX().whenPressed(new AutoWithoutCube());
+//		testJoystick.ButtonY().whenPressed(new ClimbingPattern());
+//		testJoystick.ButtonLeftTrigger().whenPressed(new DisconnectPattern());
+//		testJoystick.ButtonLeftBumper().whenPressed(new ForksDeployedPattern());
+//		testJoystick.ButtonRightBumper().whenPressed(new LiftHigh());
+//		testJoystick.ButtonRightTrigger().whenPressed(new LiftMed());
+//		testJoystick.ButtonDownDPad().whenPressed(new LiftLow());
+//		testJoystick.ButtonLeftDPad().whenPressed(new SpitPattern());
+//		testJoystick.ButtonRightDPad().whenPressed(new SuckPattern());
+//		testJoystick.ButtonUpDPad().whenPressed(new WithCubePattern());
 		
 		
 	}

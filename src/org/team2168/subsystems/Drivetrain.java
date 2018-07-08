@@ -53,6 +53,9 @@ public class Drivetrain extends Subsystem {
 	public PIDPosition rotateController;
 	public PIDPosition rotateDriveStraightController;
 	
+	public PIDPosition rightPosController;
+	public PIDPosition leftPosController;
+	
 
 	// declare speed controllers
 	public PIDSpeed rightSpeedController;
@@ -65,6 +68,8 @@ public class Drivetrain extends Subsystem {
 	TCPSocketSender TCPdrivePosController;
 	TCPSocketSender TCPrightSpeedController;
 	TCPSocketSender TCPleftSpeedController;
+	TCPSocketSender TCPrightPosController;
+	TCPSocketSender TCPleftPosController;
 	TCPSocketSender TCProtateController;
 
 	public volatile double leftMotor1Voltage;
@@ -166,10 +171,32 @@ public class Drivetrain extends Subsystem {
 				1, 
 				drivetrainLeftEncoder,
 				RobotMap.DRIVE_TRAIN_PID_PERIOD);
+		
+		
+		// Spawn new PID Controller
+				rightPosController = new PIDPosition(
+						"rightPosController", 
+						RobotMap.DRIVE_TRAIN_RIGHT_POSITION_P,
+						RobotMap.DRIVE_TRAIN_RIGHT_POSITION_I, 
+						RobotMap.DRIVE_TRAIN_RIGHT_POSITION_D, 
+						1, 
+						drivetrainRightEncoder,
+						RobotMap.DRIVE_TRAIN_PID_PERIOD);
+
+				leftPosController = new PIDPosition(
+						"leftPosController", 
+						RobotMap.DRIVE_TRAIN_LEFT_POSITION_P,
+						RobotMap.DRIVE_TRAIN_LEFT_POSITION_I, 
+						RobotMap.DRIVE_TRAIN_LEFT_POSITION_D, 
+						1, 
+						drivetrainLeftEncoder,
+						RobotMap.DRIVE_TRAIN_PID_PERIOD);
 
 		// add min and max output defaults and set array size
 		rightSpeedController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
 		leftSpeedController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
+		rightPosController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
+		leftPosController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
 		driveTrainPosController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
 		rotateController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
 		rotateDriveStraightController.setSIZE(RobotMap.DRIVE_TRAIN_PID_ARRAY_SIZE);
@@ -178,6 +205,8 @@ public class Drivetrain extends Subsystem {
 		// start controller threads
 		rightSpeedController.startThread();
 		leftSpeedController.startThread();
+		rightPosController.startThread();
+		leftPosController.startThread();
 		driveTrainPosController.startThread();
 		rotateController.startThread();
 		rotateDriveStraightController.startThread();
@@ -192,6 +221,12 @@ public class Drivetrain extends Subsystem {
 
 		TCPleftSpeedController = new TCPSocketSender(RobotMap.TCP_SERVER_LEFT_DRIVE_TRAIN_SPEED, leftSpeedController);
 		TCPleftSpeedController.start();
+		
+		TCPrightPosController = new TCPSocketSender(RobotMap.TCO_SERVER_RIGHT_DRIVE_TRAIN_POSITION, rightPosController);
+		TCPrightPosController.start();
+
+		TCPleftPosController = new TCPSocketSender(RobotMap.TCP_SERVER_LEFT_DRIVE_TRAIN_POSITION, leftPosController);
+		TCPleftPosController.start();
 
 		TCProtateController = new TCPSocketSender(RobotMap.TCP_SERVER_ROTATE_CONTROLLER, rotateController);
 		TCProtateController.start();

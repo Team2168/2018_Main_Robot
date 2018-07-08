@@ -124,56 +124,89 @@ public class Robot extends TimedRobot
     
     public static double[] leftVelPathQuintic;
     public static double[] rightVelPathQuintic;
+    public static double[] leftPosPathQuintic;
+    public static double[] rightPosPathQuintic;
     public static double[] headingQuintic;
     
     public static double[] leftVelPathQuintic2;
     public static double[] rightVelPathQuintic2;
+    public static double[] leftPosPathQuintic2;
+    public static double[] rightPosPathQuintic2;
     public static double[] headingQuintic2;
     
     public static double[] leftVelPathQuintic3;
     public static double[] rightVelPathQuintic3;
+    public static double[] leftPosPathQuintic3;
+    public static double[] rightPosPathQuintic3;
     public static double[] headingQuintic3;
     
     public static double[] leftVelPathQuintic4;
     public static double[] rightVelPathQuintic4;
+    public static double[] leftPosPathQuintic4;
+    public static double[] rightPosPathQuintic4;
     public static double[] headingQuintic4;
  
     
     public static double[] leftVelPathQuintic5;
     public static double[] rightVelPathQuintic5;
+    public static double[] leftPosPathQuintic5;
+    public static double[] rightPosPathQuintic5;
     public static double[] headingQuintic5;
     
     public static double[] leftVelPathQuintic6;
     public static double[] rightVelPathQuintic6;
+    public static double[] leftPosPathQuintic6;
+    public static double[] rightPosPathQuintic6;
     public static double[] headingQuintic6;
     
     public static double[] leftVelPathQuintic7;
     public static double[] rightVelPathQuintic7;
+    public static double[] leftPosPathQuintic7;
+    public static double[] rightPosPathQuintic7;
     public static double[] headingQuintic7;
     
     public static double[] leftVelPathQuintic8;
     public static double[] rightVelPathQuintic8;
+    public static double[] leftPosPathQuintic8;
+    public static double[] rightPosPathQuintic8;
     public static double[] headingQuintic8;
     
     public static double[] leftVelPathQuintic9;
     public static double[] rightVelPathQuintic9;
+    public static double[] leftPosPathQuintic9;
+    public static double[] rightPosPathQuintic9;
     public static double[] headingQuintic9;
     
     public static double[] leftVelPathQuintic10;
     public static double[] rightVelPathQuintic10;
+    public static double[] leftPosPathQuintic10;
+    public static double[] rightPosPathQuintic10;
     public static double[] headingQuintic10;
     
     public static double[] leftVelPathQuintic11;
     public static double[] rightVelPathQuintic11;
+    public static double[] leftPosPathQuintic11;
+    public static double[] rightPosPathQuintic11;
     public static double[] headingQuintic11;
     
     public static double[] leftVelPathQuintic12;
     public static double[] rightVelPathQuintic12;
+    public static double[] leftPosPathQuintic12;
+    public static double[] rightPosPathQuintic12;
     public static double[] headingQuintic12;
+    
     
     public static double[] leftVelPathQuintic13;
     public static double[] rightVelPathQuintic13;
+    public static double[] leftPosPathQuintic13;
+    public static double[] rightPosPathQuintic13;
     public static double[] headingQuintic13;
+    
+    public static double[] leftPosPathQuintic14;
+    public static double[] rightPosPathQuintic14;
+    public static double[] leftVelPathQuintic14;
+    public static double[] rightVelPathQuintic14;
+    public static double[] headingQuintic14;
     
  
     
@@ -433,6 +466,22 @@ public class Robot extends TimedRobot
 		this.leftVelPathQuintic13 = quinticPath13.getLeftVel();
 		this.rightVelPathQuintic13 = quinticPath13.getRightVel();
 		this.headingQuintic13 = quinticPath13.getHeadingDeg();
+		
+		
+		double[][] waypointPath14= new double[][] {
+			{0.0, 26.5, 0},
+			{5.0, 26.5, 0} //works with 19.3 on practice bot
+			//{25.0, 15, -Math.PI/2+0.0001}, //end
+			//{25.0, 19, -Math.PI/2+0.0001},
+			//{25.0, 24.0, -Math.PI/2+0.0001},
+			//{27.0, 26.0, 0}
+		};
+		QuinticTrajectory quinticPath14 = new QuinticTrajectory("path14",waypointPath14);
+		this.leftVelPathQuintic14 = quinticPath14.getLeftPos();
+		this.rightVelPathQuintic14 = quinticPath14.getRightPos();
+		this.leftVelPathQuintic14 = quinticPath14.getLeftVel();
+		this.rightVelPathQuintic14 = quinticPath14.getRightVel();
+		this.headingQuintic14 = quinticPath14.getHeadingDeg();
 		
 		
 		

@@ -170,8 +170,8 @@ public class QuinticTrajectory
 		fig3.addData(quinticPath2.rightPath, Color.magenta);
 		fig3.addData(waypointPath2, null, Color.black);
  
-//		fig3.addData(quinticPath3.leftPath, Color.blue);
-//		fig3.addData(quinticPath3.rightPath, Color.magenta);
+//		fig3.addData(quinticPath2.leftPath, Color.blue);
+//		fig3.addData(quinticPath2.rightPath, Color.magenta);
 //		fig3.addData(waypointPath3, null, Color.black);
 		
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
@@ -219,10 +219,11 @@ public class QuinticTrajectory
 		FalconLinePlot fig33 = new FalconLinePlot(new double[][]{{0.0,0.0}});
 		fig33.yGridOn();
 		fig33.xGridOn();
-		fig33.setYLabel("Velocity (ft/sec)");
+		fig33.setYLabel("Position (ft/time)");
 		fig33.setXLabel("time (seconds)");
 		fig33.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig33.addData(quinticPath.time,quinticPath.leftPos, Color.magenta);
+		fig33.addData(quinticPath.time,quinticPath.rightPos, Color.blue);
 		
 		
 		
@@ -634,6 +635,18 @@ public class QuinticTrajectory
 			  this.rightJerk[i][1] = this.leftRightTraj.right.getSegment(i).jerk;
 			  
 		  }
+	  }
+	  
+	  public double[] getLeftPos()
+	  {
+		 
+			  return this.leftPos;
+	  }
+	  
+	  public double[] getRightPos()
+	  {
+		 
+		  return this.rightPos;
 	  }
 	  
 	  public double[] getLeftVel()
