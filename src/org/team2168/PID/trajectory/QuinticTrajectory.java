@@ -76,8 +76,8 @@ public class QuinticTrajectory
 
 	private static PrintWriter log;
 
-	private static String directory = "/home/lvuser/Path/";
-	//private static String directory = "Path/";
+	//private static String directory = "/home/lvuser/Path/";
+	private static String directory = "Path/";
 
 	
 	public boolean reverse = false;
@@ -93,19 +93,13 @@ public class QuinticTrajectory
 		
 		
 		double[][] waypointPath = new double[][]{
-			{1, 24, 0},
-			{12.5, 24, 0},
-			{15.5, 20, -Math.PI/2+0.0001},
-			{15.5, 17, -Math.PI/2+0.0001}, //end of comp
-			{15.5, 13, -Math.PI/2+0.0001},
-			{15.5, 9, -Math.PI/2+0.0001},
-			{17.5, 7, 0}
+			{0.0, 26.5, 0},
+			{5.0, 26.5, 0} //works with 19.3 on practice bot
 		};
 		
 		double[][] waypointPath2 = new double[][]{
-			{2, 26.5, 0}, //crazy path
-			{17.0, 26.5, 0},
-			{19.6, 25.5, -0.349} //works with 19.3 on practice bot
+			{0.0, 26.5, 0},
+			{5.0, 26.5, 0} //works with 19.3 on practice bot
 	};
 		
 	double[][] waypointPath3 = new double[][]{
@@ -165,6 +159,7 @@ public class QuinticTrajectory
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
+		
 
 		fig3.addData(quinticPath2.leftPath, Color.blue);
 		fig3.addData(quinticPath2.rightPath, Color.magenta);
@@ -224,6 +219,7 @@ public class QuinticTrajectory
 		fig33.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig33.addData(quinticPath.time,quinticPath.leftPos, Color.magenta);
 		fig33.addData(quinticPath.time,quinticPath.rightPos, Color.blue);
+		fig33.addData(quinticPath.time,quinticPath.heading, Color.green);
 		
 		
 		

@@ -477,8 +477,8 @@ public class Robot extends TimedRobot
 			//{27.0, 26.0, 0}
 		};
 		QuinticTrajectory quinticPath14 = new QuinticTrajectory("path14",waypointPath14);
-		this.leftVelPathQuintic14 = quinticPath14.getLeftPos();
-		this.rightVelPathQuintic14 = quinticPath14.getRightPos();
+		this.leftPosPathQuintic14 = quinticPath14.getLeftPos();
+		this.rightPosPathQuintic14 = quinticPath14.getRightPos();
 		this.leftVelPathQuintic14 = quinticPath14.getLeftVel();
 		this.rightVelPathQuintic14 = quinticPath14.getRightVel();
 		this.headingQuintic14 = quinticPath14.getHeadingDeg();

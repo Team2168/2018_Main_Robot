@@ -30,7 +30,7 @@ public class DrivePIDPathQuinticPID extends Command {
 	double jMax =15000.0;
 	
     int counter;
-    double ff_term = 1.15;
+    double ff_term = 0.6;
     double oldClock;
     double angle;
     double lastRotateOutput;
@@ -415,6 +415,7 @@ public class DrivePIDPathQuinticPID extends Command {
 		 	   
 	 	  if(!direction)
 		   {
+
 			   this.setPointLeftVel = setPointLeftVel;
 			   this.setPointRightVel = setPointRightVel;
 			   this.setPointHeading = setPointHeading;
@@ -453,11 +454,11 @@ public class DrivePIDPathQuinticPID extends Command {
 		{
 			Robot.drivetrain.leftPosController.reset();
 			Robot.drivetrain.leftPosController.Enable();
-			Robot.drivetrain.leftPosController.setSetPoint(setPointLeftPos);
+			Robot.drivetrain.leftPosController.setSetPoint(this.setPointLeftPos);
 			
 			Robot.drivetrain.rightPosController.reset();
 			Robot.drivetrain.rightPosController.Enable();
-			Robot.drivetrain.rightPosController.setSetPoint(setPointRightPos);
+			Robot.drivetrain.rightPosController.setSetPoint(this.setPointRightPos);
 		}
 		
 		Robot.drivetrain.rotateDriveStraightController.reset();
