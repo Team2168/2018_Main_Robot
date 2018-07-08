@@ -93,13 +93,9 @@ public class QuinticTrajectory
 		
 		
 		double[][] waypointPath = new double[][]{
-			{1, 24, 0},
-			{12.5, 24, 0},
-			{15.5, 20, -Math.PI/2+0.0001},
-			{15.5, 17, -Math.PI/2+0.0001}, //end of comp
-			{15.5, 13, -Math.PI/2+0.0001},
-			{15.5, 9, -Math.PI/2+0.0001},
-			{17.5, 7, 0}
+			{1, 15.5, 0}, //Right switch Path
+			{2, 15.5, 0},
+			{9.8, 10.5, 0} //need to add 1.5 to 12.6 //for 4th match 
 		};
 		
 		double[][] waypointPath2 = new double[][]{

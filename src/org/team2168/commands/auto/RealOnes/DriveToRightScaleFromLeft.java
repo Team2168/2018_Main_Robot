@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveToRightScaleFromLeft extends CommandGroup {
 
     public DriveToRightScaleFromLeft() {
+    	//drive stright to null territory
     	addParallel(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new RobotPrep());
     	addParallel(new OperationKeepCube());
@@ -35,41 +36,42 @@ public class DriveToRightScaleFromLeft extends CommandGroup {
     	
     	
     	
-    	addParallel(new DrivePIDPath(5.0, 5.0));
+    	//addParallel(new DrivePIDPath(5.0, 5.0));
+    	//addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
     	addParallel(new DriveLiftPIDZZZ(35.0, 0.5, 0.1,1.0,true));
-    	addParallel(new DrivePIDPath(3.5, 5.0)); //shit might go down
-    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic5, Robot.rightVelPathQuintic5, Robot.headingQuintic5));
-    	addSequential(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true));
-    	addSequential(new  DrivePIDPathQuintic(0, -45, 2500, 3000, 30000));//rotate A to B
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.45), 0.3);
-   
-    	addParallel(new PivotIntakeUp());
+    	addSequential(new DriveXDistance(185.5/12.0, 1.0));
+    	addSequential(new RotateXDistancePIDZZZ(89,0.5,0.24,0.45,true));
+    	addSequential(new DriveXDistance(15.0, 1.0));
     	
+    	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
+    	addSequential(new RotateXDistancePIDZZZ(-30,0.5,0.24,0.5,true)); //Rotate to scale
+    	addSequential(new DriveXDistance(1.9, 1.0));
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit
+    	//addParallel(new DrivePIDPath(1.8,true)); //drive back 2.2 //stuff will go down
+    	addParallel(new EngageIntakePivotHardStop());
+    	addSequential(new DrivePIDPath(2.2,true,false)); //drive back 2.2 //stuff will go down
+    	//addSequential(new OpenIntake());
     	
-    	addSequential(new Sleep(), .3);
-    	addSequential(new DrivePIDPath(1.9,true)); //drive back 2.2 //shit will go down
-    	addSequential(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addParallel(new  DrivePIDPathQuintic(-45, -155, 2500, 3000, 30000));//rotate A to B
-    	addParallel(new PivotIntakeDown());
-    	addSequential(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addSequential(new RotateXDistancePIDZZZ(-155,0.5,0.15,0.1,true),0.2);
+    	//drive lift down and get second cube
+    	//addParallel(new PivotIntakeUp());
+    	addParallel(new DriveLiftPIDZZZ(0.5, 0.7, 0.2,1.0,true)); //drive lift down slowly;
+    	addSequential(new RotateXDistancePIDZZZ(-150,0.5,0.24,0.5,true));
+   	
     	
-    	//get 2nd cube
-    	//addSequential(new RetractPivotWithPiston());
-    	//addParallel(new OpenIntake());
+    	addSequential(new PivotIntakeDown());
+    	addParallel(new OpenIntake());
     	addParallel(new IntakeUntilCube(), 0.7);
     	addParallel(new OperationKeepCube());
-    	addSequential(new DrivePIDPath(5.0, 5.0)); //shit might go down
+    	addSequential(new DrivePIDPath(2.8, 5.0)); //stuff might go down
     	addParallel(new CloseIntake());
     	addParallel(new OperationKeepCube());
+    	addSequential(new DrivePIDPath(2.1, 5.0,true)); //drive back originally 2.3 //stuff will go down
+    	addParallel(new DriveLiftPIDZZZ(80, 1.0, 0.2,1.0,true)); //drive lift up
+    	addSequential(new RotateXDistancePIDZZZ(-30,0.5,0.24,0.5,true));
     	
-    	addSequential(new DrivePIDPath(2.3, 5.0,true)); //drive back 2.5 //shit will go down
-       	addParallel(new DriveLiftPIDZZZ(30, 0.7, 0.2,1.0,true)); //drive lift down slowly
-    	addSequential(new DrivePIDPathQuintic(-155 , -20, 2500, 3000, 30000));//rotate A to B
-    	addParallel(new RotateXDistancePIDZZZ(-20.0,0.9,0.2,0.1,true));
-    	addSequential(new DriveLiftPIDZZZ(80.0, 7.0, 0.1,1.0,true)); //70
-    	addSequential(new DrivePIDPath(1.4, 5.0)); //drive back 2.2 //shit might go down
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.4), 0.4);
+    	addSequential(new DrivePIDPath(1.9, 1.0)); //stuff might go down
+    	addParallel(new OpenIntake());
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit
     	
     	
     	 

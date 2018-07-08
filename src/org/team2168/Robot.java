@@ -13,11 +13,9 @@ import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
 import org.team2168.commands.auto.RealOnes.NeverRunMe;
 import org.team2168.commands.auto.RealOnes.TestAuto;
 import org.team2168.commands.auto.RightSide.DriveToScale2CubeFromRightSide;
-import org.team2168.commands.auto.selector.AutoStartCenter2Cube;
-
+import org.team2168.commands.auto.selector.AutoStartCenter3Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft1Cube;
 import org.team2168.commands.auto.selector.AutoStartLeft2Cube;
-
 import org.team2168.commands.auto.selector.AutoStartLeft2CubeSuperDooperPooper;
 import org.team2168.commands.auto.selector.AutoStartLeft3CubeNotSafe;
 import org.team2168.commands.auto.selector.AutoStartLeft3CubeSafe;
@@ -256,7 +254,7 @@ public class Robot extends TimedRobot
       {
 	    	{1, 15.5, 0}, //Right switch Path
 			{2, 15.5, 0},
-			{9.5, 11.5, 0} //need to add 1.5 to 12.6 //for 4th match  
+			{10.5, 10.3, 0} //need to add 1.5 to 12.6 //for 4th match  
 	};
 
 
@@ -758,7 +756,7 @@ public class Robot extends TimedRobot
 			autoChooser = new SendableChooser<Command>();
 			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
 			autoChooser.addObject("Do Nothing", new DoNothing());
-	        autoChooser.addObject("Center Auto 2 Cube", new AutoStartCenter2Cube());	        
+	        autoChooser.addObject("Center Auto 3 Cube", new AutoStartCenter3Cube());	        
 	        //autoChooser.addObject("Left Auto 1 Cube", new AutoStartLeft1Cube());
 	        //autoChooser.addObject("Left Auto 2 Cube", new AutoStartLeft2Cube());
 			//autoChooser.addObject("Left Auto 3 Dangerous", new AutoStartLeft2CubeSuperDooperPooper());

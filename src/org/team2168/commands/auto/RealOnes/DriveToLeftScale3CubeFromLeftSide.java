@@ -85,7 +85,7 @@ public class DriveToLeftScale3CubeFromLeftSide extends CommandGroup {
     	addParallel(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
     	addSequential(new DrivePIDPath(1.6, 5.0)); //drive fwd
     	addParallel(new PivotIntakeDown());
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.36), 0.3);
+    	addSequential(new DriveIntakeWheelsWithConstant(-0.30), 0.3);
     	//addParallel(new OpenIntake());
     	
     	//drive lift down and get third cube
@@ -122,7 +122,8 @@ public class DriveToLeftScale3CubeFromLeftSide extends CommandGroup {
     	addSequential(new DrivePIDPath(3.5, 5.0, true)); //drive back5 
     	addParallel(new DriveLiftPIDZZZ(45.0, 1.0, 0.1,1.0,true));
     	addParallel(new PivotIntakeUp());
-    	addSequential(new  DrivePIDPathQuintic(130, 20, 2500, 3000, 30000));//rotate A to B
+    	//addSequential(new  DrivePIDPathQuintic(130, 20, 2500, 3000, 30000));//rotate A to B
+   	    addSequential(new RotateXDistancePIDZZZ(24,0.5,0.24,0.5,true));
     	//addParallel(new RotateXDistancePIDZZZ(20,0.5,0.15,0.1,true),0.2);
     	addParallel(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
     	//addParallel(new DisEngageIntakePivotHardStop());
