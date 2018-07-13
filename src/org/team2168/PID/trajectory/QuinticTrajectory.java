@@ -95,7 +95,7 @@ public class QuinticTrajectory
 		double[][] waypointPath = new double[][]{
 			{1, 15.5, 0}, //Right switch Path
 			{2, 15.5, 0},
-			{9.8, 10.5, 0} //need to add 1.5 to 12.6 //for 4th match 
+			{10.5, 20.3, 0} 
 		};
 		
 		double[][] waypointPath2 = new double[][]{

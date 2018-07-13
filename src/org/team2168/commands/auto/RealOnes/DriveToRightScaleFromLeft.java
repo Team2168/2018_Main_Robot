@@ -71,8 +71,7 @@ public class DriveToRightScaleFromLeft extends CommandGroup {
     	
     	addSequential(new DrivePIDPath(1.9, 1.0)); //stuff might go down
     	addParallel(new OpenIntake());
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit
-    	
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.45)); //spit    	
     	
     	 
     }

@@ -9,6 +9,7 @@ import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.hardStop.EngageIntakePivotHardStop;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
 import org.team2168.commands.intake.IntakeUntilCube;
+import org.team2168.commands.intake.OpenIntake;
 import org.team2168.commands.intake.OperationKeepCube;
 import org.team2168.commands.intake.StopWheels;
 import org.team2168.commands.intake.RobotPrep;
@@ -43,7 +44,7 @@ public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
     	
     	//spit
     	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *0.5),0.4);
-    	addSequential(new StopWheels());
+    	addSequential(new OpenIntake());
     	
     	
     	//get second cube for switch

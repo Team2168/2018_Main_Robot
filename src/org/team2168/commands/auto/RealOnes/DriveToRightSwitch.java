@@ -37,9 +37,14 @@ public class DriveToRightSwitch extends CommandGroup {
     	addParallel(new OperationKeepCube());
     	addParallel(new PivotIntakeDown()); 
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));
+    	//addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic3, Robot.rightVelPathQuintic3, Robot.headingQuintic3));
+    	addSequential(new DrivePIDPath(2.0,5.0));
+    	addSequential(new RotateXDistancePIDZZZ(45,0.6,0.2,0.5,true));
+    	addSequential(new DrivePIDPath(4.1,5.0));
+    	addSequential(new RotateXDistancePIDZZZ(0,0.6,0.2,0.5,true));
+    	addSequential(new DrivePIDPath(4.0,5.0));
     	//spit cube after path    	
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.45),0.25);
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.60),1.0);
    	 	
     	//second cube
    	    addSequential(new DrivePIDPath(3.0,5.0,true)); //drive back 3
@@ -59,11 +64,11 @@ public class DriveToRightSwitch extends CommandGroup {
    	    addSequential(new RotateXDistancePIDZZZ(0,0.5,0.24,0.5,true));
    	    
    	    addSequential(new DrivePIDPath(3.0,5.0));
-   	    addSequential(new DriveIntakeWheelsWithConstant(-0.4),0.4);
-	 	addSequential(new StopWheels());
+   	    addParallel(new DriveIntakeWheelsWithConstant(-0.60),1.0);
+	 	
 	 	
 	 	//third cube
-   	    addSequential(new DrivePIDPath(3.5,5.0,true)); //drive back 3
+   	    addSequential(new DrivePIDPath(3.5,5.0,true)); //dive back 3
    	    addParallel(new DriveLiftPIDZZZ(10.0, 0.7, 0.1,1.0,true));	 	
    	    //addSequential(new  DrivePIDPathQuintic(0, -40, 2500, 3000, 30000));//rotate A to B
    	    //addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true), 0.2);
@@ -81,7 +86,7 @@ public class DriveToRightSwitch extends CommandGroup {
    	    
    	    addSequential(new DrivePIDPath(3.0,5.0));
    	    addSequential(new RotateXDistancePIDZZZ(0,0.5,0.24,0.5,true));
-   	    addSequential(new DriveIntakeWheelsWithConstant(-0.4),0.4);
+   	    addSequential(new DriveIntakeWheelsWithConstant(-0.60));
 	 	addSequential(new StopWheels());
    	 	
     	
