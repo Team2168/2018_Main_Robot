@@ -1,12 +1,11 @@
 package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
+import org.team2168.commands.auto.RealOnes.AidansRightyTighty3CubeAuto;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeftSafe;
-import org.team2168.commands.auto.RealOnes.LeftSwitchOnlyFromLeftSide;
-import org.team2168.commands.auto.RealOnes.SimpleOneCube;
+import org.team2168.commands.auto.RightSide.DriveToRightScaleAndRightSwitchRightSide;
+import org.team2168.commands.auto.RightSide.RightSwitchOnlyFromRightSide;
+import org.team2168.commands.auto.RightSide.oneCube;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,29 +13,28 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  *
  */
-public class AutoStartLeftSimple extends Command {
+public class AutoStartRightSimple extends Command {
 
-    public AutoStartLeftSimple() {
+    public AutoStartRightSimple() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (Robot.gameData.equals("LLL"))
+    	if (Robot.gameData.equals("RRR"))
     	{
     		if (Robot.getAutoPriorityInt() == 0) //switch priority
-    			Scheduler.getInstance().add(new SimpleOneCube());
+    			Scheduler.getInstance().add(new oneCube());
     		else
-    			Scheduler.getInstance().add(new SimpleOneCube());
+    			Scheduler.getInstance().add(new oneCube());
     	}
-    	else if (Robot.gameData.equals("LRL"))
-    		Scheduler.getInstance().add(new LeftSwitchOnlyFromLeftSide());
-    	else if (Robot.gameData.equals("RRR"))
-//    		Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
-    		Scheduler.getInstance().add(new DriveStraight());
     	else if (Robot.gameData.equals("RLR"))
-      		Scheduler.getInstance().add(new SimpleOneCube());
+    		Scheduler.getInstance().add(new RightSwitchOnlyFromRightSide());
+    	else if (Robot.gameData.equals("LLL"))
+    		Scheduler.getInstance().add(new DriveStraight());
+    	else if (Robot.gameData.equals("LRL"))
+      		Scheduler.getInstance().add(new oneCube());
     }
 
     // Called repeatedly when this Command is scheduled to run

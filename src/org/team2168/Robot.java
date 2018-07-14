@@ -24,6 +24,7 @@ import org.team2168.commands.auto.selector.AutoStartLeft3CubeSafe;
 import org.team2168.commands.auto.selector.AutoStartLeftSimple;
 import org.team2168.commands.auto.selector.AutoStartRight3CubeNotSafe;
 import org.team2168.commands.auto.selector.AutoStartRight3CubeSafe;
+import org.team2168.commands.auto.selector.AutoStartRightSimple;
 import org.team2168.commands.lights.AutoWithoutCube;
 import org.team2168.commands.lights.SuckPattern;
 import org.team2168.commands.lights.TeleopWithoutCube;
@@ -760,14 +761,16 @@ public class Robot extends TimedRobot
 			autoChooser = new SendableChooser<Command>();
 			autoChooser.addDefault("Drive Straight", new DriveStraight(8.0));
 			autoChooser.addObject("Do Nothing", new DoNothing());
-	        autoChooser.addObject("Center Auto 3 Cube", new AutoStartCenter3Cube());	        
+	       
+			autoChooser.addObject("Center Auto 3 Cube", new AutoStartCenter3Cube());	        
 	       
 			autoChooser.addObject("Left Auto 3 Cube Safe", new AutoStartLeft3CubeSafe());
-			autoChooser.addObject("Left Auto 3 Cube Very very (maybe) Safe", new AutoStartLeft3CubeNotSafe());
+			autoChooser.addObject("Left Auto 3 Cube not Safe", new AutoStartLeft3CubeNotSafe());
 			autoChooser.addObject("Left Auto Simple", new AutoStartLeftSimple());
+			
 			autoChooser.addObject("Right Auto 3 Cube Safe", new AutoStartRight3CubeSafe());
 			autoChooser.addObject("Right Auto 3 Cube not Safe", new AutoStartRight3CubeNotSafe());
-			autoChooser.addObject("Right Auto 3 test not Safe", new oneCube());
+			autoChooser.addObject("Right Auto Simple", new AutoStartRightSimple());
 
 
 		}

@@ -43,7 +43,7 @@ public class LeftSwitchOnlyFromLeftSide extends CommandGroup {
     
     	
     	//spit
-    	addSequential(new DriveIntakeWheelsWithConstant(RobotMap.CUBE_INTAKE_MAX_OUTAKE *0.5),0.4);
+    	addSequential(new DriveIntakeWheelsWithConstant(-.45),0.4);
     	addSequential(new OpenIntake());
     	
     	

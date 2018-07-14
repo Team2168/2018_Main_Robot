@@ -53,7 +53,7 @@ public class DriveToLeftSwitch extends CommandGroup {
    	 	
    	 	//second cube
     	addParallel(new DriveIntakeWheelsWithConstant(-0.60),1.0);
-    	addSequential(new DrivePIDPath(3.5,5.0,true)); //drive back 3
+    	addSequential(new DrivePIDPath(3.8,5.0,true)); //drive back 3
    	 	addParallel(new DriveLiftPIDZZZ(0.0, 0.7, 0.1,1.0,true));
    	  //  addSequential(new  DrivePIDPathQuintic(0, 40, 2500, 3000, 30000));//rotate A to B
    	 	
@@ -90,9 +90,9 @@ public class DriveToLeftSwitch extends CommandGroup {
         addSequential(new  DrivePIDPathQuintic(40, -20, 2500, 3000, 30000));//rotate A to B
 	 	addSequential(new RotateXDistancePIDZZZ(0,0.6,0.2,0.5,true), 0.3);
 	 	
-	 	addSequential(new DrivePIDPath(4.0,5.0));
+	 	addSequential(new DrivePIDPath(3.5,5.0));
 	 	addSequential(new RotateXDistancePIDZZZ(0,0.5,0.24,0.5,true));
-	 	addSequential(new DriveIntakeWheelsWithConstant(-0.60 ));
+	 	//addSequential(new DriveIntakeWheelsWithConstant(-0.60 ));
 	 	addSequential(new StopWheels());
  	 
     }

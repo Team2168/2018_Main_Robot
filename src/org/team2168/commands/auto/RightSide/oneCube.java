@@ -1,6 +1,8 @@
 package org.team2168.commands.auto.RightSide;
 
 import org.team2168.RobotMap;
+import org.team2168.commands.auto.Sleep;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.commands.drivetrain.PIDCommands.DriveXDistance;
 import org.team2168.commands.drivetrain.PIDCommands.RotateXDistancePIDZZZ;
 import org.team2168.commands.intake.DriveIntakeWheelsWithConstant;
@@ -25,14 +27,14 @@ public class oneCube extends CommandGroup {
     	
     	
     	//addParallel(new DrivePIDPath(5.0, 5.0));
-    	addParallel(new DriveLiftPIDZZZ(78.0, 0.5, 0.1,1.0,true));
+    	addParallel(new DriveLiftPIDZZZ(81.0, 0.5, 0.1,1.0,true));
     	//addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
-    	addSequential(new DriveXDistance(20.0, 1.0));
-    	addSequential(new RotateXDistancePIDZZZ(-90,0.5,0.24,0.5,true),2.0);
+    	addSequential(new DrivePIDPath(19.0, 1.0));
+    	addSequential(new Sleep(), 0.5);
+    	addSequential(new RotateXDistancePIDZZZ(-90,0.45,0.24,0.5,true),2.0);
     	
     	
     	
     	addParallel(new DriveIntakeWheelsWithConstant(-0.53), 0.35); //spit
-    	addSequential(new RotateXDistancePIDZZZ(10,0.5,0.24,0.5,true));
-    	addSequential(new DriveLiftPIDZZZ(10.0, 0.5, 0.1,1.0,true));    }
-}
+    	addSequential(new DrivePIDPath(2.0, true));
+}}
