@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class oneCube extends CommandGroup {
+public class RightSideSimple extends CommandGroup {
 
-    public oneCube() {
+    public RightSideSimple() {
     	addParallel(new DriveIntakeWheelsWithConstant(RobotMap.AUTO_CUBE_INTAKE_VALUE), 0.25);
     	addParallel(new RobotPrep());
     	addParallel(new OperationKeepCube());
@@ -29,7 +29,12 @@ public class oneCube extends CommandGroup {
     	//addParallel(new DrivePIDPath(5.0, 5.0));
     	addParallel(new DriveLiftPIDZZZ(81.0, 0.5, 0.1,1.0,true));
     	//addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
-    	addSequential(new DrivePIDPath(19.0, 1.0));
+    	addSequential(new DrivePIDPath(18.0
+    			
+    			
+    			
+//    			'
+    			, 1.0));
     	addSequential(new Sleep(), 0.5);
     	addSequential(new RotateXDistancePIDZZZ(-90,0.45,0.24,0.5,true),2.0);
     	

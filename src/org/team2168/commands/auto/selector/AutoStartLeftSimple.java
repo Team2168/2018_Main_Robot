@@ -6,7 +6,7 @@ import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeftSafe;
 import org.team2168.commands.auto.RealOnes.LeftSwitchOnlyFromLeftSide;
-import org.team2168.commands.auto.RealOnes.SimpleOneCube;
+import org.team2168.commands.auto.RealOnes.LeftSideSimple;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -26,9 +26,9 @@ public class AutoStartLeftSimple extends Command {
     	if (Robot.gameData.equals("LLL"))
     	{
     		if (Robot.getAutoPriorityInt() == 0) //switch priority
-    			Scheduler.getInstance().add(new SimpleOneCube());
+    			Scheduler.getInstance().add(new LeftSideSimple());
     		else
-    			Scheduler.getInstance().add(new SimpleOneCube());
+    			Scheduler.getInstance().add(new LeftSideSimple());
     	}
     	else if (Robot.gameData.equals("LRL"))
     		Scheduler.getInstance().add(new LeftSwitchOnlyFromLeftSide());
@@ -36,7 +36,7 @@ public class AutoStartLeftSimple extends Command {
 //    		Scheduler.getInstance().add(new RightScaleOnlyFromLeftSide());
     		Scheduler.getInstance().add(new DriveStraight());
     	else if (Robot.gameData.equals("RLR"))
-      		Scheduler.getInstance().add(new SimpleOneCube());
+      		Scheduler.getInstance().add(new LeftSideSimple());
     }
 
     // Called repeatedly when this Command is scheduled to run
