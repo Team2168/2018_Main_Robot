@@ -40,14 +40,14 @@ public class DriveToLeftScale3CubeFromLeftSide extends CommandGroup {
     	
     	
     	//addParallel(new DrivePIDPath(5.0, 5.0));
-    	addParallel(new DriveLiftPIDZZZ(78.0, 0.5, 0.1,1.0,true));
+    	addParallel(new DriveLiftPIDZZZ(80.0, 0.5, 0.1,1.0,true));
     	//addParallel(new DrivePIDPath(3.5, 5.0)); //stuff might go down
     	addSequential(new DriveXDistance(185.0/12.0, 1.0));
     	addSequential(new RotateXDistancePIDZZZ(30,0.5,0.24,0.5,true));
     	addSequential(new DriveXDistance(3.2, 1.0));
     	
     	
-    	addParallel(new DriveIntakeWheelsWithConstant(-0.49), 0.30); //spit
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.39), 0.30); //spit
     	
     	addParallel(new EngageIntakePivotHardStop());
     	//addSequential(new OpenIntake());
@@ -85,7 +85,7 @@ public class DriveToLeftScale3CubeFromLeftSide extends CommandGroup {
     	addSequential(new RotateXDistancePIDZZZ(15.0,0.9,0.24,0.5,true));
     	addParallel(new OperationKeepCube());
     	addParallel(new PivotIntakeDown());
-    	addParallel(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
+    	addSequential(new DriveLiftPIDZZZ(80.0, 1.0, 0.1,1.0,true)); //70
     	addSequential(new DrivePIDPath(1.6, 5.0)); //drive fwd
     	addParallel(new PivotIntakeDown());
     	addParallel(new OpenIntake());
