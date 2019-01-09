@@ -40,44 +40,49 @@ public class DriveToLeftSwitch extends CommandGroup {
     	
     	//move lift up and drive path to left switch
     	addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
-    	addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic4, Robot.rightVelPathQuintic4, Robot.headingQuintic4)); 	
+    	//addSequential(new DrivePIDPathQuintic(Robot.leftVelPathQuintic4, Robot.rightVelPathQuintic4, Robot.headingQuintic4));
+    	addSequential(new DrivePIDPath(2.0,3.0));
+    	addSequential(new RotateXDistancePIDZZZ(-60,0.6,0.2,0.5,true));
+    	addSequential(new DrivePIDPath(3.8,3.0));
+    	addSequential(new RotateXDistancePIDZZZ(0,0.6,0.2,0.5,true));
+    	addSequential(new DrivePIDPath(4.2,3.0));
     	
     	//spit cube after path
-    	addSequential(new DriveIntakeWheelsWithConstant(-0.4),0.2);
+    	//addSequential(new DriveIntakeWheelsWithConstant(-0.45),0.30);
    	 	
    	 	
    	 	//second cube
-   	 	addSequential(new DrivePIDPath(3.5,5.0,true)); //drive back 3
+    	addParallel(new DriveIntakeWheelsWithConstant(-0.60),1.0);
+    	addSequential(new DrivePIDPath(3.8,5.0,true)); //drive back 3
    	 	addParallel(new DriveLiftPIDZZZ(0.0, 0.7, 0.1,1.0,true));
-   	    addSequential(new  DrivePIDPathQuintic(0, 40, 2500, 3000, 30000));//rotate A to B
+   	  //  addSequential(new  DrivePIDPathQuintic(0, 40, 2500, 3000, 30000));//rotate A to B
    	 	
    	    //addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true));
-   	    addSequential(new RotateXDistancePIDZZZ(-rotateSecondCube,0.6,0.4,0.5,true), 0.3);
-   	    
+   	    addSequential(new RotateXDistancePIDZZZ(41,0.5,0.24,0.5,true));
    	 	addParallel(new OpenIntake());
    	    addParallel(new IntakeUntilCube()); 
-   	 	addSequential(new DrivePIDPath(2.0,5.0));  //6
+   	 	addSequential(new DrivePIDPath(2.5,5.0));  //6
    	 	addParallel(new OperationKeepCube());
    	 	addParallel(new CloseIntake());
    	 	addSequential(new DrivePIDPath(2, 5.0,true));
         addParallel(new DriveLiftPIDZZZ(40.0, 0.5, 0.1,1.0,true));
         addSequential(new  DrivePIDPathQuintic(40, -10, 2500, 3000, 30000));//rotate A to B
-   	 	addSequential(new RotateXDistancePIDZZZ(0,0.6,0.2,0.5,true), 0.3);
+   	 	addSequential(new RotateXDistancePIDZZZ(0.0,0.6,0.2,0.5,true), 0.5); 
    	    
    	 	
    	 	
    	 	addSequential(new DrivePIDPath(3.0, 5.0));
-   	    addSequential(new DriveIntakeWheelsWithConstant(-0.4 ),0.2);
+   	    addParallel(new DriveIntakeWheelsWithConstant(-0.60),1.0);
 	 	
 	 	
 	 	//3rd cube
 	 	addSequential(new DrivePIDPath(backupSecondCube,5.0,true)); //drive back 3
    	 	addParallel(new DriveLiftPIDZZZ(10.0, 0.7, 0.1,1.0,true));
-   	    addSequential(new  DrivePIDPathQuintic(0, 35, 2500, 3000, 30000));//rotate A to B
-   	    
+   	    //addSequential(new  DrivePIDPathQuintic(0, 35, 2500, 3000, 30000));//rotate A to B
+   	    addSequential(new RotateXDistancePIDZZZ(30,0.5,0.24,0.5,true));
    	    addParallel(new OpenIntake());
 	    addParallel(new IntakeUntilCube()); 
-	 	addSequential(new DrivePIDPath(4.6,5.0));  //6
+	 	addSequential(new DrivePIDPath(4.8,5.0));  //6
 	 	addParallel(new OperationKeepCube());
 	 	addParallel(new CloseIntake());
 	 	addSequential(new DrivePIDPath(3,5.0,true));
@@ -85,8 +90,9 @@ public class DriveToLeftSwitch extends CommandGroup {
         addSequential(new  DrivePIDPathQuintic(40, -20, 2500, 3000, 30000));//rotate A to B
 	 	addSequential(new RotateXDistancePIDZZZ(0,0.6,0.2,0.5,true), 0.3);
 	 	
-	 	addSequential(new DrivePIDPath(4.0,5.0));
-   	    addSequential(new DriveIntakeWheelsWithConstant(-0.4 ),0.2);
+	 	addSequential(new DrivePIDPath(3.5,5.0));
+	 	addSequential(new RotateXDistancePIDZZZ(0,0.5,0.24,0.5,true));
+	 	//addSequential(new DriveIntakeWheelsWithConstant(-0.60 ));
 	 	addSequential(new StopWheels());
  	 
     }

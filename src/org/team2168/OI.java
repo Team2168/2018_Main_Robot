@@ -185,10 +185,10 @@ public class OI {
 		operatorJoystick.ButtonRightBumper().whenPressed(new EngageIntakePivotHardStop());
 		operatorJoystick.ButtonRightBumper().whenPressed(new SpitPattern());
 		operatorJoystick.ButtonRightBumper().whenPressed(new CloseIntake()); //open on comp bot
-		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.45));
+		operatorJoystick.ButtonRightBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.65));
 		
 		////////////////Low speed spit //////////////////////////////////////////////////////////////////////////////////////////
-		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.35));
+		operatorJoystick.ButtonLeftBumper().whileHeld(new DriveIntakeWheelsWithConstant(-0.45));
 		operatorJoystick.ButtonLeftBumper().whileHeld(new SpitPattern());
 				
 		

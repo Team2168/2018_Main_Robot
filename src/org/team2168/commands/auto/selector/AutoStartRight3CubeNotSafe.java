@@ -1,16 +1,10 @@
 package org.team2168.commands.auto.selector;
 
 import org.team2168.Robot;
-import org.team2168.commands.auto.RealOnes.DriveToRightScaleFromLeft;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale2CubeFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
-import org.team2168.commands.auto.RealOnes.DriveToLeftSwitchFromLeftSide2;
+import org.team2168.commands.auto.RealOnes.AidansRightyTighty3CubeAuto;
 import org.team2168.commands.auto.RightSide.DriveToLeftScaleFromRightSide;
 import org.team2168.commands.auto.RightSide.DriveToLeftScaleFromRightSideSafe;
 import org.team2168.commands.auto.RightSide.DriveToRightScaleAndRightSwitchRightSide;
-import org.team2168.commands.auto.RightSide.DriveToRightSwitchFromRightSide;
-import org.team2168.commands.auto.RightSide.DriveToScale2CubeFromRightSide;
 import org.team2168.commands.auto.RightSide.RightSwitchOnlyFromRightSide;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,9 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  *
  */
-public class AutoStartRight2CubeSafe extends Command {
+public class AutoStartRight3CubeNotSafe extends Command {
 
-    public AutoStartRight2CubeSafe() {
+    public AutoStartRight3CubeNotSafe() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -33,16 +27,16 @@ public class AutoStartRight2CubeSafe extends Command {
     		if (Robot.getAutoPriorityInt() == 0) //switch priority
     			Scheduler.getInstance().add(new DriveToRightScaleAndRightSwitchRightSide());
     		else
-    			Scheduler.getInstance().add(new DriveToScale2CubeFromRightSide());
+    			Scheduler.getInstance().add(new AidansRightyTighty3CubeAuto());
     	}
     	else if (Robot.gameData.equals("RLR"))
-    		Scheduler.getInstance().add(new RightSwitchOnlyFromRightSide());
+    		Scheduler.getInstance().add(new DriveToLeftScaleFromRightSide());
     	else if (Robot.gameData.equals("LLL"))
-    		Scheduler.getInstance().add(new DriveToLeftScaleFromRightSideSafe());
+    		Scheduler.getInstance().add(new DriveToLeftScaleFromRightSide());
     	else if (Robot.gameData.equals("LRL"))
-      		Scheduler.getInstance().add(new DriveToScale2CubeFromRightSide());
-    }    		
-
+      		Scheduler.getInstance().add(new AidansRightyTighty3CubeAuto());
+    }
+    	
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
