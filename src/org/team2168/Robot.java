@@ -57,6 +57,7 @@ public class Robot extends TimedRobot
 {
 	//Digital Jumper to Identify if this is practice bot or comp bot
 	private static DigitalInput practiceBot;
+	private static DigitalInput canDrivetrain;
 
 	//Operator Interface
 	public static OI oi;
@@ -201,6 +202,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
 
 		practiceBot = new DigitalInput(RobotMap.PRACTICE_BOT_JUMPER);
+		canDrivetrain= new DigitalInput(RobotMap.CAN_DRIVETRAIN_JUMPER);
 
 				
 		// Instantiate the subsystems
@@ -488,6 +490,7 @@ public class Robot extends TimedRobot
 		ConsolePrinter.putNumber("gameClock", () -> {return driverstation.getMatchTime();}, true, false);
 		ConsolePrinter.putNumber("Robot Pressure", () -> {return Robot.pneumatics.getPSI();}, true, false);
 		ConsolePrinter.putBoolean("Is Practice Bot", () -> {return isPracticeRobot();}, true, false);
+		ConsolePrinter.putBoolean("Is Can", () -> {return isCanDrivetrain();}, true, false);
 		ConsolePrinter.putString("Switch_Scale_Switch orientation", () -> {return driverstation.getGameSpecificMessage();}, true, false); //Ill show you de wei
 
 		
@@ -824,6 +827,10 @@ public class Robot extends TimedRobot
 	public static boolean isPracticeRobot() {
 		return !practiceBot.get();
 
+	}
+	
+	public static boolean isCanDrivetrain(){
+		return !canDrivetrain.get();
 	}
 
 

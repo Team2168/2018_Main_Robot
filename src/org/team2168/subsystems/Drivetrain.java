@@ -2,6 +2,7 @@ package org.team2168.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.team2168.OI;
@@ -18,6 +19,9 @@ import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPath;
 import org.team2168.utils.TCPSocketSender;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -27,10 +31,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends Subsystem {
 
-	private static VictorSP leftMotor1;
-	private static VictorSP leftMotor2;
-	private static VictorSP rightMotor1;
-	private static VictorSP rightMotor2;
+	private static SpeedController leftMotor1;
+	private static SpeedController leftMotor2;
+	private static SpeedController rightMotor1;
+	private static SpeedController rightMotor2;
 
 	private static boolean INVERT_LINE_SENSOR = true; //Line sensor uses negative logic (false = detected)
 	
@@ -76,20 +80,35 @@ public class Drivetrain extends Subsystem {
 	 * Default constructors for Drivetrain
 	 */
 	private Drivetrain() {
-		leftMotor1 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_1);
-		leftMotor2 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_2);
-		rightMotor1 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_1);
-		rightMotor2 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_2);
-		lineDetector = new DigitalInput(RobotMap.LINE_DETECTOR);
 		
+
 		if(Robot.isPracticeRobot())
 		{
+			leftMotor1 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_1);
+			leftMotor2 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_2);
+			rightMotor1 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_1);
+			rightMotor2 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_2);
 						
 		}
+		
+		else if(Robot.isCanDrivetrain()){
+			leftMotor1 = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_MOTOR_1_CAN);
+			leftMotor2 = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_MOTOR_1_CAN);
+			rightMotor1 = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_MOTOR_1_CAN);
+			rightMotor2 = new WPI_TalonSRX(RobotMap.LEFT_DRIVE_MOTOR_1_CAN);
+	
+		}
+		
+		//comp bot
 		else
 		{
-			
+			leftMotor1 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_1);
+			leftMotor2 = new VictorSP(RobotMap.LEFT_DRIVE_MOTOR_2);
+			rightMotor1 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_1);
+			rightMotor2 = new VictorSP(RobotMap.RIGHT_DRIVE_MOTOR_2);
 		}
+		
+		lineDetector = new DigitalInput(RobotMap.LINE_DETECTOR);
 		
 		drivetrainRightEncoder = new AverageEncoder(
 				RobotMap.RIGHT_DRIVE_ENCODER_A,
@@ -275,10 +294,6 @@ public class Drivetrain extends Subsystem {
 	}
 
 	
-	
-	
-	
-	
 	/**
 	 * Calls left motor 1 and creates a local variable "speed" Refers to boolean in
 	 * Robot map and if true, speed = - speed Uses set() command to assign the new
@@ -288,11 +303,12 @@ public class Drivetrain extends Subsystem {
 	 *            speed between -1 and 1 negative is reverse, positive if forward, 0
 	 *            is stationary
 	 */
-	private void driveleftMotor1(double speed) {
+	private void driveleftMotor1(double speed) 
+	{
 		if (RobotMap.DT_REVERSE_LEFT1)
 			speed = -speed;
-
-		leftMotor1.set(speed);
+			leftMotor1.set(speed);
+		
 		leftMotor1Voltage = Robot.pdp.getBatteryVoltage() * speed;
 
 	}
@@ -375,7 +391,6 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Takes in speed for right and speed for left and sets them to their respective
 	 * sides
-	 * 
 	 * @param leftSpeed
 	 *            is a double between -1 and 1
 	 * @param rightSpeed
