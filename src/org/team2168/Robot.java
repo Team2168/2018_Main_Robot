@@ -4,6 +4,11 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
+import org.team2168.commands.auto.QuinticTests.DriveStraight10Feet;
+import org.team2168.commands.auto.QuinticTests.DriveStraight2Feet;
+import org.team2168.commands.auto.QuinticTests.DriveStraight4Feet;
+import org.team2168.commands.auto.QuinticTests.DriveStraight6Feet;
+import org.team2168.commands.auto.QuinticTests.DriveStraight8Feet;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchV2;
@@ -125,6 +130,25 @@ public class Robot extends TimedRobot
     
     public static OneDimensionalMotionProfiling motion;
     
+    public static double[] leftVelPathQuinticAS;
+    public static double[] rightVelPathQuinticAS;
+    public static double[] headingQuinticAS;
+    
+    public static double[] leftVelPathQuintic2AS;
+    public static double[] rightVelPathQuintic2AS;
+    public static double[] headingQuintic2AS;
+    
+    public static double[] leftVelPathQuintic3AS;
+    public static double[] rightVelPathQuintic3AS;
+    public static double[] headingQuintic3AS;
+    
+    public static double[] leftVelPathQuintic4AS;
+    public static double[] rightVelPathQuintic4AS;
+    public static double[] headingQuintic4AS;
+    
+    public static double[] leftVelPathQuintic5AS;
+    public static double[] rightVelPathQuintic5AS;
+    public static double[] headingQuintic5AS;
     
     public static double[] leftVelPathQuintic;
     public static double[] rightVelPathQuintic;
@@ -226,6 +250,55 @@ public class Robot extends TimedRobot
 //			System.out.println(motion.getVelArray()[i]);
 //		//Start Thread Only After Every Other Class is Loaded. 
 		
+		double[][] waypointPathAS = new double [][]{
+			{1,26,0},
+			{5,26,0}
+		};
+		
+		QuinticTrajectory quinticPathAS = new QuinticTrajectory("path1AS", waypointPathAS);
+		this.leftVelPathQuinticAS = quinticPathAS.getLeftVel();
+		this.rightVelPathQuinticAS = quinticPathAS.getRightVel();
+		this.headingQuinticAS = quinticPathAS.getHeadingDeg();
+		
+		double[][] waypointPath2AS = new double [][]{
+			{1,26,0},
+			{9,26,0}
+		};
+		
+		QuinticTrajectory quinticPath2AS = new QuinticTrajectory("path2AS", waypointPath2AS);
+		this.leftVelPathQuintic2AS = quinticPath2AS.getLeftVel();
+		this.rightVelPathQuintic2AS = quinticPath2AS.getRightVel();
+		this.headingQuintic2AS = quinticPath2AS.getHeadingDeg();
+		
+		double[][] waypointPath3AS = new double [][]{
+			{1,26,0},
+			{11,26,0}
+		};
+		
+		QuinticTrajectory quinticPath3AS = new QuinticTrajectory("path1AS", waypointPath3AS);
+		this.leftVelPathQuintic3AS = quinticPath3AS.getLeftVel();
+		this.rightVelPathQuintic3AS = quinticPath3AS.getRightVel();
+		this.headingQuintic3AS = quinticPath3AS.getHeadingDeg();
+		
+		double[][] waypointPath4AS = new double [][]{
+			{1,26,0},
+			{3,26,0}
+		};
+		
+		QuinticTrajectory quinticPath4AS = new QuinticTrajectory("path4AS", waypointPath4AS);
+		this.leftVelPathQuintic4AS = quinticPath4AS.getLeftVel();
+		this.rightVelPathQuintic4AS = quinticPath4AS.getRightVel();
+		this.headingQuintic4AS = quinticPath4AS.getHeadingDeg();
+		
+		double[][] waypointPath5AS = new double [][]{
+			{1,26,0},
+			{7,26,0}
+		};
+		
+		QuinticTrajectory quinticPath5AS = new QuinticTrajectory("path5AS", waypointPath5AS);
+		this.leftVelPathQuintic5AS = quinticPath5AS.getLeftVel();
+		this.rightVelPathQuintic5AS = quinticPath5AS.getRightVel();
+		this.headingQuintic5AS = quinticPath5AS.getHeadingDeg();
 		
 		double[][] waypointPath = new double[][]{
 			{1, 26, 0}, //For left switch & right scale from left side
@@ -775,6 +848,12 @@ public class Robot extends TimedRobot
 			autoChooser.addObject("Right Auto 3 Cube not Safe", new AutoStartRight3CubeNotSafe());
 			autoChooser.addObject("Right Auto Simple", new AutoStartRightSimple());
 
+			
+			autoChooser.addObject("Quintic 1", new DriveStraight4Feet());
+			autoChooser.addObject("Quintic 2", new DriveStraight8Feet());
+			autoChooser.addObject("Quintic 3", new DriveStraight10Feet());
+			autoChooser.addObject("Quintic 4", new DriveStraight2Feet());
+			autoChooser.addObject("Quintic 5", new DriveStraight6Feet());
 
 		}
 

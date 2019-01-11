@@ -21,6 +21,7 @@ import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -50,6 +51,8 @@ public class Drivetrain extends Subsystem {
 	private double leftMotor1FPS;
 	private double lefttMotor1FPS;
 	public IMU imu;
+	
+	public AHRS navx;
 	
 
 	// declare position/speed controllers
@@ -132,7 +135,9 @@ public class Drivetrain extends Subsystem {
 				RobotMap.DRIVE_SPEED_RETURN_TYPE, 
 				RobotMap.DRIVE_POS_RETURN_TYPE, 
 				RobotMap.DRIVE_AVG_ENCODER_VAL);
-
+		
+		navx = new AHRS(RobotMap.I2C_PORT);
+		
 		gyroSPI = new ADXRS453Gyro();
 		gyroSPI.startThread();
 

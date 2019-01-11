@@ -94,8 +94,8 @@ public class QuinticTrajectory
 		
 		double[][] waypointPath = new double[][]{
 			{1, 15.5, 0}, //Right switch Path
-			{2, 15.5, 0},
-			{10.5, 20.3, 0} 
+			{5, 15.5, 0},
+			
 		};
 		
 		double[][] waypointPath2 = new double[][]{
@@ -162,9 +162,9 @@ public class QuinticTrajectory
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
 
-		fig3.addData(quinticPath2.leftPath, Color.blue);
-		fig3.addData(quinticPath2.rightPath, Color.magenta);
-		fig3.addData(waypointPath2, null, Color.black);
+//		fig3.addData(quinticPath2.leftPath, Color.blue);
+//		fig3.addData(quinticPath2.rightPath, Color.magenta);
+//		fig3.addData(waypointPath2, null, Color.black);
  
 //		fig3.addData(quinticPath3.leftPath, Color.blue);
 //		fig3.addData(quinticPath3.rightPath, Color.magenta);
@@ -215,7 +215,7 @@ public class QuinticTrajectory
 		FalconLinePlot fig33 = new FalconLinePlot(new double[][]{{0.0,0.0}});
 		fig33.yGridOn();
 		fig33.xGridOn();
-		fig33.setYLabel("Velocity (ft/sec)");
+		fig33.setYLabel("Pos (feet)");
 		fig33.setXLabel("time (seconds)");
 		fig33.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig33.addData(quinticPath.time,quinticPath.leftPos, Color.magenta);
