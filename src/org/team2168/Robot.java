@@ -4,6 +4,11 @@ import org.team2168.subsystems.*;
 import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
+import org.team2168.commands.auto.AS.DriveStraight10Feet;
+import org.team2168.commands.auto.AS.DriveStraight2Feet;
+import org.team2168.commands.auto.AS.DriveStraight4Feet;
+import org.team2168.commands.auto.AS.DriveStraight6Feet;
+import org.team2168.commands.auto.AS.DriveStraight8Feet;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchV2;
@@ -818,7 +823,12 @@ public class Robot extends TimedRobot
 			autoChooser.addObject("Dont run me", new NeverRunMe());
 //			autoChooser.addObject("Dont cross me from left", new DriveToRightScaleFromLeft());
 //			autoChooser.addObject("Dont cross me from right", new DriveToLeftScaleFromRightSide());
-
+			
+			autoChooser.addObject("2 Feet", new DriveStraight2Feet());
+			autoChooser.addObject("4 Feet", new DriveStraight4Feet());
+			autoChooser.addObject("6 Feet", new DriveStraight6Feet());
+			autoChooser.addObject("8 Feet", new DriveStraight8Feet());
+			autoChooser.addObject("10 Feet", new DriveStraight10Feet());
 
 		}
 
