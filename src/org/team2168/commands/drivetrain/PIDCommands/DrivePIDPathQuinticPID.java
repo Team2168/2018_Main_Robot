@@ -30,7 +30,7 @@ public class DrivePIDPathQuinticPID extends Command {
 	double jMax =15000.0;
 	
     int counter;
-    double ff_term = 0.05;
+    double ff_term = 0.09;
     double oldClock;
     double angle;
     double lastRotateOutput;
@@ -57,6 +57,8 @@ public class DrivePIDPathQuinticPID extends Command {
   	   this.setPointRightVel = motion.getVelArray();
   	   this.direction = reverseDirection;
   	   this.positonGiven = true;
+//  	 SmartDashboard.putNumber("FF_term", 0);
+//	   ff_term = SmartDashboard.getNumber("FF_term", 0);
     }
    
     public DrivePIDPathQuinticPID(double[] setPointLeftVel, double[] setPointRightVel){
@@ -505,7 +507,7 @@ public class DrivePIDPathQuinticPID extends Command {
 		SmartDashboard.putNumber("Command Execution Time", (currTime - oldClock));
 		oldClock = currTime;
 		
-		//ff_term = SmartDashboard.getNumber("FF_term", 0);
+//		ff_term = SmartDashboard.getNumber("FF_term", 0);
 		
 		//lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
 		double leftPID = 0;
@@ -561,14 +563,14 @@ public class DrivePIDPathQuinticPID extends Command {
     // Called once after isFinished returns true
     
 	protected void end() {
-		Robot.drivetrain.leftPosController.Pause();
-		Robot.drivetrain.rightPosController.Pause();
-		Robot.drivetrain.leftSpeedController.Pause();
-		Robot.drivetrain.rightSpeedController.Pause();
-		Robot.drivetrain.rotateDriveStraightController.Pause();
-		Robot.drivetrain.rotateDriveStraightController.reset();
-		Robot.drivetrain.leftPosController.reset();
-		Robot.drivetrain.rightPosController.reset();
+//		Robot.drivetrain.leftPosController.Pause();
+//		Robot.drivetrain.rightPosController.Pause();
+//		Robot.drivetrain.leftSpeedController.Pause();
+//		Robot.drivetrain.rightSpeedController.Pause();
+//		Robot.drivetrain.rotateDriveStraightController.Pause();
+////		Robot.drivetrain.rotateDriveStraightController.reset();
+////		Robot.drivetrain.leftPosController.reset();
+////		Robot.drivetrain.rightPosController.reset();
 		Robot.drivetrain.tankDrive(0, 0);
 		
     }
