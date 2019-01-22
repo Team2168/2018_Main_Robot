@@ -194,8 +194,8 @@ public class RobotMap {
 	public static final CounterBase.EncodingType DRIVE_ENCODING_TYPE = CounterBase.EncodingType.k4X; // count rising and
 																										// falling edges
 																										// on
-	public static final AverageEncoder.PositionReturnType DRIVE_POS_RETURN_TYPE = AverageEncoder.PositionReturnType.FEET;
-	public static final AverageEncoder.SpeedReturnType DRIVE_SPEED_RETURN_TYPE = AverageEncoder.SpeedReturnType.FPS;
+	public static final AverageEncoder.PositionReturnType DRIVE_POS_RETURN_TYPE = AverageEncoder.PositionReturnType.INCH;
+	public static final AverageEncoder.SpeedReturnType DRIVE_SPEED_RETURN_TYPE = AverageEncoder.SpeedReturnType.IPS;
 	public static final int DRIVE_ENCODER_MIN_RATE = 0;
 	public static final int DRIVE_ENCODER_MIN_PERIOD = 1;
 	public static final boolean LEFT_DRIVE_TRAIN_ENCODER_REVERSE = true;
@@ -308,13 +308,17 @@ public class RobotMap {
 	public static final double DRIVE_TRAIN_RIGHT_SPEED_I = 0.0010526;
 	public static final double DRIVE_TRAIN_RIGHT_SPEED_D = 0.0543;
 
-	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.2;
-	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.0001412646174233;
-	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.0074778888124088;
+//	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.2;
+//	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.0001412646174233;
+//	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.0074778888124088;
+	
+	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0;
 
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_P = 0.25;
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.0001412646174233;
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.0074778888124088;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_P = 0;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0;
 
 	public static final double ROTATE_POSITION_P = 0.055;
 	public static final double ROTATE_POSITION_I = 0.001;

@@ -1,6 +1,7 @@
 package org.team2168.commands.auto.AS;
 
 import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuintic;
+import org.team2168.commands.drivetrain.PIDCommands.DrivePIDPathQuinticPID;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -26,7 +27,7 @@ public class DriveStraight8Feet extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DrivePIDPathQuintic(8));
+    	addSequential(new DrivePIDPathQuinticPID(8));
     }
 
 }
