@@ -5,6 +5,7 @@ import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -128,6 +129,7 @@ public class DriveWithJoystick extends Command {
 	 * @author Krystina
 	 */
 	protected void execute() {
+		double headingCorrection = 0.0;
 		ctrlStyle = Robot.getControlStyleInt();
 
 		switch (ctrlStyle) {
@@ -149,7 +151,7 @@ public class DriveWithJoystick extends Command {
 		case 1:
 
 			lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
-			double headingCorrection = (Robot.drivetrain.rotateDriveStraightController.getControlOutput());
+			headingCorrection = (Robot.drivetrain.rotateDriveStraightController.getControlOutput());
 
 			// if ((Robot.oi.driverJoystick.getLeftStickRaw_X() > 0.25 ||
 			// Robot.oi.driverJoystick.getLeftStickRaw_X() < -0.25)
@@ -219,6 +221,26 @@ public class DriveWithJoystick extends Command {
 				Robot.drivetrain.driveRight(speed);
 			}
 			break;
+
+			/**
+			 * New Gun Style Controller
+			 */
+			case 4:
+				lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
+				headingCorrection = (Robot.drivetrain.rotateDriveStraightController.getControlOutput());
+				
+				if (Math.abs(Robot.oi.driverJoystick.getX(Hand.kLeft)) < 0.1) {
+					//Drive straight
+					Robot.drivetrain.tankDrive(-Robot.oi.driverJoystick.getY(Hand.kLeft),
+							-Robot.oi.driverJoystick.getY(Hand.kLeft));
+				} else {
+					//Arcade drive
+					Robot.drivetrain.tankDrive(
+							Robot.oi.getGunStyleYValue() + Robot.oi.driverJoystick.getX(Hand.kLeft),
+							Robot.oi.getGunStyleYValue() - Robot.oi.driverJoystick.getX(Hand.kLeft));
+					Robot.drivetrain.rotateDriveStraightController.setSetPoint(Robot.drivetrain.getHeading());
+				}
+				break;
 		/**
 		 * Defaults to Tank Drive
 		 */

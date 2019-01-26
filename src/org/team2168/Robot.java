@@ -729,6 +729,9 @@ public class Robot extends TimedRobot
 			case 3:
 				retVal = "GTA Drive";
 				break;
+			case 4:
+				retVal = "New Gun Style";
+				break;
 			default:
 				retVal = "Invalid Control Style";
 			}
@@ -745,6 +748,7 @@ public class Robot extends TimedRobot
 			controlStyleChooser.addDefault("Gun Style Controller", 1);
 			controlStyleChooser.addObject("Arcade Drive", 2);
 			controlStyleChooser.addObject("GTA Drive", 3);
+			controlStyleChooser.addDefault("New Gun Style", 4);
 		}
 
 		public static int getControlStyleInt() {
