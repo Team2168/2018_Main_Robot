@@ -76,8 +76,8 @@ public class QuinticTrajectory
 
 	private static PrintWriter log;
 
-	private static String directory = "/home/lvuser/Path/";
-	//private static String directory = "Path/";
+	//private static String directory = "/home/lvuser/Path/";
+	private static String directory = "Path/";
 
 	
 	public boolean reverse = false;
@@ -94,8 +94,10 @@ public class QuinticTrajectory
 		
 		double[][] waypointPath = new double[][]{
 			{0.0, 26.5, 0},
-			{5.0, 26.5, 0} //works with 19.3 on practice bot
+			{6.0, 26.5, 0}, //works with 19.3 on practice bot
+			{9.0, 20.5, Math.PI/2}
 		};
+		
 		
 		double[][] waypointPath2 = new double[][]{
 			{0.0, 26.5, 0},
@@ -257,9 +259,9 @@ public class QuinticTrajectory
 		
 		config = new TrajectoryGenerator.Config();
 	    config.dt = .02;
-	    config.max_acc = 8.0;
-	    config.max_jerk = 30.0;
-	    config.max_vel = 10.0;
+	    config.max_acc = 8.0*12;
+	    config.max_jerk = 30.0*12;
+	    config.max_vel = 10.0*12;
 	}
 	
 	public QuinticTrajectory(String filename, double[][] path)

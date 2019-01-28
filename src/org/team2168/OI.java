@@ -2,6 +2,7 @@ package org.team2168;
 
 import org.team2168.PID.trajectory.OneDimensionalRotation;
 import org.team2168.commands.auto.AS.DriveStraight10Feet;
+import org.team2168.commands.auto.AS.DriveStraight10Feet_quintic;
 import org.team2168.commands.auto.AS.DriveStraight2Feet;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
@@ -271,8 +272,8 @@ public class OI {
 		pidTestJoystick.ButtonY().whileHeld(new DriveIntakeWheelsWithConstant(-0.5));
 		//pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
 		
-		pidTestJoystick.ButtonX().whenPressed(new DriveStraight10Feet());
-		
+//		pidTestJoystick.ButtonX().whenPressed(new DriveStraight10Feet());
+		pidTestJoystick.ButtonX().whenPressed(new DriveStraight10Feet_quintic());
 		
 		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));
 		
@@ -333,6 +334,7 @@ public class OI {
 	public static double getDriveIntakeWheelsJoystickValue() {
 		return operatorJoystick.getRightStickRaw_Y();
 	}
+	
 
 	public static double getDriveIntakePivotJoystickValue() {
 		return testJoystick.getRightStickRaw_Y();

@@ -126,6 +126,11 @@ public class Robot extends TimedRobot
     
     public static OneDimensionalMotionProfiling motion;
     
+    public static double[] leftVelQuinticPath;
+    public static double[] rightVelQuinticPath;
+    public static double[] leftPosQuinticPath;
+    public static double[] rightPosQuinticPath;
+    public static double[] headingQuinticPath;
     
     public static double[] leftVelPathQuintic;
     public static double[] rightVelPathQuintic;
@@ -260,10 +265,32 @@ public class Robot extends TimedRobot
 //		//Start Thread Only After Every Other Class is Loaded. 
 		
 		
+		/**************************************************************
+		 *                       2019 Paths
+		 *************************************************************/
+
+		double[][] wpPath = new double[][] {
+			{0,0,0},
+			{60,0,0},
+	//		{90,60, Math.PI/2}
+		};
+		
+		QuinticTrajectory qPath = new QuinticTrajectory("path_1", wpPath);
+		
+		this.leftPosQuinticPath = qPath.getLeftPos();
+		this.rightPosQuinticPath = qPath.getRightPos();
+		this.leftVelQuinticPath = qPath.getLeftVel();
+		this.rightVelQuinticPath = qPath.getRightVel();
+		this.headingQuinticPath = qPath.getHeadingDeg();
+		
+		
+		/**************************************************************
+		 * 
+		 *************************************************************/
 		double[][] waypointPath = new double[][]{
-			{1, 26, 0}, //For left switch & right scale from left side
-			{11.5, 27.0, 0},
-			{13.0, 25.5, -Math.PI/2 + 0.0001}		
+			{1, 26.0, 0}, //For left switch & right scale from left side
+			{61, 26.0, 0},
+		//	{13.0, 25.5, -Math.PI/2 + 0.0001}		
 			
 	};
 

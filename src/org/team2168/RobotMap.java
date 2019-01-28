@@ -312,13 +312,13 @@ public class RobotMap {
 //	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.0001412646174233;
 //	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.0074778888124088;
 	
-	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.4;
-	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.08;
-	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.03;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.25;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.07;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.01;
 
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_P = 0.4;
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.08;
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.03;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_P = 0.25;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.07;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.01;
 
 	public static final double ROTATE_POSITION_P = 0.055;
 	public static final double ROTATE_POSITION_I = 0.001;
