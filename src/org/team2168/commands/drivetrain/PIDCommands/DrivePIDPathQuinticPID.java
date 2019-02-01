@@ -57,8 +57,8 @@ public class DrivePIDPathQuinticPID extends Command {
   	   this.setPointRightVel = motion.getVelArray();
   	   this.direction = reverseDirection;
   	   this.positonGiven = true;
-//  	 SmartDashboard.putNumber("FF_term", 0);
-//	   ff_term = SmartDashboard.getNumber("FF_term", 0);
+  	 SmartDashboard.putNumber("FF_term", 0);
+	   ff_term = SmartDashboard.getNumber("FF_term", 0);
     }
    
     public DrivePIDPathQuinticPID(double[] setPointLeftVel, double[] setPointRightVel){
@@ -215,6 +215,8 @@ public class DrivePIDPathQuinticPID extends Command {
   	   
   	   this.headingByArray= true;
 
+  	 SmartDashboard.putNumber("FF_term", 0);
+	   ff_term = SmartDashboard.getNumber("FF_term", 0);
   	   
   	   System.out.println("SetPointLength: " + setPointLeftVel.length);
      }
@@ -470,7 +472,7 @@ public class DrivePIDPathQuinticPID extends Command {
 		if(this.headingByArray)
 			Robot.drivetrain.rotateDriveStraightController.setSetPoint(setPointHeading);
 		
-		//Robot.drivetrain.rotateDriveStraightController.Enable();
+		Robot.drivetrain.rotateDriveStraightController.Enable();
 		
 		
 		counter = 0;
@@ -478,6 +480,7 @@ public class DrivePIDPathQuinticPID extends Command {
 		
 		
 		Robot.drivetrain.resetPosition();
+		Robot.drivetrain.resetGyro();
 
 		//reset controller
 		Robot.drivetrain.imu.reset();
@@ -486,6 +489,7 @@ public class DrivePIDPathQuinticPID extends Command {
 
 		angle = Robot.drivetrain.getHeading();
 		this.lastRotateOutput = 0;
+		
 		
 
 		
@@ -507,7 +511,7 @@ public class DrivePIDPathQuinticPID extends Command {
 		SmartDashboard.putNumber("Command Execution Time", (currTime - oldClock));
 		oldClock = currTime;
 		
-//		ff_term = SmartDashboard.getNumber("FF_term", 0);
+		ff_term = SmartDashboard.getNumber("FF_term", 0);
 		
 		//lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
 		double leftPID = 0;
@@ -534,8 +538,8 @@ public class DrivePIDPathQuinticPID extends Command {
 				if (Math.abs(speedRight)<0.15 && counter!=0)
 					speedRight = directionValue*0.15;
 			}
-			//Robot.drivetrain.tankDrive(speedLeft+headingCorrection+leftPID,speedRight-headingCorrection+rightPID);
-			Robot.drivetrain.tankDrive(speedLeft+leftPID,speedRight+rightPID);
+			Robot.drivetrain.tankDrive(speedLeft+headingCorrection+leftPID,speedRight-headingCorrection+rightPID);
+			//Robot.drivetrain.tankDrive(speedLeft+leftPID,speedRight+rightPID);
 			counter++;
 			
 			SmartDashboard.putNumber("LeftPIDPosOut", leftPID);

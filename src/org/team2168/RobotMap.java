@@ -312,21 +312,21 @@ public class RobotMap {
 //	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.0001412646174233;
 //	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.0074778888124088;
 	
-	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.25;
-	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.07;
-	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.01;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_P = 0.06;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_I = 0.015;
+	public static final double DRIVE_TRAIN_LEFT_POSITION_D = 0.006;
 
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_P = 0.25;
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.07;
-	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.01;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_P = 0.06;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_I = 0.015;
+	public static final double DRIVE_TRAIN_RIGHT_POSITION_D = 0.006;
 
-	public static final double ROTATE_POSITION_P = 0.055;
-	public static final double ROTATE_POSITION_I = 0.001;
-	public static final double ROTATE_POSITION_D = 0.0064778888124088;
+	public static final double ROTATE_POSITION_P = 0.075;
+	public static final double ROTATE_POSITION_I = 0.0025;
+	public static final double ROTATE_POSITION_D = 0.0;
 	
-	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp
-	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
-	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
+	public static final double ROTATE_POSITION_P_Drive_Straight = 0.09; //0.055 comp
+	public static final double ROTATE_POSITION_I_Drive_Straight = 0.002; //0.001
+	public static final double ROTATE_POSITION_D_Drive_Straight = 0.001;
 	
 	
 

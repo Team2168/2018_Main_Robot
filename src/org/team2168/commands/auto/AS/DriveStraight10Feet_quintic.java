@@ -28,7 +28,7 @@ public class DriveStraight10Feet_quintic extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DrivePIDPathQuinticPID(120));
+    	addSequential(new DrivePIDPathQuinticPID(Robot.leftPosQuinticPath, Robot.rightPosQuinticPath, Robot.leftVelQuinticPath, Robot.rightVelQuinticPath, Robot.headingQuinticPath));
     }
 
 }

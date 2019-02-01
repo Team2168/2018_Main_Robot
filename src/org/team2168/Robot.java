@@ -5,10 +5,6 @@ import org.team2168.PID.trajectory.OneDimensionalMotionProfiling;
 import org.team2168.PID.trajectory.QuinticTrajectory;
 import org.team2168.commands.auto.*;
 import org.team2168.commands.auto.AS.DriveStraight10Feet;
-import org.team2168.commands.auto.AS.DriveStraight2Feet;
-import org.team2168.commands.auto.AS.DriveStraight4Feet;
-import org.team2168.commands.auto.AS.DriveStraight6Feet;
-import org.team2168.commands.auto.AS.DriveStraight8Feet;
 import org.team2168.commands.auto.RealOnes.DriveStraight;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchV2;
@@ -131,6 +127,18 @@ public class Robot extends TimedRobot
     public static double[] leftPosQuinticPath;
     public static double[] rightPosQuinticPath;
     public static double[] headingQuinticPath;
+    
+    public static double[] leftVelQuinticPath2;
+    public static double[] rightVelQuinticPath2;
+    public static double[] leftPosQuinticPath2;
+    public static double[] rightPosQuinticPath2;
+    public static double[] headingQuinticPath2;
+    
+    public static double[] leftVelQuinticPath3;
+    public static double[] rightVelQuinticPath3;
+    public static double[] leftPosQuinticPath3;
+    public static double[] rightPosQuinticPath3;
+    public static double[] headingQuinticPath3;
     
     public static double[] leftVelPathQuintic;
     public static double[] rightVelPathQuintic;
@@ -271,8 +279,7 @@ public class Robot extends TimedRobot
 
 		double[][] wpPath = new double[][] {
 			{0,0,0},
-			{60,0,0},
-	//		{90,60, Math.PI/2}
+			{120,0,0}
 		};
 		
 		QuinticTrajectory qPath = new QuinticTrajectory("path_1", wpPath);
@@ -283,11 +290,43 @@ public class Robot extends TimedRobot
 		this.rightVelQuinticPath = qPath.getRightVel();
 		this.headingQuinticPath = qPath.getHeadingDeg();
 		
+		double[][] wpPath2 = new double[][] {
+			{0.0, 0.0, 0},
+			{36.0, 0.0, 0},
+			{120.0, 84.0, Math.PI/2-0.001}
+		};
+		
+		QuinticTrajectory qPath2 = new QuinticTrajectory("path_2", wpPath2);
+		
+		this.leftPosQuinticPath2 = qPath2.getLeftPos();
+		this.rightPosQuinticPath2 = qPath2.getRightPos();
+		this.leftVelQuinticPath2 = qPath2.getLeftVel();
+		this.rightVelQuinticPath2 = qPath2.getRightVel();
+		this.headingQuinticPath2 = qPath2.getHeadingDeg();
+		
+		double[][] wpPath3 = new double[][] {
+			{0.0, 0.0, 0},
+			{30.0, 0.0, 0},
+			{84.0, 54.0, Math.PI/2-0.001},
+			{138.0, 108.0, 0},
+			{168.0, 108.0, 0}
+			
+		};
+		
+		QuinticTrajectory qPath3 = new QuinticTrajectory("path_3", wpPath3);
+		
+		this.leftPosQuinticPath3 = qPath3.getLeftPos();
+		this.rightPosQuinticPath3 = qPath3.getRightPos();
+		this.leftVelQuinticPath3 = qPath3.getLeftVel();
+		this.rightVelQuinticPath3 = qPath3.getRightVel();
+		this.headingQuinticPath3 = qPath3.getHeadingDeg();
+		
 		
 		/**************************************************************
 		 * 
 		 *************************************************************/
 		double[][] waypointPath = new double[][]{
+			
 			{1, 26.0, 0}, //For left switch & right scale from left side
 			{61, 26.0, 0},
 		//	{13.0, 25.5, -Math.PI/2 + 0.0001}		
@@ -851,10 +890,7 @@ public class Robot extends TimedRobot
 //			autoChooser.addObject("Dont cross me from left", new DriveToRightScaleFromLeft());
 //			autoChooser.addObject("Dont cross me from right", new DriveToLeftScaleFromRightSide());
 			
-			autoChooser.addObject("2 Feet", new DriveStraight2Feet());
-			autoChooser.addObject("4 Feet", new DriveStraight4Feet());
-			autoChooser.addObject("6 Feet", new DriveStraight6Feet());
-			autoChooser.addObject("8 Feet", new DriveStraight8Feet());
+		
 			autoChooser.addObject("10 Feet", new DriveStraight10Feet());
 
 		}

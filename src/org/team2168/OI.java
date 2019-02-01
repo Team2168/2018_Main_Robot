@@ -2,8 +2,9 @@ package org.team2168;
 
 import org.team2168.PID.trajectory.OneDimensionalRotation;
 import org.team2168.commands.auto.AS.DriveStraight10Feet;
+import org.team2168.commands.auto.AS.DriveStraight10Feet_Left2Feet;
 import org.team2168.commands.auto.AS.DriveStraight10Feet_quintic;
-import org.team2168.commands.auto.AS.DriveStraight2Feet;
+import org.team2168.commands.auto.AS.RightStart_FrontRightCargo;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScale3CubeFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftScaleAndLeftSwitchFromLeftSide;
 import org.team2168.commands.auto.RealOnes.DriveToLeftSwitch;
@@ -269,11 +270,13 @@ public class OI {
 		//pidTestJoystick.ButtonB().whenPressed(new RotateXDistancePIDZZZ(142,0.6,0.2,0.5,true));
 		
 		
-		pidTestJoystick.ButtonY().whileHeld(new DriveIntakeWheelsWithConstant(-0.5));
+//[]\		pidTestJoystick.ButtonY().whileHeld(new DriveIntakeWheelsWithConstant(-0.5));
 		//pidTestJoystick.ButtonY().whenPressed(new DriveLiftPIDZZZ(74.0, 0.9, 0.1,1.0,true));
 		
-//		pidTestJoystick.ButtonX().whenPressed(new DriveStraight10Feet());
-		pidTestJoystick.ButtonX().whenPressed(new DriveStraight10Feet_quintic());
+//		pidTestJoystick.ButtonY().whenPressed(new DriveStraight10Feet());
+//		pidTestJoystick.ButtonX().whenPressed(new DriveStraight10Feet_quintic());
+		pidTestJoystick.ButtonX().whenPressed(new RightStart_FrontRightCargo());
+		pidTestJoystick.ButtonY().whenPressed(new DriveStraight10Feet_Left2Feet());
 		
 		//pidTestJoystick.ButtonUpDPad().whenPressed(new DriveLiftPIDZZZ(2.0, 0.5, 0.16,1.0,true));
 		

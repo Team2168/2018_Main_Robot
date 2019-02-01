@@ -84,6 +84,7 @@ public class QuinticTrajectory
 
 	
 	double totalSplineLength = 0;
+	double wheelSpacing = 26.0; //inches
 
 	public static void main(String[] args)
 	{
@@ -93,15 +94,24 @@ public class QuinticTrajectory
 		
 		
 		double[][] waypointPath = new double[][]{
-			{0.0, 26.5, 0},
-			{6.0, 26.5, 0}, //works with 19.3 on practice bot
-			{9.0, 20.5, Math.PI/2}
+//			{0.0, 0.0, 0},
+//			{6.0, 0.0, 0},
+//			{10.0, 4.0, Math.PI/2-0.001}, //works with 19.3 on practice bot
+//		//	{9.0, 20.5, Math.PI/2}
+			
+			{0.0, 0.0, 0},
+			{30.0, 0.0, 0},
+			{84.0, 54.0, Math.PI/2-0.001},
+			{138.0, 108.0, 0},
+			{168.0, 108.0, 0}
+			
 		};
+		
 		
 		
 		double[][] waypointPath2 = new double[][]{
 			{0.0, 26.5, 0},
-			{5.0, 26.5, 0} //works with 19.3 on practice bot
+			{10.0, 28.5, Math.PI/2-0.001} //works with 19.3 on practice bot
 	};
 		
 	double[][] waypointPath3 = new double[][]{
@@ -156,59 +166,95 @@ public class QuinticTrajectory
 
 
 //		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
-		double fieldWidth = 32;
-		fig3.setXTic(0, 30, 1);
+//		double fieldWidth = 32;
+		double fieldWidth = 100;
+//		fig3.setXTic(0, 30, 1);
+		fig3.setXTic(0, 150, 1);
 		fig3.setYTic(0, fieldWidth, 1);
 		fig3.addData(quinticPath.rightPath, Color.magenta);
 		fig3.addData(quinticPath.leftPath, Color.blue);
 		
 
-		fig3.addData(quinticPath2.leftPath, Color.blue);
-		fig3.addData(quinticPath2.rightPath, Color.magenta);
-		fig3.addData(waypointPath2, null, Color.black);
+	//	fig3.addData(quinticPath2.leftPath, Color.blue);
+	//	fig3.addData(quinticPath2.rightPath, Color.magenta);
+	//	fig3.addData(waypointPath2, null, Color.black);
  
 //		fig3.addData(quinticPath2.leftPath, Color.blue);
 //		fig3.addData(quinticPath2.rightPath, Color.magenta);
 //		fig3.addData(waypointPath3, null, Color.black);
 		
 		fig3.addData(new double[][]{{4.667, 3}}, Color.black);
-
+		
+		fig3.setXTic(0.0, 348.0, 12.0);
+		fig3.setYTic(0.0, 348.0, 12.0);
+		
 		
 		//outline field perimeter
-		double[][] edge = {{1,16+27/2.0-2-4.81/12},{1,16-27/2.0+2+4.81/12}};
+		double[][] edge = {{336,12},{12,12},{12,336},{336,336}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1,16+27/2.0-2-4.81/12},{1+2+10.9/12,16+27/2.0}};
+		edge = new double[][] {{324,146},{221,146},{221,202},{324,202}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1,16-27/2.0+2+4.81/12},{1+2+10.9/12, 16-27/2.0}};
+		edge = new double[][] {{12,110},{60,110},{60,238},{12,238}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1+2+10.9/12,16+27/2.0},{29,16+27/2.0}};
+		edge = new double[][] {{60,110},{60,100},{108,100},{108,248},{60,248},{60,238}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1+2+10.9/12, 16-27/2.0},{29,16-27/2.0}};
+		edge = new double[][] {{12,150},{60,150}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{28,16+27/2.0}, {28, 16-27/2.0}};
+		edge = new double[][] {{12,198},{60,198}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{12+7.6/12, 16+27/2.0-7-1.5/12}, {16+3.2/12, 16+27/2.0-7-1.5/12}, {16+3.2/12, 16-27/2.0+7+1.5/12}, {12+7.6/12, 16-27/2.0+7+1.5/12}, {12+7.6/12, 16+27/2.0-7-1.5/12}};
+		edge = new double[][] {{},{}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{12+7.6/12,16+27/2.0-11-7.75/12}, {12+7.6/12-3.5, 16+27/2.0-11-7.75/12}, {12+7.6/12-3.5, 16-27/2.0+11+7.75/12}, {12+7.6/12, 16-27/2.0+11+7.75/12}};
+		edge = new double[][] {{},{}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{12+7.6/12-3.5, 16+1.875},{12+7.6/12-3.5, 16-1.875}};
+		edge = new double[][] {{},{}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{28,16+28/2.0-5-11.6/12}, {28-1-11.7/12, 16+28/2.0-5-11.6/12}, {28-1-11.7/12,  16+28/2.0-5-11.6/12-2-1.4/12}, 
-			{28-1-11.7/12-3-2.9/12, 16+28/2.0-5-11.6/12-2-1.4/12}, {28-1-11.7/12-3-2.9/12, 16-28/2.0+5+11.6/12+2+1.4/12}, {28-1-11.7/12, 16-28/2.0+5+11.6/12+2+1.4/12},
-			{28-1-11.7/12, 16-28/2.0+5+11.6/12}, {28, 16-28/2.0+5+11.6/12}};
+		edge = new double[][] {{},{}};
 		fig3.addData(edge, Color.black);
+//		double[][] edge = {{(1),(16+27/2.0-2-4.81/12)},{(1),(16-27/2.0+2+4.81/12)}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{1,16+27/2.0-2-4.81/12},{1+2+10.9/12,16+27/2.0}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{1,16-27/2.0+2+4.81/12},{1+2+10.9/12, 16-27/2.0}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{1+2+10.9/12,16+27/2.0},{29,16+27/2.0}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{1+2+10.9/12, 16-27/2.0},{29,16-27/2.0}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{28,16+27/2.0}, {28, 16-27/2.0}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{12+7.6/12, 16+27/2.0-7-1.5/12}, {16+3.2/12, 16+27/2.0-7-1.5/12}, {16+3.2/12, 16-27/2.0+7+1.5/12}, {12+7.6/12, 16-27/2.0+7+1.5/12}, {12+7.6/12, 16+27/2.0-7-1.5/12}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{12+7.6/12,16+27/2.0-11-7.75/12}, {12+7.6/12-3.5, 16+27/2.0-11-7.75/12}, {12+7.6/12-3.5, 16-27/2.0+11+7.75/12}, {12+7.6/12, 16-27/2.0+11+7.75/12}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{12+7.6/12-3.5, 16+1.875},{12+7.6/12-3.5, 16-1.875}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{28,16+28/2.0-5-11.6/12}, {28-1-11.7/12, 16+28/2.0-5-11.6/12}, {28-1-11.7/12,  16+28/2.0-5-11.6/12-2-1.4/12}, 
+//			{28-1-11.7/12-3-2.9/12, 16+28/2.0-5-11.6/12-2-1.4/12}, {28-1-11.7/12-3-2.9/12, 16-28/2.0+5+11.6/12+2+1.4/12}, {28-1-11.7/12, 16-28/2.0+5+11.6/12+2+1.4/12},
+//			{28-1-11.7/12, 16-28/2.0+5+11.6/12}, {28, 16-28/2.0+5+11.6/12}};
+//		fig3.addData(edge, Color.black);
+//		
+//		edge = new double[][] {{1,16+27/2.0-8-6.25/12}, {1+2+11.7/12, 16+27/2.0-8-6.25/12}, {1+2+11.7/12, 16+27/2.0-8-4-6.25/12}, {1, 16+27/2.0-8-4-6.25/12}};
+//		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{1,16+27/2.0-8-6.25/12}, {1+2+11.7/12, 16+27/2.0-8-6.25/12}, {1+2+11.7/12, 16+27/2.0-8-4-6.25/12}, {1, 16+27/2.0-8-4-6.25/12}};
-		fig3.addData(edge, Color.black);
+		
 		
 		
 		//Velocity
@@ -221,7 +267,14 @@ public class QuinticTrajectory
 		fig33.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig33.addData(quinticPath.time,quinticPath.leftPos, Color.magenta);
 		fig33.addData(quinticPath.time,quinticPath.rightPos, Color.blue);
-		fig33.addData(quinticPath.time,quinticPath.heading, Color.green);
+		
+		FalconLinePlot fig44 = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		fig44.yGridOn();
+		fig44.xGridOn();
+		fig44.setYLabel("Position (ft/time)");
+		fig44.setXLabel("time (seconds)");
+		fig44.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+		fig44.addData(quinticPath.time,quinticPath.heading, Color.green);
 		
 		
 		
@@ -259,9 +312,14 @@ public class QuinticTrajectory
 		
 		config = new TrajectoryGenerator.Config();
 	    config.dt = .02;
-	    config.max_acc = 8.0*12;
-	    config.max_jerk = 30.0*12;
-	    config.max_vel = 10.0*12;
+//	    config.max_acc = 8.0*12;
+//	    config.max_jerk = 30.0*12;
+//	    config.max_vel = 10.0*12;
+	    
+	    config.max_vel = 5.0*12;
+	    config.max_acc = 5.0*12;
+	    config.max_jerk = 70.0*12;
+	    
 	}
 	
 	public QuinticTrajectory(String filename, double[][] path)
@@ -397,7 +455,7 @@ public class QuinticTrajectory
 	    
 	    fixHeadings();
 	   
-	    leftRightTraj = makeLeftAndRightTrajectories(traj, 2.0);
+	    leftRightTraj = makeLeftAndRightTrajectories(traj, wheelSpacing);
 	    
 	    
 	    
