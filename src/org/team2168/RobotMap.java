@@ -34,10 +34,12 @@ public class RobotMap {
 	public static final int GTA_STYLE_ENUM = 3;
 
 	// PWM (0 to 9) on RoboRio/////////////////////////////////////////////////
-	public static final int RIGHT_DRIVE_MOTOR_1 = 0; //Same as 2017
-	public static final int RIGHT_DRIVE_MOTOR_2 = 1; //Same as 2017
-	public static final int LEFT_DRIVE_MOTOR_1 = 2; //Same as 2017
-	public static final int LEFT_DRIVE_MOTOR_2 = 3; //Same as 2017
+	public static final int RIGHT_DRIVE_MOTOR_1 = 1; //Same as 2017
+	public static final int RIGHT_DRIVE_MOTOR_2 = 2; //Same as 2017
+	public static final int RIGHT_DRIVE_MOTOR_3 = 3;
+	public static final int LEFT_DRIVE_MOTOR_1 = 13; //Same as 2017
+	public static final int LEFT_DRIVE_MOTOR_2 = 14; //Same as 2017
+	public static final int LEFT_DRIVE_MOTOR_3 = 15; //Same as 2017
 	
 	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
 	public static final int LIFT_MOTOR_2 = 5; //2017 conveyor
@@ -123,27 +125,27 @@ public class RobotMap {
 	// PDP Channels/////////////////////////////////////////////////////////////
 	
 	///////////////////40 Amp////////////////////////////////
-	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 0;
-	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 1;
-	//public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 3;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 1;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 2;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 3;
 	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 15;
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
-	//public static final int DRIVETRAIN_LEFT_MOTOR_3_PDP = 13;
+	public static final int DRIVETRAIN_LEFT_MOTOR_3_PDP = 13;
 	//public static final int PLATFORM_1_PDP = 3;
 	//public static final int PLATFORM_2_PDP = 12;
 	
-	public static final int WINCH_1_PDP = 2;
-	public static final int WINCH_2_PDP = 13;
+//	public static final int WINCH_1_PDP = 2;
+//	public static final int WINCH_2_PDP = 13;
 	
 	///////////20-30 Amp/////////////////////////////////////
-	public static final int LIFT_MOTOR_1_PDP = 9;
-	public static final int LIFT_MOTOR_2_PDP = 10;
+	public static final int LIFT_MOTOR_1_PDP = 8;
+	public static final int LIFT_MOTOR_2_PDP = 9;
 	public static final int LIFT_MOTOR_3_PDP = 11;
-	public static final int INTAKE_MOTOR_1_PDP = 4;
+	public static final int INTAKE_MOTOR_1_PDP = 12;
 	public static final int INTAKE_MOTOR_2_PDP = 5;
 	public static final int INTAKE_PIVOT_MOTOR_PDP = 6;
 	public static final int COMPRESSOR_PDP = 7;
-	public static final int AUX_POWER = 8;
+//	public static final int AUX_POWER = 8;
 	
 	
 	
@@ -177,8 +179,10 @@ public class RobotMap {
 	// TODO check if the reverse values match the physical robot
 	public static final boolean DT_REVERSE_LEFT1 = false; //false
 	public static final boolean DT_REVERSE_LEFT2 = false; //false
+	public static final boolean DT_REVERSE_LEFT3 = false; //false
 	public static final boolean DT_REVERSE_RIGHT1 = true; //true
 	public static final boolean DT_REVERSE_RIGHT2 = true; //true
+	public static final boolean DT_REVERSE_RIGHT3 = true; //true
 	
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 	// TODO find ratio
@@ -243,7 +247,7 @@ public class RobotMap {
 	 *                         LIFT PARAMETERS                               *
 	 *************************************************************************/
 	public static final boolean LIFT_MOTOR1_REVERSE = true;
-	public static final boolean LIFT_MOTOR2_REVERSE = true;
+	public static final boolean LIFT_MOTOR2_REVERSE = false;
 	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
 	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.85; 
