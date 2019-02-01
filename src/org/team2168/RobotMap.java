@@ -34,23 +34,23 @@ public class RobotMap {
 	public static final int GTA_STYLE_ENUM = 3;
 
 	// PWM (0 to 9) on RoboRio/////////////////////////////////////////////////
-	public static final int RIGHT_DRIVE_MOTOR_1 = 1; //Same as 2017
+	public static final int RIGHT_DRIVE_MOTOR_1 = 7; //Same as 2017
 	public static final int RIGHT_DRIVE_MOTOR_2 = 2; //Same as 2017
-	public static final int RIGHT_DRIVE_MOTOR_3 = 3;
-	public static final int LEFT_DRIVE_MOTOR_1 = 13; //Same as 2017
-	public static final int LEFT_DRIVE_MOTOR_2 = 14; //Same as 2017
-	public static final int LEFT_DRIVE_MOTOR_3 = 15; //Same as 2017
+	public static final int RIGHT_DRIVE_MOTOR_3 = 1;
+	public static final int LEFT_DRIVE_MOTOR_1 = 3; //Same as 2017
+	public static final int LEFT_DRIVE_MOTOR_2 = 4; //Same as 2017
+	public static final int LEFT_DRIVE_MOTOR_3 = 9; //Same as 2017
 	
-	public static final int LIFT_MOTOR_1 = 4; //2017 ball intake
+	public static final int LIFT_MOTOR_1 = 6; //2017 ball intake
 	public static final int LIFT_MOTOR_2 = 5; //2017 conveyor
-	public static final int LIFT_MOTOR_3 = 6; //2017 agitator
+	public static final int LIFT_MOTOR_3 = 15; //2017 agitator
 	
-	public static final int CUBE_INTAKE_MOTOR_LEFT = 7; //2017 gear intake
-	public static final int CUBE_INTAKE_MOTOR_RIGHT = 8; //PWM 19 on board //2017 spare
+	public static final int CUBE_INTAKE_MOTOR_LEFT = 13; //2017 gear intake
+	public static final int CUBE_INTAKE_MOTOR_RIGHT = 0; //PWM 19 on board //2017 spare
 	
 	//public static final int CUBE_INTAKE_PIVOT_MOTOR = 9;
 	
-	public static final int WINCH_MOTOR_1 = 9;
+	public static final int WINCH_MOTOR_1 = 10;
 	public static final int WINCH_MOTOR_2 = 19;
 	
 	
@@ -222,8 +222,8 @@ public class RobotMap {
 	/*************************************************************************
 	 *                         CUBE INTAKE PARAMETERS                        *
 	 *************************************************************************/
-	public static final boolean INTAKE_LEFT_REVERSE = true;
-	public static final boolean INTAKE_RIGHT_REVERSE = true;
+	public static final boolean INTAKE_LEFT_REVERSE = false;
+	public static final boolean INTAKE_RIGHT_REVERSE = false;
 	public static final double CUBE_INTAKE_IR_THRESHOLD = 2.9; //was 2.2\\
 	public static final double CUBE_INTAKE_IR_THRESHOLD_PBOT = 2.8;
 	public static final boolean INTAKE_PIVOT_REVERSE = false;
@@ -247,7 +247,7 @@ public class RobotMap {
 	 *                         LIFT PARAMETERS                               *
 	 *************************************************************************/
 	public static final boolean LIFT_MOTOR1_REVERSE = true;
-	public static final boolean LIFT_MOTOR2_REVERSE = false;
+	public static final boolean LIFT_MOTOR2_REVERSE = true;
 	
 	public static final boolean LIFT_MOTOR3_REVERSE = true;
 	public static final double LIFT_MAX_JOYSTICK_SPEED = 0.85; 
