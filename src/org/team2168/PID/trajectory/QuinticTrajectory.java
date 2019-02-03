@@ -76,8 +76,8 @@ public class QuinticTrajectory
 
 	private static PrintWriter log;
 
-	//private static String directory = "/home/lvuser/Path/";
-	private static String directory = "Path/";
+	private static String directory = "/home/lvuser/Path/";
+	//private static String directory = "Path/";
 
 	
 	public boolean reverse = false;
@@ -99,11 +99,19 @@ public class QuinticTrajectory
 //			{10.0, 4.0, Math.PI/2-0.001}, //works with 19.3 on practice bot
 //		//	{9.0, 20.5, Math.PI/2}
 			
-			{0.0, 0.0, 0},
-			{30.0, 0.0, 0},
-			{84.0, 54.0, Math.PI/2-0.001},
-			{138.0, 108.0, 0},
-			{168.0, 108.0, 0}
+//			{0.0, 0.0, 0},
+//			{30.0, 0.0, 0},
+//			{84.0, 54.0, Math.PI/2-0.001},
+//			{138.0, 108.0, 0},
+//			{168.0, 108.0, 0}
+			
+			{48.0, 0.0, 0},
+			{96.0, 0.0, 0},
+			{180.0, 90.0, Math.PI/6},
+			{0.0, 90.0, 0},
+			{204.0, 21.0, -Math.PI/6},
+			{263.0, 32.0, Math.PI/3-0.001},
+			{252.0, 90.0, 5*Math.PI/6-0.002}
 			
 		};
 		
@@ -150,7 +158,7 @@ public class QuinticTrajectory
 //		fig3.addData(quinticPath.rightPath, Color.magenta);
 //		fig3.addData(quinticPath.leftPath, Color.blue);
 //
-//		//fig3.addData(quinticPath2.leftPath, Color.blue);
+//		//fi[g3.addData(quinticPath2.leftPath, Color.blue);
 //		//fig3.addData(quinticPath2.rightPath, Color.magenta);
 //		//fig3.addData(waypointPath2, null, Color.black);
 // 
@@ -316,9 +324,11 @@ public class QuinticTrajectory
 //	    config.max_jerk = 30.0*12;
 //	    config.max_vel = 10.0*12;
 	    
-	    config.max_vel = 5.0*12;
-	    config.max_acc = 5.0*12;
+	    config.max_vel = 3.0*12;
+	    config.max_acc = 3.0*12;
 	    config.max_jerk = 70.0*12;
+	    
+	    calculate();
 	    
 	}
 	
@@ -342,7 +352,7 @@ public class QuinticTrajectory
 			log = new PrintWriter(directory + Filename);
 			log.println(this.traj.getNumSegments());
 			for(int i = 0; i<this.traj.getNumSegments(); i++)
-				log.println(this.leftVel[i] +"," + this.rightVel[i] +"," + this.heading[i]);
+				log.println(this.leftPos[i] +","+this.rightPos[i] +","+ this.leftVel[i] +"," + this.rightVel[i] +"," + this.heading[i]);
 			log.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -380,6 +390,8 @@ public class QuinticTrajectory
 					
 					if(isFirstLine) 
 					{
+						this.leftPos = new double[Integer.parseInt(values[0])];
+						this.rightPos = new double[Integer.parseInt(values[0])];
 						this.leftVel = new double[Integer.parseInt(values[0])];
 						this.rightVel = new double[Integer.parseInt(values[0])];
 						this.heading = new double[Integer.parseInt(values[0])];
@@ -387,9 +399,11 @@ public class QuinticTrajectory
 					}
 					else 
 					{
-						this.leftVel[filecounter] = Double.parseDouble(values[0]) ;
-						this.rightVel[filecounter] =  Double.parseDouble(values[1]);
-						this.heading[filecounter] = Double.parseDouble(values[2]);
+						this.leftPos[filecounter] = Double.parseDouble(values[0]) ;
+						this.rightPos[filecounter] =  Double.parseDouble(values[1]);
+						this.leftVel[filecounter] = Double.parseDouble(values[2]) ;
+						this.rightVel[filecounter] =  Double.parseDouble(values[3]);
+						this.heading[filecounter] = Double.parseDouble(values[4]);
 						
 						filecounter++;
 					}	

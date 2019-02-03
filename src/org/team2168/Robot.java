@@ -279,11 +279,19 @@ public class Robot extends TimedRobot
 		 *************************************************************/
 
 		double[][] wpPath = new double[][] {
-			{0,0,0},
-			{120,0,0}
+//			{0,0,0},
+//			{120,0,0}
+			
+//			{0.0, 0.0, 0},
+//			{48.0, 0.0, 0},
+//			{132.0, 84.0, Math.PI/6}
+			
+			{48.0, 0.0, 0},
+			{96.0, 0.0, 0},
+			{180.0, 90.0, Math.PI/6}
 		};
 		
-		QuinticTrajectory qPath = new QuinticTrajectory("path_1", wpPath);
+		QuinticTrajectory qPath = new QuinticTrajectory("test1", wpPath);
 		
 		this.leftPosQuinticPath = qPath.getLeftPos();
 		this.rightPosQuinticPath = qPath.getRightPos();
@@ -292,12 +300,18 @@ public class Robot extends TimedRobot
 		this.headingQuinticPath = qPath.getHeadingDeg();
 		
 		double[][] wpPath2 = new double[][] {
-			{0.0, 0.0, 0},
-			{36.0, 0.0, 0},
-			{120.0, 84.0, Math.PI/2-0.001}
+//			{0.0, 0.0, 0},
+//			{36.0, 0.0, 0},
+//			{120.0, 84.0, Math.PI/2-0.001}
+			
+//			{180.0, 90.0, -Math.PI/6},
+//			{0.0, 90.0, 0},
+			
+			{0, 0.0, 0},
+			{120.0, 0.0, 0}
 		};
 		
-		QuinticTrajectory qPath2 = new QuinticTrajectory("path_2", wpPath2);
+		QuinticTrajectory qPath2 = new QuinticTrajectory("test2",wpPath2);
 		
 		this.leftPosQuinticPath2 = qPath2.getLeftPos();
 		this.rightPosQuinticPath2 = qPath2.getRightPos();
@@ -306,15 +320,20 @@ public class Robot extends TimedRobot
 		this.headingQuinticPath2 = qPath2.getHeadingDeg();
 		
 		double[][] wpPath3 = new double[][] {
-			{0.0, 0.0, 0},
-			{30.0, 0.0, 0},
-			{84.0, 54.0, Math.PI/2-0.001},
-			{138.0, 108.0, 0},
-			{168.0, 108.0, 0}
+//			{0.0, 0.0, 0},
+//			{30.0, 0.0, 0},
+//			{84.0, 54.0, Math.PI/2-0.001},
+//			{138.0, 108.0, 0},
+//			{168.0, 108.0, 0}
+
+			{0.0, 90.0, 0},
+			{204.0, 21.0, -Math.PI/6},
+			{263.0, 32.0, Math.PI/3-0.001},
+			{252.0, 90.0, 5*Math.PI/6-0.002}
 			
 		};
 		
-		QuinticTrajectory qPath3 = new QuinticTrajectory("path_3", wpPath3);
+		QuinticTrajectory qPath3 = new QuinticTrajectory("test3",wpPath3);
 		
 		this.leftPosQuinticPath3 = qPath3.getLeftPos();
 		this.rightPosQuinticPath3 = qPath3.getRightPos();

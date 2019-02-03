@@ -133,38 +133,12 @@ public class DrivePIDPathQuinticPID extends Command {
  	   
  	   this.setPointLeftPos = setPointLeftPos;
 	   this.setPointRightPos = setPointRightPos;
- 	   this.setPointLeftVel =setPointLeftVel;
+ 	   this.setPointLeftVel = setPointLeftVel;
  	   this.setPointRightVel = setPointRightVel;
  	   this.setPointHeading = setPointHeading;
  	   
 
- 	   if(!direction)
- 	   {
- 		   this.setPointLeftPos = setPointLeftPos;
- 		   this.setPointRightPos = setPointRightPos;
- 		   this.setPointLeftVel = setPointLeftVel;
- 		   this.setPointRightVel = setPointRightVel;
- 		   this.setPointHeading = setPointHeading;
- 		   
- 	   }
- 	   //we want to drive the path backwards
- 	   // swap the left and right wheels, and negate the velocitys, also correct
- 	   //heading to be 180 from current position
- 	   else
- 	   {
- 		   this.setPointLeftPos = setPointLeftPos;
- 		   this.setPointRightPos = setPointRightPos;
- 		   this.setPointLeftVel = setPointRightVel;
- 	   	   this.setPointRightVel = setPointLeftVel;
- 	   	   this.setPointHeading = setPointHeading;
- 	   	   
- 	   	   for (int i=0; i<this.setPointHeading.length; i++)
- 	   	   {
- 	   		   this.setPointHeading[i] = 180+this.setPointHeading[i];
- 	   		   this.setPointLeftPos[i] = -this.setPointLeftPos[i];
- 	   		   this.setPointLeftPos[i] = -this.setPointLeftPos[i];
- 	   	   }
- 	   }
+
  	   
  	   this.headingByArray= true;
 
@@ -185,33 +159,15 @@ public class DrivePIDPathQuinticPID extends Command {
   	   this.setPointHeading = setPointHeading;
   	   
 
-  	   if(!direction)
-  	   {
-  		   this.setPointLeftPos = setPointLeftPos;
-  		   this.setPointRightPos = setPointRightPos;
-  		   this.setPointLeftVel = setPointLeftVel;
-  		   this.setPointRightVel = setPointRightVel;
-  		   this.setPointHeading = setPointHeading;
-  		   
-  	   }
-  	   //we want to drive the path backwards
-  	   // swap the left and right wheels, and negate the velocitys, also correct
-  	   //heading to be 180 from current position
-  	   else
-  	   {
-  		   this.setPointLeftPos = setPointLeftPos;
-  		   this.setPointRightPos = setPointRightPos;
-  		   this.setPointLeftVel = setPointRightVel;
-  	   	   this.setPointRightVel = setPointLeftVel;
-  	   	   this.setPointHeading = setPointHeading;
-  	   	   
-  	   	   for (int i=0; i<this.setPointHeading.length; i++)
-  	   	   {
-  	   		   this.setPointHeading[i] = 180+this.setPointHeading[i];
-  	   		   this.setPointLeftPos[i] = -this.setPointLeftPos[i];
-  	   		   this.setPointLeftPos[i] = -this.setPointLeftPos[i];
-  	   	   }
-  	   }
+	   double[] tempLp = new double[this.setPointLeftPos.length];
+	   double[] tempRp = new double[this.setPointRightPos.length];
+	   
+	   	   for (int i=0; i<this.setPointHeading.length; i++)
+	   	   {
+	   		   this.setPointHeading[i] = 180+this.setPointHeading[i];
+	   		   this.setPointLeftPos[i] = -this.setPointLeftPos[i];
+	   		   this.setPointLeftPos[i] = -this.setPointLeftPos[i];
+	   	   }
   	   
   	   this.headingByArray= true;
 
@@ -438,14 +394,20 @@ public class DrivePIDPathQuinticPID extends Command {
 		   	   this.setPointHeading = setPointHeading;
 		   	   
 		   	   double[] temp = new double[this.setPointHeading.length];
+		   	   double[] temp_rv = new double[this.setPointRightVel.length];
+		   	   double[] temp_lv = new double[this.setPointLeftVel.length];
 		   	   int counter = this.setPointHeading.length-1;
 		   	   for (int i=0; i<temp.length; i++)
 		   	   {
 		   		   temp[i] = this.setPointHeading[counter];
+		   		   temp_rv[i] = -this.setPointRightVel[counter];
+		   		   temp_lv[i] = -this.setPointLeftVel[counter];
 		   		   counter--;
 		   	   }
 		   	   
 		   	   this.setPointHeading = temp;
+		   	   this.setPointLeftVel = temp_lv;
+		   	   this.setPointRightVel = temp_rv;
 		   }
 	 	   
 
