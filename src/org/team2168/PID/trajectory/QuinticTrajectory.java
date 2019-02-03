@@ -313,7 +313,7 @@ public class QuinticTrajectory
 	
 	
 	
-	public QuinticTrajectory(double[][] path)
+	private QuinticTrajectory(double[][] path)
 	{
 		
 		this.origPath = doubleArrayCopy(path);
@@ -328,7 +328,6 @@ public class QuinticTrajectory
 	    config.max_acc = 3.0*12;
 	    config.max_jerk = 70.0*12;
 	    
-	    calculate();
 	    
 	}
 	
