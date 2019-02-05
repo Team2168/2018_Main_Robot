@@ -76,8 +76,8 @@ public class QuinticTrajectory
 
 	private static PrintWriter log;
 
-	private static String directory = "/home/lvuser/Path/";
-	//private static String directory = "Path/";
+	//private static String directory = "/home/lvuser/Path/";
+	private static String directory = "Path/";
 
 	
 	public boolean reverse = false;
@@ -105,13 +105,14 @@ public class QuinticTrajectory
 //			{138.0, 108.0, 0},
 //			{168.0, 108.0, 0}
 			
-			{48.0, 0.0, 0},
-			{96.0, 0.0, 0},
-			{180.0, 90.0, Math.PI/6},
+			// {48.0, 0.0, 0},
+			// {96.0, 0.0, 0},
 			{0.0, 90.0, 0},
-			{204.0, 21.0, -Math.PI/6},
-			{263.0, 32.0, Math.PI/3-0.001},
-			{252.0, 90.0, 5*Math.PI/6-0.002}
+			{180.0, 90.0, Math.PI/6},
+			
+			// {204.0, 21.0, -Math.PI/6},
+			// {263.0, 32.0, Math.PI/3-0.001},
+			// {252.0, 90.0, 5*Math.PI/6-0.002}
 			
 		};
 		
@@ -130,12 +131,10 @@ public class QuinticTrajectory
 		{19, 21.5, -Math.PI/4+0.0001},
 
 	};		
-		QuinticTrajectory quinticPath= new QuinticTrajectory("path1.txt", waypointPath);
-		quinticPath.calculate();
+		QuinticTrajectory quinticPath= new QuinticTrajectory("path1.txt", waypointPath, true);
+		
 		//System.out.println(quinticPath.traj.toStringEuclidean());
 
-		QuinticTrajectory quinticPath2= new QuinticTrajectory("path2.txt", waypointPath2);
-		quinticPath2.calculate();
 
 
 		
@@ -216,17 +215,7 @@ public class QuinticTrajectory
 		edge = new double[][] {{12,198},{60,198}};
 		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{},{}};
-		fig3.addData(edge, Color.black);
 		
-		edge = new double[][] {{},{}};
-		fig3.addData(edge, Color.black);
-		
-		edge = new double[][] {{},{}};
-		fig3.addData(edge, Color.black);
-		
-		edge = new double[][] {{},{}};
-		fig3.addData(edge, Color.black);
 //		double[][] edge = {{(1),(16+27/2.0-2-4.81/12)},{(1),(16-27/2.0+2+4.81/12)}};
 //		fig3.addData(edge, Color.black);
 //		
@@ -279,7 +268,7 @@ public class QuinticTrajectory
 		FalconLinePlot fig44 = new FalconLinePlot(new double[][]{{0.0,0.0}});
 		fig44.yGridOn();
 		fig44.xGridOn();
-		fig44.setYLabel("Position (ft/time)");
+		fig44.setYLabel("heading (degt/time)");
 		fig44.setXLabel("time (seconds)");
 		fig44.setTitle("Pos Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 		fig44.addData(quinticPath.time,quinticPath.heading, Color.green);
@@ -294,6 +283,15 @@ public class QuinticTrajectory
 				fig4.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
 				fig4.addData(quinticPath.rightVelocity, Color.magenta);
 				fig4.addData(quinticPath.leftVelocity, Color.cyan);
+
+				FalconLinePlot fig5 = new FalconLinePlot(new double[]{0.0});
+				fig5.yGridOn();
+				fig5.xGridOn();
+				fig5.setYLabel("Velocity (ft/sec)");
+				fig5.setXLabel("time (seconds)");
+				fig5.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+				fig5.addData(quinticPath.rightVel, Color.magenta);
+				fig5.addData(quinticPath.leftVel, Color.cyan);
 //				
 //				
 //				//Velocity
@@ -331,10 +329,22 @@ public class QuinticTrajectory
 	    
 	}
 	
+	public QuinticTrajectory(String filename, double[][] path, boolean reverse)
+	{
+		this(filename, path);
+
+		if(reverse)
+			this.invert();
+	}
+
 	public QuinticTrajectory(String filename, double[][] path)
 	{
 		this(path);
+
+		//checkfile also calls calculate
 		checkFileExist(filename);
+
+
 		
 	}
 	
@@ -734,6 +744,66 @@ public class QuinticTrajectory
 	  {
 		  return this.heading;
 	  }
+
+	  public void invert()
+	  {
+		for (int x=0; x<this.leftVel.length-1; x++)
+			System.out.println("leftVel:" + this.leftVel[x]);
+
+		int i = heading.length-1;
+
+		  //Invert arrays
+		  double[] temp_h = new double[heading.length];
+		  double[] temp_lv = new double[heading.length];
+		  double[] temp_rv = new double[heading.length];
+		  double[] temp_rp = new double[heading.length];
+		  double[] temp_lp = new double[heading.length];
+
+		//inverting all arrays
+		for(int j=i; j>=0; j--)
+		{
+			System.out.println("i:" + i + ", j:" + j + ", i-j:" + (i-j));
+			
+			temp_h[j]= heading[i-j];
+			temp_lv[j]= -leftVel[i-j];
+			temp_rv[j]= -rightVel[i-j];
+			temp_rp[j]= rightPos[i-j];
+			temp_lp[j]= leftPos[i-j];
+			
+			
+		}
+
+		  
+		double temp_lp_zero = temp_lp[0];
+		double temp_rp_zero = temp_rp[0];
+
+		//subtracting first element from all pos elements
+		//and making velocities negative
+		for(int j=0; j<heading.length; j++)
+		{
+			
+			temp_lp[j]=temp_lp[j]-temp_lp_zero;
+			temp_rp[j]=temp_rp[j]-temp_rp_zero;
+		}
+
+		this.heading = temp_h;
+		this.leftPos =temp_lp;
+		this.rightPos =temp_rp;
+		this.leftVel =temp_lv;
+		this.rightVel =temp_rv;
+		
+
+		for (int x=0; x<this.heading.length-1; x++)
+			System.out.println("heading:" + this.heading[x]);
+
+		for (int x=0; x<this.leftVel.length-1; x++)
+			System.out.println("leftVel:" + this.leftVel[x]);
+
+
+
+	  }
+
+
 	  
 	  
 	  
